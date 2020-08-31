@@ -1,30 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
-import re  # Library for dealing with regular expressions
-from functools import reduce
 
 SELECTED_YEAR = '2010'
 life_expectancy_dict = {}
 gdp_dict = {}
-
-
-# Given an array of numbers, calculate the average
-def average(array):
-    return np.sum(array)/(len(array))
-
-
-def calcVar(array):
-    avg = average(array)
-    def deviation(acc, value): return acc + (value-avg)**2
-
-    sum = reduce(deviation, array, 0)
-    return sum / len(array)
-
-
-def standard_deviation(array):
-    variance = calcVar(array)
-    return variance**(1/2)
 
 
 # open life expectancy.csv, add values to life_expectancy dictionary
@@ -58,8 +38,12 @@ for code in gdp_dict:
     gdp_array.append(gdp_dict[code])
     life_array.append(life_expectancy_dict[code])
 
-print(int(standard_deviation(gdp_array)))
-print(int(standard_deviation(life_array)))
+print(int(np.std(gdp_array)))
+print(int(np.std(life_array)))
+
+print(int(np.var(gdp_array)))
+print(int(np.var(life_array)))
+
 
 # create plot
 fig, ax = plt.subplots()
