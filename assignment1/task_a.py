@@ -14,7 +14,8 @@ life_std = np.std(entries_from_year[HEADER_TITLE])
 life_mean = np.mean(entries_from_year[HEADER_TITLE])
 
 # get countries one mean above average
-top_percentage_countries = entries_from_year[entries_from_year[HEADER_TITLE] > life_mean+life_std]
+top_countries = entries_from_year[entries_from_year[HEADER_TITLE]
+                                  > life_mean+life_std]
 
-#print countires being one std above the mean
-print(top_percentage_countries['Entity'])
+# print countries being one std above the mean
+print(top_countries['Entity'])
