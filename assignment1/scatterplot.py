@@ -1,58 +1,25 @@
-import matplotlib.pyplot as plt
 import numpy as np
-import csv
+import pandas as pd
+import matplotlib.pyplot as plt
 
-SELECTED_YEAR = '2010'
-life_expectancy_dict = {}
-gdp_dict = {}
+# Setup constants
+SELECTED_YEAR = 2010
+HEADER_TITLE_GDP = 'Output-side real GDP per capita (2011 international-$)'
+HEADER_TITLE_LIFE = 'Life expectancy (years)'
 
+# use pandas to read csv
+df_gdp = pd.read_csv('gdp.csv')
+df_life = pd.read_csv('life-expectancy.csv')
 
-# open life expectancy.csv, add values to life_expectancy dictionary
-with open('life-expectancy.csv', newline='') as csvfile:
-    reader = csv.DictReader(csvfile)
-    for row in reader:
-        if row['Year'] == SELECTED_YEAR:
-            code = row['Code']
-            life_exp = float(row['Life expectancy (years)'])
-            life_expectancy_dict[code] = life_exp
+# filter data on selected year
+gdp_entries = df_gdp[(df_gdp['Year'] == SELECTED_YEAR)]
+life_entries = df_life[(df_life['Year'] == SELECTED_YEAR)]
 
-# open gdp per capita, add values to gdp dictionary
-with open('real-gdp-per-capita-PWT.csv', newline='') as csvfile:
-    reader = csv.DictReader(csvfile)
-    for row in reader:
-        if row['Year'] == SELECTED_YEAR:
-            code = row['Code']
-            gdp = float(
-                row['Output-side real GDP per capita (2011 international-$)'])
-            gdp_dict[code] = gdp
+# merge entries with inner join. Excluding entities not available in both datasets.
+merged_entries = pd.merge(gdp_entries, life_entries, on=['Code', 'Year', 'Entity'])
 
-print(life_expectancy_dict)
-print(gdp_dict)
-
-
-gdp_list = []
-life_list = []
-
-# add to arrays to plot
-for code in gdp_dict:
-    gdp_list.append(gdp_dict[code])
-    life_list.append(life_expectancy_dict[code])
-
-gdp_array = np.array(gdp_list)
-life_array = np.array(life_list)
-
-life_std = np.std(life_array)
-life_mean = np.mean(life_array)
-
-life_array_top_60 = life_array[life_array > life_mean+life_std]
-
-print(life_array_top_60)
-print(int(np.std(gdp_array)))
-print(int(np.std(life_array)))
-
-# create plot
+# setup scatterplot
 fig, ax = plt.subplots()
-plt.scatter(gdp_array, life_array)
-
-# show plot
+# scatterplot gdp as x, life-expectancy as y
+plt.scatter(merged_entries[HEADER_TITLE_GDP], merged_entries[HEADER_TITLE_LIFE])
 plt.show()
