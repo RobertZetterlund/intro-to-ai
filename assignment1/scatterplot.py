@@ -30,20 +30,25 @@ print(life_expectancy_dict)
 print(gdp_dict)
 
 
-gdp_array = []
-life_array = []
+gdp_list = []
+life_list = []
 
 # add to arrays to plot
 for code in gdp_dict:
-    gdp_array.append(gdp_dict[code])
-    life_array.append(life_expectancy_dict[code])
+    gdp_list.append(gdp_dict[code])
+    life_list.append(life_expectancy_dict[code])
 
+gdp_array = np.array(gdp_list)
+life_array = np.array(life_list)
+
+life_std = np.std(life_array)
+life_mean = np.mean(life_array)
+
+life_array_top_60 = life_array[life_array > life_mean+life_std]
+
+print(life_array_top_60)
 print(int(np.std(gdp_array)))
 print(int(np.std(life_array)))
-
-print(int(np.var(gdp_array)))
-print(int(np.var(life_array)))
-
 
 # create plot
 fig, ax = plt.subplots()
