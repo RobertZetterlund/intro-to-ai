@@ -8,13 +8,15 @@ import sys
 
 
 STD_CONSTANT = 0.5
+SELECTED_YEAR = 2010
 
-# Allow for argument in unix. eg. 'python task_b.py 0.2'
+# Allow for argument in unix. eg. 'python task_b.py 0.2 1999'
 if(sys.argv[1]):
     STD_CONSTANT = float(sys.argv[1])
+    if(sys.argv[2]):
+        SELECTED_YEAR = float(sys.argv[2])
 
 # Setup constants
-SELECTED_YEAR = 2010
 HEADER_TITLE_GDP = 'Output-side real GDP per capita (2011 international-$)'
 HEADER_TITLE_LIFE = 'Life expectancy (years)'
 
@@ -46,7 +48,7 @@ high_life_low_gdp = high_life[high_life[HEADER_TITLE_GDP]
 
 # print countries having a high life expectancy and a low gdp
 if(len(high_life_low_gdp) > 0):
-    print('These countries have high life expectancy and a low gdp \n')
+    print('These countries have high life expectancy and a low gdp: \n')
     print(high_life_low_gdp['Entity'])
 else:
     print('There are no countries with a high life expectancy and a low gdp')
