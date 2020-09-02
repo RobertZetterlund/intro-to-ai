@@ -1,13 +1,10 @@
 # Report
 
-
 ### State the Assumptions and decisions
 
- * We selected year 2010
- * 
-
-
-
+- We selected year 2010
+-
 
 ## Task C
-We look at the scatterplot and arbitrariry 
+
+We look at the scatterplot and arbitrariry
