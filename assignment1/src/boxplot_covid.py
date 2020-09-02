@@ -21,14 +21,17 @@ def extract_data(country):
 country_data = [extract_data(country) for country in countryList]
 
 
-fig = plt.figure()
+(fig, ax) = plt.subplots()
 # Create an axes instance
-ax = fig.add_axes([0, 0, 1, 1])
 bp = ax.boxplot(country_data)
-ax.legend(
-    [bp["boxes"][0], bp["boxes"][1], bp["boxes"][2], bp["boxes"][3]],
-    countryList,
-    loc="upper right",
-)
 
+
+ax.set_title("New cases of corona in nordic countries")
+# ax.legend(
+#    [bp["boxes"][0], bp["boxes"][1], bp["boxes"][2], bp["boxes"][3]],
+#    countryList,
+#    loc="upper right",
+# )
+
+plt.xticks(range(1, len(countryList) + 1), countryList)
 plt.show()
