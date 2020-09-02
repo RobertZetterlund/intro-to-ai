@@ -19,9 +19,6 @@ life_entries = df_life[(df_life['Year'] == SELECTED_YEAR)]
 # merge entries with inner join. Excluding entities not available in both datasets.
 merged_entries = pd.merge(gdp_entries, life_entries, on=['Code', 'Year', 'Entity'])
 
-
-
-
 # setup scatterplot
 fig, ax = plt.subplots()
 # scatterplot gdp as x, life-expectancy as y
