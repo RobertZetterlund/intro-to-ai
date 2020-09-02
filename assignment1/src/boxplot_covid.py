@@ -34,4 +34,5 @@ ax.set_title("New cases of corona in nordic countries")
 # )
 
 plt.xticks(range(1, len(countryList) + 1), countryList)
-plt.show()
+plt.savefig('../fig/boxplot_covid.png')
+#plt.show()

@@ -26,6 +26,6 @@ merged_entries = pd.merge(forest_entries, life_entries, on=["Code", "Year", "Ent
 fig, ax = plt.subplots()
 # scatterplot gdp as x, life-expectancy as y
 plt.scatter(merged_entries[HEADER_TITLE_X], merged_entries[HEADER_TITLE_Y])
-plt.xlabel("Forest area as share of land area")
+plt.xlabel("Annual working hours")
 plt.ylabel("Happiness")
 plt.show()
