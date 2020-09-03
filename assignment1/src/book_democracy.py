@@ -5,8 +5,8 @@ import sys
 
 # Setup constants
 SELECTED_YEAR = 1990
-HEADER_TITLE_X = "Unique booktitles per million inhabitants"
-HEADER_TITLE_Y = "Political Regime"
+HEADER_X = "Unique booktitles per million inhabitants"
+HEADER_Y = "Political Regime"
 
 # use pandas to read csv
 df_books = pd.read_csv("../res/books.csv")
@@ -25,7 +25,7 @@ merged_entries = merged_entries[merged_entries["Political Regime"] != -20]
 # setup scatterplot
 fig, ax = plt.subplots()
 # scatterplot gdp as x, life-expectancy as y
-plt.scatter(merged_entries[HEADER_TITLE_X], merged_entries[HEADER_TITLE_Y])
-plt.xlabel(HEADER_TITLE_X)
-plt.ylabel(HEADER_TITLE_Y)
+plt.scatter(merged_entries[HEADER_X], merged_entries[HEADER_Y])
+plt.xlabel(HEADER_X)
+plt.ylabel(HEADER_Y)
 plt.show()

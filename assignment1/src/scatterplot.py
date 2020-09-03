@@ -5,8 +5,8 @@ import sys
 
 # Setup constants
 SELECTED_YEAR = 2010
-HEADER_TITLE_GDP = "Output-side real GDP per capita (2011 international-$)"
-HEADER_TITLE_LIFE = "Life expectancy (years)"
+GDP = "Output-side real GDP per capita (2011 international-$)"
+LIFE = "Life expectancy (years)"
 
 # use pandas to read csv
 df_gdp = pd.read_csv("../res/gdp.csv")
@@ -22,7 +22,7 @@ merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity
 # setup scatterplot
 fig, ax = plt.subplots()
 # scatterplot gdp as x, life-expectancy as y
-plt.scatter(merged_entries[HEADER_TITLE_GDP], merged_entries[HEADER_TITLE_LIFE])
+plt.scatter(merged_entries[GDP], merged_entries[LIFE])
 plt.xlabel("GDP")
 plt.ylabel("Life Expectancy")
 plt.savefig("../fig/gdp_life.png")

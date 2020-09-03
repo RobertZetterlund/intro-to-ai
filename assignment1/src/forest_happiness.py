@@ -5,10 +5,10 @@ import sys
 
 # Setup constants
 SELECTED_YEAR = 2010
-HEADER_TITLE_X = (
+HEADER_X = (
     "15.1.1 - Forest area as a proportion of total land area (%) - AG_LND_FRST (%)"
 )
-HEADER_TITLE_Y = "World Happiness Report 2016 (Cantril Ladder (0=worst; 10=best))"
+HEADER_Y = "World Happiness Report 2016 (Cantril Ladder (0=worst; 10=best))"
 
 # use pandas to read csv
 df_forest = pd.read_csv("../res/forest-area-as-share-of-land-area.csv")
@@ -25,7 +25,7 @@ merged_entries = pd.merge(forest_entries, life_entries, on=["Code", "Year", "Ent
 # setup scatterplot
 fig, ax = plt.subplots()
 # scatterplot gdp as x, life-expectancy as y
-plt.scatter(merged_entries[HEADER_TITLE_X], merged_entries[HEADER_TITLE_Y])
+plt.scatter(merged_entries[HEADER_X], merged_entries[HEADER_Y])
 plt.xlabel("Forest area as share of land area")
 plt.ylabel("Happiness")
 plt.savefig('../fig/forest_happiness.png')

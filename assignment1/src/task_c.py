@@ -17,8 +17,8 @@ if len(sys.argv) >= 2:
         SELECTED_YEAR = float(sys.argv[2])
 
 # Setup constants
-HEADER_TITLE_GDP = "Output-side real GDP per capita (2011 international-$)"
-HEADER_TITLE_LIFE = "Life expectancy (years)"
+GDP = "Output-side real GDP per capita (2011 international-$)"
+LIFE = "Life expectancy (years)"
 
 # use pandas to read csv
 df_gdp = pd.read_csv("../res/gdp.csv")
@@ -32,19 +32,19 @@ life_entries = df_life[(df_life["Year"] == SELECTED_YEAR)]
 merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity"])
 
 # get standard deviation and mean from entries
-gdp_std = np.std(merged_entries[HEADER_TITLE_GDP])
-gdp_mean = np.mean(merged_entries[HEADER_TITLE_GDP])
+gdp_std = np.std(merged_entries[GDP])
+gdp_mean = np.mean(merged_entries[GDP])
 
-life_std = np.std(merged_entries[HEADER_TITLE_LIFE])
-life_mean = np.mean(merged_entries[HEADER_TITLE_LIFE])
+life_std = np.std(merged_entries[LIFE])
+life_mean = np.mean(merged_entries[LIFE])
 
 # filter based on having strong economy
 strong_economy = merged_entries[
-    merged_entries[HEADER_TITLE_GDP] > gdp_mean + gdp_std * STD_CONSTANT
+    merged_entries[GDP] > gdp_mean + gdp_std * STD_CONSTANT
 ]
 # filter based on having not high life expectancy
 not_high_life_strong_economy = strong_economy[
-    strong_economy[HEADER_TITLE_LIFE] < life_mean + life_std * STD_CONSTANT
+    strong_economy[LIFE] < life_mean + life_std * STD_CONSTANT
 ]
 
 # print countries having a high life expectancy and a low gdp

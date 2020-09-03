@@ -5,10 +5,10 @@ import sys
 
 # Setup constants
 SELECTED_YEAR = 2010
-HEADER_TITLE_X = (
+HEADER_X = (
     "Average annual hours worked by persons engaged (hours per person engaged)"
 )
-HEADER_TITLE_Y = "World Happiness Report 2016 (Cantril Ladder (0=worst; 10=best))"
+HEADER_Y = "World Happiness Report 2016 (Cantril Ladder (0=worst; 10=best))"
 
 # use pandas to read csv
 df_forest = pd.read_csv("../res/annual-working-hours-per-persons-engaged.csv")
@@ -25,7 +25,7 @@ merged_entries = pd.merge(forest_entries, life_entries, on=["Code", "Year", "Ent
 # setup scatterplot
 fig, ax = plt.subplots()
 # scatterplot gdp as x, life-expectancy as y
-plt.scatter(merged_entries[HEADER_TITLE_X], merged_entries[HEADER_TITLE_Y])
+plt.scatter(merged_entries[HEADER_X], merged_entries[HEADER_Y])
 plt.xlabel("Annual working hours")
 plt.ylabel("Happiness")
 plt.show()
