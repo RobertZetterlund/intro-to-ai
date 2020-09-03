@@ -26,7 +26,7 @@ country_data = [extract_data(country) for country in countryList]
 bp = ax.boxplot(country_data)
 
 
-ax.set_title("New cases of corona in nordic countries")
+ax.set_title("New cases of corona in nordic countries in August")
 # ax.legend(
 #    [bp["boxes"][0], bp["boxes"][1], bp["boxes"][2], bp["boxes"][3]],
 #    countryList,
@@ -34,5 +34,5 @@ ax.set_title("New cases of corona in nordic countries")
 # )
 
 plt.xticks(range(1, len(countryList) + 1), countryList)
-plt.savefig('../fig/boxplot_covid.png')
-#plt.show()
+plt.savefig("../fig/boxplot_covid.png")
+# plt.show()

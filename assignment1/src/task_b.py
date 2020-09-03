@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import sys
+import matplotlib.pyplot as plt
 
 # For the sake of the assignment,
 # lets assume that high and low represents is based on the standard deviation.
@@ -17,8 +18,8 @@ if len(sys.argv) >= 2:
         SELECTED_YEAR = float(sys.argv[2])
 
 # Setup constants
-HEADER_TITLE_GDP = "Output-side real GDP per capita (2011 international-$)"
-HEADER_TITLE_LIFE = "Life expectancy (years)"
+GDP = "Output-side real GDP per capita (2011 international-$)"
+LIFE = "Life expectancy (years)"
 
 # use pandas to read csv
 df_gdp = pd.read_csv("../res/gdp.csv")
@@ -32,20 +33,46 @@ life_entries = df_life[(df_life["Year"] == SELECTED_YEAR)]
 merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity"])
 
 # get standard deviation and mean from entries
-gdp_std = np.std(merged_entries[HEADER_TITLE_GDP])
-gdp_mean = np.mean(merged_entries[HEADER_TITLE_GDP])
+gdp_std = np.std(merged_entries[GDP])
+gdp_mean = np.mean(merged_entries[GDP])
 
-life_std = np.std(merged_entries[HEADER_TITLE_LIFE])
-life_mean = np.mean(merged_entries[HEADER_TITLE_LIFE])
+life_std = np.std(merged_entries[LIFE])
+life_mean = np.mean(merged_entries[LIFE])
+
+#    GDP MEAN
+#       |
+# ------|------ LIFE MEAN
+#       |
+
+col = np.where(
+    merged_entries[LIFE] > life_mean,
+    np.where(merged_entries[GDP] < gdp_mean, "red", "orange"),
+    np.where(merged_entries[GDP] < gdp_mean, "purple", "blue"),
+)
+
+fig, ax = plt.subplots()
+
+
+scatter = ax.scatter(
+    merged_entries[GDP],
+    merged_entries[LIFE],
+    c=col,
+    s=75,
+    alpha=0.8,
+    edgecolors="none",
+)
+
+
+# plt.legend()
+plt.xlabel("GDP")
+plt.ylabel("Life Expectancy")
+# plt.savefig("../fig/gdp_life_b.png")
+plt.show()
 
 # filter based on having high life-expectancy
-high_life = merged_entries[
-    merged_entries[HEADER_TITLE_LIFE] > life_mean + life_std * STD_CONSTANT
-]
+high_life = merged_entries[merged_entries[LIFE] > life_mean + life_std * STD_CONSTANT]
 # filter based on having low gdp
-high_life_low_gdp = high_life[
-    high_life[HEADER_TITLE_GDP] < gdp_mean - gdp_std * STD_CONSTANT
-]
+high_life_low_gdp = high_life[high_life[GDP] < gdp_mean - gdp_std * STD_CONSTANT]
 
 # print countries having a high life expectancy and a low gdp
 if len(high_life_low_gdp) > 0:

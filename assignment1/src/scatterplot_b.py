@@ -22,8 +22,15 @@ merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity
 # setup scatterplot
 fig, ax = plt.subplots()
 # scatterplot gdp as x, life-expectancy as y
-plt.scatter(merged_entries[HEADER_TITLE_GDP], merged_entries[HEADER_TITLE_LIFE])
+
+col = np.where(
+    merged_entries[HEADER_TITLE_GDP] < 40000,
+    "b",
+    np.where(merged_entries[HEADER_TITLE_LIFE] > 50, "r", "y"),
+)
+
+plt.scatter(merged_entries[HEADER_TITLE_GDP], merged_entries[HEADER_TITLE_LIFE], c=col)
 plt.xlabel("GDP")
 plt.ylabel("Life Expectancy")
-plt.savefig("../fig/gdp_life.png")
-# plt.show()
+# plt.savefig('../fig/gdp_life_b.png')
+plt.show()
