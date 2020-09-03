@@ -6,6 +6,8 @@
 
 - We selected year 2010
 
+![img](fig/gdp_life.png)
+
 
 ## Question A
 
@@ -87,6 +89,7 @@ Using this assumption and the previously stated assumption about a high life exp
 - United Arab Emirates
 - United States
 
+
 <!--- Motivera varför våra assumptions är rimliga? --->
 <!--- Consider whether the results obtained seem
 reasonable -->
@@ -114,6 +117,7 @@ The graph shows that there is some correlation between how much you work and you
 ## Internet usage vs one person households
 
 ![img](fig/internet_household.png)
+
 The graph shows that there is some correlation between the percentage of the population that uses the internet and the share of one person households.
 
 ## New cases of Covid-19 in August in Sweden, Norway, Denmark and Finland
