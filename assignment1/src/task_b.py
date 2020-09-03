@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 # lets assume that high and low represents is based on the standard deviation.
 # To which extent can be set by adjusting the variable STD_CONSTANT below
 
-
-STD_CONSTANT = 0.5
+# 0.253 is a z score indicating 60 (or 40) %.
+STD_CONSTANT = 0.253
 SELECTED_YEAR = 2010
 
 # Allow for argument in unix. eg. 'python task_b.py 0.2 1999'

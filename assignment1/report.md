@@ -57,13 +57,15 @@ reasonable -->
 
 ## Question B
 
-We assume that a country has a low GDP if the the GDP is lower than one standard deviation below the mean.
+We assume that a country has a low GDP if their GDP is lower than 0.253 standard deviation below the mean. Meaning that they are a part of the bottom 40%.
 
-We assume that a high life expectancy is higher than one standard deviation above the mean.
+We assume that a high life expectancy is higher than 0.253 standard deviation above the mean. Meaning that they are a part of the top 40%.
 
-Using these assumptions, the countries that have high life expectancy but low GDP are:
+Using these assumptions, the countries that have high life expectancy but low GDP are shown in blue:
 
-None
+- **Turks and Caicos Islands**
+
+![img](fig/gdp_life_b.png)
 
 <!--- Motivera varför våra assumptions är rimliga? --->
 <!--- Consider whether the results obtained seem
