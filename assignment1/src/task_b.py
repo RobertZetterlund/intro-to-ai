@@ -11,9 +11,9 @@ STD_CONSTANT = 0.5
 SELECTED_YEAR = 2010
 
 # Allow for argument in unix. eg. 'python task_b.py 0.2 1999'
-if sys.argv[1]:
+if len(sys.argv) >= 2:
     STD_CONSTANT = float(sys.argv[1])
-    if sys.argv[2]:
+    if len(sys.argv) >= 3:
         SELECTED_YEAR = float(sys.argv[2])
 
 # Setup constants
@@ -21,8 +21,8 @@ HEADER_TITLE_GDP = "Output-side real GDP per capita (2011 international-$)"
 HEADER_TITLE_LIFE = "Life expectancy (years)"
 
 # use pandas to read csv
-df_gdp = pd.read_csv("gdp.csv")
-df_life = pd.read_csv("life-expectancy.csv")
+df_gdp = pd.read_csv("../res/gdp.csv")
+df_life = pd.read_csv("../res/life-expectancy.csv")
 
 # filter data on selected year
 gdp_entries = df_gdp[(df_gdp["Year"] == SELECTED_YEAR)]

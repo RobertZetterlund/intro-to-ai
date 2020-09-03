@@ -4,7 +4,7 @@ import pandas as pd
 SELECTED_YEAR = 2010
 HEADER_TITLE = "Life expectancy (years)"
 
-df = pd.read_csv("life-expectancy.csv")
+df = pd.read_csv("../res/life-expectancy.csv")
 
 # Extract data entries from dataframe where year is SELECTED YEAR, essentially filter
 entries_from_year = df[(df["Year"] == SELECTED_YEAR)]
