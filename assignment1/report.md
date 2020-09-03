@@ -100,6 +100,16 @@ We removed:
 - All the rows that didn't have the year we were interested in.
 - Columns with data that wasn't used in any of the tasks. From both the life expectancy dataset and the gdp dataset we removed the "Code" and "Year" columns.
 
+```python
+df_clean.head(2)
+```
+
+| index | Entity  | GDP ((2011 international-\$)) | Life expectancy (years) |
+| ----- | ------- | ----------------------------- | ----------------------- |
+| 0     | Albania | 9544.7402                     | 76.562                  |
+| 1     | Algeria | 12590.2260                    | 74.938                  |
+| 2     | Angola  | 5988.5347                     | 55.350                  |
+
 <!--- Något om att vi funderade på att ta bort alla rader som ej blev "utvalda" av varken task A, task B, task C ? --->
 
 # Task 2
