@@ -64,7 +64,8 @@ plt.savefig("../fig/gdp_life_b.png")
 plt.show()
 
 
-
+print(len(highLifeLowGdp))
+print(len(rest))
 # print countries having a high life expectancy and a low gdp
 if len(highLifeLowGdp) > 0:
     print("These countries have high life expectancy and a low gdp: \n")

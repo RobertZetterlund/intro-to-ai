@@ -23,7 +23,7 @@ merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity
 fig, ax = plt.subplots()
 # scatterplot gdp as x, life-expectancy as y
 plt.scatter(merged_entries[GDP], merged_entries[LIFE])
-plt.xlabel("GDP")
+plt.xlabel("GDP per capita")
 plt.ylabel("Life Expectancy")
 plt.savefig("../fig/gdp_life.png")
 # plt.show()

@@ -21,9 +21,6 @@ life_entries = df_life[(df_life["Year"] == SELECTED_YEAR)]
 merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity"])
 
 # get standard deviation and mean from entries
-gdp_std = np.std(merged_entries[GDP])
-gdp_mean = np.mean(merged_entries[GDP])
-
 life_std = np.std(merged_entries[LIFE])
 life_mean = np.mean(merged_entries[LIFE])
 
@@ -45,7 +42,7 @@ ax.legend()
 
 print(high_life["Entity"].to_frame().to_string(index=False))
 
-plt.xlabel("GDP")
+plt.xlabel("GDP per capita")
 plt.ylabel("Life Expectancy")
 # plt.savefig("../fig/gdp_life_b.png")
 plt.show()

@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import sys
 import argparse
 
-
-parser = argparse.ArgumentParser(description='Create a scatterplot. Expects the csv files to have the columns Code, Year and Entity')
+# Setup argument parser
+parser = argparse.ArgumentParser(description='Creates a scatterplot. Expects the csv files to have the columns Code, Year and Entity')
 parser.add_argument('csv_x', type=str,
                     help='CSV file 1')
 parser.add_argument('csv_y', type=str,

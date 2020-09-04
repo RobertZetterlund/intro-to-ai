@@ -1,4 +1,6 @@
-# Report
+# Assignment 1: Introduction to Data Science and Python
+## Tobias Lindroth: x hrs
+## Robert Zetterlund: y hrs
 
 # Task 1
 
@@ -6,10 +8,10 @@
 
 - Decisions
 
+  - We selected two datasets from different sources. We found datasets containing both life expectancy and GDP per capita. But we wanted to use two datasets for the learning of experience of merging datasets. 
   - We decided to merge the data-sets and only include entities within both.
   - We selected year 2017 because that was the latest year that both our datasets had data from.
-  - We selected two datasets from different sources ...
-  - 
+
 
 - Assumptions
   - We assume that the spelling of countries and the use of the country code are consistent across the datasets.
@@ -24,7 +26,8 @@
 
 ## Question A - Which countries have a life expectancy higher than one standard deviation above the mean?
 
-The countries that in 2017 had a life expectancy higher than one standard deviation above the mean were:
+Out of the 182 entities examined, the following had a life expectancy higher than one standard deviation above the mean:
+
 
 - Anguilla
 - Australia
@@ -60,7 +63,19 @@ The countries that in 2017 had a life expectancy higher than one standard deviat
 - Switzerland
 - United Kingdom
 
-This seems like a reasonable result since...
+(33 entities)
+
+```python
+# Get standard deviation and mean from dataframe
+life_std = np.std(merged_entries[LIFE])
+life_mean = np.mean(merged_entries[LIFE])
+# Filter based on entries which value is larger than mean + one standard deviation
+high_life = merged_entries[merged_entries[LIFE] > life_mean+life_std]
+```
+
+To asses how reasonable 33 entities are we use an ideal normal distribution of 182 entities. In an normal distribution approximately 15.7% (28 entities) of the population lies above the range of `mean+sigma`. In our case, `33/182` equals `0.18` (18.1%) which we (without going into more math) deem to be similar.
+
+
 
 ## Question B - Which countries have high life expectancy but have low GDP?
 
@@ -91,11 +106,27 @@ Using these assumptions, the countries that have high life expectancy but low GD
 - Turks and Caicos Islands
 - Vietnam
 
+(20 entities)
 
 ![img](fig/gdp_life_b.png)
 
-<!--- Consider whether the results obtained seem
-reasonable -->
+We assume that a high GDP is correlated to high life-expectancy due to having the means to improve living conditions. 
+
+To asses how reasonable 20 entities are we think about Venn Diagrams.
+
+* There should be about 40% of the entities having a high GDP, group named HG.
+* There should be about 40% of the entities having a low life expectaction, group named LE.
+
+* If the union between HG and LE amounts to 40% of the entities, we have a strong correlation.
+* If it is 0%, we have no correlation at all.
+
+* If the distribution were to be completely uncorrelated, we would assume that we would get (0.4*.0.4)100% = 16% of the entities. 
+
+
+Our 20 entities is approximately 11% of the population, which is lower than a uncorrelated scenario. When we calculate the union of high gdp and high life expectation we get 27% of the total population, which is higher than a uncorrelated scenario. This suggests to us that there is a correlation.
+
+Therefore we find the number of entities reasonable because we believe that the correlation between the high life-expectancy and high gdp are relatively high.
+
 
 ## Question C - Does every strong economy have high life expectancy?
 
@@ -122,11 +153,8 @@ strong_economy = merged_entries[
 
 ![img](fig/gdp_life_c.png)
 
-<!--- Motivera varför våra assumptions är rimliga? --->
-<!--- Consider whether the results obtained seem
-reasonable -->
 
-
+The 2 entities is approximately 4 % out of the countries with a strong economy. This indicates that the correlation between having a high GDP and a high life expectancy is strong. This correlation seems reasonable since having a strong economy will make it easier to for example provide good healthcare, living conditions etc. 
 
 ## Question D - Clean the data
 
@@ -198,6 +226,8 @@ bp = ax.boxplot(location_data_matrix)
 
 The graph explores the spread the reporting of new cases of Covid-19 vary in nordic countries during the month of August.
 ![img](fig/boxplot_covid.png)
+
+
 
 ## Scatterplots
 
