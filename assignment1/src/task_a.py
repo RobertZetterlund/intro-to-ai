@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-SELECTED_YEAR = 2010
+SELECTED_YEAR = 2017
 HEADER_TITLE = "Life expectancy (years)"
 
 df = pd.read_csv("../res/life-expectancy.csv")
@@ -19,4 +19,4 @@ top_countries = entries_from_year[
 ]
 
 # print countries being one std above the mean
-print(top_countries["Entity"])
+print(top_countries["Entity"].to_frame().to_string(index=False))

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 # 0.253 is a z score indicating 60 (or 40) %.
 STD_CONSTANT = 0.253
-SELECTED_YEAR = 2010
+SELECTED_YEAR = 2017
 
 # Allow for argument in unix. eg. 'python task_b.py 0.2 1999'
 if len(sys.argv) >= 2:
@@ -44,14 +44,23 @@ life_mean = np.mean(merged_entries[LIFE])
 # -------|------- LIFE MEAN
 # purple | blue
 
+                top 40 gdp
+#     x  |       x| x y
+# ---------------------- top 40 life
+#       |       |
+# ---------------------- bottom 40
+#       |       |
+
 col = np.where(
     merged_entries[LIFE] > life_mean - life_std * STD_CONSTANT,
-    np.where(merged_entries[GDP] < gdp_mean + gdp_std * STD_CONSTANT, "red", "orange"),
-    np.where(merged_entries[GDP] < gdp_mean + gdp_std * STD_CONSTANT, "purple", "blue"),
+    
+    np.where(merged_entries[GDP] < gdp_mean + gdp_std , 10, 20),
+    np.where(merged_entries[GDP] < gdp_mean + gdp_std * STD_CONSTANT, 30, 40),
 )
 
 fig, ax = plt.subplots()
 
+print(type(col))
 
 scatter = ax.scatter(
     merged_entries[GDP],
@@ -62,11 +71,14 @@ scatter = ax.scatter(
     edgecolors="none",
 )
 
+kw = dict(prop="colors", num=4)
+
+
 
 # plt.legend()
 plt.xlabel("GDP")
 plt.ylabel("Life Expectancy")
-plt.savefig("../fig/gdp_life_b.png")
+#plt.savefig("../fig/gdp_life_b.png")
 plt.show()
 
 # filter based on having high life-expectancy
@@ -77,6 +89,6 @@ high_life_low_gdp = high_life[high_life[GDP] < gdp_mean - gdp_std * STD_CONSTANT
 # print countries having a high life expectancy and a low gdp
 if len(high_life_low_gdp) > 0:
     print("These countries have high life expectancy and a low gdp: \n")
-    print(high_life_low_gdp["Entity"])
+    print(high_life_low_gdp["Entity"].to_frame().to_string(index=False))
 else:
     print("There are no countries with a high life expectancy and a low gdp")

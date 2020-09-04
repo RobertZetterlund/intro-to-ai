@@ -7,8 +7,8 @@ import sys
 # To which extent can be set by adjusting the variable STD_CONSTANT below
 
 
-STD_CONSTANT = 0.5
-SELECTED_YEAR = 2010
+STD_CONSTANT = 0.243
+SELECTED_YEAR = 2017
 
 # Allow for argument in unix. eg. 'python task_b.py 0.2 1999'
 if len(sys.argv) >= 2:
