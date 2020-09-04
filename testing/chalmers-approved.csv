@@ -1,53 +1,53 @@
-Termin,Program/kurs,Utbildningens namn,Anm.kod,Univ/högskola,Kvinnor totalt,Män totalt,Kvinnor 1:a hand,Män 1:a hand
-HT2020,Program,ARKITEKTUR,CTH-45000,Chalmers tekniska högskola,1506,1018,403,248
-HT2020,Program,ARKITEKTUR OCH TEKNIK,CTH-46000,Chalmers tekniska högskola,685,743,186,187
-HT2020,Program,"AUTOMATION OCH MEKATRONIK, CIVILINGENJÖR",CTH-47000,Chalmers tekniska högskola,160,679,29,156
-HT2020,Program,"Automation och mekatronik, civilingenjör, senare del av program (EJ åk 1)",CTH-47005,Chalmers tekniska högskola,3,15,0,4
-HT2020,Program,"BIOTEKNIK, CIVILINGENJÖR",CTH-48000,Chalmers tekniska högskola,680,495,120,83
-HT2020,Program,"DATATEKNIK, CIVILINGENJÖR",CTH-49000,Chalmers tekniska högskola,234,1389,22,274
-HT2020,Program,"Datateknik, civilingenjör senare del av program (EJ åk 1)",CTH-49005,Chalmers tekniska högskola,7,39,3,16
-HT2020,Program,"ELEKTROTEKNIK, CIVILINGENJÖR",CTH-50000,Chalmers tekniska högskola,108,685,8,79
-HT2020,Program,"Elektroteknik, civilingenjör, senare del av program (EJ åk 1)",CTH-50005,Chalmers tekniska högskola,3,15,1,5
-HT2020,Program,"INDUSTRIELL EKONOMI, CIVILINGENJÖR",CTH-51000,Chalmers tekniska högskola,643,1400,163,398
-HT2020,Program,"INFORMATIONSTEKNIK, CIVILINGENJÖR",CTH-52000,Chalmers tekniska högskola,185,730,38,176
-HT2020,Program,"Informationsteknik, civilingenjör, senare del av program (EJ åk 1)",CTH-52005,Chalmers tekniska högskola,8,18,3,2
-HT2020,Program,"KEMITEKNIK, CIVILINGENJÖR",CTH-53000,Chalmers tekniska högskola,336,322,27,42
-HT2020,Program,"Kemiteknik, civilingenjör, senare del av program (EJ åk 1)",CTH-53005,Chalmers tekniska högskola,2,8,1,4
-HT2020,Program,"KEMITEKNIK MED FYSIK, CIVILINGENJÖR",CTH-54000,Chalmers tekniska högskola,121,256,8,35
-HT2020,Program,"Kemiteknik med fysik, civilingenjör, senare del av program (EJ åk 1)",CTH-54005,Chalmers tekniska högskola,1,5,0,2
-HT2020,Program,"MASKINTEKNIK, CIVILINGENJÖR",CTH-55000,Chalmers tekniska högskola,323,1317,43,219
-HT2020,Program,"Maskinteknik, civilingenjör, senare del av program (EJ åk 1)",CTH-55005,Chalmers tekniska högskola,12,38,5,12
-HT2020,Program,"TEKNISK DESIGN, CIVILINGENJÖR",CTH-56000,Chalmers tekniska högskola,487,580,90,82
-HT2020,Program,"TEKNISK FYSIK, CIVILINGENJÖR",CTH-57000,Chalmers tekniska högskola,221,875,45,223
-HT2020,Program,"Teknisk fysik, civilingenjör, senare del av program (EJ åk 1)",CTH-57005,Chalmers tekniska högskola,4,25,3,8
-HT2020,Program,"SAMHÄLLSBYGGNADSTEKNIK, CIVILINGENJÖR",CTH-58000,Chalmers tekniska högskola,525,710,78,111
-HT2020,Program,"Samhällsbyggnadsteknik, civilingenjör, senare del av program (EJ åk 1)",CTH-58005,Chalmers tekniska högskola,22,42,12,27
-HT2020,Program,"TEKNISK MATEMATIK, CIVILINGENJÖR",CTH-59000,Chalmers tekniska högskola,185,536,27,93
-HT2020,Program,"Teknisk matematik, civilingenjör, senare del av program (EJ åk 1)",CTH-59005,Chalmers tekniska högskola,5,18,1,4
-HT2020,Program,AFFÄRSUTVECKLING OCH ENTREPRENÖRSKAP INOM SAMHÄLLSBYGGNADSTEKNIK,CTH-60000,Chalmers tekniska högskola,297,337,61,70
-HT2020,Program,"SAMHÄLLSBYGGNADSTEKNIK, HÖGSKOLEINGENJÖR",CTH-61000,Chalmers tekniska högskola,307,485,32,81
-HT2020,Program,"Samhällsbyggnadsteknik, högskoleingenjör, senare del av program (EJ åk 1)",CTH-61005,Chalmers tekniska högskola,8,23,2,7
-HT2020,Program,"DATATEKNIK, HÖGSKOLEINGENJÖR",CTH-62000,Chalmers tekniska högskola,132,749,22,120
-HT2020,Program,"Datateknik, högskoleingenjör, senare del av program (EJ åk 1)",CTH-62005,Chalmers tekniska högskola,5,16,2,7
-HT2020,Program,"ELEKTROTEKNIK, HÖGSKOLEINGENJÖR",CTH-63000,Chalmers tekniska högskola,54,398,1,45
-HT2020,Program,"Elektroteknik, högskoleingenjör, senare del av program (EJ åk 1)",CTH-63005,Chalmers tekniska högskola,4,11,1,3
-HT2020,Program,"KEMITEKNIK, HÖGSKOLEINGENJÖR",CTH-64000,Chalmers tekniska högskola,124,157,10,18
-HT2020,Program,"Kemiteknik, högskoleingenjör, senare del av program (EJ åk 1)",CTH-64005,Chalmers tekniska högskola,2,6,1,2
-HT2020,Program,"MASKINTEKNIK, HÖGSKOLEINGENJÖR",CTH-65000,Chalmers tekniska högskola,136,664,10,89
-HT2020,Program,"Maskinteknik, högskoleingenjör, senare del av program (EJ åk 1)",CTH-65005,Chalmers tekniska högskola,3,19,0,8
-HT2020,Program,"DESIGN OCH PRODUKTUTVECKLING, HÖGSKOLEINGENJÖR",CTH-66000,Chalmers tekniska högskola,374,368,51,61
-HT2020,Program,"Design och produktutveckling, högskoleingenjör, senare del av program (EJ åk 1)",CTH-66005,Chalmers tekniska högskola,4,10,0,3
-HT2020,Program,"MEKATRONIK, HÖGSKOLEINGENJÖR",CTH-67000,Chalmers tekniska högskola,66,363,6,59
-HT2020,Program,"Mekatronik, högskoleingenjör, senare del av program (EJ åk 1)",CTH-67005,Chalmers tekniska högskola,2,9,1,3
-HT2020,Program,"EKONOMI OCH PRODUKTIONSTEKNIK, HÖGSKOLEINGENJÖR",CTH-68000,Chalmers tekniska högskola,202,368,37,55
-HT2020,Program,"Ekonomi och produktionsteknik, högskoleingenjör, senare del av program (EJ åk 1)",CTH-68005,Chalmers tekniska högskola,6,10,3,3
-HT2020,Program,"MEDICINTEKNIK, CIVILINGENJÖR",CTH-73000,Chalmers tekniska högskola,558,520,98,77
-HT2020,Program,"GLOBALA SYSTEM, CIVILINGENJÖR",CTH-74000,Chalmers tekniska högskola,356,361,86,82
-HT2020,Program,SJÖKAPTEN,CTH-75000,Chalmers tekniska högskola,65,305,17,89
-HT2020,Program,"Sjökapten, senare del av program (EJ åk 1)",CTH-75005,Chalmers tekniska högskola,0,17,0,10
-HT2020,Program,SJÖINGENJÖR,CTH-76000,Chalmers tekniska högskola,29,166,6,41
-HT2020,Program,"Sjöingenjör, senare del av program (EJ åk 1)",CTH-76005,Chalmers tekniska högskola,1,6,1,1
-HT2020,Program,INTERNATIONELL LOGISTIK,CTH-81000,Chalmers tekniska högskola,266,416,34,82
-HT2020,Program,"Internationell logistik, senare del av program (EJ åk 1)",CTH-81005,Chalmers tekniska högskola,6,8,0,4
-HT2020,Program,Sjöbefäl klass VII,CTH-83000,Chalmers tekniska högskola,78,230,32,116
-HT2020,Program,TEKNISKT BASÅR,CTH-95000,Chalmers tekniska högskola,1006,2019,271,623
+Termin,Program/kurs,Utbildningens namn,Anm.kod,Univ/hogskola,Kvinnor totalt,Man totalt,Kvinnor 1:a hand,Man 1:a hand
+HT2020,Program,ARKITEKTUR,CTH-45000,Chalmers tekniska hogskola,1506,1018,403,248
+HT2020,Program,ARKITEKTUR OCH TEKNIK,CTH-46000,Chalmers tekniska hogskola,685,743,186,187
+HT2020,Program,"AUTOMATION OCH MEKATRONIK, CIVILINGENJOR",CTH-47000,Chalmers tekniska hogskola,160,679,29,156
+HT2020,Program,"Automation och mekatronik, civilingenjor, senare del av program (EJ ak 1)",CTH-47005,Chalmers tekniska hogskola,3,15,0,4
+HT2020,Program,"BIOTEKNIK, CIVILINGENJOR",CTH-48000,Chalmers tekniska hogskola,680,495,120,83
+HT2020,Program,"DATATEKNIK, CIVILINGENJOR",CTH-49000,Chalmers tekniska hogskola,234,1389,22,274
+HT2020,Program,"Datateknik, civilingenjor senare del av program (EJ ak 1)",CTH-49005,Chalmers tekniska hogskola,7,39,3,16
+HT2020,Program,"ELEKTROTEKNIK, CIVILINGENJOR",CTH-50000,Chalmers tekniska hogskola,108,685,8,79
+HT2020,Program,"Elektroteknik, civilingenjor, senare del av program (EJ ak 1)",CTH-50005,Chalmers tekniska hogskola,3,15,1,5
+HT2020,Program,"INDUSTRIELL EKONOMI, CIVILINGENJOR",CTH-51000,Chalmers tekniska hogskola,643,1400,163,398
+HT2020,Program,"INFORMATIONSTEKNIK, CIVILINGENJOR",CTH-52000,Chalmers tekniska hogskola,185,730,38,176
+HT2020,Program,"Informationsteknik, civilingenjor, senare del av program (EJ ak 1)",CTH-52005,Chalmers tekniska hogskola,8,18,3,2
+HT2020,Program,"KEMITEKNIK, CIVILINGENJOR",CTH-53000,Chalmers tekniska hogskola,336,322,27,42
+HT2020,Program,"Kemiteknik, civilingenjor, senare del av program (EJ ak 1)",CTH-53005,Chalmers tekniska hogskola,2,8,1,4
+HT2020,Program,"KEMITEKNIK MED FYSIK, CIVILINGENJOR",CTH-54000,Chalmers tekniska hogskola,121,256,8,35
+HT2020,Program,"Kemiteknik med fysik, civilingenjor, senare del av program (EJ ak 1)",CTH-54005,Chalmers tekniska hogskola,1,5,0,2
+HT2020,Program,"MASKINTEKNIK, CIVILINGENJOR",CTH-55000,Chalmers tekniska hogskola,323,1317,43,219
+HT2020,Program,"Maskinteknik, civilingenjor, senare del av program (EJ ak 1)",CTH-55005,Chalmers tekniska hogskola,12,38,5,12
+HT2020,Program,"TEKNISK DESIGN, CIVILINGENJOR",CTH-56000,Chalmers tekniska hogskola,487,580,90,82
+HT2020,Program,"TEKNISK FYSIK, CIVILINGENJOR",CTH-57000,Chalmers tekniska hogskola,221,875,45,223
+HT2020,Program,"Teknisk fysik, civilingenjor, senare del av program (EJ ak 1)",CTH-57005,Chalmers tekniska hogskola,4,25,3,8
+HT2020,Program,"SAMHALLSBYGGNADSTEKNIK, CIVILINGENJOR",CTH-58000,Chalmers tekniska hogskola,525,710,78,111
+HT2020,Program,"Samhallsbyggnadsteknik, civilingenjor, senare del av program (EJ ak 1)",CTH-58005,Chalmers tekniska hogskola,22,42,12,27
+HT2020,Program,"TEKNISK MATEMATIK, CIVILINGENJOR",CTH-59000,Chalmers tekniska hogskola,185,536,27,93
+HT2020,Program,"Teknisk matematik, civilingenjor, senare del av program (EJ ak 1)",CTH-59005,Chalmers tekniska hogskola,5,18,1,4
+HT2020,Program,AFFaRSUTVECKLING OCH ENTREPRENORSKAP INOM SAMHaLLSBYGGNADSTEKNIK,CTH-60000,Chalmers tekniska hogskola,297,337,61,70
+HT2020,Program,"SAMHALLSBYGGNADSTEKNIK, HOGSKOLEINGENJOR",CTH-61000,Chalmers tekniska hogskola,307,485,32,81
+HT2020,Program,"Samhallsbyggnadsteknik, hogskoleingenjor, senare del av program (EJ ak 1)",CTH-61005,Chalmers tekniska hogskola,8,23,2,7
+HT2020,Program,"DATATEKNIK, HOGSKOLEINGENJOR",CTH-62000,Chalmers tekniska hogskola,132,749,22,120
+HT2020,Program,"Datateknik, hogskoleingenjor, senare del av program (EJ ak 1)",CTH-62005,Chalmers tekniska hogskola,5,16,2,7
+HT2020,Program,"ELEKTROTEKNIK, HOGSKOLEINGENJOR",CTH-63000,Chalmers tekniska hogskola,54,398,1,45
+HT2020,Program,"Elektroteknik, hogskoleingenjor, senare del av program (EJ ak 1)",CTH-63005,Chalmers tekniska hogskola,4,11,1,3
+HT2020,Program,"KEMITEKNIK, HOGSKOLEINGENJOR",CTH-64000,Chalmers tekniska hogskola,124,157,10,18
+HT2020,Program,"Kemiteknik, hogskoleingenjor, senare del av program (EJ ak 1)",CTH-64005,Chalmers tekniska hogskola,2,6,1,2
+HT2020,Program,"MASKINTEKNIK, HOGSKOLEINGENJOR",CTH-65000,Chalmers tekniska hogskola,136,664,10,89
+HT2020,Program,"Maskinteknik, hogskoleingenjor, senare del av program (EJ ak 1)",CTH-65005,Chalmers tekniska hogskola,3,19,0,8
+HT2020,Program,"DESIGN OCH PRODUKTUTVECKLING, HOGSKOLEINGENJOR",CTH-66000,Chalmers tekniska hogskola,374,368,51,61
+HT2020,Program,"Design och produktutveckling, hogskoleingenjor, senare del av program (EJ ak 1)",CTH-66005,Chalmers tekniska hogskola,4,10,0,3
+HT2020,Program,"MEKATRONIK, HOGSKOLEINGENJOR",CTH-67000,Chalmers tekniska hogskola,66,363,6,59
+HT2020,Program,"Mekatronik, hogskoleingenjor, senare del av program (EJ ak 1)",CTH-67005,Chalmers tekniska hogskola,2,9,1,3
+HT2020,Program,"EKONOMI OCH PRODUKTIONSTEKNIK, HOGSKOLEINGENJOR",CTH-68000,Chalmers tekniska hogskola,202,368,37,55
+HT2020,Program,"Ekonomi och produktionsteknik, hogskoleingenjor, senare del av program (EJ ak 1)",CTH-68005,Chalmers tekniska hogskola,6,10,3,3
+HT2020,Program,"MEDICINTEKNIK, CIVILINGENJOR",CTH-73000,Chalmers tekniska hogskola,558,520,98,77
+HT2020,Program,"GLOBALA SYSTEM, CIVILINGENJOR",CTH-74000,Chalmers tekniska hogskola,356,361,86,82
+HT2020,Program,SJOKAPTEN,CTH-75000,Chalmers tekniska hogskola,65,305,17,89
+HT2020,Program,"Sjokapten, senare del av program (EJ ak 1)",CTH-75005,Chalmers tekniska hogskola,0,17,0,10
+HT2020,Program,SJOINGENJOR,CTH-76000,Chalmers tekniska hogskola,29,166,6,41
+HT2020,Program,"Sjoingenjor, senare del av program (EJ ak 1)",CTH-76005,Chalmers tekniska hogskola,1,6,1,1
+HT2020,Program,INTERNATIONELL LOGISTIK,CTH-81000,Chalmers tekniska hogskola,266,416,34,82
+HT2020,Program,"Internationell logistik, senare del av program (EJ ak 1)",CTH-81005,Chalmers tekniska hogskola,6,8,0,4
+HT2020,Program,Sjobefal klass VII,CTH-83000,Chalmers tekniska hogskola,78,230,32,116
+HT2020,Program,TEKNISKT BASaR,CTH-95000,Chalmers tekniska hogskola,1006,2019,271,623
