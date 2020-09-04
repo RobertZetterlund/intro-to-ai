@@ -6,9 +6,10 @@
 
 - Decisions
 
+  - We decided to merge the data-sets and only include entities within both.
   - We selected year 2017 because that was the latest year that both our datasets had data from.
   - We selected two datasets from different sources ...
-  -
+  - 
 
 - Assumptions
   - We assume that the spelling of countries and the use of the country code are consistent across the datasets.
@@ -17,15 +18,14 @@
   - We assume that the data is correctly formatted according to .csv-standards
   - We assume that within a dataset there is no duplicated entries
 
-### Plot
+###  A scatter plot of GDP per capita vs life expectancy.
 
 ![img](fig/gdp_life.png)
 
-## Question A
+## Question A - Which countries have a life expectancy higher than one standard deviation above the mean?
 
 The countries that in 2017 had a life expectancy higher than one standard deviation above the mean were:
 
-- Andorra
 - Anguilla
 - Australia
 - Austria
@@ -33,50 +33,40 @@ The countries that in 2017 had a life expectancy higher than one standard deviat
 - Bermuda
 - Canada
 - Cayman Islands
-- Channel Islands
-- Falkland Islands
+- Cyprus
+- Denmark
 - Finland
 - France
 - Germany
 - Greece
-- Guadeloupe
 - Hong Kong
 - Iceland
 - Ireland
-- Isle of Man
 - Israel
 - Italy
 - Japan
-- Liechtenstein
 - Luxembourg
 - Macao
 - Malta
-- Martinique
-- Monaco
 - Netherlands
 - New Zealand
 - Norway
 - Portugal
-- Saint Barthlemy
-- Saint Martin (French part)
-- San Marino
 - Singapore
 - Slovenia
 - South Korea
 - Spain
 - Sweden
 - Switzerland
-- Tokelau
 - United Kingdom
 
-<!--- Consider whether the results obtained seem
-reasonable -->
+This seems like a reasonable result since...
 
-## Question B
+## Question B - Which countries have high life expectancy but have low GDP?
 
 We assume that a country has a low GDP if their GDP is lower than 0.253 standard deviation below the mean. Meaning that they are a part of the bottom 40%.
 
-We assume that a high life expectancy is higher than 0.253 standard deviation above the mean. Meaning that they are a part of the top 40%.
+Furthermore, we assume that a high life expectancy is higher than 0.253 standard deviation above the mean. Meaning that they are a part of the top 40%.
 
 Using these assumptions, the countries that have high life expectancy but low GDP are shown in blue:
 
@@ -101,12 +91,22 @@ Using these assumptions, the countries that have high life expectancy but low GD
 - Turks and Caicos Islands
 - Vietnam
 
+
 ![img](fig/gdp_life_b.png)
 
+<!--- Consider whether the results obtained seem
+reasonable -->
+
+## Question C - Does every strong economy have high life expectancy?
+
+We assume that a GDP higher than `0.253 * standard deviation`, meaning that they are a part of the top 40%, indicates a strong economy.
+
+Using this assumption and the previously stated assumption about a high life expectancy, the countries that have a strong economy, but not a high life expectancy, are:
+
+- Seychelles
+- Trinidad and Tobago
+
 ```python
-# filter on selected year
-gdp_entries = df_gdp[(df_gdp["Year"] == SELECTED_YEAR)]
-life_entries = df_life[(df_life["Year"] == SELECTED_YEAR)]
 # merge dataframes
 merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity"])
 
@@ -120,33 +120,18 @@ strong_economy = merged_entries[
 ]
 ```
 
-<!--- Motivera varför våra assumptions är rimliga? --->
-<!--- Consider whether the results obtained seem
-reasonable -->
-
-## Question C
-
-We assume that a GDP higher than one standard deviation above the mean indicates a strong economy.
-
-Using this assumption and the previously stated assumption about a high life expectancy, the countries that have a strong economy, but not a high life expectancy, are:
-
-- Aruba
-- Bahrain
-- Brunei
-- Denmark
-- Kuwait
-- Oman
-- Qatar
-- Saudi Arabia
-- Taiwan
-- United Arab Emirates
-- United States
+![img](fig/gdp_life_c.png)
 
 <!--- Motivera varför våra assumptions är rimliga? --->
 <!--- Consider whether the results obtained seem
 reasonable -->
 
-## Question D
+
+
+## Question D - Clean the data
+
+The rows that we removed were those not containing data from the year that we were examining (2017), or the Entity not being available in both datasets. After the removal of rows we decided to remove the columns *Code* and *Year* as they were no longer pertaining to the assignment. Important to note is that the information of the dataframe now showing data from the year 2017 is excluded. However, instead of having 2017 repeated through an entire column, we add the year to the column name of Entity. Making `Entity` be `Entity, 2017`. Note that we are aware that this restricts the re-usability of the dataframe, as the convention of naming the field `Entity`, but for the sake of this assignment we allow this.
+
 
 **We merged the datasets:**
 
@@ -169,13 +154,13 @@ merged_entries = merged_entries[(merged_entries["Year"] == SELECTED_YEAR)]
 ```python
 # Drop Code and Year columns, also rename
 df_clean = merged_entries.drop(columns=["Code", "Year"])
-df_clean = df_clean.rename(columns={GDP: "GDP (2011 international-$)"})
+df_clean = df_clean.rename(columns={GDP: "GDP (2011 international-$)", 'Entity': "Entity, {SELECTED_YEAR}"})
 
 df_clean.head(2)
 ```
 
-| index | Entity  | GDP ((2011 international-\$)) | Life expectancy (years) |
-| ----- | ------- | ----------------------------- | ----------------------- |
+| index | Entity (2017)  | GDP ((2011 international-\$)) | Life expectancy (years) |
+| ----- | -------       | ----------------------------- | ----------------------- |
 | 0     | Albania | 9544.7402                     | 76.562                  |
 | 1     | Algeria | 12590.2260                    | 74.938                  |
 | 2     | Angola  | 5988.5347                     | 55.350                  |
@@ -222,9 +207,9 @@ Below are scatterplots exploring correlation between two datasets.
 
 ![img](fig/working-hours-happiness.png)
 
-The graph shows that there is some correlation between how much you work and your happiness. It seems reasonable that the amount of work would affect the happiness as with more work you won't have as much spare time to do things you enjoy and like. Of course, there are also many other factors that affects one's happiness, but it still seems reasonable that there are at least a weak causation between amount of work and happiness.
+The graph shows that there is some correlation between how much you work and your happiness. It seems reasonable that the amount of work would affect the happiness as with more work you won't have as much spare time to do things you enjoy and like. Of course, there are also many other factors that affects one's happiness, but it still seems reasonable that there is at least a weak causation between amount of work and happiness.
 
-<!--- Eventuellt något om att working hours inte tar med  arbetslösa? Många som jobbar 0 timmar är förmodligen inte glada? --->
+
 
 ### Internet usage vs one person households
 
