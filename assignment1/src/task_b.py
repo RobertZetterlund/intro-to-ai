@@ -109,11 +109,10 @@ ax.legend()
 #kw = dict(prop="colors", num=4)
 
 
-
 # plt.legend()
 plt.xlabel("GDP")
 plt.ylabel("Life Expectancy")
-#plt.savefig("../fig/gdp_life_b.png")
+# plt.savefig("../fig/gdp_life_b.png")
 plt.show()
 
 # filter based on having high life-expectancy

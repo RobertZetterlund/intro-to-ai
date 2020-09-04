@@ -4,7 +4,18 @@
 
 ### State the Assumptions and decisions
 
-- We selected year 2017 because that was the latest year that both our datasets had data from.
+- Decisions
+
+  - We selected year 2017 because that was the latest year that both our datasets had data from.
+  - We selected two datasets from different sources ...
+  -
+
+- Assumptions
+  - We assume that the spelling of countries and the use of the country code are consistent across the datasets.
+  - We assume numerical values of the data we plan to plot
+  - We assume that the datasets have data over similar countries
+  - We assume that the data is correctly formatted according to .csv-standards
+  - We assume that within a dataset there is no duplicated entries
 
 ### Plot
 
@@ -93,14 +104,6 @@ Using these assumptions, the countries that have high life expectancy but low GD
 ![img](fig/gdp_life_b.png)
 
 ```python
-# setup constants
-SELECTED_YEAR = 2017
-GDP = "Output-side real GDP per capita (2011 international-$)"
-LIFE = "Life expectancy (years)"
-
-# use pandas read_csv to read csv files 
-# name them df_gdp and df_life
-
 # filter on selected year
 gdp_entries = df_gdp[(df_gdp["Year"] == SELECTED_YEAR)]
 life_entries = df_life[(df_life["Year"] == SELECTED_YEAR)]
@@ -145,19 +148,26 @@ reasonable -->
 
 ## Question D
 
-We removed:
-
-- All the rows that didn't have the year we were interested in.
-- Columns with data that wasn't used in any of the tasks. From both the life expectancy dataset and the gdp dataset we removed the "Code" and "Year" columns.
-
-
-
+**We merged the datasets:**
 
 ```python
 # merge entries with inner join. Excluding entities not available in both datasets.
 merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity"])
+```
 
-# Drop Code and Year columns, also rename 
+**We removed:**
+
+- All the rows that didn't have the year we were interested in.
+
+```python
+# Filter based on year
+merged_entries = merged_entries[(merged_entries["Year"] == SELECTED_YEAR)]
+```
+
+- Columns with data that wasn't used in any of the tasks. Meaning, we removed the "Code" and "Year" columns.
+
+```python
+# Drop Code and Year columns, also rename
 df_clean = merged_entries.drop(columns=["Code", "Year"])
 df_clean = df_clean.rename(columns={GDP: "GDP (2011 international-$)"})
 
@@ -174,7 +184,41 @@ df_clean.head(2)
 
 # Task 2
 
-## Annual working hours per person vs Happiness
+## Boxplots
+
+In this section we present Boxplots that we made.
+
+### New cases of Covid-19 in August in Sweden, Norway, Denmark and Finland
+
+The following code snippet highlights part of the program relevant to creating the boxplot-graph.
+
+```python
+# Define which locations that are of interest
+locationList = ["Sweden", "Norway", "Finland", "Denmark"]
+# Filter based on locationList
+entries = df[(df["location"].isin(locationList))]
+# Filter based on date being august 2020
+entries = entries[(entries["date"].str.contains("2020-08"))]
+
+# Define function for extracting new_cases based on location
+def extract_new_cases(location):
+    return entries.loc[entries["location"] == location]["new_cases"]
+
+# Create a matrix containing each dataset in an array.
+location_data_matrix = [extract_new_cases(location) for location in locationList]
+
+# Boxplot
+bp = ax.boxplot(location_data_matrix)
+```
+
+The graph explores the spread the reporting of new cases of Covid-19 vary in nordic countries during the month of August.
+![img](fig/boxplot_covid.png)
+
+## Scatterplots
+
+Below are scatterplots exploring correlation between two datasets.
+
+### Annual working hours per person vs Happiness
 
 ![img](fig/working-hours-happiness.png)
 
@@ -182,12 +226,14 @@ The graph shows that there is some correlation between how much you work and you
 
 <!--- Eventuellt något om att working hours inte tar med  arbetslösa? Många som jobbar 0 timmar är förmodligen inte glada? --->
 
-## Internet usage vs one person households
-
-![img](fig/internet_household.png)
+### Internet usage vs one person households
 
 The graph shows that there is some correlation between the percentage of the population that uses the internet and the share of one person households.
 
-## New cases of Covid-19 in August in Sweden, Norway, Denmark and Finland
+![img](fig/internet_household.png)
 
-![img](fig/boxplot_covid.png)
+## The correlation between age and happiness
+
+The following graphs explores the notion that being happy makes you live a longer life.
+
+![img](fig/median-age_happiness.png)
