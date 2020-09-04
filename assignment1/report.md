@@ -159,7 +159,7 @@ df_clean = df_clean.rename(columns={GDP: "GDP (2011 international-$)", 'Entity':
 df_clean.head(2)
 ```
 
-| index | Entity (2017)  | GDP ((2011 international-\$)) | Life expectancy (years) |
+| index | Entity, 2017  | GDP ((2011 international-\$)) | Life expectancy (years) |
 | ----- | -------       | ----------------------------- | ----------------------- |
 | 0     | Albania | 9544.7402                     | 76.562                  |
 | 1     | Algeria | 12590.2260                    | 74.938                  |
