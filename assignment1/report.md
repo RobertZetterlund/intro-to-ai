@@ -17,8 +17,8 @@
   - We assume that the spelling of countries and the use of the country code are consistent across the datasets.
   - We assume numerical values of the data we plan to plot
   - We assume that the datasets have data over similar countries
-  - We assume that the data is correctly formatted according to .csv-standards
-  - We assume that within a dataset there is no duplicated entries
+  - We assume that the data is correctly formatted according to `.csv-standards`
+  - We assume that within a dataset there are no duplicated entries
 
 ###  A scatter plot of GDP per capita vs life expectancy.
 
@@ -187,7 +187,7 @@ df_clean = df_clean.rename(columns={GDP: "GDP (2011 international-$)", 'Entity':
 df_clean.head(2)
 ```
 
-| index | Entity (2017)  | GDP ((2011 international-\$)) | Life expectancy (years) |
+| index | Entity, 2017  | GDP ((2011 international-\$)) | Life expectancy (years) |
 | ----- | -------       | ----------------------------- | ----------------------- |
 | 0     | Albania | 9544.7402                     | 76.562                  |
 | 1     | Algeria | 12590.2260                    | 74.938                  |
