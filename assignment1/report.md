@@ -98,7 +98,7 @@ SELECTED_YEAR = 2017
 GDP = "Output-side real GDP per capita (2011 international-$)"
 LIFE = "Life expectancy (years)"
 
-# use pandas read_csv to read csv files 
+# use pandas read_csv to read csv files
 # name them df_gdp and df_life
 
 # filter on selected year
@@ -150,14 +150,11 @@ We removed:
 - All the rows that didn't have the year we were interested in.
 - Columns with data that wasn't used in any of the tasks. From both the life expectancy dataset and the gdp dataset we removed the "Code" and "Year" columns.
 
-
-
-
 ```python
 # merge entries with inner join. Excluding entities not available in both datasets.
 merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity"])
 
-# Drop Code and Year columns, also rename 
+# Drop Code and Year columns, also rename
 df_clean = merged_entries.drop(columns=["Code", "Year"])
 df_clean = df_clean.rename(columns={GDP: "GDP (2011 international-$)"})
 
@@ -190,4 +187,31 @@ The graph shows that there is some correlation between the percentage of the pop
 
 ## New cases of Covid-19 in August in Sweden, Norway, Denmark and Finland
 
+The following graph explores the spread the reporting of new cases of Covid-19 vary in nordic countries during the month of August.
+
+
+```python
+# Define which locations that are of interest
+locationList = ["Sweden", "Norway", "Finland", "Denmark"]
+# Filter based on locationList
+entries = df[(df["location"].isin(locationList))]
+# Filter based on date being august 2020
+entries = entries[(entries["date"].str.contains("2020-08"))]
+
+# Define function for extracting new_cases based on location
+def extract_new_cases(location):
+    return entries.loc[entries["location"] == location]["new_cases"]
+
+# Create a matrix containing each dataset in an array.
+location_data_matrix = [extract_new_cases(location) for location in locationList]
+
+# Boxplot
+bp = ax.boxplot(location_data_matrix)
+```
 ![img](fig/boxplot_covid.png)
+
+## The correlation between age and happiness
+
+The following graphs explores the notion that being happy makes you live a longer life.
+
+![img](fig/median-age_happiness.png)

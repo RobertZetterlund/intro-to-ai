@@ -20,7 +20,6 @@ def extract_data(country):
 
 country_data = [extract_data(country) for country in countryList]
 
-
 (fig, ax) = plt.subplots()
 # Create an axes instance
 bp = ax.boxplot(country_data)

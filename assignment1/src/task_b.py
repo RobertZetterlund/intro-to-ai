@@ -39,22 +39,10 @@ gdp_mean = np.mean(merged_entries[GDP])
 life_std = np.std(merged_entries[LIFE])
 life_mean = np.mean(merged_entries[LIFE])
 
-#    GDP MEAN
-#  red   | orange
-# -------|------- LIFE MEAN
-# purple | blue
-
-                top 40 gdp
-#     x  |       x| x y
-# ---------------------- top 40 life
-#       |       |
-# ---------------------- bottom 40
-#       |       |
 
 col = np.where(
     merged_entries[LIFE] > life_mean - life_std * STD_CONSTANT,
-    
-    np.where(merged_entries[GDP] < gdp_mean + gdp_std , 10, 20),
+    np.where(merged_entries[GDP] < gdp_mean + gdp_std, 10, 20),
     np.where(merged_entries[GDP] < gdp_mean + gdp_std * STD_CONSTANT, 30, 40),
 )
 
@@ -74,11 +62,10 @@ scatter = ax.scatter(
 kw = dict(prop="colors", num=4)
 
 
-
 # plt.legend()
 plt.xlabel("GDP")
 plt.ylabel("Life Expectancy")
-#plt.savefig("../fig/gdp_life_b.png")
+# plt.savefig("../fig/gdp_life_b.png")
 plt.show()
 
 # filter based on having high life-expectancy
