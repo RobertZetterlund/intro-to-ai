@@ -15,8 +15,8 @@
   - We assume that the spelling of countries and the use of the country code are consistent across the datasets.
   - We assume numerical values of the data we plan to plot
   - We assume that the datasets have data over similar countries
-  - We assume that the data is correctly formatted according to .csv-standards
-  - We assume that within a dataset there is no duplicated entries
+  - We assume that the data is correctly formatted according to `.csv-standards`
+  - We assume that within a dataset there are no duplicated entries
 
 ###  A scatter plot of GDP per capita vs life expectancy.
 
