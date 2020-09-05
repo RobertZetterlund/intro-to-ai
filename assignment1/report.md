@@ -154,7 +154,7 @@ strong_economy = merged_entries[
 ![img](fig/gdp_life_c.png)
 
 
-The 2 entities is approximately 4 % out of the countries with a strong economy. This indicates that the correlation between having a high GDP and a high life expectancy is strong. This correlation seems reasonable since having a strong economy will make it easier to for example provide good healthcare, living conditions etc. 
+In total there were 52 countries with a strong economy. Two out of these 52 countries, approximately 4 %, did not have a high life expectancy. This indicates that the correlation between having a high GDP and a high life expectancy is strong. And this strong correlation seems very reasonable since having a strong economy will make it easier to provide good healthcare, living conditions etc. Factors that we assume improves the life expectancy. Therefore, we find the result reasonable.
 
 ## Question D - Clean the data
 
@@ -193,7 +193,6 @@ df_clean.head(2)
 | 1     | Algeria | 12590.2260                    | 74.938                  |
 | 2     | Angola  | 5988.5347                     | 55.350                  |
 
-<!--- Något om att vi funderade på att ta bort alla rader som ej blev "utvalda" av varken task A, task B, task C ? --->
 
 # Task 2
 
@@ -233,19 +232,29 @@ The graph explores the spread the reporting of new cases of Covid-19 vary in nor
 
 Below are scatterplots exploring correlation between two datasets.
 
+### Internet usage vs One person households
+
+![img](fig/internet_household_2016.png)
+
+The graph displays the correlation between the percentage of the population that uses the internet and the share of one-person households. It tells us that a country with a high percentage of internet-users does often has a high share of one-person households. This seems reasonable as you can live alone but still interact with friends and family on an everyday basis. It is easy to assume that there is a causation between the two.
+
+However, there might not be a causation at all. Instead, the reason for this correlation might be that people choose to live alone when they have enough money and that internet is used more in countries with a high GDP. 
+- The share of one person households and GDP is strongly correlated. 
+- Internet usage and GDP is strongly correlated
+
+GDP per capita vs share of one person households (2016) | GDP per capita vs internet usage (2016)
+- | - 
+![img](fig/gdp_household_2016.png) | ![img](fig/gdp_internet_2016.png)
+
+Therfore, it is difficult to say whether internet usage makes people more willing to live alone or if people just like to live alone and will do so if they have enough money.
+
+The insights obtained is that even though two datasets have a quite clear correlation there might not be a causation. Even though there may seem to be a quite reasonable causation they might both depend on a common factor that causes the correlation.
+
 ### Annual working hours per person vs Happiness
 
 ![img](fig/working-hours-happiness.png)
 
-The graph shows that there is some correlation between how much you work and your happiness. It seems reasonable that the amount of work would affect the happiness as with more work you won't have as much spare time to do things you enjoy and like. Of course, there are also many other factors that affects one's happiness, but it still seems reasonable that there is at least a weak causation between amount of work and happiness.
-
-
-
-### Internet usage vs one person households
-
-The graph shows that there is some correlation between the percentage of the population that uses the internet and the share of one person households.
-
-![img](fig/internet_household.png)
+The graph explores wheter working less increases your happiness. It shows the self-reported  life satisfaction on the y-axis and the average annual hours worked per employed persons on the x-axis. The graph shows that there is a correlation between how much an person work and their happiness. whether there is a causation between the two or not is difficult to say but it seems reasonable that the amount of work would affect the happiness as with more work you won't have as much spare time to do things you enjoy and like. Of course, there are also many other factors that affects one's happiness, but it still seems reasonable that there is at least a weak causation between amount of work and happiness.
 
 ## The correlation between age and happiness
 
