@@ -8,7 +8,7 @@
 
 - Decisions
 
-  - We selected two datasets from different sources. We found datasets containing both life expectancy and GDP per capita. But we wanted to use two datasets for the learning of experience of merging datasets. 
+  - We selected two datasets from different sources. We found datasets containing both life expectancy and GDP per capita. But we wanted to use two datasets for the learning experience of merging datasets. 
   - We decided to merge the data-sets and only include entities within both.
   - We selected year 2017 because that was the latest year that both our datasets had data from.
 
@@ -65,7 +65,11 @@ Out of the 182 entities examined, the following had a life expectancy higher tha
 
 (33 entities)
 
+Below is a code snippet showing the merging of the datasets, how the mean and standard deviation was created and finally how the countries with one standard deviation above the mean were found.
+
 ```python
+# merge entries with inner join. Excluding entities not available in both datasets.
+merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity"])
 # Get standard deviation and mean from dataframe
 life_std = np.std(merged_entries[LIFE])
 life_mean = np.mean(merged_entries[LIFE])
@@ -137,17 +141,16 @@ Using this assumption and the previously stated assumption about a high life exp
 - Seychelles
 - Trinidad and Tobago
 
+The following code snippet displays how the countries with a strong economy but not a high life expectancy were found.
 ```python
-# merge dataframes
-merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity"])
-
-# get standard deviation and mean from entries (same for life_std and life_mean)
-gdp_std = np.std(merged_entries[GDP])
-gdp_mean = np.mean(merged_entries[GDP])
-
 # filter based on having strong economy
 strong_economy = merged_entries[
     merged_entries[GDP] > gdp_mean + gdp_std * STD_CONSTANT
+]
+
+# filter based on having not high life expectancy
+not_high_life_strong_economy = strong_economy[
+    strong_economy[LIFE] < life_mean + life_std * STD_CONSTANT
 ]
 ```
 
@@ -186,6 +189,8 @@ df_clean = df_clean.rename(columns={GDP: "GDP (2011 international-$)", 'Entity':
 
 df_clean.head(2)
 ```
+
+The cleaned data looked like below:
 
 | index | Entity, 2017  | GDP ((2011 international-\$)) | Life expectancy (years) |
 | ----- | -------       | ----------------------------- | ----------------------- |
@@ -234,27 +239,35 @@ Below are scatterplots exploring correlation between two datasets.
 
 ### Internet usage vs One person households
 
+The graph displays the correlation between the percentage a population of a country that uses the internet and the share of one-person households (2016).
+
 ![img](fig/internet_household_2016.png)
 
-The graph displays the correlation between the percentage of the population that uses the internet and the share of one-person households. It tells us that a country with a high percentage of internet-users does often has a high share of one-person households. This seems reasonable as you can live alone but still interact with friends and family on an everyday basis. It is easy to assume that there is a causation between the two.
 
-However, there might not be a causation at all. Instead, the reason for this correlation might be that people choose to live alone when they have enough money and that internet is used more in countries with a high GDP. 
-- The share of one person households and GDP is strongly correlated. 
-- Internet usage and GDP is strongly correlated
+
+We selected the year 2016 since that was the latest year in which the datasets still had a solid amount of data points. 
+
+The graph tells us that a country with a high percentage of internet-users does often has a high share of one-person households. At a first glance this seems reasonable as with the internet you can live alone but still have the everyday interactions with friends and family as you would have if you lived with other people. It is easy to assume that the internet might have increased the share of people who live alone. 
+
+However, there might not be a causation at all. By coloring countries with a GDP per capita above the mean, one notices that almost all the countries that have a high percentage of internet-users and a high share of one-person households also has a high GDP. At the other hand, almost all countries at the opposite end, low percentage of internet-users and low share of one-person households, has a GDP that is below the mean.
+
+![img](fig/intenet_household_gdp_2016.png)
+
+This means that the correlation between internet usage and one-person households might only exist because of a common factor, the GDP per capita. The comparison below shows the correlation between GDP per capita and an one-person households as well as the correlation between GDP per capita and internet usage. 
 
 GDP per capita vs share of one person households (2016) | GDP per capita vs internet usage (2016)
 - | - 
 ![img](fig/gdp_household_2016.png) | ![img](fig/gdp_internet_2016.png)
 
-Therfore, it is difficult to say whether internet usage makes people more willing to live alone or if people just like to live alone and will do so if they have enough money.
+Because of this, it is difficult to say whether internet usage makes people more likely to live alone or if people just like to live alone and will do so if they have enough money.
 
-The insights obtained is that even though two datasets have a quite clear correlation there might not be a causation. Even though there may seem to be a quite reasonable causation they might both depend on a common factor that causes the correlation.
+The insights we have obtained from this is that even though two datasets have a quite clear correlation there might not be a causation. Even though there may seem to be a quite reasonable causation they might both depend on a common factor that causes the correlation.
 
 ### Annual working hours per person vs Happiness
 
 ![img](fig/working-hours-happiness.png)
 
-The graph explores wheter working less increases your happiness. It shows the self-reported  life satisfaction on the y-axis and the average annual hours worked per employed persons on the x-axis. The graph shows that there is a correlation between how much an person work and their happiness. whether there is a causation between the two or not is difficult to say but it seems reasonable that the amount of work would affect the happiness as with more work you won't have as much spare time to do things you enjoy and like. Of course, there are also many other factors that affects one's happiness, but it still seems reasonable that there is at least a weak causation between amount of work and happiness.
+The graph explores whether working less increases your happiness. It shows the self-reported  life satisfaction on the y-axis and the average annual hours worked per employed persons on the x-axis. The graph shows that there is a correlation between how much an person work and their happiness. whether there is a causation between the two or not is difficult to say but it seems reasonable that the amount of work would affect the happiness as with more work you won't have as much spare time to do things you enjoy and like. Of course, there are also many other factors that affects one's happiness, but it still seems reasonable that there is at least a weak causation between amount of work and happiness.
 
 ## The correlation between age and happiness
 
