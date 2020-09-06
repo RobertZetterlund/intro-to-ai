@@ -1,3 +1,5 @@
+## Author: {Tobias Lindroth & Robert Zetterlund}
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
