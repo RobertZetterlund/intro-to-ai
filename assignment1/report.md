@@ -207,7 +207,11 @@ In this section we present Boxplots that we made.
 
 ### New cases of Covid-19 in August in Sweden, Norway, Denmark and Finland
 
+The graph explores the spread the reporting of new cases of Covid-19 vary in nordic countries during the month of August.
+![img](fig/boxplot_covid.png)
+
 The following code snippet highlights part of the program relevant to creating the boxplot-graph.
+
 
 ```python
 # Define which locations that are of interest
@@ -228,8 +232,7 @@ location_data_matrix = [extract_new_cases(location) for location in locationList
 bp = ax.boxplot(location_data_matrix)
 ```
 
-The graph explores the spread the reporting of new cases of Covid-19 vary in nordic countries during the month of August.
-![img](fig/boxplot_covid.png)
+
 
 
 
@@ -237,31 +240,29 @@ The graph explores the spread the reporting of new cases of Covid-19 vary in nor
 
 Below are scatterplots exploring correlation between two datasets.
 
-### Internet usage vs One person households
+### Internet usage vs one-person households
 
-The graph displays the correlation between the percentage a population of a country that uses the internet and the share of one-person households (2016).
+The following graph displays the correlation between the percentage of a population in a country that uses the internet and the share of one-person households (2016).
 
 ![img](fig/internet_household_2016.png)
 
+We selected the year 2016 since that was the latest year in which the datasets still had a solid amount of data points. We used two different datasets and made the same assumptions about these datasets as those in task one.
 
+The graph above tells us that there is a correlation between the percentage of a population using the internet and the share of one-person households. A country with a high percentage of internet-users does often have a high share of one-person households. And in opposite, a country with a low percentage of internet users does often have a low share of one-person households. At a first glance this seems reasonable as with the internet you can live alone but still have the everyday interactions with friends and family as you would have if you lived with other people. It is easy to assume that the internet might have increased the share of people who live alone. 
 
-We selected the year 2016 since that was the latest year in which the datasets still had a solid amount of data points. 
-
-The graph tells us that a country with a high percentage of internet-users does often has a high share of one-person households. At a first glance this seems reasonable as with the internet you can live alone but still have the everyday interactions with friends and family as you would have if you lived with other people. It is easy to assume that the internet might have increased the share of people who live alone. 
-
-However, there might not be a causation at all. By coloring countries with a GDP per capita above the mean, one notices that almost all the countries that have a high percentage of internet-users and a high share of one-person households also has a high GDP. At the other hand, almost all countries at the opposite end, low percentage of internet-users and low share of one-person households, has a GDP that is below the mean.
+However, there might not be a causation at all. By combining the datasets with the GDP per capita-dataset from the previous task and coloring the countries with a GDP per capita above the mean, one notices that almost all the countries that have a high percentage of internet-users and a high share of one-person households also has a high GDP. At the other hand, almost all countries at the opposite end, low percentage of internet-users and low share of one-person households, has a GDP that is below the mean.
 
 ![img](fig/intenet_household_gdp_2016.png)
 
-This means that the correlation between internet usage and one-person households might only exist because of a common factor, the GDP per capita. The comparison below shows the correlation between GDP per capita and an one-person households as well as the correlation between GDP per capita and internet usage. 
+This indicates that the correlation between internet usage and one-person households might only exist because of a common factor, the GDP per capita. The comparison below shows the correlation between GDP per capita and an one-person households as well as the correlation between GDP per capita and internet usage. 
 
 GDP per capita vs share of one person households (2016) | GDP per capita vs internet usage (2016)
 - | - 
 ![img](fig/gdp_household_2016.png) | ![img](fig/gdp_internet_2016.png)
 
-Because of this, it is difficult to say whether internet usage makes people more likely to live alone or if people just like to live alone and will do so if they have enough money.
+Since both the percentage of internet users and share of one-person households have a strong correlation to GDP per capita, it is difficult to say whether internet usage makes people more likely to live alone or if people just like to live alone and will do so if they have enough money.
 
-The insights we have obtained from this is that even though two datasets have a quite clear correlation there might not be a causation. Even though there may seem to be a quite reasonable causation they might both depend on a common factor that causes the correlation.
+The insights we have obtained from this is that even though two datasets have a quite clear correlation there might not be a causation. This means that even though it may seem reasonable that a causation exists, the case could be that both depend on a common factor wich causes the correlation.
 
 ### Annual working hours per person vs Happiness
 
