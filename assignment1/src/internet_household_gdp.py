@@ -5,13 +5,6 @@ import pandas as pd
 import sys
 import matplotlib.pyplot as plt
 
-# Which countries have high life expectancy but have low GDP?
-# For the sake of the assignment,
-# lets assume that high and low represents is based on the standard deviation.
-# To which extent can be set by adjusting the variable STD_CONSTANT below
-
-# 0.253 is a z score indicating 60 (or 40) %.
-STD_CONSTANT = 0
 SELECTED_YEAR = 2016
 
 # Setup constants
@@ -42,7 +35,7 @@ gdp_mean = np.mean(gdp_entries[GDP])
 
 
 
-highGdp = merged_entries[(merged_entries[GDP] >= gdp_mean + gdp_std * STD_CONSTANT )]
+highGdp = merged_entries[(merged_entries[GDP] > gdp_mean )]
 
 rest = merged_entries.drop(highGdp.index)
 
