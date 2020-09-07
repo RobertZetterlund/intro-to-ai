@@ -24,7 +24,10 @@ country_data = [extract_data(country) for country in countryList]
 
 (fig, ax) = plt.subplots()
 # Create an axes instance
-bp = ax.violinplot(country_data)
+bp = ax.violinplot(
+    country_data,
+    showmeans=True,
+)
 
 
 ax.set_title("New cases of corona in nordic countries in August")
