@@ -1,6 +1,6 @@
 # Assignment 1: Introduction to Data Science and Python
 
-## Tobias Lindroth: x hrs
+## Tobias Lindroth: 15 hrs
 
 ## Robert Zetterlund: 15 hrs
 
