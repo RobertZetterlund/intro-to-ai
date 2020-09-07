@@ -118,7 +118,7 @@ To asses how reasonable 20 entities are we think about Venn Diagrams.
 
 - There should be about `40%` of the entities having a high GDP, group named `HG`.
 - There should be about `40%` of the entities having a low life expectaction, group named `LE`.
-- We define the union between `HG` and `LE` to be `Z`. The percentage of entities within `LE` and `HG` are denoted `X` and `Y` respectively.
+- We define the intersection between `HG` and `LE` to be `Z`. The percentage of entities within `LE` and `HG` are denoted `X` and `Y` respectively.
 
 <p align="center">
 <img src="fig/venn.png" width="70%"/>
