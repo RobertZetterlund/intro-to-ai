@@ -199,11 +199,8 @@ The cleaned data looked like below:
 
 # Task 2
 
-## Violin Plot
 
-In this section we present a Violinplot that we made.
-
-### New cases of Covid-19 in August in Sweden, Norway, Denmark and Finland
+## New cases of Covid-19 in August in Sweden, Norway, Denmark and Finland
 
 The graph explores the spread the reporting of new cases of Covid-19 vary in nordic countries during the month of August.
 ![img](fig/boxplot_covid.png)
