@@ -41,22 +41,24 @@ gdp_mean = np.mean(merged_entries[GDP])
 life_std = np.std(merged_entries[LIFE])
 life_mean = np.mean(merged_entries[LIFE])
 
-highLife = merged_entries[(merged_entries[LIFE] > life_mean + life_std * STD_CONSTANT )]
-highLifeLowGdp =  highLife[(highLife[GDP] < gdp_mean - gdp_std * STD_CONSTANT)]
+highLife = merged_entries[(merged_entries[LIFE] > life_mean + life_std * STD_CONSTANT)]
+highLifeLowGdp = highLife[(highLife[GDP] < gdp_mean - gdp_std * STD_CONSTANT)]
 rest = merged_entries.drop(highLifeLowGdp.index)
 
 
 fig, ax = plt.subplots()
 
 
-inputs = [(highLifeLowGdp, "blue", "High life expectancy, low GDP"),
-            (rest, "gray", "Other")
-          ]
+inputs = [
+    (highLifeLowGdp, "blue", "High life expectancy, low GDP"),
+    (rest, "gray", "Other"),
+]
 
 for df, color, label in inputs:
-    ax.scatter(df[GDP], df[LIFE], c=color, s=75, label=label,
-               alpha=0.8, edgecolors='none')
-    
+    ax.scatter(
+        df[GDP], df[LIFE], c=color, s=75, label=label, alpha=0.8, edgecolors="none"
+    )
+
 ax.legend()
 
 plt.xlabel("GDP per capita ($)")

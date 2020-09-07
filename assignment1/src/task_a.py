@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Which countries have a life expectancy higher 
+# Which countries have a life expectancy higher
 # than one standard deviation above the mean?
 
 SELECTED_YEAR = 2017
@@ -25,20 +25,22 @@ merged_entries = pd.merge(gdp_entries, life_entries, on=["Code", "Year", "Entity
 life_std = np.std(merged_entries[LIFE])
 life_mean = np.mean(merged_entries[LIFE])
 
-high_life = merged_entries[merged_entries[LIFE] > life_mean+life_std]
+high_life = merged_entries[merged_entries[LIFE] > life_mean + life_std]
 
 rest = merged_entries.drop(high_life.index)
 
 fig, ax = plt.subplots()
 
-inputs = [(high_life, "blue", "Life Expectancy one standard deviation above mean"),
-            (rest, "gray", "Other")
-          ]
+inputs = [
+    (high_life, "blue", "Life Expectancy one standard deviation above mean"),
+    (rest, "gray", "Other"),
+]
 
 for df, color, label in inputs:
-    ax.scatter(df[GDP], df[LIFE], c=color, s=75, label=label,
-               alpha=0.8, edgecolors='none')
-    
+    ax.scatter(
+        df[GDP], df[LIFE], c=color, s=75, label=label, alpha=0.8, edgecolors="none"
+    )
+
 ax.legend()
 
 print(high_life["Entity"].to_frame().to_string(index=False))

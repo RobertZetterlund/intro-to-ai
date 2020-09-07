@@ -25,7 +25,9 @@ household_entries = df_households[(df_households["Year"] == SELECTED_YEAR)]
 
 # merge entries with inner join. Excluding entities not available in both datasets.
 merged_entries = pd.merge(gdp_entries, internet_entries, on=["Code", "Year", "Entity"])
-merged_entries = pd.merge(merged_entries, household_entries, on=["Code", "Year", "Entity"])
+merged_entries = pd.merge(
+    merged_entries, household_entries, on=["Code", "Year", "Entity"]
+)
 
 print(merged_entries.count)
 
@@ -34,8 +36,7 @@ gdp_std = np.std(merged_entries[GDP])
 gdp_mean = np.mean(gdp_entries[GDP])
 
 
-
-highGdp = merged_entries[(merged_entries[GDP] > gdp_mean )]
+highGdp = merged_entries[(merged_entries[GDP] > gdp_mean)]
 
 rest = merged_entries.drop(highGdp.index)
 
@@ -43,13 +44,21 @@ rest = merged_entries.drop(highGdp.index)
 fig, ax = plt.subplots()
 
 
-inputs = [(highGdp, "blue", "GDP per capita above the mean"),
-            (rest, "gray", "GDP per capita below or equal to the mean")
-          ]
+inputs = [
+    (highGdp, "blue", "GDP per capita above the mean"),
+    (rest, "gray", "GDP per capita below or equal to the mean"),
+]
 
 for df, color, label in inputs:
-    ax.scatter(df[HOUSEHOLD], df[INTERNET], c=color, s=75, label=label,
-               alpha=0.8, edgecolors='none')   
+    ax.scatter(
+        df[HOUSEHOLD],
+        df[INTERNET],
+        c=color,
+        s=75,
+        label=label,
+        alpha=0.8,
+        edgecolors="none",
+    )
 
 ax.legend()
 
@@ -57,6 +66,3 @@ plt.xlabel(HOUSEHOLD)
 plt.ylabel(INTERNET)
 plt.savefig("../fig/intenet_household_gdp_2016.png")
 plt.show()
-
-
-

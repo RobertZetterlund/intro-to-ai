@@ -7,20 +7,20 @@ import sys
 import argparse
 
 # Setup argument parser
-parser = argparse.ArgumentParser(description='Creates a scatterplot. Expects the csv files to have the columns Code, Year and Entity')
-parser.add_argument('csv_x', type=str,
-                    help='CSV file 1')
-parser.add_argument('csv_y', type=str,
-                    help='CSV file 2')
-parser.add_argument('column_x', type=str,
-                    help='Title of column in file 1 to put on x-axis')
-parser.add_argument('column_y', type=str,
-                    help='Title of column in file 2 to put on y-axis')
-parser.add_argument('year', type=int,
-                    help='The year to compare on')  
-                    
-parser.add_argument('--output', type=str,
-                    help='name of output file')                                                                                                  
+parser = argparse.ArgumentParser(
+    description="Creates a scatterplot. Expects the csv files to have the columns Code, Year and Entity"
+)
+parser.add_argument("csv_x", type=str, help="CSV file 1")
+parser.add_argument("csv_y", type=str, help="CSV file 2")
+parser.add_argument(
+    "column_x", type=str, help="Title of column in file 1 to put on x-axis"
+)
+parser.add_argument(
+    "column_y", type=str, help="Title of column in file 2 to put on y-axis"
+)
+parser.add_argument("year", type=int, help="The year to compare on")
+
+parser.add_argument("--output", type=str, help="name of output file")
 
 args = parser.parse_args()
 
@@ -49,6 +49,6 @@ plt.xlabel(args.column_x)
 plt.ylabel(args.column_y)
 
 if args.output is not None:
-    plt.savefig('../fig/' + args.output + '.png')
+    plt.savefig("../fig/" + args.output + ".png")
 else:
-    plt.show()     
+    plt.show()
