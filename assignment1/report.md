@@ -266,8 +266,11 @@ The graph explores whether working less increases your happiness. It shows the s
 ## The correlation between age and happiness
 
 ![img](fig/age_happiness_gdp-2010.png)
-The graph above explores the notion that being happy makes you live a longer life. At first it looks like it may, however, with the GDP per capita into account it becomes apparent that there might not be a causation between the two.
+
+The graph above explores the notion that being happy makes you live a longer life. At first it looks like it might, however, with the GDP per capita into account it becomes apparent that there might not be a causation between the two.
 
 ## Summary
 
-It does appear that GDP per capita has some degree of causation to the other entries selected in our assignment, as entities above the mean _tend_ to cluster or at least be in close proximity to each other. However as there are some outliers we cannot say for sure. For example, discussed in the graph "Working Hours vs Happiness"
+It does appear that GDP per capita has some degree of causation to the other entries selected in our assignment, as entities above the mean _tend_ to cluster or at least be in close proximity to each other. However as there are some outliers we cannot say for sure. For example, discussed in the graph "Working Hours vs Happiness".
+
+We would say that we gained further insights into the saying "Correlation does not imply causation". We learned that data visualization can be difficult and that it is easy to trick yourselves and others through plotting data.
