@@ -2,7 +2,7 @@
 
 ## Tobias Lindroth: x hrs
 
-## Robert Zetterlund: y hrs
+## Robert Zetterlund: 15 hrs
 
 # Task 1
 
@@ -65,7 +65,7 @@ Out of the 182 entities examined, the following had a life expectancy higher tha
 
 (33 entities)
 
-Below is a code snippet showing the merging of the datasets, how the mean and standard deviation was created and finally how the countries with one standard deviation above the mean were found.
+Below is a code snippet showing the merging of the datasets, how the mean and standard deviation were calculated and finally how the countries with one standard deviation above the mean were found.
 
 ```python
 # merge entries with inner join. Excluding entities not available in both datasets.
@@ -161,7 +161,7 @@ In total there were 52 countries with a strong economy. Two out of these 52 coun
 
 ## Question D - Clean the data
 
-The rows that we removed were those not containing data from the year that we were examining (2017), or the Entity not being available in both datasets. After the removal of rows we decided to remove the columns _Code_ and _Year_ as they were no longer pertaining to the assignment. Important to note is that the information of the dataframe now showing data from the year 2017 is excluded. However, instead of having 2017 repeated through an entire column, we add the year to the column name of Entity. Making `Entity` be `Entity, 2017`. Note that we are aware that this restricts the re-usability of the dataframe, as the convention of naming the field `Entity`, but for the sake of this assignment we allow this.
+The rows that we removed were those not containing data from the year that we were examining (2017), or the Entity not being available in both datasets. After the removal of rows we decided to remove the columns _Code_ and _Year_ as they were no longer relevant to the assignment. Important to note is that the information of the dataframe now showing data from the year 2017 is excluded. However, instead of having 2017 repeated through an entire column, we add the year to the column name of Entity. Making `Entity` be `Entity, 2017`. Note that we are aware that this restricts the re-usability of the dataframe, as the convention of naming the field `Entity`, but for the sake of this assignment we allow this.
 
 **We merged the datasets:**
 
@@ -189,7 +189,7 @@ df_clean = df_clean.rename(columns={GDP: "GDP (2011 international-$)", 'Entity':
 df_clean.head(2)
 ```
 
-The cleaned data looked like below:
+The clean data:
 
 | index | Entity, 2017 | GDP (2011 international-\$) | Life expectancy (years) |
 | ----- | ------------ | --------------------------- | ----------------------- |
@@ -198,7 +198,6 @@ The cleaned data looked like below:
 | 2     | Angola       | 5988.5347                   | 55.350                  |
 
 # Task 2
-
 
 ## New cases of Covid-19 in August in Sweden, Norway, Denmark and Finland
 
@@ -259,6 +258,8 @@ The insights we have obtained from this is that even though two datasets have a 
 ![img](fig/w-hours_happiness_gdp.png)
 
 The graph explores whether working less increases your happiness. It shows the self-reported life satisfaction on the y-axis and the average annual hours worked per employed persons on the x-axis. The graph shows that there is a correlation between how much an person work and their happiness. whether there is a causation between the two or not is difficult to say but it seems reasonable that the amount of work would affect the happiness as with more work you won't have as much spare time to do things you enjoy and like. Of course, there are also many other factors that affects one's happiness, but it still seems reasonable that there is at least a weak causation between amount of work and happiness.
+
+Here, GDP per capita does not seem to influence happiness nor working hours.
 
 ## The correlation between age and happiness
 
