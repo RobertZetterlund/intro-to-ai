@@ -17,7 +17,6 @@ from matplotlib.colors import ListedColormap
 from sklearn import neighbors, datasets
 from sklearn.metrics import plot_confusion_matrix
 
-
 # import some data to play with
 iris = datasets.load_iris()
 
@@ -27,16 +26,18 @@ target_names = iris["target_names"]
 
 h = .02  # step size in the mesh
 
-row = 0
-col = 0
-
 n_neighbors_array = np.array([1, 5, 15, 25])
 distributions = ['uniform', 'distance']
 
-
+# setup multiple plots within one window
 fig, ax = plt.subplots(nrows=len(distributions), ncols=len(
     n_neighbors_array), figsize=(10, 10))
 plt.tight_layout()
+
+# indices for determining placement of figure in subplot
+col = 0
+row = 0
+
 for n_neighbors in n_neighbors_array:
     for weights in distributions:
 
@@ -56,7 +57,7 @@ for n_neighbors in n_neighbors_array:
     col = col + 1
     row = 0
 
-
+# looks nicer
 plt.subplots_adjust(left=0.05, bottom=0.05, right=0.95,
                     top=0.95, hspace=0.1, wspace=0.5)
 
