@@ -1,4 +1,5 @@
-from scipy import stats
+## Author: {Tobias Lindroth & Robert Zetterlund}
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -30,20 +31,20 @@ print("predicted value of house with 100m2 =", 100 * slope + intercept)
 print("predicted value of house with 150m2 =", 150 * slope + intercept)
 print("predicted value of house with 200m2 =", 200 * slope + intercept)
 
-## Plot regression line
+## Setup plot
 fig, ax = plt.subplots()
-plt.scatter(x, y)
-
-x_predicted = np.linspace(0, np.amax(x)+50)
-
-def f(x): return reg.predict(x)
-
-plt.plot(x_predicted, f(x_predicted.reshape(-1, 1)), c="red")
-
 plt.xlabel(x_header)
 plt.ylabel(y_header)
 plt.ylim(np.amin(y)-100000, np.amax(y)+100000)
 plt.xlim(np.amin(x)-10, np.amax(x)+10)
+
+# draw regression line
+x_predicted = np.linspace(0, np.amax(x)+50).reshape(-1,1)
+def f(x): return reg.predict(x)
+plt.plot(x_predicted, f(x_predicted), c="red")
+
+# create scatterplot
+plt.scatter(x, y)
 
 plt.show()
 

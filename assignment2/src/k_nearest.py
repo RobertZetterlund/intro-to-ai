@@ -1,3 +1,9 @@
+# Author: {Tobias Lindroth & Robert Zetterlund}
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import neighbors, datasets
+from sklearn.metrics import plot_confusion_matrix
 
 # task 3
 # Use k-nearest neighbours to classify the iris data set with some different values for k,
@@ -10,22 +16,13 @@
 # regression. Calculate confusion matrices for these models and discuss the
 # performance of the various models.
 
-
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
-from sklearn import neighbors, datasets
-from sklearn.metrics import plot_confusion_matrix
-
-# import some data to play with
+# import iris dataset and extract relevant data
 iris = datasets.load_iris()
-
-X = iris["data"][:, :2]
+X = iris["data"]
 y = iris["target"]
 target_names = iris["target_names"]
 
-h = .02  # step size in the mesh
-
+# Determine which settings to use in plot.
 n_neighbors_array = np.array([1, 5, 15, 25])
 distributions = ['uniform', 'distance']
 
@@ -41,15 +38,17 @@ row = 0
 for n_neighbors in n_neighbors_array:
     for weights in distributions:
 
-        # we create an instance of Neighbours Classifier and fit the data.
+        # create an instance of Neighbours Classifier and fit the data.
         clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
         clf.fit(X, y)
 
         # create confusion matrix
         plot_confusion_matrix(
             clf, X, y, display_labels=target_names, ax=ax[row, col],  cmap=plt.get_cmap("Blues"), xticks_rotation=90)
+
         titleString = "K: " + str(n_neighbors) + \
             "\n Distribution: " + str(weights)
+
         ax[row, col].set_title(titleString)
 
         row = row + 1
@@ -57,8 +56,8 @@ for n_neighbors in n_neighbors_array:
     col = col + 1
     row = 0
 
-# looks nicer
-plt.subplots_adjust(left=0.05, bottom=0.05, right=0.95,
+# looks nicer (essentially changing zoom)
+plt.subplots_adjust(left=0.08, bottom=0.05, right=0.98,
                     top=0.95, hspace=0.1, wspace=0.5)
 
 plt.show()
