@@ -21,7 +21,7 @@ class_names = bunch["target_names"]
 clf1 = OneVsRestClassifier(LogisticRegression()).fit(X, y)
 
 # create confusion matrix
-plot_confusion_matrix(clf1, X,y, display_labels=class_names, cmap=plt.cm.Blues)
+plot_confusion_matrix(clf1, X,y, display_labels=class_names, cmap=plt.cm.get_cmap("Blues"))
 
 # show!!!!
 plt.show()
