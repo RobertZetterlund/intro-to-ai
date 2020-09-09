@@ -9,16 +9,20 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import plot_confusion_matrix
 from sklearn.datasets import load_iris
 
-iris = load_iris()
+# Load iris dataset and get data and classification
+bunch = load_iris()
+X = bunch.data
+y = bunch.target
 
-X, y = load_iris(return_X_y=True)
-print(y)
-class_names = iris.target_names
-print(class_names)
+# get classnames (setosa,versicolor,virginica)
+class_names = bunch.target_names
 
-clf1 = OneVsRestClassifier(LogisticRegression(random_state=0)).fit(X, y)
+# Use use onevsrestclassifier with a logistical regression.......
+clf1 = OneVsRestClassifier(LogisticRegression()).fit(X, y)
 
-
+# create confusion matrix
 plot_confusion_matrix(clf1, X,y, display_labels=class_names, cmap=plt.cm.Blues)
 
+# show!!!!
 plt.show()
+plt.savefig('confusion-matrix.png')
