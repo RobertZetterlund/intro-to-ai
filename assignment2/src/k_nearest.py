@@ -23,7 +23,7 @@ y = iris["target"]
 target_names = iris["target_names"]
 
 # Determine which settings to use in plot.
-n_neighbors_array = np.array([1, 5, 15, 25])
+n_neighbors_array = np.array([1, 5, 50, 100])
 distributions = ['uniform', 'distance']
 
 # setup multiple plots within one window
@@ -43,8 +43,12 @@ for n_neighbors in n_neighbors_array:
         clf.fit(X, y)
 
         # create confusion matrix
-        plot_confusion_matrix(
-            clf, X, y, display_labels=target_names, ax=ax[row, col],  cmap=plt.get_cmap("Blues"), xticks_rotation=90)
+        conf_plot = plot_confusion_matrix(
+            clf, X, y, display_labels=target_names, ax=ax[row, col],  cmap=plt.get_cmap("Greens"), xticks_rotation=90)
+
+        # remove colorbar on plots except first one
+        if(col > 0 or row > 0):
+            conf_plot.im_.colorbar.remove()
 
         titleString = "K: " + str(n_neighbors) + \
             "\n Distribution: " + str(weights)
@@ -58,6 +62,6 @@ for n_neighbors in n_neighbors_array:
 
 # looks nicer (essentially changing zoom)
 plt.subplots_adjust(left=0.08, bottom=0.05, right=0.98,
-                    top=0.95, hspace=0.1, wspace=0.5)
+                    top=0.95, hspace=0.1, wspace=0.75)
 
 plt.show()
