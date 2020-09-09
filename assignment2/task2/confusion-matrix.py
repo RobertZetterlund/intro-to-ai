@@ -11,13 +11,14 @@ from sklearn.datasets import load_iris
 
 # Load iris dataset and get data and classification
 bunch = load_iris()
-X = bunch.data
-y = bunch.target
+X = bunch["data"]
+y = bunch["target"]
 
 # get classnames (setosa,versicolor,virginica)
-class_names = bunch.target_names
+class_names = bunch["target_names"]
 
-# Use use onevsrestclassifier with a logistical regression.......
+# Use use onevsrestclassifier with a logistic regression.......
+# Train one logistic classifier for each class
 clf1 = OneVsRestClassifier(LogisticRegression()).fit(X, y)
 
 # create confusion matrix
