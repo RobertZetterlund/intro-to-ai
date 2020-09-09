@@ -20,6 +20,9 @@ reg.fit(x, y)
 y_predicted = reg.predict(x)
 residuals = y-y_predicted
 
+# The r2 score of the correlation
+print('score: ', reg.score(x, y))
+
 
 fig, ax = plt.subplots()
 
