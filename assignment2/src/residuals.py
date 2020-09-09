@@ -6,44 +6,29 @@ from sklearn.linear_model import LinearRegression
 
 df = pd.read_csv("../res/data.csv")
 
+
 x_header = "area"
 y_header = "price"
 
-# A
-# What are the values of the slope and intercept of the regression line?
+# C
+# Draw a residual plot
 x = df[x_header].values.reshape(-1, 1)
 y = df[y_header].values.reshape(-1, 1)
 reg = LinearRegression()
 
 reg.fit(x, y)
+y_predicted = reg.predict(x)
+residuals = y-y_predicted
 
-slope = reg.coef_
-intercept = reg.intercept_
 
-print("reg.coef_: ", slope)
-print("reg.intercept_:", intercept)
-
-# B
-# Use this model to predict the selling prices of houses which have living area 100 m2 , 150 m2 and 200 m2
-
-print("predicted value of house with 100m2 =", 100 * slope + intercept)
-print("predicted value of house with 150m2 =", 150 * slope + intercept)
-print("predicted value of house with 200m2 =", 200 * slope + intercept)
-
-## Plot regression line
 fig, ax = plt.subplots()
-plt.scatter(x, y)
 
-x_predicted = np.linspace(0, np.amax(x)+50)
-
-def f(x): return reg.predict(x)
-
-plt.plot(x_predicted, f(x_predicted.reshape(-1, 1)), c="red")
-
+plt.plot(x, residuals, 'o', alpha=0.9)
+plt.ylim(-2000000, 2000000)
 plt.xlabel(x_header)
-plt.ylabel(y_header)
-plt.ylim(np.amin(y)-100000, np.amax(y)+100000)
-plt.xlim(np.amin(x)-10, np.amax(x)+10)
+plt.ylabel("Residuals")
+
+plt.axhline(y=0, ls="--", alpha=0.7, color="black")
 
 plt.show()
 
