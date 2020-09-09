@@ -33,7 +33,7 @@ print("predicted value of house with 200m2 =", 200 * slope + intercept)
 
 ## C
 ## Draw a residual plot
-
+print('score: ', reg.score(x,y))
 y_predicted = reg.predict(x)
 residuals = y-y_predicted
 
@@ -43,16 +43,28 @@ plt.plot(x, residuals, 'o', alpha=0.9)
 
 #fig, ax = plt.subplots()
 # scatterplot gdp as x, life-expectancy as y
-# #plt.scatter(x, y)
+#plt.scatter(x, y)
 
 plt.xlabel(x_header)
 plt.ylabel(y_header)
 plt.axhline(y=0, ls="--", alpha=0.7, color="black")
-#plt.hlines(y=0, xmin=np.amin(x), xmax=np.amax(x), linestyles='dashed', clipOn=False)
-
-#plt.Line2D(x, x*slope + intercept)
 
 plt.show()
 
 ## D
 ## d. Discuss the results, and how the model could be improved.
+
+
+# Regarding the results.
+#   our R-squared "score" is 0.543, 
+#   
+
+
+# More datapoints
+# There are more factors to take into account
+    # Area of land in measurements 
+    # Year of building the house
+    # Is it newly renovated?
+    # Do we have additional living space? (biarea)
+    # What is the annual cost of keeping the property?
+    # Where is it located? Near city centre or not?
