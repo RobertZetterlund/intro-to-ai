@@ -7,8 +7,8 @@ from sklearn.linear_model import LinearRegression
 
 df = pd.read_csv("../res/data.csv")
 
-x_header = "area"
-y_header = "price"
+x_header = "area (m2)"
+y_header = "price (SEK)"
 
 # A
 # What are the values of the slope and intercept of the regression line?
