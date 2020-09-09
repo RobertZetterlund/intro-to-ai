@@ -47,9 +47,9 @@ for n_neighbors in n_neighbors_array:
 
         # create confusion matrix
         plot_confusion_matrix(
-            clf, X, y, display_labels=target_names, ax=ax[row, col],  cmap=plt.cm.get_cmap("Blues"))
+            clf, X, y, display_labels=target_names, ax=ax[row, col],  cmap=plt.get_cmap("Blues"), xticks_rotation=90)
         titleString = "K: " + str(n_neighbors) + \
-            " Distribution: " + str(weights)
+            "\n Distribution: " + str(weights)
         ax[row, col].set_title(titleString)
 
         row = row + 1
