@@ -17,12 +17,12 @@ Using the slope and the intercept values we create a regression line (`f(x) = kx
 f(x) = 20337*x + 2073775
 ```
 
-Using our model we predict values for houses with the area of 100,150 and 200 m2.
+Using our model we predict prices for houses with the area of 100,150 and 200 m2.
 
 ```python
-f(100) = 20337*100 + 2073775 = 4107500
-f(150) = 20337*150 + 2073775 = 5124362
-f(200) = 20337*200 + 2073775 = 6141224
+f(100) = 4107500
+f(150) = 5124362
+f(200) = 6141224
 ```
 
 ## Task C
