@@ -1,10 +1,10 @@
-# Question 1
+##  *Question 1*
 
 ## Task A 
 <!-- What are the values of the slope and intercept of the regression line? -->
 
-    * slope: 20337
-    * intercept: 2073775
+   * slope: 20337
+   * intercept: 2073775
 
 
 ## Task B
@@ -33,18 +33,20 @@ f(200) = 6141224
 ## Task D 
 <!-- Discuss the results, and how the model could be improved. -->
 Regarding the results.
+
 *   our R-squared "score" is 0.543,
 
 Improvements
-* Buying a very small house is very expensive. a 0m2 house costs 2 million SEK!
-* More datapoints
-* There are more factors to take into account
-* Area of land in measurements
-* Year of building the house
-* Is it newly renovated?
-* Do we have additional living space? (biarea)
-* What is the annual cost of keeping the property?
-* Where is it located? Near city centre or not?
+- Adding a datapoint at (0,0) will create a more realistic model. Buying a very small house is very expensive right now. A 0m2 house costs 2 million SEK!
+- Not assuming that there is a linear relationship. It might not be the case that the data is linear. 
+- More datapoints will give a more precise model.
+- Take more factors into account
+    * Area of land in measurements
+    * Year of building the house
+    * Is it newly renovated?
+    * Do we have additional living space? (biarea)
+    * What is the annual cost of keeping the property?
+    * Where is it located? Near city centre or not? Near schoold and public transport?
 
 
 
