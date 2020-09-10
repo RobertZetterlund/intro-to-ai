@@ -16,6 +16,7 @@ Using the slope and the intercept values we create a regression line (`f(x) = kx
 ```python
 f(x) = 20337*x + 2073775
 ```
+![regression-line-scatter](fig/regression.png)
 
 Using our model we predict prices for houses with the area of 100,150 and 200 m2.
 
