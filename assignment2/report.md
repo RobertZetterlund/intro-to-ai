@@ -3,8 +3,8 @@
 ## Task A 
 <!-- What are the values of the slope and intercept of the regression line? -->
 
-    * slope: 20337
-    * intercept: 2073775
+   * slope: 20337
+   * intercept: 2073775
 
 
 ## Task B
