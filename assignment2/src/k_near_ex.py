@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn import neighbors, datasets
 
-n_neighbors = 4
+n_neighbors = 50
 
 # import some data to play with
 iris = datasets.load_iris()
@@ -19,7 +19,7 @@ h = .02  # step size in the mesh
 cmap_light = ListedColormap(['orange', 'cyan', 'cornflowerblue'])
 cmap_bold = ListedColormap(['darkorange', 'c', 'darkblue'])
 
-for weights in ['uniform']:
+for weights in ['distance', "uniform"]:
     # we create an instance of Neighbours Classifier and fit the data.
     clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
     clf.fit(X, y)
