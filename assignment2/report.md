@@ -114,8 +114,11 @@ Code is almost identical to above, just that we make multiple figures in a plot.
 
 3. for n_neighbors in n_neighbors_array:
 4.     for weights in distributions:
+            # create an instance of Neighbours Classifier and fit the data.
+            clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
+            clf.fit(X_train, y_train)
             # Calculate placement of plot (row,col)
-            # Code is very similar as in task2
+            # Create confusion matrix, code similar to task2
 ```
 
 |                         ![multi-confusion-matrix](fig/multi-confusion-matrix.png)                          |
