@@ -44,10 +44,10 @@ for n_neighbors in n_neighbors_array:
 
         # create confusion matrix
         conf_plot = plot_confusion_matrix(
-            clf, X, y, display_labels=target_names, ax=ax[row, col],  cmap=plt.get_cmap( "Greens" if (row % 2 == 1) else "Blues"), xticks_rotation=90)
+            clf, X, y, display_labels=target_names, ax=ax[row, col],  cmap=plt.get_cmap("Greens" if (row % 2 == 1) else "Blues"), xticks_rotation=90)
 
         # remove colorbar on plots except first one
-        if(col > 0):
+        if(col < len(n_neighbors_array) - 1):
             conf_plot.im_.colorbar.remove()
 
         titleString = "K: " + str(n_neighbors) + \

@@ -19,5 +19,6 @@ clf1 = OneVsRestClassifier(LogisticRegression()).fit(X, y)
 
 # create confusion matrix
 plot_confusion_matrix(clf1, X,y, display_labels=class_names, cmap=plt.get_cmap("Blues"))
+plt.title("One versus rest classifier with logistic regression \n for the iris data set")
 
 plt.show()
