@@ -93,7 +93,16 @@ By looking at the bottom row of confusion matrices displaying an distance distri
 
 ### To answer the question "What will happen when k grows larger for the different cases? Why?"
 
-Intuitively, we be
+We note that we have alotted 33% of the datapoints to testing, totalt of 50 being: 19 setosa, 15 versicolor and 16 virginica.
+This means that we have *trained* our model on 100 datapoints: 31 setotas, 35 versicolor and 34 virginica. 
+
+We start of by inspecting the results of k=100 with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. Recall the distribution in the training set, we have a majority of virginica. 
+If any given testing point were to evaluate their 100 nearest neigbors, their distribution would be
+
+| setosas  | versicolor  | virginca  |
+|---|---|---|
+|   |   |   |
+
 
 
 
