@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import neighbors, datasets
 from sklearn.metrics import plot_confusion_matrix
+from sklearn.model_selection import train_test_split
 
 # task 3
 # Use k-nearest neighbours to classify the iris data set with some different values for k,
@@ -35,16 +36,20 @@ plt.tight_layout()
 col = 0
 row = 0
 
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.33, random_state=42)
+
+
 for n_neighbors in n_neighbors_array:
     for weights in distributions:
 
         # create an instance of Neighbours Classifier and fit the data.
         clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
-        clf.fit(X, y)
+        clf.fit(X_train, y_train)
 
         # create confusion matrix
         conf_plot = plot_confusion_matrix(
-            clf, X, y, display_labels=target_names, ax=ax[row, col],  cmap=plt.get_cmap("Greens" if (row % 2 == 1) else "Blues"), xticks_rotation=90)
+            clf, X_test, y_test, display_labels=target_names, ax=ax[row, col],  cmap=plt.get_cmap("Greens" if (row % 2 == 1) else "Blues"), xticks_rotation=90)
 
         # remove colorbar on plots except first one
         if(col < len(n_neighbors_array) - 1):
