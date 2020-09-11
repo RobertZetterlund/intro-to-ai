@@ -138,6 +138,12 @@ First we will look at our data in "Our examples", then we will add other thought
 We note that we have alotted 50 (33%) of the datapoints to _testing_, being: 19 setosa, 15 versicolor and 16 virginica.
 This means that we have _trained_ our model on 100 (66%) datapoints: 31 setotas, 35 versicolor and 34 virginica.
 
+|          | setosas | versicolor | virginica | total |
+| -------- | ------- | ---------- | --------- | ----- |
+| testing  | 19      | 15         | 16        | 50    |
+| training | 31      | 35         | 34        | 100   |
+| total    | 50      | 50         | 50        | 150   |
+
 We start of by inspecting the results of k=100 with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. Recall the distribution in the training set, we have a majority of virginica.
 If the model were to evaluate any given testing point's 100 nearest neigbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
 
