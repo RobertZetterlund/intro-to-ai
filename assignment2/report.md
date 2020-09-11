@@ -33,14 +33,17 @@ f(200) = 6141224
 
 ## Task D 
 <!-- Discuss the results, and how the model could be improved. -->
-Regarding the results.
+### Regarding the results.
 
-*   our R-squared "score" is 0.543,
+The model we have created has some problems. According to the model, it is very expensive to buy small houses. For example, 0 m2 costs 2 000 000 kr. Furthermore, in the residual plot one can see that the model often underestimate or overestimate the price of a house by quite a lot. One house is underestimated by 2 000 000 kr. 
 
-Improvements
-- Adding a datapoint at (0,0) will create a more realistic model. Buying a very small house is very expensive right now. A 0m2 house costs 2 million SEK!
-- Not assuming that there is a linear relationship. It might not be the case that the data is linear. 
-- More datapoints will give a more precise model.
+The coefficient of determination of the predictions is around 0.53. This basically means that 53 % of the variation in y can be explained by the x-variables or in other words, 53 % of the prices can be predicted by the area of the house. Becuase of this, our model does not seem to be very reliable.
+
+
+
+### Improvements
+- Adding a datapoint at (0,0) will create a more realistic model. 
+- Adding more datapoints will give a more precise model.
 - Take more factors into account
     * Area of land in measurements
     * Year of building the house
