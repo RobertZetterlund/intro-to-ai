@@ -35,7 +35,7 @@ f(200) = 6141224
 <!-- Discuss the results, and how the model could be improved. -->
 ### Regarding the results.
 
-The model we have created has some problems. According to the model, it is very expensive to buy small houses. For example, 0 m2 costs 2 000 000 kr. Furthermore, in the residual plot one can see that the model often underestimate or overestimate the price of a house by quite a lot. One house is underestimated by 2 000 000 kr. 
+The model we have created has some issues. According to the model, it is very expensive to buy small houses. For example, 0 m2 costs 2 000 000 kr. Furthermore, in the residual plot one can see that the model often underestimate or overestimate the price of a house by quite a lot. One house is underestimated by 2 000 000 kr. 
 
 The coefficient of determination of the predictions is around 0.53. This basically means that 53 % of the variation in y can be explained by the x-variables or in other words, 53 % of the prices can be predicted by the area of the house. Becuase of this, our model does not seem to be very reliable.
 
@@ -57,6 +57,7 @@ The coefficient of determination of the predictions is around 0.53. This basical
 
 # Task 2 
 <!-- Use a confusion matrix to evaluate the use of logistic regression to classify the iris data set. Use the one-vs-rest option to use the same setup as in the lectures for multiclass regression -->
+The below code snippet shows how the confusion matrix below was caluclated. 
 
 ```python
 # Load iris dataset and get data and classification
@@ -67,16 +68,17 @@ y = bunch["target"]
 # Get classnames (setosa, versicolor, virginica)
 class_names = bunch["target_names"]
 
+# divide into training and test data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+
 # Train one logistic classifier for each class
-clf1 = OneVsRestClassifier(LogisticRegression()).fit(X, y)
+clf1 = OneVsRestClassifier(LogisticRegression()).fit(X_train, y_train)
 
 # Create confusion matrix
-plot_confusion_matrix(clf1, X,y, display_labels=class_names, cmap=plt.get_cmap("Blues"))
+plot_confusion_matrix(clf1, X_test,y_test, display_labels=class_names, cmap=plt.get_cmap("Blues"))
 ```
 
 ![single-confusion-matrix](fig/single-confusion-matrix.png)
-
-
 
 # Task 3 and 4
 
@@ -105,6 +107,9 @@ Intuitively, we be
 
 # Task 5
 
+ The reason it is important to use a seperate test set is because you want to be able to check how well your model is performing. If you don't split the data into training and test data, but instead use all data for both training and testing, your model won't generalize well for unseen data. Your model will always do well on the "test" data as it is the same data that has been used for the training, but when tasked to predict unseen data, the results probably won't be as good. 
+
+ If you at the other hand do split the data into training and test data, you will be able to compare different models and see which does best on the unseen test data. If you then a find a model that performs well on the unseen test data, you can be more confident that it will predict any new unseen data quite well.
 <!-- Explain why it is important to use a separate test (and sometimes validation) set -->
 
 Overfitting?
