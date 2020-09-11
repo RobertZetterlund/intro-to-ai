@@ -28,9 +28,7 @@ f(x) = 20337*x + 2073775
 
 | ![regression-line-scatter](fig/regression.png) |
 | :--------------------------------------------: |
-
-
-| _Figure 1: A scatter plot of the data values with the regression line_
+| _Figure 1: A scatter plot of the data values with the regression line_ |
 
 Using our model we predict prices for houses with the area of 100,150 and 200 m2.
 
@@ -46,9 +44,7 @@ f(200) = 6141224
 
 | ![residuals plot](fig/residuals.png) |
 | :----------------------------------: |
-
-
-| _Figure 2: A residual plot with the residuals on the vertical axis and the area of the house on the horizontal axis_
+| _Figure 2: A residual plot with the residuals on the vertical axis and the area of the house on the horizontal axis_ |
 
 ## Task D
 
@@ -101,9 +97,7 @@ The below code snippet shows how the confusion matrix of the logistic regression
 
 | ![single-confusion-matrix](fig/single-confusion-matrix.png) |
 | :---------------------------------------------------------: |
-
-
-| _Figure 3: Confusion matrix for classification model using logistic regression_
+| _Figure 3: Confusion matrix for classification model using logistic regression_ |
 
 In the confusion matrix above, see figure 3, one can see that the logistic regression model performed fairly well on the unseen dataset. It only failed to predict two points correctly, as it predicted two versicolor as virginica.
 
