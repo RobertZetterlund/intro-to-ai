@@ -1,13 +1,19 @@
-##  *Question 1*
+# Assignment 2: Regression and classification
+## Tobias Lindroth: x hrs
+## Robert Zetterlund: y hrs
+---
 
-## Task A 
+## _Question 1_
+
+## Task A
+
 <!-- What are the values of the slope and intercept of the regression line? -->
 
-   * slope: 20337
-   * intercept: 2073775
-
+- slope: 20337
+- intercept: 2073775
 
 ## Task B
+
 <!-- Use this model to predict the selling prices of houses which have living area
 222 100m ,150m and200m . -->
 
@@ -16,7 +22,12 @@ Using the slope and the intercept values we create a regression line (`f(x) = kx
 ```python
 f(x) = 20337*x + 2073775
 ```
-![regression-line-scatter](fig/regression.png)
+
+| ![regression-line-scatter](fig/regression.png) |
+| :--------------------------------------------: |
+
+
+| _Figure 1: A scatter plot of the data values with the regression line_
 
 Using our model we predict prices for houses with the area of 100,150 and 200 m2.
 
@@ -27,98 +38,160 @@ f(200) = 6141224
 ```
 
 ## Task C
+
 <!-- Draw a residual plot. -->
 
-![residuals plot](fig/residuals.png)
+| ![residuals plot](fig/residuals.png) |
+| :----------------------------------: |
+| _Figure 2: A residual plot with the residuals on the vertical axis and the area of the house on the horizontal axis_
 
-## Task D 
+## Task D
+
 <!-- Discuss the results, and how the model could be improved. -->
+
 ### Regarding the results.
 
-The model we have created has some issues. According to the model, it is very expensive to buy small houses. For example, 0 m2 costs 2 000 000 kr. Furthermore, in the residual plot one can see that the model often underestimate or overestimate the price of a house by quite a lot. One house is underestimated by 2 000 000 kr. 
+The model we have created has some issues. According to the model, it is very expensive to buy small houses. For example, 0 m2 costs 2 000 000 kr. Furthermore, in the residual plot one can see that the model often underestimate or overestimate the price of a house by quite a lot. One house is underestimated by 2 000 000 kr.
 
 The coefficient of determination of the predictions is around 0.53. This basically means that 53 % of the variation in y can be explained by the x-variables or in other words, 53 % of the prices can be predicted by the area of the house. Becuase of this, our model does not seem to be very reliable.
 
-
-
 ### Improvements
-- Adding a datapoint at (0,0) will create a more realistic model. 
+
+- Adding a datapoint at (0,0) will create a more realistic model.
 - Adding more datapoints will give a more precise model.
 - Take more factors into account
-    * Area of land in measurements
-    * Year of building the house
-    * Is it newly renovated?
-    * Do we have additional living space? (biarea)
-    * What is the annual cost of keeping the property?
-    * Where is it located? Near city centre or not? Near schoold and public transport?
+  - Area of land in measurements
+  - Year of building the house
+  - Is it newly renovated?
+  - Do we have additional living space? (biarea)
+  - What is the annual cost of keeping the property?
+  - Where is it located? Near city centre or not? Near schoold and public transport?
 
+# Task 2
 
-
-
-# Task 2 
 <!-- Use a confusion matrix to evaluate the use of logistic regression to classify the iris data set. Use the one-vs-rest option to use the same setup as in the lectures for multiclass regression -->
-The below code snippet shows how the confusion matrix below was caluclated. 
+
+The below code snippet shows how the confusion matrix below was caluclated. Note that we on line 5 a lot 33 % of the data to a test set and the rest to a training set.
 
 ```python
 # Load iris dataset and get data and classification
-bunch = load_iris()
-X = bunch["data"]
-y = bunch["target"]
+1. bunch = load_iris()
+2. X = bunch["data"]
+3. y = bunch["target"]
 
 # Get classnames (setosa, versicolor, virginica)
-class_names = bunch["target_names"]
+4. class_names = bunch["target_names"]
 
 # divide into training and test data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+5. X_train, X_test, y_train, y_test = train_test_split(X, y,
+6.      test_size=0.33, random_state=42)
 
 # Train one logistic classifier for each class
-clf1 = OneVsRestClassifier(LogisticRegression()).fit(X_train, y_train)
+7. clf1 = OneVsRestClassifier(LogisticRegression()).fit(X_train, y_train)
 
 # Create confusion matrix
-plot_confusion_matrix(clf1, X_test,y_test, display_labels=class_names, cmap=plt.get_cmap("Blues"))
+8. plot_confusion_matrix(clf1, X_test,y_test,
+9.      display_labels=class_names, cmap=plt.get_cmap("Blues"))
 ```
 
-![single-confusion-matrix](fig/single-confusion-matrix.png)
+| ![single-confusion-matrix](fig/single-confusion-matrix.png) |
+| :---------------------------------------------------------: |
+| _Figure 3: Confusion matrix for classification model using logistic regression_
 
-# Task 3 and 4
+In the confusion matrix above, see figure 3, one can see that the logistic regression model performed fairly well on the unseen dataset. It only failed to predict two points correctly, as it predicted two versicolor as virginica.
 
-Below are an multi matrix plot that shows confusion matrices for different values of k. Blue matrices have distribution set to "uniform", Green ones have it set to "distance". 
+# Task 3
 
-![multi-confusion-matrix](fig/multi-confusion-matrix.png)
+Below are an multi matrix plot that shows confusion matrices for different values of k. Blue matrices have distribution set to "uniform", Green ones have it set to "distance".
+
+Code is almost identical to above, just that we make multiple figures in a plot.
+
+```python
+# decide values for k and distributions
+1. n_neighbors_array = np.array([1, 5, 50, 100])
+2. distributions = ['uniform', 'distance']
+
+3. for n_neighbors in n_neighbors_array:
+4.     for weights in distributions:
+            # Calculate placement of plot (row,col)
+            # Code is very similar as in task2
+```
+
+| ![multi-confusion-matrix](fig/multi-confusion-matrix.png) |
+| :-------------------------------------------------------: |
+| _Figure 3: The confusion matrixes of the different classification models generated by k-nearest-neighbour_ |
+
+By looking at the top row of confusion matrices displaying an _uniform_ distribution, we notice that the accuracy decreases through k=1,5,50,100.
+
+By looking at the bottom row of confusion matrices displaying an _distance_ distribution, we notice that the accuracy is improved through k=1,5,50,100.
+
+## To answer the question "What will happen when k grows larger for the different cases? Why?"
+
+First we will look at our data in "Our examples", then we will add other thoughts in the other section, "Our thoughts in general"
+
+### Our examples
+
+We note that we have alotted 50 (33%) of the datapoints to _testing_, being: 19 setosa, 15 versicolor and 16 virginica.
+This means that we have _trained_ our model on 100 (66%) datapoints: 31 setotas, 35 versicolor and 34 virginica.
+
+We start of by inspecting the results of k=100 with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. Recall the distribution in the training set, we have a majority of virginica.
+If the model were to evaluate any given testing point's 100 nearest neigbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
+
+The model using k=100 with _distance_ distribution performs much better, being able to accurately predict labels for all datapoints.
+
+We now inspect k=1 with uniform distribution. Here, the predictions are very good, a majority being correct. When evaluating a point, the model simply labeled each testing point to be the same as their closest neighbor. We note that when k=1 the choice of distribution does not matter, as only one neighbor is sought after. See below, two 3-class classifications with k=1, with separate distributions, having identical plots
+| | |
+| --------------------- | --------------------- |
+| ![](fig/cmp/k1-d.png) | ![](fig/cmp/k1-u.png) |
+
+We now inspect when k=50 for both _uniform_ and _distance_-based distribution and note that they are different. We believe that this has to do with the ability to have intertwined values.
+
+### Our thoughts in general
+
+Compare the following two 3-class classifications obtained via scikit-learn documentation.
+
+|                          |                           |
+| ------------------------ | ------------------------- |
+| ![](fig/3cc-uniform.png) | ![](fig/3cc-distance.png) |
+
+[_A small note on the colors in the figure: A testing point will be classified according to which color it is placed within, for example point `P =(4,4)` will be placed within the orange area, and classified as such._]
+
+Note that the cyan area at `x=7,y=2.8` varies in size dependent on whether or not the distribution is 'distance' or 'uniform'.
+This is because the we believe that the ability to form "mini-clusters" (where `mini<k/2`) becomes very difficult in uniform distributions. Uniform distributions, evaluates neighbors equally and purely by the amount. Although closely surrounded by many points labeled `virginica`, given an large enough `k`, they can be classified with another label `versicolor`. Compare the cluster located at (`x=5, y =2.4`) in the following 3-class classifications with different values of k.
+
+|                          |                           |
+| ------------------------ | ------------------------- |
+| ![](fig/cmp/k4-u.png) | ![](fig/cmp/k75-u.png) |
 
 
-By looking at the top row of confusion matrices displaying an uniform distribution, we notice that the accuracy decreases through k=1,5,50,100. 
-
-By looking at the bottom row of confusion matrices displaying an distance distribution, we notice that the accuracy is perfect through k=1,5,50,100. 
-
-### To answer the question "What will happen when k grows larger for the different cases? Why?"
-
-We note that we have alotted 33% of the datapoints to testing, totalt of 50 being: 19 setosa, 15 versicolor and 16 virginica.
-This means that we have *trained* our model on 100 datapoints: 31 setotas, 35 versicolor and 34 virginica. 
-
-We start of by inspecting the results of k=100 with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. Recall the distribution in the training set, we have a majority of virginica. 
-If any given testing point were to evaluate their 100 nearest neigbors, their distribution would be
-
-| setosas  | versicolor  | virginca  |
-|---|---|---|
-|   |   |   |
-
-
-
+Distance distribution however, evaluates neighbors based on the distance to them, more specifically `1/distance`.  
 
 <!-- 3... Use k-nearest neighbours to classify the iris data set with some different values for k, and with uniform and distance-based weights. What will happen when k grows larger for the different cases? Why? -->
 
-
+# Task 4
 
 <!-- 4... Compare the classification models for the iris data set that are generated by k- nearest neighbours (for the different settings from question 3) and by logistic regression. Calculate confusion matrices for these models and discuss the performance of the various models. -->
 
+By comparing the classification models created with k-nearest-neighbours and the one using logistic regression, we can decide which classifier works best for classyfing iris-flowers.
 
+In the confusion matrixes above, see figure 3 for k-nearest neighbour models and figure 2 for the logistic regression model, we see that
+
+- When k=1 or k=5 and the weight is uniform knn performs better than logistic regession.
+
+- When the weight is distance knn performs better no matter what k.
+
+When we however pick a "bad" k and weight, the logistic regression classification model works better. For example, if k is 50 and the distribution is uniform, the confusion matrixes shows that knn performs worse than logistic regression.
+
+This means that if you choose a good k and distribution, K-nearest-neighbour performs better than logistic regression. Note however that this is only the result from our case. There might be cases when logistic regression works better than k-nearest-neighbours no matter what k or distribution you chose.
+
+We have already discussed which of the models generated by k-nearest neighbour performed the best in task 3 and hence we will not do it again in this task.
 
 # Task 5
 
- The reason it is important to use a seperate test set is because you want to be able to check how well your model is performing. If you don't split the data into training and test data, but instead use all data for both training and testing, your model won't generalize well for unseen data. Your model will always do well on the "test" data as it is the same data that has been used for the training, but when tasked to predict unseen data, the results probably won't be as good. 
+We believe it is important to use a seperate test set because you want your model to perform well on unseen data. If you don't split the data into training and test data, but instead use all data for both training and testing, your model won't generalize well for unseen data. Your model will always do well on the "test" data as it is the same data that has been used for the training, but when tasked to predict unseen data, the results probably will not be as good.
 
- If you at the other hand do split the data into training and test data, you will be able to compare different models and see which does best on the unseen test data. If you then a find a model that performs well on the unseen test data, you can be more confident that it will predict any new unseen data quite well.
+If you at the other hand do split the data into training and test data, you will be able to compare different models and see which does best on the unseen test data. If you then a find a model that performs well on the unseen test data, you can be more confident that it will predict any new unseen data quite well.
+
 <!-- Explain why it is important to use a separate test (and sometimes validation) set -->
 
 Overfitting?
