@@ -201,7 +201,7 @@ Compare the following two 3-class classifications obtained via scikit-learn docu
 Note that the cyan area at `x=7,y=2.8` varies in size dependent on whether or not the distribution is 'distance' or 'uniform'.
 We believe this is because that the ability to form "mini-clusters" (where `mini<k/2`) becomes very difficult in uniform distributions. Uniform distributions, evaluates neighbors equally and purely by the amount. Although a point closely surrounded by many points labeled `virginica`, given an large enough `k`, they can be classified with another label `versicolor`. 
 
-Now compare the cluster located at `(x,y) = (5, 2.4)` in the following 3-class classifications with different values of k and a uniform distribution.
+Now compare the cluster located at `(x,y) = (5, 2.4)` in the 3-class classifications with different values of k and a uniform distribution, shown below in figure 7.
 
 | ![](fig/cmp/k5-u.png) | ![](fig/cmp/k75-u.png) |
 | :-------------------: | :--------------------: |
