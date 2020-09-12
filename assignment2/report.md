@@ -175,8 +175,7 @@ This means that we have _trained_ our model on 100 (66%) datapoints: 31 setotas,
 | **testing**  |   19    |      15       |    16     |  50   |
 | **training** |   31    |      35       |    34     |  100  |
 |  **total**   |   50    |      50       |    50     |  150  |
-|              |         |               |           |       |
-|              |         | Table of data |           |       |
+
 
 We start of by inspecting the results of `k=100` (shown rightmost in figure 4) with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. View the distribution in the training set, we have a majority of virginica. If the model were to evaluate any given testing point's 100 nearest neigbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
 
