@@ -170,13 +170,13 @@ First we will look at our data in "Our examples", then we will add other thought
 We note that we have allotted 50 (33%) of the datapoints to _testing_, being: 19 setosa, 15 versicolor and 16 virginica.
 This means that we have _trained_ our model on 100 (66%) datapoints: 31 setotas, 35 versicolor and 34 virginica.
 
-|          | setosas |  versicolor   | virginica | total |
-| :------: | :-----: | :-----------: | :-------: | :---: |
+|              | setosas |  versicolor   | virginica | total |
+| :----------: | :-----: | :-----------: | :-------: | :---: |
 | **testing**  |   19    |      15       |    16     |  50   |
 | **training** |   31    |      35       |    34     |  100  |
 |  **total**   |   50    |      50       |    50     |  150  |
-|          |         |               |           |       |
-|          |         | Table of data |           |       |
+|              |         |               |           |       |
+|              |         | Table of data |           |       |
 
 We start of by inspecting the results of `k=100` (shown rightmost in figure 4) with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. View the distribution in the training set, we have a majority of virginica. If the model were to evaluate any given testing point's 100 nearest neigbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
 
@@ -199,7 +199,7 @@ Compare the following two 3-class classifications obtained via scikit-learn docu
 [_A small note on the colors in the figure: A testing point will be classified according to which color it is placed within, for example point `P =(4,4)` will be placed within the orange area, and classified as such._]
 
 Note that the cyan area at `x=7,y=2.8` varies in size dependent on whether or not the distribution is 'distance' or 'uniform'.
-We believe this is because that the ability to form "mini-clusters" (where `mini<k/2`) becomes very difficult in uniform distributions. Uniform distributions, evaluates neighbors equally and purely by the amount. Although a point closely surrounded by many points labeled `virginica`, given an large enough `k`, they can be classified with another label `versicolor`. 
+We believe this is because that the ability to form "mini-clusters" (where `mini<k/2`) becomes very difficult in uniform distributions. Uniform distributions, evaluates neighbors equally and purely by the amount. Although a point closely surrounded by many points labeled `virginica`, given an large enough `k`, they can be classified with another label `versicolor`.
 
 Now compare the cluster located at `(x,y) = (5, 2.4)` in the 3-class classifications with different values of k and a uniform distribution, shown below in figure 7.
 
@@ -209,7 +209,26 @@ Now compare the cluster located at `(x,y) = (5, 2.4)` in the 3-class classificat
 
 At `(x,y) = (5, 2.4)` there are 3 cyan points closely coupled together, indicating that similar points might also be cyan. This is supported by the left figure where `k=4`, in which the color of the area is cyan. This is not supported by the right figure where `k=75`, in which the color of the area is orange. In this case, we deem `k=4` to be the better value for `k`.
 
-In general, we believe that uniform distribution can be good when you know the size of clusters (which seems unlikely). 
+### Using an example to show our thought process
+Below in Image 1 we show a scenario for the KNNeighbors model when instructed to classify the blue point. The following table show what we predict how the model behaves for different values of k and distributions.
+
+<p align="center">
+  <img src="fig/example-classification.jpg" width=200, height=200>
+  <p align="center"> Image 1: An classification problem for KNNeighbors algorithm which is instructed to classify the blue point as either orange or green<p>
+</p>
+
+|              |                        1 < k < 3                         |                        3 < k < 7                         |                                                        7 < k                                                         |
+| :----------: | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: |
+| **uniform**  | ![#f7e4c0](https://placehold.it/15/0e6b0e/000000?text=+) | ![#f7e4c0](https://placehold.it/15/ffa500/000000?text=+) |                               ![#f7e4c0](https://placehold.it/15/ffa500/000000?text=+)                               |
+| **distance** | ![#f7e4c0](https://placehold.it/15/0e6b0e/000000?text=+) | ![#f7e4c0](https://placehold.it/15/0e6b0e/000000?text=+) | ![#f7e4c0](https://placehold.it/15/ffa500/000000?text=+) or ![#f7e4c0](https://placehold.it/15/0e6b0e/000000?text=+) |
+
+
+Intuitively, **we** would classify the blue point as green. It looks as if it is the continuation of the green body. To follow our intuition, we should pick a low value of `k`. We do realize that the value of `k` is related to to size of the dataset, and that our intuition can be wrong. We have created some guidelines that we could think of regarding picking the value of `k` and choosing distribution.
+
+* If you are using an uniform distribution and have __few__ labels, `k<2*(min(#label))` should hold. Essentially it says that `k` should be larger than the number of datapoints with the least used label in the training data. If it does not hold, it becomes difficult to label a datapoint to the least used label.
+
+* We think that if you have a dataset that is intertwined to some extent, it is important to use distance as distribution, as it allows for outliers given a small enough `k`.
+
 <!--Distance distribution however, evaluates neighbors based on the distance to them, more specifically `1/distance`. Let us use the same two k values and compare in the figure below.
 
 |                       |                        |
