@@ -172,9 +172,9 @@ This means that we have _trained_ our model on 100 (66%) datapoints: 31 setotas,
 
 |          | setosas |  versicolor   | virginica | total |
 | :------: | :-----: | :-----------: | :-------: | :---: |
-| testing  |   19    |      15       |    16     |  50   |
-| training |   31    |      35       |    34     |  100  |
-|  total   |   50    |      50       |    50     |  150  |
+| **testing**  |   19    |      15       |    16     |  50   |
+| **training** |   31    |      35       |    34     |  100  |
+|  **total**   |   50    |      50       |    50     |  150  |
 |          |         |               |           |       |
 |          |         | Table of data |           |       |
 
