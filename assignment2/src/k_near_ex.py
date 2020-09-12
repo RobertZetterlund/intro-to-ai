@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn import neighbors, datasets
 
-n_neighbors = 50
+n_neighbors = 5
 
 # import some data to play with
 iris = datasets.load_iris()

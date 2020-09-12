@@ -15,6 +15,19 @@
 - slope: 20337
 - intercept: 2073775
 
+```python
+# [:regression-line.py:]
+
+# Create linear regression model
+1: reg = LinearRegression()
+# Fit model to data from hemnet
+2: reg.fit(x, y)
+# Get slope and intercept
+4: slope = reg.coef_ # = 20337
+5: intercept = reg.intercept_ # = 2073775
+
+```
+
 ## Task B
 
 <!-- Use this model to predict the selling prices of houses which have living area
@@ -23,11 +36,12 @@
 Using the slope and the intercept values we create a regression line (`f(x) = kx + m`)
 
 ```python
-f(x) = 20337*x + 2073775
+1:  def f(x):
+2:      return 20337*x + 2073775
 ```
 
-| ![regression-line-scatter](fig/regression.png) |
-| :--------------------------------------------: |
+|             ![regression-line-scatter](fig/regression.png)             |
+| :--------------------------------------------------------------------: |
 | _Figure 1: A scatter plot of the data values with the regression line_ |
 
 Using our model we predict prices for houses with the area of 100,150 and 200 m2.
@@ -42,8 +56,22 @@ f(200) = 6141224
 
 <!-- Draw a residual plot. -->
 
-| ![residuals plot](fig/residuals.png) |
-| :----------------------------------: |
+```python
+# [:residuals.py:]
+
+# use regression fit to get predicted y values.
+y_predicted = reg.predict(x)
+# calculate residuals
+residuals = y-y_predicted
+
+# scatterplot residuals
+plt.plot(x, residuals, 'o', alpha=0.9)
+# create horizontal line to show the prediction of the linear regression
+plt.axhline(y=0, ls="--", alpha=0.7, color="black")
+```
+
+|                                         ![residuals plot](fig/residuals.png)                                         |
+| :------------------------------------------------------------------------------------------------------------------: |
 | _Figure 2: A residual plot with the residuals on the vertical axis and the area of the house on the horizontal axis_ |
 
 ## Task D
@@ -72,9 +100,11 @@ The coefficient of determination of the predictions is around 0.53. This basical
 
 <!-- Use a confusion matrix to evaluate the use of logistic regression to classify the iris data set. Use the one-vs-rest option to use the same setup as in the lectures for multiclass regression -->
 
-The below code snippet shows how the confusion matrix of the logistic regression model was caluclated. Note that we on line 5 alott 33 % of the data to a test set and the rest to a training set.
+The code snippet below shows how the confusion matrix of the logistic regression model was caluclated. On line 5, note that we allot 33 % of the data to a testing set and the rest to a training set.
 
 ```python
+# [:confusion-matrix.py:]
+
 # Load iris dataset and get data and classification
 1. bunch = load_iris()
 2. X = bunch["data"]
@@ -92,11 +122,11 @@ The below code snippet shows how the confusion matrix of the logistic regression
 
 # Create confusion matrix
 8. plot_confusion_matrix(clf1, X_test,y_test,
-9.      display_labels=class_names, cmap=plt.get_cmap("Blues"))
+        display_labels=class_names, cmap=plt.get_cmap("Blues"))
 ```
 
-| ![single-confusion-matrix](fig/single-confusion-matrix.png) |
-| :---------------------------------------------------------: |
+|           ![single-confusion-matrix](fig/single-confusion-matrix.png)           |
+| :-----------------------------------------------------------------------------: |
 | _Figure 3: Confusion matrix for classification model using logistic regression_ |
 
 In the confusion matrix above, see figure 3, one can see that the logistic regression model performed fairly well on the unseen dataset. It only failed to predict two points correctly, as it predicted two versicolor as virginica.
@@ -105,9 +135,11 @@ In the confusion matrix above, see figure 3, one can see that the logistic regre
 
 Below is a multi matrix plot that shows confusion matrices for different values of k. Blue matrices have distribution set to "uniform", green ones have it set to "distance".
 
-Code is almost identical to above, just that we make multiple figures in a plot.
+Code is almost identical to above, except we use `KNeighborsClassifier` on line 5 and create multiple plots in a figure.
 
 ```python
+# [:k_nearest.py:]
+
 # decide values for k and distributions
 1. n_neighbors_array = np.array([1, 5, 50, 100])
 2. distributions = ['uniform', 'distance']
@@ -115,8 +147,8 @@ Code is almost identical to above, just that we make multiple figures in a plot.
 3. for n_neighbors in n_neighbors_array:
 4.     for weights in distributions:
             # create an instance of Neighbours Classifier and fit the data.
-            clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
-            clf.fit(X_train, y_train)
+5.          clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
+6.          clf.fit(X_train, y_train)
             # Calculate placement of plot (row,col)
             # Create confusion matrix, code similar to task2
 ```
@@ -135,51 +167,54 @@ First we will look at our data in "Our examples", then we will add other thought
 
 ### Our examples
 
-We note that we have alotted 50 (33%) of the datapoints to _testing_, being: 19 setosa, 15 versicolor and 16 virginica.
+We note that we have allotted 50 (33%) of the datapoints to _testing_, being: 19 setosa, 15 versicolor and 16 virginica.
 This means that we have _trained_ our model on 100 (66%) datapoints: 31 setotas, 35 versicolor and 34 virginica.
 
-|          | setosas | versicolor | virginica | total |
-| -------- | ------- | ---------- | --------- | ----- |
-| testing  | 19      | 15         | 16        | 50    |
-| training | 31      | 35         | 34        | 100   |
-| total    | 50      | 50         | 50        | 150   |
+|          | setosas |  versicolor   | virginica | total |
+| :------: | :-----: | :-----------: | :-------: | :---: |
+| testing  |   19    |      15       |    16     |  50   |
+| training |   31    |      35       |    34     |  100  |
+|  total   |   50    |      50       |    50     |  150  |
+|          |         |               |           |       |
+|          |         | Table of data |           |       |
 
-We start of by inspecting the results of `k=100` with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. Recall the distribution in the training set, we have a majority of virginica.
-If the model were to evaluate any given testing point's 100 nearest neigbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
+We start of by inspecting the results of `k=100` (shown rightmost in figure 4) with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. View the distribution in the training set, we have a majority of virginica. If the model were to evaluate any given testing point's 100 nearest neigbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
 
-The model using `k=100` with _distance_ distribution performs much better, being able to accurately predict labels for all datapoints.
+The model using `k=100` with _distance_ distribution performs much better, being able to accurately predict labels for all datapoints. This difference is because it assigns different weights to neighbors based on distance.
 
-We now inspect `k=1` with uniform distribution. Here, the predictions are very good, a majority being correct. When evaluating a point, the model simply labeled each testing point to be the same as their closest neighbor. We note that when `k=1` the choice of distribution does not matter, as only one neighbor is sought after. See below, two 3-class classifications with `k=1`, with separate distributions, having identical plots
-| | |
-| --------------------- | --------------------- |
+We now inspect `k=1` with uniform distribution. Here, the predictions are very good, a majority being correct. When evaluating a point, the model simply labeled each testing point to be the same as their closest neighbor. We note that when `k=1` the choice of distribution does not matter, as only one neighbor is sought after. See below in figure 5a,b, two 3-class classifications with `k=1`, with separate distributions, having identical plots.
+
 | ![](fig/cmp/k1-d.png) | ![](fig/cmp/k1-u.png) |
-
-We now inspect when `k=50` for both _uniform_ and _distance_-based distribution and note that they are different. We believe that this has to do with the ability to have intertwined values.
+| :-------------------: | :-------------------: |
+|       Figure 5a       |       Figure 5b       |
 
 ### Our thoughts in general
 
-Compare the following two 3-class classifications obtained via scikit-learn documentation.
+Compare the following two 3-class classifications obtained via scikit-learn documentation shown below in figure 6.
 
-|                          |                           |
-| ------------------------ | ------------------------- |
 | ![](fig/3cc-uniform.png) | ![](fig/3cc-distance.png) |
+| :----------------------: | :-----------------------: |
+|        Figure 6a         |         Figure 6b         |
 
 [_A small note on the colors in the figure: A testing point will be classified according to which color it is placed within, for example point `P =(4,4)` will be placed within the orange area, and classified as such._]
 
 Note that the cyan area at `x=7,y=2.8` varies in size dependent on whether or not the distribution is 'distance' or 'uniform'.
-We believe this is because that the ability to form "mini-clusters" (where `mini<k/2`) becomes very difficult in uniform distributions. Uniform distributions, evaluates neighbors equally and purely by the amount. Although a point closely surrounded by many points labeled `virginica`, given an large enough `k`, they can be classified with another label `versicolor`. Compare the cluster located at `(x,y) = (5, 2.4)` in the following 3-class classifications with different values of k.
+We believe this is because that the ability to form "mini-clusters" (where `mini<k/2`) becomes very difficult in uniform distributions. Uniform distributions, evaluates neighbors equally and purely by the amount. Although a point closely surrounded by many points labeled `virginica`, given an large enough `k`, they can be classified with another label `versicolor`. 
 
-|                       |                        |
-| --------------------- | ---------------------- |
-| ![](fig/cmp/k4-u.png) | ![](fig/cmp/k75-u.png) |
+Now compare the cluster located at `(x,y) = (5, 2.4)` in the following 3-class classifications with different values of k and a uniform distribution.
+
+| ![](fig/cmp/k5-u.png) | ![](fig/cmp/k75-u.png) |
+| :-------------------: | :--------------------: |
+|       Figure 7a       |       Figure 7b        |
 
 At `(x,y) = (5, 2.4)` there are 3 cyan points closely coupled together, indicating that similar points might also be cyan. This is supported by the left figure where `k=4`, in which the color of the area is cyan. This is not supported by the right figure where `k=75`, in which the color of the area is orange. In this case, we deem `k=4` to be the better value for `k`.
 
+In general, we believe that uniform distribution can be good when you know the size of clusters (which seems unlikely). 
 <!--Distance distribution however, evaluates neighbors based on the distance to them, more specifically `1/distance`. Let us use the same two k values and compare in the figure below.
 
 |                       |                        |
 | --------------------- | ---------------------- |
-| ![](fig/cmp/k4-d.png) | ![](fig/cmp/k75-d.png) |
+| ![](fig/cmp/k5-d.png) | ![](fig/cmp/k75-d.png) |
 -->
 
 <!-- 3... Use k-nearest neighbours to classify the iris data set with some different values for k, and with uniform and distance-based weights. What will happen when k grows larger for the different cases? Why? -->
