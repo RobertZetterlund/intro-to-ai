@@ -206,7 +206,7 @@ Now compare the cluster located at `(x,y) = (5, 2.4)` in the 3-class classificat
 | :-------------------: | :--------------------: |
 |       Figure 7a       |       Figure 7b        |
 
-At `(x,y) = (5, 2.4)` there are 3 cyan points closely coupled together, indicating that similar points might also be cyan. This is supported by the left figure where `k=4`, in which the color of the area is cyan. This is not supported by the right figure where `k=75`, in which the color of the area is orange. In this case, we deem `k=4` to be the better value for `k`.
+At `(x,y) = (5, 2.4)` there are 3 cyan points closely coupled together, indicating that similar points might also be cyan. This is supported by the left figure where `k=5`, in which the color of the area is cyan. This is not supported by the right figure where `k=75`, in which the color of the area is orange. In this case, we deem `k=5` to be the better value for `k`.
 
 ### Using an example to show our thought process
 Below in Image 1 we show a scenario for the KNNeighbors model when instructed to classify the blue point. The following table show what we predict how the model behaves for different values of k and distributions.
