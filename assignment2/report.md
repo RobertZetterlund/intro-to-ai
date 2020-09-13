@@ -224,7 +224,7 @@ Below in Image 1 we show a scenario for the KNNeighbors model when instructed to
 
 Intuitively, **we** would classify the blue point as green. It looks as if it is the continuation of the green body. To follow our intuition, we should pick a low value of `k`. We do realize that the value of `k` is related to to size of the dataset, and that our intuition can be wrong. We have created some guidelines that we could think of regarding picking the value of `k` and choosing distribution.
 
-* If you are using an uniform distribution and have __few__ labels, `k<2*(min(#label))` should hold. Essentially it says that `k` should be larger than the number of datapoints with the least used label in the training data. If it does not hold, it becomes difficult to label a datapoint to the least used label (Supported by our above discussion where we use uniform distribution and `k=100` and classified all points as `versicolor` for the iris data set).
+* If you are using an uniform distribution and have __few__ labels, `k<2*(min(#label))` should hold. Essentially it says that `k` should be larger than the number of datapoints with the least used label in the training data. If it does not hold, it becomes difficult to label a datapoint to the least used label (supported by our above discussion where our model used uniform distribution and `k=100` and classified all points as `versicolor` for the iris data set).
 
 * We think that if you have a dataset that is intertwined to some extent, it is important to use distance as distribution, as it allows for outliers given a small enough `k`.
 
