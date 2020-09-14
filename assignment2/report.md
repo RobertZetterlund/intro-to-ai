@@ -2,7 +2,7 @@
 
 ## Tobias Lindroth: 14 hrs
 
-## Robert Zetterlund: y hrs
+## Robert Zetterlund: 16 hrs
 
 ---
 
@@ -82,7 +82,7 @@ plt.axhline(y=0, ls="--", alpha=0.7, color="black")
 
 The model we have created has some issues. According to the model, it is very expensive to buy small houses. For example, 0 m2 costs 2 000 000 kr. Furthermore, in the residual plot one can see that the model often underestimates or overestimates the price of a house by quite a lot. One house is underestimated by 2 000 000 kr.
 
-To get a score on how well the model predicted the prices, we calculated the coefficient of determination of the predictions using the sklearn.linear_model.LinearRegression.score method. The result, approximately 0.53, basically means that 53 % of the variation in y can be explained by the x-variables. Or in other words, 53 % of the prices are predicted by the area of the house. Because of this, our model does not seem to be very reliable.
+To get a score on how well the model predicted the prices, we calculated the coefficient of determination of the predictions using the `sklearn.linear_model.LinearRegression.score` method. The result, approximately 0.53, basically means that 53 % of the variation in y can be explained by the x-variables. Or in other words, 53 % of the prices are predicted by the area of the house. Because of this, our model does not seem to be very reliable.
 
 ### Improvements
 
@@ -224,11 +224,13 @@ Below in Image 1 we show a scenario for the KNNeighbors model when instructed to
 | **distance** | ![#f7e4c0](https://placehold.it/15/0e6b0e/000000?text=+) | ![#f7e4c0](https://placehold.it/15/0e6b0e/000000?text=+) | ![#f7e4c0](https://placehold.it/15/ffa500/000000?text=+) or ![#f7e4c0](https://placehold.it/15/0e6b0e/000000?text=+) |
 
 
-Intuitively, **we** would classify the blue point as green. It looks as if it is the continuation of the green body. To follow our intuition, we should pick a low value of `k`. We do realize that the value of `k` is related to to size of the dataset, and that our intuition can be wrong. We have created some guidelines that we could think of regarding picking the value of `k` and choosing distribution.
+Intuitively, **we** would classify the blue point as green. It looks as if it is the continuation of the green body. To follow our intuition, we should pick a low value of `k`. We do realize that the value of `k` is related to to size of the dataset, and that our intuition can be wrong. Also, as noted in the lecture, if the value of `k` is small the noise can have a greater influence (assuming the green within the orange is noise). We have created some guidelines that we could think of regarding picking the value of `k` and choosing distribution.
 
 * If you are using an uniform distribution and have __few__ labels, `k<2*(min(#label))` should hold. Essentially it says that `k` should be larger than the number of datapoints with the least used label in the training data. If it does not hold, it becomes difficult to label a datapoint to the least used label (supported by our above discussion where our model used uniform distribution and `k=100` and classified all points as `versicolor` for the iris data set).
 
-* We think that if you have a dataset that is intertwined to some extent, it is important to use distance as distribution, as it allows for outliers given a small enough `k`.
+* We think that if you have a dataset that is intertwined to some extent, it is important to use distance as distribution, as it allows for outliers given a small enough `k`. 
+
+* It should be attempted to pick a value for `k` which is similar in magnitude to how many datapoints is within the data scientist definition of a small cluster.
 
 <!--Distance distribution however, evaluates neighbors based on the distance to them, more specifically `1/distance`. Let us use the same two k values and compare in the figure below.
 
