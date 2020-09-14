@@ -1,6 +1,6 @@
 # Assignment 2: Regression and classification
 
-## Tobias Lindroth: x hrs
+## Tobias Lindroth: 14 hrs
 
 ## Robert Zetterlund: y hrs
 
