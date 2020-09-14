@@ -8,7 +8,7 @@
 
 ## _Question 1_
 
-## Task A
+## Task A - What are the values of the slope and intercept of the regression line?
 
 <!-- What are the values of the slope and intercept of the regression line? -->
 
@@ -28,7 +28,7 @@
 
 ```
 
-## Task B
+## Task B - Predict the selling prices of houses which have living area for 100, 150 and 200 m2
 
 <!-- Use this model to predict the selling prices of houses which have living area
 222 100m ,150m and200m . -->
@@ -52,7 +52,7 @@ f(150) = 5124362
 f(200) = 6141224
 ```
 
-## Task C
+## Task C - Residual plot
 
 <!-- Draw a residual plot. -->
 
@@ -74,7 +74,7 @@ plt.axhline(y=0, ls="--", alpha=0.7, color="black")
 | :------------------------------------------------------------------------------------------------------------------: |
 | _Figure 2: A residual plot with the residuals on the vertical axis and the area of the house on the horizontal axis_ |
 
-## Task D
+## Task D - Discussion
 
 <!-- Discuss the results, and how the model could be improved. -->
 
@@ -98,7 +98,7 @@ To get a score on how well the model predicted the prices, we calculated the coe
   - Where is it located? Near city centre or not? Near school and public transport?
   - How is the neighbourhood?
 
-# Task 2
+# Task 2 - Logistic regression to classify the iris data set
 
 <!-- Use a confusion matrix to evaluate the use of logistic regression to classify the iris data set. Use the one-vs-rest option to use the same setup as in the lectures for multiclass regression -->
 
@@ -134,6 +134,8 @@ The code snippet below shows how the confusion matrix of the logistic regression
 In the confusion matrix above, figure 3, one can see that the logistic regression model performed fairly well on the unseen dataset. It only failed to predict two points correctly, as it predicted two versicolor as virginica.
 
 # Task 3
+
+<!-- 3... Use k-nearest neighbours to classify the iris data set with some different values for k, and with uniform and distance-based weights. What will happen when k grows larger for the different cases? Why? -->
 
 Below is a multi matrix plot that shows confusion matrices for different values of k. Blue matrices have distribution set to "uniform", green ones have it set to "distance".
 
@@ -179,7 +181,7 @@ This means that we have _trained_ our model on 100 (66%) datapoints: 31 setotas,
 |  **total**   |   50    |      50       |    50     |  150  |
 
 
-We start of by inspecting the results of `k=100` (shown rightmost above in figure 4) with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. View the distribution in the training set, we have a majority of virginica. If the model were to evaluate any given testing point's 100 nearest neigbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
+We start of by inspecting the results of `k=100` (shown rightmost above in figure 4) with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. View the distribution in the training set, we have a majority of virginica. If the model were to evaluate any given testing point's 100 nearest neighbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
 
 The model using `k=100` with _distance_ distribution performs much better, being able to accurately predict labels for all datapoints. This difference is because it assigns different weights to neighbors based on distance. As the iris data set is relatively separated by groups and our training has equal datapoints of `setosas`, `versicolor`, and `virginica`, a testing point will most likely be surrounded primarily by datapoints with the "correct" label, and these will be regarded as more important than those further away.
 
@@ -202,7 +204,7 @@ Compare the following two 3-class classifications obtained via scikit-learn docu
 Note that the cyan area at `x=7,y=2.8` varies in size dependent on whether or not the distribution is 'distance' or 'uniform'.
 We believe this is because that the ability to form "mini-clusters" (where `mini<k/2`) becomes very difficult in uniform distributions. Uniform distributions, evaluates neighbors equally and purely by the amount. Although a point closely surrounded by many points labeled `virginica`, given an large enough `k`, they can be classified with another label `versicolor`.
 
-Now compare the cluster located at `(x,y) = (5, 2.4)` in the 3-class classifications with different values of k and a uniform distribution, shown below in figure 7.
+Now compare the cluster located at `(x,y) = (5, 2.4)` in the 3-class classifications with different values of `k` and a uniform distribution, shown below in figure 7.
 
 | ![](fig/cmp/k5-u.png) | ![](fig/cmp/k75-u.png) |
 | :-------------------: | :--------------------: |
@@ -210,9 +212,8 @@ Now compare the cluster located at `(x,y) = (5, 2.4)` in the 3-class classificat
 
 At `(x,y) = (5, 2.4)` there are 3 cyan points closely coupled together, indicating that similar points might also be cyan. This is supported by the left figure where `k=5`, in which the color of the area is cyan. This is not supported by the right figure where `k=75`, in which the color of the area is orange. In this case, we deem `k=5` to be the better value for `k`.
 
-**Using an example to show our thought process**
-
-Below in Image 1 we show a scenario for the KNNeighbors model when instructed to classify the blue point. The following table show what we predict how the model behaves for different values of k and distributions.
+### Using an example to show our thought process
+Below in Image 1 we show a scenario for the KNNeighbors model when instructed to classify the blue point. The following table show what we predict how the model behaves for different values of `k` and distributions.
 
 <p align="center">
   <img src="fig/example-classification.jpg" width=200, height=200>
@@ -240,8 +241,6 @@ Intuitively, **we** would classify the blue point as green. It looks as if it is
 | ![](fig/cmp/k5-d.png) | ![](fig/cmp/k75-d.png) |
 -->
 
-<!-- 3... Use k-nearest neighbours to classify the iris data set with some different values for k, and with uniform and distance-based weights. What will happen when k grows larger for the different cases? Why? -->
-
 # Task 4
 
 <!-- 4... Compare the classification models for the iris data set that are generated by k- nearest neighbours (for the different settings from question 3) and by logistic regression. Calculate confusion matrices for these models and discuss the performance of the various models. -->
@@ -254,15 +253,15 @@ In the confusion matrixes above, see figure 3 for k-nearest neighbour models and
 
 - When the weight is distance knn performs better no matter what `k`.
 
-When we however pick a "bad" k and weight, the logistic regression classification model works better. For example, if k is 50 and the distribution is uniform, the confusion matrixes show that knn performs worse than logistic regression.
+When we however pick a "bad" `k` and weight, the logistic regression classification model works better. For example, if `k` is 50 and the distribution is uniform, the confusion matrices show that knn performs worse than logistic regression.
 
-Hence, K-nearest-neighbour performs better than logistic regression if you manage to choose a good k and weight. Note however that this is only the result from our case. There might be cases when logistic regression works better than k-nearest-neighbours no matter what k or distribution you choose.
+Hence, K-nearest-neighbour performs better than logistic regression if you manage to choose a good `k` and weight. Note however that this is only the result from our case. There might be cases when logistic regression works better than k-nearest-neighbors no matter what `k` or distribution you choose.
 
-We have, in task 3, already discussed the performance of the models generated by k-nearest-neighbour, and hence we will not do it again in this task. But in short, one can say that when the weight was uniform, the models with low k predicted more accurate. When the weight was distance, models with higher k performed better, even though all models with distance as weight performed well.
+We have, in task 3, already discussed the performance of the models generated by k-nearest-neighbour, and hence we will not do it again in this task. But in short, one can say that when the weight was uniform, the models with low `k` predicted more accurate. When the weight was distance, models with higher `k` performed better, even though all models with distance as weight performed well.
 
 # Task 5
 
-We believe it is important to use a seperate test set because you want your model to perform well on unseen data, noted in the lecture as _overfitted_. If you don't split the data into training and test data, but instead use all data for both training and testing, your model perhaps won't generalize well for unseen data. In turn you will not be able to validate its accuracy and therefore not effectively tweak parameters. Your model might always do well on the "test" data as it is the same data that has been used for the training, but when tasked to predict unseen data, the results probably will not be as good.
+We believe it is important to use a separate test set because you want your model to perform well on unseen data, noted in the lecture as _overfitted_. If you don't split the data into training and test data, but instead use all data for both training and testing, your model perhaps won't generalize well for unseen data. In turn you will not be able to validate its accuracy and therefore not effectively tweak parameters. Your model might always do well on the "test" data as it is the same data that has been used for the training, but when tasked to predict unseen data, the results probably will not be as good.
 
 On the other hand, if the data is split into training and test data, you will be able to compare different models and see which performs best. If you then a find a model that performs well on the unseen test data, you can be more confident that it will predict other unseen data quite well. Important to note is this process should probably be made with different random states when splitting the data, to cover any irregularities dependent on said state. A case can be made for hand-picking data for the training set, ensuring that certain clusters do not end up as a group of outliers, however we believe that the iris-data set might not benefit from this process due to two clusters overlapping at a high degree. 
 
