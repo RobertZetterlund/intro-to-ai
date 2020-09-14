@@ -165,23 +165,23 @@ By looking at the bottom row of confusion matrices displaying an _distance_ dist
 
 ## To answer the question "What will happen when k grows larger for the different cases? Why?"
 
-First we will look at our data in "Our examples", then we will add other thoughts in the other section, "Our thoughts in general"
+First we will look at our data in "Our examples of the iris data set", then we will add other thoughts in the other section: "Our thoughts in general", where we first compare results of the iris data set, and then wrap up by introducing a classification-scenario and share some guidelines for selecting `k`.
 
-### Our examples
+### Our examples of the iris data set
 
 We note that we have allotted 50 (33%) of the datapoints to _testing_, being: 19 setosa, 15 versicolor and 16 virginica.
 This means that we have _trained_ our model on 100 (66%) datapoints: 31 setotas, 35 versicolor and 34 virginica.
 
-|              | setosas |  versicolor   | virginica | total |
+|              | setosa |  versicolor   | virginica | total |
 | :----------: | :-----: | :-----------: | :-------: | :---: |
 | **testing**  |   19    |      15       |    16     |  50   |
 | **training** |   31    |      35       |    34     |  100  |
 |  **total**   |   50    |      50       |    50     |  150  |
 
 
-We start of by inspecting the results of `k=100` (shown rightmost in figure 4) with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. View the distribution in the training set, we have a majority of virginica. If the model were to evaluate any given testing point's 100 nearest neigbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
+We start of by inspecting the results of `k=100` (shown rightmost above in figure 4) with uniform distribution. Here, all predictions are versicolor, which has a reasonable explaination. View the distribution in the training set, we have a majority of virginica. If the model were to evaluate any given testing point's 100 nearest neigbors, their distribution would be equal to the training data. As the distribution is uniform, they are all equal in weight and the point will be classified as virginica.
 
-The model using `k=100` with _distance_ distribution performs much better, being able to accurately predict labels for all datapoints. This difference is because it assigns different weights to neighbors based on distance.
+The model using `k=100` with _distance_ distribution performs much better, being able to accurately predict labels for all datapoints. This difference is because it assigns different weights to neighbors based on distance. As the iris data set is relatively separated by groups and our training has equal datapoints of `setosas`, `versicolor`, and `virginica`, a testing point will most likely be surrounded primarily by datapoints with the "correct" label, and these will be regarded as more important than those further away.
 
 We now inspect `k=1` with uniform distribution. Here, the predictions are very good, a majority being correct. When evaluating a point, the model simply labeled each testing point to be the same as their closest neighbor. We note that when `k=1` the choice of distribution does not matter, as only one neighbor is sought after. See below in figure 5a,b, two 3-class classifications with `k=1`, with separate distributions, having identical plots.
 
@@ -210,7 +210,8 @@ Now compare the cluster located at `(x,y) = (5, 2.4)` in the 3-class classificat
 
 At `(x,y) = (5, 2.4)` there are 3 cyan points closely coupled together, indicating that similar points might also be cyan. This is supported by the left figure where `k=5`, in which the color of the area is cyan. This is not supported by the right figure where `k=75`, in which the color of the area is orange. In this case, we deem `k=5` to be the better value for `k`.
 
-### Using an example to show our thought process
+**Using an example to show our thought process**
+
 Below in Image 1 we show a scenario for the KNNeighbors model when instructed to classify the blue point. The following table show what we predict how the model behaves for different values of k and distributions.
 
 <p align="center">
