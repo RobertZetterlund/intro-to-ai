@@ -13,17 +13,17 @@ nr_boxes = 18
 PATH = '../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
-boxsize = 360 // nr_boxes
-indexOffset = nr_boxes // 2
-yticks = np.arange(-180, 180, boxsize)
-xticks = np.arange(-180,180, boxsize)
+BOX_SIZE = 360 // nr_boxes
+INDEX_OFFSET = nr_boxes // 2
+Y_TICKS = np.arange(-180, 180, BOX_SIZE)
+X_TICKS = np.arange(-180,180, BOX_SIZE)
 # use pandas to read csv
 df = pd.read_csv(PATH)
 df = df[[PHI, PSI]]
 df = df.astype(int)
 
 # apply function which gets index based on value
-df = df.apply(lambda x: x // boxsize + indexOffset )
+df = df.apply(lambda row: row // BOX_SIZE + INDEX_OFFSET )
 
 # create matrix for heatmap, init as zeros
 matrix = np.zeros((nr_boxes, nr_boxes), dtype=int)
@@ -38,10 +38,10 @@ print(len(df.index) == np.sum(matrix))
 
 # in order to get similar axis distr as scatterplot, flip matrix in y, also flip yticks
 matrix = np.flip(matrix, axis=0)
-yticks = np.flip(yticks)
+Y_TICKS = np.flip(Y_TICKS)
 
 # create heatmap
-ax = sns.heatmap(matrix, xticklabels=xticks, yticklabels=yticks)
+ax = sns.heatmap(matrix, xticklabels=X_TICKS, yticklabels=Y_TICKS)
 plt.xlabel("phi")
 plt.ylabel("psi")
 
