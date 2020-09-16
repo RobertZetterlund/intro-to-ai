@@ -5,12 +5,14 @@ import numpy as np
 import seaborn as sns
 sns.set_theme()
 
+
+# SELECT AMOUNT OF BOXES FOR HEATMAP
+nr_boxes = 18
+
 # Setup constants
 PATH = '../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
-# set amount of boxes for heatmap
-nr_boxes = 18
 boxsize = 360 // nr_boxes
 ticks = np.arange(-180, 180, boxsize)
 
