@@ -47,5 +47,5 @@ y_pred = KMeans(n_clusters=n_clusters,
 df.plot.scatter(x=PHI, y=PSI, c=vColors(y_pred))
 plt.xticks(np.arange(0, 361, 40))
 plt.yticks(np.arange(-110, 251, 40))
-plt.title("Kmeans using " + str(n_clusters) + " number of clusters")
+plt.title("Kmeans using " + str(n_clusters) + " number of clusters, with shifted axises")
 plt.show()

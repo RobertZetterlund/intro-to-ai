@@ -27,13 +27,10 @@ b. A heat map
 <p>
 
 ## _Question 2_
-
-### Elbow curve
-
-<p align="center">
-    <img src="fig/elbow_curve.png">
-<p>
-
+<!-- 
+Use the K-means clustering method to cluster the phi and psi angle combinations in the data file.
+a. Experiment with different values of K. Suggest an appropriate value of K for this task and motivate this choice.
+-->
 
 ### KMeans plot
 <p align="center">
@@ -41,14 +38,46 @@ b. A heat map
     <img src="fig/kmeans-4.png" width=45%>
 <p>
 
+### Elbow curve
+<p align="center">
+    <img src="fig/elbow_curve.png">
+<p>
+
+
+### Validation
+<!-- b. Validate the clusters that are found with the chosen value of K. -->
+
+Here we remove 25% of the points and examine if the labeling remains similar.
+<p align="center" >
+    <img src="fig/kmeans-3-removal.png">
+<p>
+
+
+### Do the clusters found seem reasonable?
 <!--
-2. Use the K-means clustering method to cluster the phi and psi angle combinations in the data file.
-a. Experiment with different values of K. Suggest an appropriate value of K for this task and motivate this choice.
-b. Validate the clusters that are found with the chosen value of K.
 c. Do the clusters found in part (a) seem reasonable?
-d. Can you change the data to get better results (or the same results in a simpler
+-->
+well maybe,
+
+
+
+### Can you change the data to get better results?
+<!--d. Can you change the data to get better results (or the same results in a simpler
 way)? (Hint: since both phi and psi are periodic attributes, you can think of shifting/translating them by some value and then use the modulo operation.)
 -->
+
+Yea!
+
+```python
+# shift phi by 180, new range is 0>->360
+# shift psi by 70, new range is -110>->250
+df[PHI] = df[PHI].apply(lambda phi: phi + 360 if phi < 0 else phi)
+df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -100 else psi)
+```
+
+<p align="center">
+    <img src="fig/kmeans-3-shift.png">
+<p>
 
 ## _Question 3_
 
