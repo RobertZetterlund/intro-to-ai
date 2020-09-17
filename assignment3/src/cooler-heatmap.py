@@ -14,8 +14,7 @@ PSI = "psi"
 
 # use pandas to read csv
 df = pd.read_csv(PATH)
-sns.kdeplot(x=df[PHI], y=df[PSI], fill=True, cmap="mako")
-#df.plot.scatter(x=PHI, y=PSI)
+sns.kdeplot(x=df[PHI], y=df[PSI], fill=True, cmap="rocket")
 plt.yticks(np.arange(-180, 181, 40))
 plt.xticks(np.arange(-180, 181, 40))
 plt.show()
