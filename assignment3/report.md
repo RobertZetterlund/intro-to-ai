@@ -8,17 +8,28 @@
 
 ## _Question 1_
 
-
-<!-- 1. Show the distribution of phi and psi combinations using: 
-
+<!-- 1. Show the distribution of phi and psi combinations using:
 a. A scatter plot
 
 b. A heat map
-
 -->
 
+### Scatterplot
+<p align="center">
+    <img src="fig/scatterplot.png">
+<p>
+
+### Heatmap
+
+<p align="center">
+    <img src="fig/heatmap.png" width=45%>
+    <img src="fig/heatmap_cool.png" width=45%>
+<p>
 
 ## _Question 2_
+<p align="center">
+    <img src="fig/elbow_curve.png">
+<p>
 
 <!--
 2. Use the K-means clustering method to cluster the phi and psi angle combinations in the data file.
@@ -28,7 +39,6 @@ c. Do the clusters found in part (a) seem reasonable?
 d. Can you change the data to get better results (or the same results in a simpler
 way)? (Hint: since both phi and psi are periodic attributes, you can think of shifting/translating them by some value and then use the modulo operation.)
 -->
-
 
 ## _Question 3_
 

@@ -18,10 +18,6 @@ df = pd.read_csv(PATH)
 X = df[[PHI, PSI]]
 random_state = 170
 
-y_pred = KMeans(n_clusters=4, random_state=random_state).fit_predict(X)
-
-
-
 distorsions = []
 for k in range(2, 10):
     kmeans = KMeans(n_clusters=k)
@@ -29,18 +25,8 @@ for k in range(2, 10):
     #inertia is sum of squared distances of samples to their closest cluster center.
     distorsions.append(kmeans.inertia_)
 
-fig = plt.figure(figsize=(15, 5))
+fig = plt.figure()
 plt.plot(range(2, 10), distorsions)
 plt.grid(True)
 plt.title('Elbow curve')
-
-#getColors = lambda p: colors[p]
-#vColors = np.vectorize(getColors)
-
-
-
-
-#df.plot.scatter(x=PHI, y=PSI, c=vColors(y_pred))
-#plt.yticks(np.arange(-180, 181, 40))
-#plt.xticks(np.arange(-180, 181, 40))
 plt.show()
