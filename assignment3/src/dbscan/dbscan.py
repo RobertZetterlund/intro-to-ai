@@ -77,32 +77,17 @@ for u_label, color in zip(unique_labels, colors):
              markeredgecolor='black', markersize=14)
 
 
-# Number of clusters in labels. if we have noise (-1), n_clusters should exclude that
-n_clusters_ = len(set(labels)) - 1 if (-1 in labels) else 0
-n_noise_ = list(labels).count(-1)
-
-
-plt.show()
-
-#print('Estimated number of clusters: %d' % n_clusters_)
-#print('Estimated number of noise points: %d' % n_noise_)
-# print("Silhouette Coefficient: %0.3f"
-#      % metrics.silhouette_score(X, labels))
-
-
-# print(noiseMask)
-
-
-
+# #############################################################################
+# Bar plot of noise
 
 df_noise = df[noiseMask]
 
 
 # DONT ASK OMG WHY IS THIS SO DIFFICULT WHEN IT IS SO NORMAL TO WANT TO DO https://stackoverflow.com/a/32801170
-# count number of each name occuring in df
+# count number of each name occuring in df, create column counts to store value
 df_noise = df_noise.groupby(['residue name']).size().reset_index(name='counts')
 
-
+plt.figure()
 sns.barplot(x=df_noise["residue name"], y=df_noise["counts"])
 
 print(df_noise)
