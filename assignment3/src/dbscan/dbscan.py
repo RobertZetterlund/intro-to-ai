@@ -10,11 +10,11 @@ import matplotlib.pyplot as plt
 
 ## good for 200: eps 35, min_samples=3
 ## good for 500: eps 30, min_samples=9
-## good for all: eps 14, min_samples=40
+## good for all: eps 19, min_samples=42
 
 
 
-PATH = '../../res/data_all.csv'
+PATH = '../../res/data_200.csv'
 PHI = "phi"
 PSI = "psi"
 df = pd.read_csv(PATH)
@@ -27,7 +27,7 @@ X = df[[PHI, PSI]]
 
 # #############################################################################
 # Compute DBSCAN
-db = DBSCAN(eps=19, min_samples=42).fit(X)
+db = DBSCAN(eps=35, min_samples=3).fit(X)
 core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
 core_samples_mask[db.core_sample_indices_] = True
 labels = db.labels_
@@ -46,8 +46,12 @@ print('Estimated number of noise points: %d' % n_noise_)
 
 # Black removed and is used for noise instead.
 unique_labels = set(labels)
-colors = [plt.cm.Spectral(each)
+
+cmap = plt.get_cmap("Spectral")
+
+colors = [cmap(each)
           for each in np.linspace(0, 1, len(unique_labels))]
+
 for k, col in zip(unique_labels, colors):
     if k == -1:
         # Black used for noise.

@@ -17,6 +17,7 @@ b. A heat map
 ### Scatterplot
 <p align="center">
     <img src="fig/scatterplot.png">
+    <p align="center">Figure: <p>
 <p>
 
 ### Heatmap
