@@ -27,8 +27,18 @@ b. A heat map
 <p>
 
 ## _Question 2_
+
+### Elbow curve
+
 <p align="center">
     <img src="fig/elbow_curve.png">
+<p>
+
+
+### KMeans plot
+<p align="center">
+    <img src="fig/kmeans-3.png" width=45%>
+    <img src="fig/kmeans-4.png" width=45%>
 <p>
 
 <!--
