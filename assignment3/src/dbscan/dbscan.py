@@ -6,6 +6,7 @@ from sklearn.cluster import DBSCAN
 from sklearn import metrics
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # good for 200: eps 35, min_samples=3
 # good for 500: eps 30, min_samples=9
@@ -14,7 +15,7 @@ import matplotlib.pyplot as plt
 # #############################################################################
 # Get data
 
-PATH = '../../res/data_200.csv'
+PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
 df = pd.read_csv(PATH)
@@ -80,6 +81,9 @@ for u_label, color in zip(unique_labels, colors):
 n_clusters_ = len(set(labels)) - 1 if (-1 in labels) else 0
 n_noise_ = list(labels).count(-1)
 
+
+plt.show()
+
 #print('Estimated number of clusters: %d' % n_clusters_)
 #print('Estimated number of noise points: %d' % n_noise_)
 # print("Silhouette Coefficient: %0.3f"
@@ -88,14 +92,19 @@ n_noise_ = list(labels).count(-1)
 
 # print(noiseMask)
 
+
+
+
 df_noise = df[noiseMask]
 
 
+# DONT ASK OMG WHY IS THIS SO DIFFICULT WHEN IT IS SO NORMAL TO WANT TO DO https://stackoverflow.com/a/32801170
+# count number of each name occuring in df
+df_noise = df_noise.groupby(['residue name']).size().reset_index(name='counts')
 
-df_noise = df_noise.drop(columns=["position", "chain", "phi","psi"])
 
-df_noise = df_noise.value_counts()
+sns.barplot(x=df_noise["residue name"], y=df_noise["counts"])
 
 print(df_noise)
 
-print(df_noise.index)
+plt.show()
