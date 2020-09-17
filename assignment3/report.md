@@ -24,6 +24,8 @@ b. A heat map
 <p align="center">
     <img src="fig/heatmap.png" width=45%>
     <img src="fig/heatmap_cool.png" width=45%>
+    <p align="center">Figure: <p>
+
 <p>
 
 ## _Question 2_
@@ -35,12 +37,14 @@ a. Experiment with different values of K. Suggest an appropriate value of K for 
 ### KMeans plot
 <p align="center">
     <img src="fig/kmeans-3.png" width=45%>
-    <img src="fig/kmeans-4.png" width=45%>
+    <img src="fig/kmeans-4.png" width=45%>   
+    <p align="center">Figure: <p>
 <p>
 
 ### Elbow curve
 <p align="center">
     <img src="fig/elbow_curve.png">
+    <p align="center">Figure: <p>
 <p>
 
 
@@ -50,6 +54,8 @@ a. Experiment with different values of K. Suggest an appropriate value of K for 
 Here we remove 25% of the points and examine if the labeling remains similar.
 <p align="center" >
     <img src="fig/kmeans-3-removal.png">
+    <p align="center">Figure: <p>
+
 <p>
 
 
@@ -77,9 +83,19 @@ df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -100 else psi)
 
 <p align="center">
     <img src="fig/kmeans-3-shift.png">
+    <p align="center">Figure: <p>
 <p>
 
+
+Comparing elbow-curves and also this other thingy (see 2x2) table, we see that we can improve the performance of kmeans by shifting!! 
+
 ## _Question 3_
+
+
+<p align="center">
+    <img src="fig/dbscan-19-42.png"> 
+    <p align="center">DBSCAN 19 42<p>
+<p>
 
 <!--
 3. Use the DBSCAN method to cluster the phi and psi angle combinations in the data

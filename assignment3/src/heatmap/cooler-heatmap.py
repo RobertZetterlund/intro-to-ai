@@ -6,7 +6,7 @@ import numpy as np
 
 
 # Setup constants
-PATH = '../res/data_all.csv'
+PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
 

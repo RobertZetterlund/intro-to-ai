@@ -15,7 +15,7 @@ n_clusters = 3
 # Setup constants
 colors = ["red", "blue", "green", "orange",
           "purple", "cyan", "black", "pink", "yellow"]
-PATH = '../res/data_all.csv'
+PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
 df = pd.read_csv(PATH)

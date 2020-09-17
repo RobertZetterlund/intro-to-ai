@@ -10,7 +10,7 @@ sns.set_theme()
 nr_boxes = 18
 
 # Setup constants
-PATH = '../res/data_all.csv'
+PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
 BOX_SIZE = 360 // nr_boxes
