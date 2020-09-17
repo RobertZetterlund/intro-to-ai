@@ -26,7 +26,7 @@ X = df[[PHI, PSI]]
 
 # #############################################################################
 # Compute DBSCAN
-db = DBSCAN(eps=35, min_samples=3).fit(X)
+db = DBSCAN(eps=14, min_samples=4).fit(X)
 
 # create array same size as dataset, init as all false
 core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
@@ -58,12 +58,13 @@ for u_label, color in zip(unique_labels, colors):
     # make unassigned datapoints grey
     if isNoise:
         color = [232/255, 236/255, 241/255, 0.8]
+        noiseMask = (labels == u_label)
 
     # create mask for labels, used for selecting which datapoints to plot
     class_member_mask = (labels == u_label)
-    
+
     # PLOT NON-CORE DATAPOINTS
-    # Filter xy, get only non-core datapoints 
+    # Filter xy, get only non-core datapoints
     non_core = X[class_member_mask & ~core_samples_mask]
     plt.plot(non_core[PHI], non_core[PSI], 'o', markerfacecolor=tuple(color),
              markeredgecolor="black", markersize=6)
@@ -84,5 +85,17 @@ n_noise_ = list(labels).count(-1)
 # print("Silhouette Coefficient: %0.3f"
 #      % metrics.silhouette_score(X, labels))
 
-plt.title('Estimated number of clusters: %d' % n_clusters_)
-plt.show()
+
+# print(noiseMask)
+
+df_noise = df[noiseMask]
+
+
+
+df_noise = df_noise.drop(columns=["position", "chain", "phi","psi"])
+
+df_noise = df_noise.value_counts()
+
+print(df_noise)
+
+print(df_noise.index)
