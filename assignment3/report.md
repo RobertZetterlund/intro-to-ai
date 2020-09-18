@@ -93,10 +93,40 @@ Comparing elbow-curves and also this other thingy (see 2x2) table, we see that w
 ## _Question 3_
 
 
+
+
+## a - Motivate
+
+### i - the choice of the minimum number of samples in the neighbourhood for a point to be considered as a core point
+
+
+
+### ii - the choice of the maximum distance between two samples belonging to the same neighbourhood (“eps” or “epsilon”).
+
+
+
+
+## b  
+
+### scatterplot dbscan
+
 <p align="center">
     <img src="fig/dbscan-19-42.png"> 
     <p align="center">DBSCAN 19 42<p>
 <p>
+
+### barplot
+
+<p align="center">
+    <img src="fig/barplot.png"> 
+    <p align="center">Barplot<p>
+<p>
+
+## c - Compare DBSCAN and K-means
+
+## d - Robust to small changes?
+
+
 
 <!--
 3. Use the DBSCAN method to cluster the phi and psi angle combinations in the data
