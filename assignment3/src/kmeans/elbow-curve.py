@@ -12,7 +12,14 @@ colors = ["red","blue","green","orange","purple","cyan","black", "pink", "yellow
 PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
+RESIDUE_NAME = ""
 df = pd.read_csv(PATH)
+
+
+
+
+if RESIDUE_NAME:
+    df = df.loc[df['residue name'] == RESIDUE_NAME]
 
 # Get data to scatterplot
 X = df[[PHI, PSI]]

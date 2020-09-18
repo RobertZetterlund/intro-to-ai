@@ -18,7 +18,12 @@ colors = ["red", "blue", "green", "orange",
 PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
+RESIDUE_NAME = "PRO"
 df = pd.read_csv(PATH)
+
+
+if RESIDUE_NAME:
+    df = df.loc[df['residue name'] == RESIDUE_NAME]
 
 # Get data to scatterplot
 df[PHI] = df[PHI].apply(lambda phi: phi + 360 if phi < 0 else phi)
