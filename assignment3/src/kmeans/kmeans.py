@@ -21,6 +21,10 @@ PSI = "psi"
 df = pd.read_csv(PATH)
 
 # Get data to scatterplot
+df[PHI] = df[PHI].apply(lambda phi: phi + 360 if phi < 0 else phi)
+df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -100 else psi)
+
+
 X = df[[PHI, PSI]]
 random_state = 170
 
@@ -49,7 +53,5 @@ y_pred = KMeans(n_clusters=n_clusters,
                random_state=random_state).fit_predict(X)
 
 df.plot.scatter(x=PHI, y=PSI, c=vColors(y_pred))
-plt.yticks(np.arange(-180, 181, 40))
-plt.xticks(np.arange(-180, 181, 40))
 plt.title("Kmeans using " + str(n_clusters) + " number of clusters")
 plt.show()
