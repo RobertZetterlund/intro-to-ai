@@ -6,7 +6,7 @@
 
 ---
 
-## _Question 1_
+## _Question 1_ - Robert
 
 <!-- 1. Show the distribution of phi and psi combinations using:
 a. A scatter plot
@@ -29,7 +29,7 @@ b. A heat map
 
 <p>
 
-## _Question 2_
+## _Question 2_ - 
 <!-- 
 Use the K-means clustering method to cluster the phi and psi angle combinations in the data file.
 a. Experiment with different values of K. Suggest an appropriate value of K for this task and motivate this choice.
@@ -60,7 +60,7 @@ Here we remove 25% of the points and examine if the labeling remains similar.
 <p>
 
 
-### Do the clusters found seem reasonable?
+### Do the clusters found seem reasonable? - Robert
 <!--
 c. Do the clusters found in part (a) seem reasonable?
 -->
@@ -68,7 +68,7 @@ well maybe,
 
 
 
-### Can you change the data to get better results?
+### Can you change the data to get better results? - Robert
 <!--d. Can you change the data to get better results (or the same results in a simpler
 way)? (Hint: since both phi and psi are periodic attributes, you can think of shifting/translating them by some value and then use the modulo operation.)
 -->
@@ -94,8 +94,7 @@ Comparing elbow-curves and also this other thingy (see 2x2) table, we see that w
 
 
 
-
-## a - Motivate
+## a - Motivate - robert 
 
 ### i - the choice of the minimum number of samples in the neighbourhood for a point to be considered as a core point
 
@@ -106,7 +105,7 @@ Comparing elbow-curves and also this other thingy (see 2x2) table, we see that w
 
 
 
-## b  
+## b  - robert
 
 ### scatterplot dbscan
 
