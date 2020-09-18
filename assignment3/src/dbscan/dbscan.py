@@ -27,7 +27,7 @@ X = df[[PHI, PSI]]
 
 # #############################################################################
 # Compute DBSCAN
-db = DBSCAN(eps=14, min_samples=4).fit(X)
+db = DBSCAN(eps=20, min_samples=200).fit(X)
 
 # create array same size as dataset, init as all false
 core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
