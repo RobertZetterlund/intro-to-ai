@@ -160,7 +160,6 @@ By looking at
 <p>
 
 ## c - Compare DBSCAN and K-means
-<<<<<<< Updated upstream
 
 When looking at the clusters found by K-means and those found using DBSCAN we find some similarities, but mostly differences.
 
@@ -178,9 +177,6 @@ An interesting note is that if we had done the clustering by hand, we would prob
     <p align="center">Figure: The clusters created by k-means to the left and the clusters created by dbscan to the right.<p>
 <p>
 
-=======
-<!--c. Compare the clusters found by DBSCAN with those found using K-means.-->
->>>>>>> Stashed changes
 ## d - Robust to small changes?
 <!-- d. Discuss whether the clusters found using DBSCAN are robust to small changes
 in the minimum number of samples in the neighbourhood for a point to be considered as a core point, and/or the choice of the maximum distance between two samples belonging to the same neighbourhood (“eps” or “epsilon”). -->

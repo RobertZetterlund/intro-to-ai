@@ -12,14 +12,14 @@ colors = ["red","blue","green","orange","purple","cyan","black", "pink", "yellow
 PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
-RESIDUE_NAME = ""
+RESIDUE_NAME = "PRO"
 df = pd.read_csv(PATH)
-
-
-
 
 if RESIDUE_NAME:
     df = df.loc[df['residue name'] == RESIDUE_NAME]
+
+df[PHI] = df[PHI].apply(lambda phi: phi + 360 if phi < 0 else phi)
+df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -100 else psi)
 
 # Get data to scatterplot
 X = df[[PHI, PSI]]
@@ -35,5 +35,5 @@ for k in range(2, 10):
 fig = plt.figure()
 plt.plot(range(2, 10), distorsions)
 plt.grid(True)
-plt.title('Elbow curve')
+plt.title('Elbow curve for ' + str(RESIDUE_NAME))
 plt.show()
