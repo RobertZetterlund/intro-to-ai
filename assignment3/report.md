@@ -84,7 +84,7 @@ We remove a random 25% of the points and examine if the labeling remains similar
 
 In the figures above we see that the shapes of the clusters almost do not change at all. The color of the clusters changes...
 
-<!--  Unsure whether color change indicates anything-->
+<!--  Unsure whether color change indicates anything Den verkar göra det-->
 
 
 
@@ -219,31 +219,26 @@ The fact that DBSCAN is so sensitive to the minimum number of samples in the nei
 
 In order to compare the clusters, we find suitable k using elbow curve and find that PRO has a `k = 3`. 
 
-<p align="center">
-    <img src="fig/q4/elbow-PRO.png"> 
-    <p align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest<p>
-<p>
-
 A cluster ... 
 
-
 <p align="center">
-    <img src="fig/q4/kmeans-PRO.png"> 
-    <p align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest<p>
+    <img src="fig/q4/elbow-PRO.png" width="45%"> 
+    <img src="fig/q4/kmeans-PRO.png" width="45%"> 
 <p>
+<!-- align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest -->
 
+
+Looks better, since they are condensed within phi 250-350. 
 
 
 ### GLY
 In order to compare the clusters, we find suitable k using elbow curve and find that GLY has a `k = 4`. 
 
 <p align="center">
-    <img src="fig/q4/kmeans-PRO.png"> 
-    <p align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 4<p>
+    <img src="fig/q4/elbow-GLY.png" width="45%"> 
+    <img src="fig/q4/kmeans-GLY.png" width="45%"> 
 <p>
 
-<p align="center">
-    <img src="fig/q4/kmeans-GLY.png"> 
-    <p align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest<p>
-<p>
+bla bla bla, seems like noise.. we can find clusters but it might be coincidence.
+
 
