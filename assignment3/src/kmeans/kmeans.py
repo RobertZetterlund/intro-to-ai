@@ -18,7 +18,7 @@ colors = ["red", "blue", "green", "orange",
 PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
-RESIDUE_NAME = "PRO"
+RESIDUE_NAME = 'GLY'
 df = pd.read_csv(PATH)
 
 

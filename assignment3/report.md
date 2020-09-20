@@ -213,3 +213,37 @@ The fact that DBSCAN is so sensitive to the minimum number of samples in the nei
 <!--
 4. The data file can be stratified by amino acid residue type. Investigate how the clusters found for amino acid residues of type PRO differ from the general clusters. Similarly, investigate how the clusters found for amino acid residues of type GLY differ from the general clusters. Remember that parameters might have to be adjusted from those used in previous questions.
 -->
+
+### PRO
+
+
+In order to compare the clusters, we find suitable k using elbow curve and find that PRO has a `k = 3`. 
+
+<p align="center">
+    <img src="fig/q4/elbow-PRO.png"> 
+    <p align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest<p>
+<p>
+
+A cluster ... 
+
+
+<p align="center">
+    <img src="fig/q4/kmeans-PRO.png"> 
+    <p align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest<p>
+<p>
+
+
+
+### GLY
+In order to compare the clusters, we find suitable k using elbow curve and find that GLY has a `k = 4`. 
+
+<p align="center">
+    <img src="fig/q4/kmeans-PRO.png"> 
+    <p align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 4<p>
+<p>
+
+<p align="center">
+    <img src="fig/q4/kmeans-GLY.png"> 
+    <p align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest<p>
+<p>
+
