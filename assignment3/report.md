@@ -121,9 +121,17 @@ Comparing elbow-curves and also this other thingy (see 2x2) table, we see that w
 
 ## _Question 3_
 
-
+<!--
+3. Use the DBSCAN method to cluster the phi and psi angle combinations in the data
+file.
+a. Motivate:
+-->
 
 ## a - Motivate - robert 
+
+We will try to motivate our choice of the minimum number of samples and selecting the maximum distance by looking at heatmaps that we have generated. We will also look at a variant of the elbow-method to find an epsilon. 
+
+By looking at 
 
 ### i - the choice of the minimum number of samples in the neighbourhood for a point to be considered as a core point
 
@@ -135,6 +143,7 @@ Comparing elbow-curves and also this other thingy (see 2x2) table, we see that w
 
 
 ## b  - robert
+<!--b. Highlight the clusters found using DBSCAN and any outliers in a scatter plot. How many outliers are found? Plot a bar chart to show which amino acid residue types are most frequently outliers.-->
 
 ### scatterplot dbscan
 
@@ -151,6 +160,7 @@ Comparing elbow-curves and also this other thingy (see 2x2) table, we see that w
 <p>
 
 ## c - Compare DBSCAN and K-means
+<<<<<<< Updated upstream
 
 When looking at the clusters found by K-means and those found using DBSCAN we find some similarities, but mostly differences.
 
@@ -168,7 +178,12 @@ An interesting note is that if we had done the clustering by hand, we would prob
     <p align="center">Figure: The clusters created by k-means to the left and the clusters created by dbscan to the right.<p>
 <p>
 
+=======
+<!--c. Compare the clusters found by DBSCAN with those found using K-means.-->
+>>>>>>> Stashed changes
 ## d - Robust to small changes?
+<!-- d. Discuss whether the clusters found using DBSCAN are robust to small changes
+in the minimum number of samples in the neighbourhood for a point to be considered as a core point, and/or the choice of the maximum distance between two samples belonging to the same neighbourhood (“eps” or “epsilon”). -->
 
 By looking at what happens when epsilon or minPts is changed by a small value, one notices that dbscan can be very sensitive to these parameters. 
 
@@ -196,17 +211,6 @@ The clusters are of course also effected by changes in minPts, but in our case i
 
 The fact that DBSCAN is so sensitive to the minimum number of samples in the neighbourhood for a point to be considered as a core point, and/or the choice of the maximum distance between two samples belonging to the same neighbourhood, shows how important it is to choose these parameters carefully. A small increase or decrease can change the clusters fundamentally.
 
-<!--
-3. Use the DBSCAN method to cluster the phi and psi angle combinations in the data
-file.
-a. Motivate:
-i. the choice of the minimum number of samples in the neighbourhood for a point to be considered as a core point, and
-ii. the choice of the maximum distance between two samples belonging to the same neighbourhood (“eps” or “epsilon”).
-b. Highlight the clusters found using DBSCAN and any outliers in a scatter plot. How many outliers are found? Plot a bar chart to show which amino acid residue types are most frequently outliers.
-c. Compare the clusters found by DBSCAN with those found using K-means.
-d. Discuss whether the clusters found using DBSCAN are robust to small changes
-in the minimum number of samples in the neighbourhood for a point to be considered as a core point, and/or the choice of the maximum distance between two samples belonging to the same neighbourhood (“eps” or “epsilon”).
--->
 
 ## _Question 4_
 
