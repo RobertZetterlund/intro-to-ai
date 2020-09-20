@@ -79,10 +79,10 @@ We remove a random 25% of the points and examine if the labeling remains similar
 <p align="center" >
     <img src="fig/kmeans-3.png" width=45%>
     <img src="fig/kmeans-3-removal.png">
-    <p align="center">Figure: <p>
+    <p align="center">Figure: The original clusters compared to the clusters created when removing a random 25% of the points. <p>
 <p>
 
-In the figures above we see that the shapes of the clusters almost do not change at all. The color of the clusters changes...
+In the figures above we see that the shapes of the clusters almost do not change at all. However, the colors of the clusters change, which indicates that the clusters are unstable. We use the same initial central nodes in all the graphs above, and if the clusters were stable, the labeling should remain similar even though 25% of the points were removed. Since the labeling did not remain similar, it seems like the clusters we have created are quite unstable.  
 
 <!--  Unsure whether color change indicates anything Den verkar göra det-->
 
@@ -105,10 +105,10 @@ way)? (Hint: since both phi and psi are periodic attributes, you can think of sh
 Yea!
 
 ```python
-# shift phi by 180, new range is 0>->360
-# shift psi by 70, new range is -110>->250
+# shift phi by 180, new range is 0 >-> 360
+# shift psi by 70, new range is -110 >-> 250
 df[PHI] = df[PHI].apply(lambda phi: phi + 360 if phi < 0 else phi)
-df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -100 else psi)
+df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -110 else psi)
 ```
 
 <p align="center">
