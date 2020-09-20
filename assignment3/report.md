@@ -192,11 +192,56 @@ a. Motivate:
 
 We will try to motivate our choice of the minimum number of samples and selecting the maximum distance by looking at heatmaps that we have generated. We will also look at a variant of the elbow-method to find an epsilon.
 
-By looking at
+By looking at the heatmaps below we try to reason:
+
+<p align="center">
+    <img src="fig/heatmap.png" width=45%>
+    <img src="fig/heatmap_cool.png" width=45%>
+    <p align="center">Figure X: Heatmap for dataset using two different representations<p>
+<p>
 
 ### i - the choice of the minimum number of samples in the neighbourhood for a point to be considered as a core point
 
+We did not really have anything to go on when it came to this, we decided to test different values and ended up choosing 42. 
+
+
 ### ii - the choice of the maximum distance between two samples belonging to the same neighbourhood (“eps” or “epsilon”).
+
+
+The following line of code uses the algorithm explained in this [paper](https://iopscience.iop.org/article/10.1088/1755-1315/31/1/012012/pdf), via this [medium article](https://towardsdatascience.com/machine-learning-clustering-dbscan-determine-the-optimal-value-for-epsilon-eps-python-example-3100091cfbc), but **we changed** so that it takes the largest distance within in all k neighbours. If it takes the nearest it will get identical results for all `k>0`.
+
+We found that this methodology worked well, and intuitively we motivate the adjustment in by the following statements:
+
+* We want to have core points within clusters, given a sufficiently dense cluster and value of `k` it does not really matter if the value of epsilon increases.
+
+* When the largest distance to the "k":th neighbor changest the most, it is possible that we encounter noise. So by picking the value of largest distance, we have made a distinction between noise and clusters that is reasonable.
+
+* In contrary to the article (from medium) in which we found the algorithm, it performs differently based on the value of kmeans.
+
+Here is how it is implemented:
+
+```python
+# init nearest neighbors with our dataset
+neigh = NearestNeighbors(n_neighbors=n_neighbors)
+nbrs = neigh.fit(X)
+
+# get distances
+(distances, _) = nbrs.kneighbors(X)
+
+# Sort each node's distances to its closest n_neighbors neighbors
+distances = np.sort(distances, axis=0)
+
+# For each node, pick out the distance to the neighbor (out of closest n_neighbors) that is furthest away.
+distances = distances[:, -1]
+
+# find index of largest difference (make a distinction of 28500,
+# since the plot looks exponental and we're only interested in "elbow" area.)
+index = np.diff(distances[0:28500]).argmax()
+```
+
+Using `n_neighbors=42`, we get an epsilon of `17`, which we will use for the remainder of the analysis.
+
+It is possible to argue our tweak to the algorithm, as ... lowest is relevant, core points can grow very large in numbers, ... 
 
 ## b - robert
 
