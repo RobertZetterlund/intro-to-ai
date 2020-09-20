@@ -6,15 +6,14 @@
 
 ---
 
-## _Question 1_ - Robert
+## _Question 1_ - Show the distributions
 
-<!-- 1. Show the distribution of phi and psi combinations using:
-a. A scatter plot
-
-b. A heat map
--->
+```python
+df.plot.scatter(x=PHI, y=PSI)
+```
 
 ### Scatterplot
+
 <p align="center">
     <img src="fig/scatterplot.png">
     <p align="center">Figure: <p>
@@ -22,19 +21,46 @@ b. A heat map
 
 ### Heatmap
 
+Code for creating square heatmap, show left below.
+
+```python
+# In this program we create a 18x18 matrix of integers, and calculate index by floor division
+
+# create matrix
+matrix = np.zeros((nr_boxes, nr_boxes), dtype=int)
+
+# Calculate index by using
+df = df.apply(lambda row: row // BOX_SIZE + INDEX_OFFSET )
+
+# increment based on value
+# increment values in matrix based on index
+for row in df.itertuples(index=False):
+    matrix[row[1]][row[0]] += 1
+
+# create heatmap
+ax = sns.heatmap(matrix, xticklabels=X_TICKS, yticklabels=Y_TICKS)
+```
+
+Code for creating smooth heatmap, shown right below:
+
+```python
+sns.kdeplot(x=df[PHI], y=df[PSI], fill=True, cmap="rocket", cbar=True, thresh=0, levels=50)
+```
+
 <p align="center">
     <img src="fig/heatmap.png" width=45%>
     <img src="fig/heatmap_cool.png" width=45%>
-    <p align="center">Figure 2: <p>
+    <p align="center">Figure 2: Heatmap for dataset using two different representations<p>
 <p>
 
-## _Question 2_ - 
-<!-- 
+## _Question 2_ -
+
+<!--
 Use the K-means clustering method to cluster the phi and psi angle combinations in the data file.
 a. Experiment with different values of K. Suggest an appropriate value of K for this task and motivate this choice.
 -->
 
-By trying  out different k-values we notice that k=3 or k=4 have the most reasonable clusters. With a k < 3, the clusters does not explain the variation, and with a k > 4 it seems like we are trying to create clusters where there should not be clusters, i.e we are overfitting. 
+By trying out different k-values we notice that k=3 or k=4 have the most reasonable clusters. With a k < 3, the clusters does not explain the variation, and with a k > 4 it seems like we are trying to create clusters where there should not be clusters, i.e we are overfitting.
 
 <p align="center">
 <img src="fig/kmeans-2.png" width=45%>
@@ -44,9 +70,10 @@ By trying  out different k-values we notice that k=3 or k=4 have the most reason
     <p align="center">Figure 3: The clusters created using k-means for different k. <p>
 <p>
 
-By using an elbow curve we can get an indication to what k-value fits the data best, that is, how many clusters we should use. In the figure below we can clearly see an elbow at k=3, hence the elbow curves indicates that 3 clusters is the best fit. 
+By using an elbow curve we can get an indication to what k-value fits the data best, that is, how many clusters we should use. In the figure below we can clearly see an elbow at k=3, hence the elbow curves indicates that 3 clusters is the best fit.
 
 ### Elbow curve
+
 <p align="center">
     <img src="fig/elbow_curve.png">
     <p align="center">Figure 4: The elbow curve <p>
@@ -54,7 +81,7 @@ By using an elbow curve we can get an indication to what k-value fits the data b
 
 The calculation of the elbow curve was done by:
 
- For each k (k=2 to k=10), taking the sum of the squared distances of samples to the nearest cluster centre. See the code snippet below. 
+For each k (k=2 to k=10), taking the sum of the squared distances of samples to the nearest cluster centre. See the code snippet below.
 
 ```python
 distorsions = []
@@ -63,16 +90,16 @@ for k in range(2, 10):
     kmeans.fit(X)
     distorsions.append(kmeans.inertia_)
 
-#inertia is the sum of squared distances of samples to    their closest cluster center.    
+#inertia is the sum of squared distances of samples to    their closest cluster center.
 ```
 
-Since both our own experiment with different k-values and the elbow curved indicates k=3 to be a good value,  we deem 3 to be the most suitable k-value for this task. 
-
+Since both our own experiment with different k-values and the elbow curved indicates k=3 to be a good value, we deem 3 to be the most suitable k-value for this task.
 
 ### Validation
+
 <!-- b. Validate the clusters that are found with the chosen value of K. -->
 
-We validate the clusters by checking if the clusters still are stable even if we remove a proportion of the points. 
+We validate the clusters by checking if the clusters still are stable even if we remove a proportion of the points.
 
 We remove a random 25% of the points and examine if the labeling remains similar. We choose 25% as we believe that is enough to have an affect on the clusters, but not change the dataset dramatically.
 
@@ -82,27 +109,53 @@ We remove a random 25% of the points and examine if the labeling remains similar
     <p align="center">Figure: The original clusters compared to the clusters created when removing a random 25% of the points. <p>
 <p>
 
-In the figures above we see that the shapes of the clusters almost do not change at all. However, the colors of the clusters change, which indicates that the clusters are unstable. We use the same initial central nodes in all the graphs above, and if the clusters were stable, the labeling should remain similar even though 25% of the points were removed. Since the labeling did not remain similar, it seems like the clusters we have created are quite unstable.  
+In the figures above we see that the shapes of the clusters almost do not change at all. However, the colors of the clusters change, which indicates that the clusters are unstable. We use the same initial central nodes in all the graphs above, and if the clusters were stable, the labeling should remain similar even though 25% of the points were removed. Since the labeling did not remain similar, it seems like the clusters we have created are quite unstable.
 
 <!--  Unsure whether color change indicates anything Den verkar göra det-->
 
+### Do the clusters found seem reasonable?
 
-
-
-### Do the clusters found seem reasonable? - Robert
 <!--
 c. Do the clusters found in part (a) seem reasonable?
 -->
-well maybe,
 
+<p align="center">
+<img src="fig/kmeans-2.png" width=45%>
+    <img src="fig/kmeans-3.png" width=45%>
+    <img src="fig/kmeans-4.png" width=45%>
+    <img src="fig/kmeans-5.png" width=45%>   
+    <p align="center">Figure 3: The clusters created using k-means for different k. The large X denotes the centroid <p>
+<p>
 
+Looking at the figure, we see that some clusters can be argued more reasonable than others.
 
-### Can you change the data to get better results? - Robert
+For example, `k = 2` does not seem reasonable since both clusters range over all possible phi values and includes the interval `phi E (-30,20)` which has very few datapoints within it. Signalling that perhaps this divide should not be included in a cluster. For example, the blue centroid is seemingly the closest centroid for 4 different clusters.
+
+`k = 5` has a similar problem, where the purple color cross the divide (at the bottom), but does not include the entire scope, (yellow is at `phi = 150`). Also, the red and green clusters in the top right corner create an awkward split which looks artificial and wrong. We also see by comparing it to other plots that it has split the red centroid by creating two centroids instead in the top left corner.
+
+Then we arrive at `k = 4` which does not have an awkward split at the top left corner, but the bottom crossing of the divide is still there, perhaps foreshadowing what is about to come.
+
+### Can you change the data to get better results?
+
 <!--d. Can you change the data to get better results (or the same results in a simpler
 way)? (Hint: since both phi and psi are periodic attributes, you can think of shifting/translating them by some value and then use the modulo operation.)
 -->
 
-Yea!
+By looking at the plots above, we notice two "divides", one at approximately `phi=0` and `psi=-110`. Below is a plot with added lines.
+
+<p align="center">
+    <img src="fig/kmeans-3-lines.png">
+    <p align="center">Figure: <p>
+<p>
+
+We reason that due to the periodic attributes we can show negative values as positive values by adding `360`, essentially shifting them. This would in practice revolve in the following result
+
+|         |     | value  | shift? | new value |
+| :-----: | :-: | :----: | :----: | :-------: |
+| **phi** |     |  > 0   |   no   |    phi    |
+| **phi** |     |  < 0   |  yes   |  phi+360  |
+| **psi** |     | > -110 |   no   |    psi    |
+| **psi** |     | < -110 |  yes   |  psi+360  |
 
 ```python
 # shift phi by 180, new range is 0 >-> 360
@@ -110,14 +163,22 @@ Yea!
 df[PHI] = df[PHI].apply(lambda phi: phi + 360 if phi < 0 else phi)
 df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -110 else psi)
 ```
+What happens to the elbow curve, should we select new value for k? Lets see by comparing the two elbows curve, the elbow curve to the right is the one with shifted values.
+
+<p align="center">
+<img src="fig/elbow_curve.png" width=45%>
+    <img src="fig/elbow_curve_shifted.png" width=45%>
+<p>
+
+We see that we improve the cumulative sum of the neighbors (the y axis) but that the optimal value for k remains, `k = 3`.
+
+We plot the datapoints again using kmeans with shifted axises and get a visually more reasonable clusters that does not bridge any divides.
 
 <p align="center">
     <img src="fig/kmeans-3-shift.png">
     <p align="center">Figure: <p>
 <p>
 
-
-Comparing elbow-curves and also this other thingy (see 2x2) table, we see that we can improve the performance of kmeans by shifting!! 
 
 ## _Question 3_
 
@@ -127,22 +188,18 @@ file.
 a. Motivate:
 -->
 
-## a - Motivate - robert 
+## a - Motivate - robert
 
-We will try to motivate our choice of the minimum number of samples and selecting the maximum distance by looking at heatmaps that we have generated. We will also look at a variant of the elbow-method to find an epsilon. 
+We will try to motivate our choice of the minimum number of samples and selecting the maximum distance by looking at heatmaps that we have generated. We will also look at a variant of the elbow-method to find an epsilon.
 
-By looking at 
+By looking at
 
 ### i - the choice of the minimum number of samples in the neighbourhood for a point to be considered as a core point
 
-
-
 ### ii - the choice of the maximum distance between two samples belonging to the same neighbourhood (“eps” or “epsilon”).
 
+## b - robert
 
-
-
-## b  - robert
 <!--b. Highlight the clusters found using DBSCAN and any outliers in a scatter plot. How many outliers are found? Plot a bar chart to show which amino acid residue types are most frequently outliers.-->
 
 ### scatterplot dbscan
@@ -165,10 +222,12 @@ When looking at the clusters found by K-means and those found using DBSCAN we fi
 
 The clusters are similar in the way that both methods found 3 clusters (This is however largely affected by our choice of parameters).
 
-But even though they have the same amount of clusters, the clusters are very different. K-means splitted the points to the right into two clusters and kept the ones at the left as a single cluster while DBSCAN did the opposite. The clusters created by DBSCAN seems more reasonable those created by K-means. This is because when looking at the clusters,  it is more clear that the points to the left should be divided into two clusters than that those to the right should be.
+But even though they have the same amount of clusters, the clusters are very different. K-means splitted the points to the right into two clusters and kept the ones at the left as a single cluster while DBSCAN did the opposite. The clusters created by DBSCAN seems more reasonable those created by K-means. This is because when looking at the clusters, it is more clear that the points to the left should be divided into two clusters than that those to the right should be.
 
-Furthermore we can see that the clusters created by DBSCAN are more compact clusters as it leaves outliers out of clusters. K-means at the other hand puts every node into clusters even though they sometimes clearly should not be in a cluster. 
+Furthermore we can see that the clusters created by DBSCAN are more compact clusters as it leaves outliers out of clusters. K-means at the other hand puts every node into clusters even though they sometimes clearly should not be in a cluster.
 
+
+<!-- Det läser lite otydligt, menar du totalt fyra kluster? --->
 An interesting note is that if we had done the clustering by hand, we would probably have chosen a mixture between K-means and DBSCAN. That is, we would have divided both the points to the rigth and the ones to left into two clusters.
 
 <p align="center">
@@ -178,10 +237,11 @@ An interesting note is that if we had done the clustering by hand, we would prob
 <p>
 
 ## d - Robust to small changes?
+
 <!-- d. Discuss whether the clusters found using DBSCAN are robust to small changes
 in the minimum number of samples in the neighbourhood for a point to be considered as a core point, and/or the choice of the maximum distance between two samples belonging to the same neighbourhood (“eps” or “epsilon”). -->
 
-By looking at what happens when epsilon or minPts is changed by a small value, one notices that dbscan can be very sensitive to these parameters. 
+By looking at what happens when epsilon or minPts is changed by a small value, one notices that dbscan can be very sensitive to these parameters.
 
 When changing one parameter at a time, we see that the clusters we have found are very sensitive to an increase in the maximum distance between two samples belonging to the same neighbourhood a little. The top left cluster is engulfed into the large cluster. This is because epsilon now is large enough for a "bridge" to be created by the top left cluster and the large cluster.
 
@@ -207,7 +267,6 @@ The clusters are of course also effected by changes in minPts, but in our case i
 
 The fact that DBSCAN is so sensitive to the minimum number of samples in the neighbourhood for a point to be considered as a core point, and/or the choice of the maximum distance between two samples belonging to the same neighbourhood, shows how important it is to choose these parameters carefully. A small increase or decrease can change the clusters fundamentally.
 
-
 ## _Question 4_
 
 <!--
@@ -216,10 +275,9 @@ The fact that DBSCAN is so sensitive to the minimum number of samples in the nei
 
 ### PRO
 
+In order to compare the clusters, we find suitable k using elbow curve and find that PRO has a `k = 3`.
 
-In order to compare the clusters, we find suitable k using elbow curve and find that PRO has a `k = 3`. 
-
-A cluster ... 
+A cluster ...
 
 <p align="center">
     <img src="fig/q4/elbow-PRO.png" width="45%"> 
@@ -227,18 +285,15 @@ A cluster ...
 <p>
 <!-- align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest -->
 
-Looks better, since they are condensed within phi 250-350. 
-
+Looks better, since they are condensed within phi 250-350.
 
 <p align="center">
     <img src="fig/q4/dbscan-PRO.png" width="70%">  
 <p>
 
-
-
-
 ### GLY
-In order to compare the clusters, we find suitable k using elbow curve and find that GLY has a `k = 4`. 
+
+In order to compare the clusters, we find suitable k using elbow curve and find that GLY has a `k = 4`.
 
 <p align="center">
     <img src="fig/q4/elbow-GLY.png" width="45%"> 
@@ -250,6 +305,3 @@ bla bla bla, seems like noise.. we can find clusters but it might be coincidence
 <p align="center">
     <img src="fig/q4/dbscan-GLY.png" width="70%">  
 <p>
-
-
-
