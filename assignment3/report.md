@@ -227,8 +227,14 @@ A cluster ...
 <p>
 <!-- align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest -->
 
-
 Looks better, since they are condensed within phi 250-350. 
+
+
+<p align="center">
+    <img src="fig/q4/dbscan-PRO.png" width="70%">  
+<p>
+
+
 
 
 ### GLY
@@ -240,5 +246,10 @@ In order to compare the clusters, we find suitable k using elbow curve and find 
 <p>
 
 bla bla bla, seems like noise.. we can find clusters but it might be coincidence.
+
+<p align="center">
+    <img src="fig/q4/dbscan-GLY.png" width="70%">  
+<p>
+
 
 

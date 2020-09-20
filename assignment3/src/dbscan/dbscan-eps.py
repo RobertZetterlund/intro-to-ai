@@ -20,7 +20,7 @@ df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -100 else psi)
 
 X = df[[PHI, PSI]]
 
-neigh = NearestNeighbors(n_neighbors=200)
+neigh = NearestNeighbors(n_neighbors=25)
 nbrs = neigh.fit(X)
 
 # Get distances to the closest n_neighbors neighbors for each node

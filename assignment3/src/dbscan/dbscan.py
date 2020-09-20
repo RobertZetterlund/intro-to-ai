@@ -18,9 +18,11 @@ import seaborn as sns
 PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
-RESIDUE_NAME = "PRO"
+RESIDUE_NAME = "GLY"
 df = pd.read_csv(PATH)
 
+eps = 29.5
+min_samples=25
 
 if RESIDUE_NAME:
     df = df.loc[df['residue name'] == RESIDUE_NAME]
@@ -32,7 +34,7 @@ X = df[[PHI, PSI]]
 
 # #############################################################################
 # Compute DBSCAN
-db = DBSCAN(eps=20, min_samples=200).fit(X)
+db = DBSCAN(eps=eps, min_samples=min_samples).fit(X)
 
 # create array same size as dataset, init as all false
 core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
@@ -82,11 +84,13 @@ for u_label, color in zip(unique_labels, colors):
              markeredgecolor='black', markersize=14)
 
 
+plt.title("DBSCAN using epsilon=" +str(eps) + ", min_samples="+ str(min_samples) + (" (" + RESIDUE_NAME + ")") if RESIDUE_NAME else "")
+plt.xlabel(PHI)
+plt.ylabel(PSI)
 # #############################################################################
 # Bar plot of noise
 
 df_noise = df[noiseMask]
-
 
 # DONT ASK OMG WHY IS THIS SO DIFFICULT WHEN IT IS SO NORMAL TO WANT TO DO https://stackoverflow.com/a/32801170
 # count number of each name occuring in df, create column counts to store value
@@ -96,5 +100,13 @@ plt.figure()
 sns.barplot(x=df_noise["residue name"], y=df_noise["counts"])
 
 print(df_noise)
+
+# Number of clusters in labels, ignoring noise if present.
+n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+n_noise_ = list(labels).count(-1)
+
+print('Estimated number of clusters: %d' % n_clusters_)
+print('Estimated number of noise points: %d' % n_noise_)
+
 
 plt.show()
