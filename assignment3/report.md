@@ -156,7 +156,7 @@ When looking at the clusters found by K-means and those found using DBSCAN we fi
 
 The clusters are similar in the way that both methods found 3 clusters (This is however largely affected by our choice of parameters).
 
-But even thoug they have the same amount of clusters, the clusters are very different. K-means splitted the points to the right into two clusters and kept the ones at the left as a single cluster while DBSCAN did the opposite. The clusters created by DBSCAN seems more reasonable than the clusters created by K-means. This is since it is more clear that the points to the left should be divided into two clusters than that the points to the right should be.
+But even though they have the same amount of clusters, the clusters are very different. K-means splitted the points to the right into two clusters and kept the ones at the left as a single cluster while DBSCAN did the opposite. The clusters created by DBSCAN seems more reasonable those created by K-means. This is because when looking at the clusters,  it is more clear that the points to the left should be divided into two clusters than that those to the right should be.
 
 Furthermore we can see that the clusters created by DBSCAN are more compact clusters as it leaves outliers out of clusters. K-means at the other hand puts every node into clusters even though they sometimes clearly should not be in a cluster. 
 
