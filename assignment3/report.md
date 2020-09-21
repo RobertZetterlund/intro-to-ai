@@ -60,7 +60,7 @@ Use the K-means clustering method to cluster the phi and psi angle combinations 
 a. Experiment with different values of K. Suggest an appropriate value of K for this task and motivate this choice.
 -->
 
-By trying out different k-values we notice that k=3 or k=4 have the most reasonable clusters. 
+By trying out different k-values we notice that k=3 or k=4 have the most reasonable clusters.
 
 With a k < 3, the clusters does not explain the variation. For example, in `k = 2` both clusters range over all possible phi values and includes the interval `phi E (-30,20)` which has very few datapoints within it. Signalling that perhaps this divide should not be included in a cluster. For example, the blue centroid is seemingly the closest centroid for 4 different clusters.
 
@@ -114,9 +114,9 @@ We remove a random 25% of the points and examine if the labeling remains similar
     <p align="center">Figure 5: The original clusters compared to the clusters created when removing a random 25% of the points. <p>
 <p>
 
-In the figures above we see that the shapes of the clusters almost do not change at all. There are minor changes but it is still the same clusters. This indicates that the clusters are stable. 
+In the figures above we see that the shapes of the clusters almost do not change at all. There are minor changes but it is still the same clusters. This indicates that the clusters are stable.
 
-We also notice that the colors of the clusters change in different runs. This does however not mean that the clusters are unstable since the initial centroids are different each time. Suppose that points nearest to “centre 1” are shown in blue, those nearest “centre 2” are shown in green and those nearest “centre 3” are shown in red. Which of the clusters we have found happens to be blue might change from one run to the next since the centres start off in different places and end up in different places, “centre 1” from one run might end up near to where “centre 2” ended up in another run. 
+We also notice that the colors of the clusters change in different runs. This does however not mean that the clusters are unstable since the initial centroids are different each time. Suppose that points nearest to “centre 1” are shown in blue, those nearest “centre 2” are shown in green and those nearest “centre 3” are shown in red. Which of the clusters we have found happens to be blue might change from one run to the next since the centres start off in different places and end up in different places, “centre 1” from one run might end up near to where “centre 2” ended up in another run.
 
 So, we always find roughly the same clusters when performing k-means on different subsets of the dataset and hence we deem these clusters to be stable.s
 
@@ -128,11 +128,11 @@ So, we always find roughly the same clusters when performing k-means on differen
 c. Do the clusters found in part (a) seem reasonable?
 -->
 
-By looking at the figure below we notice that there are some aspects of the clustering that does not seem very reasonable. For example, the bottom left points, see label 1 in figure below, should probably not be in the blue set, but rather in the red. This is because psi=-180  is the same as psi=180 and hence the points in the bottom left should actually be in the red cluster as they are more connected to that cluster. 
+By looking at the figure below we notice that there are some aspects of the clustering that does not seem very reasonable. For example, the bottom left points, see label 1 in figure below, should probably not be in the blue set, but rather in the red. This is because psi=-180 is the same as psi=180 and hence the points in the bottom left should actually be in the red cluster as they are more connected to that cluster.
 
-Furthermore, it seems unreasonable for the green cluster to be so scattered, see label 2 in figure below. It would probably be more reasonable if it was divided into two clusters. The points at the top and bottom in one cluster, and the points in the middle as another. 
+Furthermore, it seems unreasonable for the green cluster to be so scattered, see label 2 in figure below. It would probably be more reasonable if it was divided into two clusters. The points at the top and bottom in one cluster, and the points in the middle as another.
 
-One could also argue that the points in the absolute bottom right corner, see label 3 in figure below (and possible some in the top right corner) should belong to the red set, as phi=-180 is the same as phi=180 (and again psi=-180  is the same as psi=180).
+One could also argue that the points in the absolute bottom right corner, see label 3 in figure below (and possible some in the top right corner) should belong to the red set, as phi=-180 is the same as phi=180 (and again psi=-180 is the same as psi=180).
 
 <p align="center">
     <img src="fig/kmeans-3-resonable.png">
@@ -167,6 +167,7 @@ We reason that due to the periodic attributes we can show negative values as pos
 df[PHI] = df[PHI].apply(lambda phi: phi + 360 if phi < 0 else phi)
 df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -110 else psi)
 ```
+
 What happens to the elbow curve, should we select new value for k? Lets see by comparing the two elbows curve, the elbow curve to the right is the one with shifted values.
 
 <p align="center">
@@ -182,7 +183,6 @@ We plot the datapoints again using kmeans with shifted axises and get a visually
     <img src="fig/kmeans-3-shift.png">
     <p align="center">Figure: <p>
 <p>
-
 
 ## _Question 3_
 
@@ -206,31 +206,27 @@ By looking at the heatmaps below we try to reason:
 
 ### i - the choice of the minimum number of samples in the neighbourhood for a point to be considered as a core point
 
-Criteria when we chose the number:
+_[To preface, we are not entirely sure how to motivate this number, we have googled quite a bit but with no luck]_
 
-* Testing values
-* Do not form clusters of noise,
+Things we had in mind when we chose the number:
 
-By extensive googling, we gather that:
+- Do not form clusters of noise, hence we do not want to choose a to low minPts.
+- The value should be picked by someone with domain knowledge.
+- Given an arbitrarily chosen epsilon, we wanted to ensure that clusters we could visually motivate would be classified as such, and also that potential "bridges" across subsets of clusters.
 
-* The value should be picked by someone with domain knowledge
-
-
-We did not really have anything to go on when it came to this, we decided to test different values and ended up choosing 42. 
-
+Again, we did not really have any foundation when it came to this, we decided to test different values and ended up choosing 42. We decided that we would pick a suitable epsilon based on the value of minPts. It was noted online that this was an acceptable approach and we explore choosing this value more in depth in part d.
 
 ### ii - the choice of the maximum distance between two samples belonging to the same neighbourhood (“eps” or “epsilon”).
 
-
-The following line of code uses the algorithm explained in this [paper](https://iopscience.iop.org/article/10.1088/1755-1315/31/1/012012/pdf), via this [medium article](https://towardsdatascience.com/machine-learning-clustering-dbscan-determine-the-optimal-value-for-epsilon-eps-python-example-3100091cfbc), but **we changed** so that it takes the largest distance within in all k neighbours. If it takes the nearest it will get identical results for all `k>0`.
+The following lines of code uses the algorithm explained in this [paper](https://iopscience.iop.org/article/10.1088/1755-1315/31/1/012012/pdf), via this [medium article](https://towardsdatascience.com/machine-learning-clustering-dbscan-determine-the-optimal-value-for-epsilon-eps-python-example-3100091cfbc), but **we changed** so that it takes the largest distance within in all k neighbours. If it takes the nearest it will get identical results for all `k>0`.
 
 We found that this methodology worked well, and intuitively we motivate the adjustment in by the following statements:
 
-* We want to have core points within clusters, given a sufficiently dense cluster and value of `k` it does not really matter if the value of epsilon increases.
+- We want to have core points within clusters, given a sufficiently dense cluster and value of `k` it does not really matter if the value of epsilon increases.
 
-* When the largest distance to the "k":th neighbor changest the most, it is possible that we encounter noise. So by picking the value of largest distance, we have made a distinction between noise and clusters that is reasonable.
+- When the largest distance to the "k":th neighbor changest the most, it is possible that we encounter noise. So by picking the value of largest distance, we have made a distinction between noise and clusters that is reasonable.
 
-* In contrary to the article (from medium) in which we found the algorithm, it performs differently based on the value of kmeans.
+- In contrary to the article (from medium) in which we found the algorithm, it performs differently based on the value of kmeans.
 
 Here is how it is implemented:
 
@@ -248,32 +244,78 @@ distances = np.sort(distances, axis=0)
 # For each node, pick out the distance to the neighbor (out of closest n_neighbors) that is furthest away.
 distances = distances[:, -1]
 
-# find index of largest difference (make a distinction of 28500,
+# find index of largest difference (make a distinction of 28750,
 # since the plot looks exponental and we're only interested in "elbow" area.)
-index = np.diff(distances[0:28500]).argmax()
+index = np.diff(distances[0:28750]).argmax()
 ```
 
-Using `n_neighbors=42`, we get an epsilon of `17`, which we will use for the remainder of the analysis.
+Using `n_neighbors=42`, we get an epsilon of `19`, which we will use for the remainder of the analysis.
 
-It is possible to argue our tweak to the algorithm, as ... lowest is relevant, core points can grow very large in numbers, ... 
+It is possible to argue our tweak to the algorithm, as ... lowest is relevant, core points can grow very large in numbers, ...
 
-## b - robert
+# TODO: FIX THIS
+
+## b - Highlight clusters found using DBSCAN, Barplot and outliers.
 
 <!--b. Highlight the clusters found using DBSCAN and any outliers in a scatter plot. How many outliers are found? Plot a bar chart to show which amino acid residue types are most frequently outliers.-->
 
-### scatterplot dbscan
+### Scatterplot DBSCAN
+
+Our code for creating a DBSCAN make use of masks.
+
+```python
+# create array same size as dataset, init as all false
+core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+# Take array and make boolean true for indices of core nodes
+core_samples_mask[db.core_sample_indices_] = True
+# ...
+for u_label, color in zip(unique_labels, colors):
+    # u_label is -1 if not part of cluster, ie. noise
+    isNoise = u_label == -1
+
+    # make unassigned datapoints grey
+    if isNoise:
+        color = "grey"
+        noiseMask = (labels == u_label)
+
+    # create mask for labels, used for selecting which datapoints to plot
+    class_member_mask = (labels == u_label)
+    # create mask for non core datapoints within current loop's members
+    non_core = X[class_member_mask & ~core_samples_mask]
+    # create mask for core datapoints within current loop's members
+    core = X[class_member_mask & core_samples_mask]
+
+    # do regular scatterplots ...
+```
 
 <p align="center">
     <img src="fig/dbscan-19-42.png"> 
-    <p align="center">DBSCAN 19 42<p>
+    <p align="center">Figure: DBSCAN with epsilon=19, minPts=42<p>
 <p>
 
-### barplot
+### Barplot of noise
+
+Using the same code as above, we use the `noisemask` and apply it to the dataframe. Then we count the occurence of each residue name and plot accordingly.
+
+```python
+# apply noisemask to dataframe
+df_noise = df[noiseMask]
+# count number of each name occuring in df, create column counts to store value
+df_noise = df_noise
+                   .groupby(['residue name'])
+                   .size()
+                   .reset_index(name='counts')
+
+#create barplot
+sns.barplot(x=df_noise["residue name"], y=df_noise["counts"])
+```
 
 <p align="center">
     <img src="fig/barplot.png"> 
-    <p align="center">Barplot<p>
+    <p align="center">Figure: Barplot of noise of above DBSCAN<p>
 <p>
+
+In total we have `327` noise points (outliers).
 
 ## c - Compare DBSCAN and K-means
 
@@ -285,9 +327,6 @@ But even though they have the same amount of clusters, the clusters are very dif
 
 Furthermore we can see that the clusters created by DBSCAN are more compact clusters as it leaves outliers out of clusters. K-means at the other hand puts every node into clusters even though they sometimes clearly should not be in a cluster.
 
-
-<!-- Det läser lite otydligt, menar du totalt fyra kluster? 
-Bättre?--->
 An interesting note is that if we had done the clustering by hand, we would probably have chosen a mixture between K-means and DBSCAN. That is, we would have divided both the points to the rigth and the ones to left into two clusters, in total four clusters.
 
 <p align="center">
@@ -352,13 +391,12 @@ Now for a more analytical analysis, we find suitable k using elbow curve and fin
 <p>
 <!-- align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest -->
 
-Comparatively little noise is noted when looking at the PRO dataset, verified by our DBSCAN below. We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides one or two clusters. 
+Comparatively little noise is noted when looking at the PRO dataset, verified by our DBSCAN below. We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides one or two clusters.
 
 <p align="center">
     <img src="fig/q4/dbscan-PRO-1.png" width="45%">    
     <img src="fig/q4/dbscan-PRO.png" width="45%">
 <p>
-
 
 ### GLY
 
@@ -369,8 +407,7 @@ First we look at a scatterplot highlighting the amino acids with the GLY residue
     <p align="center">Figure: <p>
 <p>
 
-The scatterplot shows how the distribution of GLY-points is quite similar to the distribution of all points. This indicates that the clusters of GLY might be quite similar to the general clusters. The GLY-points are quite scattered which indicates that amino acids with residue name GLY are not similar in characteristic and therefore can be difficult to label with precision.
-
+The scatterplot shows how the distribution of GLY-points is quite similar to the distribution of all points. This indicates that the clusters of GLY might be quite similar to the general clusters. The GLY-points are quite scattered,with a lot of noise, which indicates that amino acids with residue name GLY are not similar in characteristic and therefore can be difficult to label with precision.
 
 In order to compare the clusters, we find suitable k using elbow curve and find that GLY has a `k = 4`.
 
@@ -379,11 +416,11 @@ In order to compare the clusters, we find suitable k using elbow curve and find 
     <img src="fig/q4/kmeans-GLY.png" width="45%"> 
 <p>
 
-We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides three or four clusters. 
+We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides three or four clusters.
 
 <p align="center">
     <img src="fig/q4/dbscan-GLY.png" width="45%">  
     <img src="fig/q4/dbscan-GLY-4.png" width="45%">  
 <p>
 
-In this case, we would argue that dbscan more accurately finds 3 clusters than kmeans did. The GLY dataset is very similar to the entire dataset as visualised in the figure below.
+In this case, we would argue that dbscan more accurately finds 3 clusters than kmeans did.

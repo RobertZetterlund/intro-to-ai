@@ -11,7 +11,7 @@ PSI = "psi"
 RESIDUE_NAME = ""
 df = pd.read_csv(PATH)
 
-n_neighbors=42
+n_neighbors=500
 
 if RESIDUE_NAME:
     df = df.loc[df['residue name'] == RESIDUE_NAME]

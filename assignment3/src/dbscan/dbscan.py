@@ -18,11 +18,11 @@ import seaborn as sns
 PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
-RESIDUE_NAME = "GLY"
+RESIDUE_NAME = ""
 df = pd.read_csv(PATH)
 
-eps = 17.5
-min_samples=30
+eps = 19
+min_samples=42
 
 if RESIDUE_NAME:
     df = df.loc[df['residue name'] == RESIDUE_NAME]
@@ -94,10 +94,10 @@ df_noise = df[noiseMask]
 
 # DONT ASK OMG WHY IS THIS SO DIFFICULT WHEN IT IS SO NORMAL TO WANT TO DO https://stackoverflow.com/a/32801170
 # count number of each name occuring in df, create column counts to store value
-df_noise = df_noise.groupby(['residue name']).size().reset_index(name='counts')
+df_noise = df_noise.groupby(['residue name']).size().reset_index(name='noise points')
 
 plt.figure()
-sns.barplot(x=df_noise["residue name"], y=df_noise["counts"])
+sns.barplot(x=df_noise["residue name"], y=df_noise["noise points"])
 
 print(df_noise)
 
@@ -108,5 +108,6 @@ n_noise_ = list(labels).count(-1)
 print('Estimated number of clusters: %d' % n_clusters_)
 print('Estimated number of noise points: %d' % n_noise_)
 
+plt.title("Number of noise points grouped by residue name")
 
 plt.show()
