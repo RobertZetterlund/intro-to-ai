@@ -16,7 +16,7 @@ df.plot.scatter(x=PHI, y=PSI)
 
 <p align="center">
     <img src="fig/scatterplot.png">
-    <p align="center">Figure: <p>
+    <p align="center">Figure 1: Scatterplot of psi and phi values <p>
 <p>
 
 ### Heatmap
@@ -98,7 +98,7 @@ for k in range(2, 10):
 #inertia is the sum of squared distances of samples to    their closest cluster center.
 ```
 
-Since both our own experiment with different k-values and the elbow curved indicates k=3 to be a good value, we deem 3 to be the most suitable k-value for this task.
+Since both our own experiment with different k-values and the elbow curved indicate k=3 to be a good value, we deem 3 to be the most suitable k-value for this task.
 
 ### Validation
 
@@ -111,10 +111,14 @@ We remove a random 25% of the points and examine if the labeling remains similar
 <p align="center" >
     <img src="fig/kmeans-3.png" width=45%>
     <img src="fig/kmeans-3-removal.png">
-    <p align="center">Figure: The original clusters compared to the clusters created when removing a random 25% of the points. <p>
+    <p align="center">Figure 5: The original clusters compared to the clusters created when removing a random 25% of the points. <p>
 <p>
 
-In the figures above we see that the shapes of the clusters almost do not change at all. However, the colors of the clusters change, which indicates that the clusters are unstable. We use the same initial central nodes in all the graphs above, and if the clusters were stable, the labeling should remain similar even though 25% of the points were removed. Since the labeling did not remain similar, it seems like the clusters we have created are quite unstable.
+In the figures above we see that the shapes of the clusters almost do not change at all. There are minor changes but it is still the same clusters. This indicates that the clusters are stable. 
+
+We also notice that the colors of the clusters change in different runs. This does however not mean that the clusters are unstable since the initial centroids are different each time. Suppose that points nearest to “centre 1” are shown in blue, those nearest “centre 2” are shown in green and those nearest “centre 3” are shown in red. Which of the clusters we have found happens to be blue might change from one run to the next since the centres start off in different places and end up in different places, “centre 1” from one run might end up near to where “centre 2” ended up in another run. 
+
+So, we always find roughly the same clusters when performing k-means on different subsets of the dataset and hence we deem these clusters to be stable.s
 
 <!--  Unsure whether color change indicates anything Den verkar göra det-->
 
