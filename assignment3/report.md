@@ -60,7 +60,12 @@ Use the K-means clustering method to cluster the phi and psi angle combinations 
 a. Experiment with different values of K. Suggest an appropriate value of K for this task and motivate this choice.
 -->
 
-By trying out different k-values we notice that k=3 or k=4 have the most reasonable clusters. With a k < 3, the clusters does not explain the variation, and with a k > 4 it seems like we are trying to create clusters where there should not be clusters, i.e we are overfitting.
+By trying out different k-values we notice that k=3 or k=4 have the most reasonable clusters. 
+
+With a k < 3, the clusters does not explain the variation. For example, in `k = 2` both clusters range over all possible phi values and includes the interval `phi E (-30,20)` which has very few datapoints within it. Signalling that perhaps this divide should not be included in a cluster. For example, the blue centroid is seemingly the closest centroid for 4 different clusters.
+
+With a k > 4 it seems like we are trying to create clusters where there should not be clusters, i.e we are overfitting.
+For example, in `k = 5` the red and green clusters in the top left corner create an awkward split which looks artificial and wrong. We also see by comparing it to other plots that it has split the red centroid by creating two centroids instead in the top left corner.
 
 <p align="center">
 <img src="fig/kmeans-2.png" width=45%>
@@ -70,7 +75,7 @@ By trying out different k-values we notice that k=3 or k=4 have the most reasona
     <p align="center">Figure 3: The clusters created using k-means for different k. <p>
 <p>
 
-By using an elbow curve we can get an indication to what k-value fits the data best, that is, how many clusters we should use. In the figure below we can clearly see an elbow at k=3, hence the elbow curves indicates that 3 clusters is the best fit.
+To decide whether k=3 or k=4 should be used we use an elbow curve as it can give an indication to what k-value fits the data best, that is, how many clusters we should use. In the figure below we can clearly see an elbow at k=3, hence the elbow curves indicates that 3 clusters is the best fit.
 
 ### Elbow curve
 
@@ -128,14 +133,6 @@ c. Do the clusters found in part (a) seem reasonable?
     <img src="fig/kmeans-5.png" width=45%>   
     <p align="center">Figure 3: The clusters created using k-means for different k. The large X denotes the centroid <p>
 <p>
-
-Looking at the figure, we see that some clusters can be argued more reasonable than others.
-
-For example, `k = 2` does not seem reasonable since both clusters range over all possible phi values and includes the interval `phi E (-30,20)` which has very few datapoints within it. Signalling that perhaps this divide should not be included in a cluster. For example, the blue centroid is seemingly the closest centroid for 4 different clusters.
-
-`k = 5` has a similar problem, where the purple color cross the divide (at the bottom), but does not include the entire scope, (yellow is at `phi = 150`). Also, the red and green clusters in the top right corner create an awkward split which looks artificial and wrong. We also see by comparing it to other plots that it has split the red centroid by creating two centroids instead in the top left corner.
-
-Then we arrive at `k = 4` which does not have an awkward split at the top left corner, but the bottom crossing of the divide is still there, perhaps foreshadowing what is about to come.
 
 ### Can you change the data to get better results?
 
