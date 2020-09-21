@@ -351,7 +351,7 @@ Now for a more analytical analysis, we find suitable k using elbow curve and fin
 <p>
 <!-- align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest -->
 
-The cluster for residue type PRO looks better than the general datapoints. They are condensed within phi 250-350 and very little noise is noted. We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides one or two clusters. 
+Comparatively little noise is noted when looking at the PRO dataset, verified by our DBSCAN below. We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides one or two clusters. 
 
 <p align="center">
     <img src="fig/q4/dbscan-PRO-1.png" width="45%">    
