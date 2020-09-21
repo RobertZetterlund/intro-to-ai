@@ -334,6 +334,16 @@ The fact that DBSCAN is so sensitive to the minimum number of samples in the nei
 
 ### PRO
 
+First we look at a scatterplot highlighting the amino acids with the PRO residue name.
+
+<p align="center">
+    <img src="fig/q4/highlight-PRO.png" width="70%">
+    <p align="center">Figure: <p>
+<p>
+
+We notice that amino acids with PRO are are 
+
+
 In order to compare the clusters, we find suitable k using elbow curve and find that PRO has a `k = 3`.
 
 <p align="center">
@@ -349,13 +359,17 @@ The cluster for residue type PRO looks better than the general datapoints. They 
     <img src="fig/q4/dbscan-PRO.png" width="45%">
 <p>
 
+
+### GLY
+
+First we look at a scatterplot highlighting the amino acids with the GLY residue name.
+
 <p align="center">
-    <img src="fig/q4/highlight-PRO.png" width="70%">
+    <img src="fig/q4/highlight-GLY.png" width="70%">
     <p align="center">Figure: <p>
 <p>
 
 
-### GLY
 
 In order to compare the clusters, we find suitable k using elbow curve and find that GLY has a `k = 4`.
 
@@ -372,9 +386,3 @@ We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min
 <p>
 
 In this case, we would argue that dbscan more accurately finds 3 clusters than kmeans did. The GLY dataset is very similar to the entire dataset as visualised in the figure below.
-
-
-<p align="center">
-    <img src="fig/q4/highlight-GLY.png" width="70%">
-    <p align="center">Figure: <p>
-<p>
