@@ -35,7 +35,7 @@ distances = distances[:, -1]
 
 # find index of largest difference (make a distinction of 28500,
 # since the plot looks exponental and we're only interested in "elbow" area.)
-index = np.diff(distances[0:28500]).argmax()
+index = np.diff(distances[0:27000]).argmax()
 
 print("The largest difference is at x=" + str(index) + ", y=" + str(distances[index]))
 # Plot these distances
