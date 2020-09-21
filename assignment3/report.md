@@ -106,14 +106,12 @@ We remove a random 25% of the points and examine if the labeling remains similar
 <p align="center" >
     <img src="fig/kmeans-3.png" width=45%>
     <img src="fig/kmeans-3-removal.png">
-    <p align="center">Figure: The original clusters compared to clusters created when removing a random 25% of the points. <p>
+    <p align="center">Figure: The original clusters compared to the clusters created when removing a random 25% of the points. <p>
 <p>
 
-In the figures above we see that the shapes of the clusters almost do not change at all. There are minor changes but it is still the same clusters. This indicates that the clusters are stable. 
+In the figures above we see that the shapes of the clusters almost do not change at all. However, the colors of the clusters change, which indicates that the clusters are unstable. We use the same initial central nodes in all the graphs above, and if the clusters were stable, the labeling should remain similar even though 25% of the points were removed. Since the labeling did not remain similar, it seems like the clusters we have created are quite unstable.
 
-We also notice that the colors of the clusters change in different runs. This does however not mean that the clusters are unstable since the initial centroids are different each time. Suppose that points nearest to “centre 1” are shown in blue, those nearest “centre 2” are shown in green and those nearest “centre 3” are shown in red. Which of the clusters we have found happens to be blue might change from one run to the next since the centres start off in different places and end up in different places, “centre 1” from one run might end up near to where “centre 2” ended up in another run. 
-
-So, we always find roughly the same clusters when performing k-means on different subsets of the dataset and hence we deem these clusters to be stable.
+<!--  Unsure whether color change indicates anything Den verkar göra det-->
 
 ### Do the clusters found seem reasonable?
 
@@ -203,6 +201,16 @@ By looking at the heatmaps below we try to reason:
 <p>
 
 ### i - the choice of the minimum number of samples in the neighbourhood for a point to be considered as a core point
+
+Criteria when we chose the number:
+
+* Testing values
+* Do not form clusters of noise,
+
+By extensive googling, we gather that:
+
+* The value should be picked by someone with domain knowledge
+
 
 We did not really have anything to go on when it came to this, we decided to test different values and ended up choosing 42. 
 
