@@ -286,8 +286,9 @@ But even though they have the same amount of clusters, the clusters are very dif
 Furthermore we can see that the clusters created by DBSCAN are more compact clusters as it leaves outliers out of clusters. K-means at the other hand puts every node into clusters even though they sometimes clearly should not be in a cluster.
 
 
-<!-- Det läser lite otydligt, menar du totalt fyra kluster? --->
-An interesting note is that if we had done the clustering by hand, we would probably have chosen a mixture between K-means and DBSCAN. That is, we would have divided both the points to the rigth and the ones to left into two clusters.
+<!-- Det läser lite otydligt, menar du totalt fyra kluster? 
+Bättre?--->
+An interesting note is that if we had done the clustering by hand, we would probably have chosen a mixture between K-means and DBSCAN. That is, we would have divided both the points to the rigth and the ones to left into two clusters, in total four clusters.
 
 <p align="center">
     <img src="fig/kmeans-3-shift.png" width=45%>
