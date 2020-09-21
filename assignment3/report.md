@@ -114,8 +114,8 @@ We validate the clusters by checking if the clusters still are stable even if we
 We remove a random 25% of the points and examine if the labeling remains similar. We choose 25% as we believe that is enough to have an affect on the clusters, but not change the dataset dramatically.
 
 <p align="center" >
-    <img src="fig/kmeans-3.png" width=45%>
-    <img src="fig/kmeans-3-removal.png">
+    <img src="fig/kmeans-3.png" width=40%>
+    <img src="fig/kmeans-3-removal.png" width=80%>
     <p align="center">Figure 5: The original clusters compared to the clusters created when removing a random 25% of the points. <p>
 <p>
 
@@ -140,7 +140,7 @@ Furthermore, it seems unreasonable for the green cluster to be so scattered, see
 One could also argue that the points in the absolute bottom right corner, see label 3 in figure below (and possible some in the top right corner) should belong to the red set, as phi=-180 is the same as phi=180 (and again psi=-180 is the same as psi=180).
 
 <p align="center">
-    <img src="fig/kmeans-3-resonable.png">
+    <img src="fig/kmeans-3-resonable.png" width="70%">
     <p align="center">Figure 3: The clusters created using k-means for different k.  <p>
 <p>
 
