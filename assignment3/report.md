@@ -369,6 +369,7 @@ First we look at a scatterplot highlighting the amino acids with the GLY residue
     <p align="center">Figure: <p>
 <p>
 
+The scatterplot shows how the distribution of GLY-points is quite similar to the distribution of all points. This indicates that the clusters of GLY might be quite similar to the general clusters. The GLY-points are quite scattered which indicates that amino acids with residue name GLY are not similar in characteristic and therefore can be difficult to label with precision.
 
 
 In order to compare the clusters, we find suitable k using elbow curve and find that GLY has a `k = 4`.
