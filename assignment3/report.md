@@ -336,19 +336,24 @@ The fact that DBSCAN is so sensitive to the minimum number of samples in the nei
 
 In order to compare the clusters, we find suitable k using elbow curve and find that PRO has a `k = 3`.
 
-A cluster ...
-
 <p align="center">
     <img src="fig/q4/elbow-PRO.png" width="45%"> 
     <img src="fig/q4/kmeans-PRO.png" width="45%"> 
 <p>
 <!-- align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest -->
 
-Looks better, since they are condensed within phi 250-350.
+The cluster for residue type PRO looks better than the general datapoints. They are condensed within phi 250-350 and very little noise is noted. We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides one or two clusters. 
 
 <p align="center">
-    <img src="fig/q4/dbscan-PRO.png" width="70%">  
+    <img src="fig/q4/dbscan-PRO-1.png" width="45%">    
+    <img src="fig/q4/dbscan-PRO.png" width="45%">
 <p>
+
+<p align="center">
+    <img src="fig/q4/highlight-PRO.png" width="70%">
+    <p align="center">Figure: <p>
+<p>
+
 
 ### GLY
 
@@ -359,8 +364,17 @@ In order to compare the clusters, we find suitable k using elbow curve and find 
     <img src="fig/q4/kmeans-GLY.png" width="45%"> 
 <p>
 
-bla bla bla, seems like noise.. we can find clusters but it might be coincidence.
+We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides three or four clusters. 
 
 <p align="center">
-    <img src="fig/q4/dbscan-GLY.png" width="70%">  
+    <img src="fig/q4/dbscan-GLY.png" width="45%">  
+    <img src="fig/q4/dbscan-GLY-4.png" width="45%">  
+<p>
+
+In this case, we would argue that dbscan more accurately finds 3 clusters than kmeans did. The GLY dataset is very similar to the entire dataset as visualised in the figure below.
+
+
+<p align="center">
+    <img src="fig/q4/highlight-GLY.png" width="70%">
+    <p align="center">Figure: <p>
 <p>

@@ -21,8 +21,8 @@ PSI = "psi"
 RESIDUE_NAME = "GLY"
 df = pd.read_csv(PATH)
 
-eps = 29.5
-min_samples=25
+eps = 17.5
+min_samples=30
 
 if RESIDUE_NAME:
     df = df.loc[df['residue name'] == RESIDUE_NAME]

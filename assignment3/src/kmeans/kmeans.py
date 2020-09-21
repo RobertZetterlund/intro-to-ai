@@ -10,7 +10,7 @@ from numpy.random import default_rng
 
 
 # SELECT NR OF CLUSTERS
-n_clusters = 3
+n_clusters = 4
 
 # Setup constants
 colors = ["red", "blue", "green", "orange",
@@ -18,7 +18,7 @@ colors = ["red", "blue", "green", "orange",
 PATH = '../../res/data_all.csv'
 PHI = "phi"
 PSI = "psi"
-RESIDUE_NAME = ''
+RESIDUE_NAME = 'GLY'
 df = pd.read_csv(PATH)
 
 
@@ -26,8 +26,8 @@ if RESIDUE_NAME:
     df = df.loc[df['residue name'] == RESIDUE_NAME]
 
 # Get data to scatterplot
-#df[PHI] = df[PHI].apply(lambda phi: phi + 360 if phi < 0 else phi)
-#df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -100 else psi)
+df[PHI] = df[PHI].apply(lambda phi: phi + 360 if phi < 0 else phi)
+df[PSI] = df[PSI].apply(lambda psi: psi + 360 if psi < -100 else psi)
 
 
 X = df[[PHI, PSI]]
@@ -67,8 +67,8 @@ plt.scatter(centroids[:, 0], centroids[:, 1],
             marker='x', s=169, linewidths=3,
             color='k', zorder=10)
 
-plt.hlines(-110, -180,180)
-plt.vlines(0, -180,180)
+#plt.hlines(-110, -180,180)
+#plt.vlines(0, -180,180)
 
 
 
