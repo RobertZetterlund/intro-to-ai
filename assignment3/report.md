@@ -341,10 +341,9 @@ First we look at a scatterplot highlighting the amino acids with the PRO residue
     <p align="center">Figure: <p>
 <p>
 
-We notice that amino acids with PRO are are 
+We notice that amino acids with residue name PRO are can be classified into one or two clusters, since they are primarily in the phi range of 250 to 350, also they range somewhat consistently across phi -100 to 200. They are not evenly distributed through the entire dataset which lead us to believe that amino acids with residue name PRO are similar in characteristic and can be labeled with _somewhat_ precision.
 
-
-In order to compare the clusters, we find suitable k using elbow curve and find that PRO has a `k = 3`.
+Now for a more analytical analysis, we find suitable k using elbow curve and find that PRO has a `k = 3`.
 
 <p align="center">
     <img src="fig/q4/elbow-PRO.png" width="45%"> 
@@ -352,7 +351,7 @@ In order to compare the clusters, we find suitable k using elbow curve and find 
 <p>
 <!-- align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest -->
 
-The cluster for residue type PRO looks better than the general datapoints. They are condensed within phi 250-350 and very little noise is noted. We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides one or two clusters. 
+Comparatively little noise is noted when looking at the PRO dataset, verified by our DBSCAN below. We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides one or two clusters. 
 
 <p align="center">
     <img src="fig/q4/dbscan-PRO-1.png" width="45%">    
