@@ -67,10 +67,5 @@ plt.scatter(centroids[:, 0], centroids[:, 1],
             marker='x', s=169, linewidths=3,
             color='k', zorder=10)
 
-#plt.hlines(-110, -180,180)
-#plt.vlines(0, -180,180)
-
-
-
 plt.title("Kmeans using " + str(n_clusters) + " number of clusters")
 plt.show()

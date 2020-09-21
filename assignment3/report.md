@@ -8,11 +8,13 @@
 
 ## _Question 1_ - Show the distributions
 
+These tasks are straightforward so we present the code rather than explain it.
+
+
+### Scatterplot
 ```python
 df.plot.scatter(x=PHI, y=PSI)
 ```
-
-### Scatterplot
 
 <p align="center">
     <img src="fig/scatterplot.png">
@@ -24,6 +26,8 @@ df.plot.scatter(x=PHI, y=PSI)
 Code for creating square heatmap, show left below.
 
 ```python
+# Square heatmap
+
 # In this program we create a 18x18 matrix of integers, and calculate index by floor division
 
 # create matrix
@@ -44,6 +48,7 @@ ax = sns.heatmap(matrix, xticklabels=X_TICKS, yticklabels=Y_TICKS)
 Code for creating smooth heatmap, shown right below:
 
 ```python
+# smooth heatmap
 sns.kdeplot(x=df[PHI], y=df[PSI], fill=True, cmap="rocket", cbar=True, thresh=0, levels=50)
 ```
 
@@ -192,17 +197,9 @@ file.
 a. Motivate:
 -->
 
-## a - Motivate - robert
+## a - Motivate
 
-We will try to motivate our choice of the minimum number of samples and selecting the maximum distance by looking at heatmaps that we have generated. We will also look at a variant of the elbow-method to find an epsilon.
-
-By looking at the heatmaps below we try to reason:
-
-<p align="center">
-    <img src="fig/heatmap.png" width=45%>
-    <img src="fig/heatmap_cool.png" width=45%>
-    <p align="center">Figure X: Heatmap for dataset using two different representations<p>
-<p>
+<!--We will try to motivate our choice of the minimum number of samples and selecting the maximum distance by looking at heatmaps that we have generated. We will also look at a variant of the elbow-method to find an epsilon.-->
 
 ### i - the choice of the minimum number of samples in the neighbourhood for a point to be considered as a core point
 
@@ -210,8 +207,8 @@ _[To preface, we are not entirely sure how to motivate this number, we have goog
 
 Things we had in mind when we chose the number:
 
-- Do not form clusters of noise, hence we do not want to choose a to low minPts.
-- The value should be picked by someone with domain knowledge.
+- Do not form clusters of noise, hence we do not want to choose a to low minPts. Assisted by looking at our heatmaps.
+- The value should be picked by someone with domain knowledge, i.e. not us.
 - Given an arbitrarily chosen epsilon, we wanted to ensure that clusters we could visually motivate would be classified as such, and also that potential "bridges" across subsets of clusters.
 
 Again, we did not really have any foundation when it came to this, we decided to test different values and ended up choosing 42. We decided that we would pick a suitable epsilon based on the value of minPts. It was noted online that this was an acceptable approach and we explore choosing this value more in depth in part d.
@@ -251,9 +248,7 @@ index = np.diff(distances[0:28750]).argmax()
 
 Using `n_neighbors=42`, we get an epsilon of `19`, which we will use for the remainder of the analysis.
 
-It is possible to argue our tweak to the algorithm, as ... lowest is relevant, core points can grow very large in numbers, ...
-
-# TODO: FIX THIS
+It is possible to argue our tweak to the algorithm, as this arbitrary distinction that noise begin at the largest jump in distance can have it's flaws. We also note that for large values of `n_neighbors` our approach performs poorly. But this proved effective for us and it seems that approaches are inherently data-dependent. We learn that it is important to have the amount of core points in mind and (although again, it is data dependent on the densisty) make sure that some non-core points are classified as well.
 
 ## b - Highlight clusters found using DBSCAN, Barplot and outliers.
 
