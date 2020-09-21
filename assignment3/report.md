@@ -124,12 +124,15 @@ In the figures above we see that the shapes of the clusters almost do not change
 c. Do the clusters found in part (a) seem reasonable?
 -->
 
+By looking at the figure below we notice that there are some aspects of the clustering that does not seem very reasonable. For example, the bottom left points, see label 1 in figure below, should probably not be in the blue set, but rather in the red. This is because psi=-180  is the same as psi=180 and hence the points in the bottom left should actually be in the red cluster as they are more connected to that cluster. 
+
+Furthermore, it seems unreasonable for the green cluster to be so scattered, see label 2 in figure below. It would probably be more reasonable if it was divided into two clusters. The points at the top and bottom in one cluster, and the points in the middle as another. 
+
+One could also argue that the points in the absolute bottom right corner, see label 3 in figure below (and possible some in the top right corner) should belong to the red set, as phi=-180 is the same as phi=180 (and again psi=-180  is the same as psi=180).
+
 <p align="center">
-<img src="fig/kmeans-2.png" width=45%>
-    <img src="fig/kmeans-3.png" width=45%>
-    <img src="fig/kmeans-4.png" width=45%>
-    <img src="fig/kmeans-5.png" width=45%>   
-    <p align="center">Figure 3: The clusters created using k-means for different k. The large X denotes the centroid <p>
+    <img src="fig/kmeans-3-resonable.png">
+    <p align="center">Figure 3: The clusters created using k-means for different k.  <p>
 <p>
 
 ### Can you change the data to get better results?
