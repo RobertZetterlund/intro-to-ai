@@ -67,10 +67,10 @@ a. Experiment with different values of K. Suggest an appropriate value of K for 
 
 By trying out different k-values we notice that k=3 or k=4 have the most reasonable clusters.
 
-With a k < 3, the clusters does not explain the variation. For example, in `k = 2` both clusters range over all possible phi values and includes the interval `phi E (-30,20)` which has very few datapoints within it. Signalling that perhaps this divide should not be included in a cluster. For example, the blue centroid is seemingly the closest centroid for 4 different clusters.
+With a k < 3, the clusters do not explain the variation. For example, in `k = 2` both clusters range over all possible phi values and include the interval `phi E (-30,20)` which has very few data points within it. Signaling that perhaps this divide should not be included in a cluster. For example, the blue centroid is seemingly the closest centroid for 4 different clusters.
 
 With a k > 4 it seems like we are trying to create clusters where there should not be clusters, i.e we are overfitting.
-For example, in `k = 5` the red and green clusters in the top left corner create an awkward split which looks artificial and wrong. We also see by comparing it to other plots that it has split the red centroid by creating two centroids instead in the top left corner.
+For example, in `k = 5` the red and green clusters in the top left corner create an awkward split that looks artificial and wrong. We also see by comparing it to other plots that it has split the red centroid by creating two centroids instead in the top left corner.
 
 <p align="center">
 <img src="fig/kmeans-2.png" width=45%>
@@ -80,7 +80,7 @@ For example, in `k = 5` the red and green clusters in the top left corner create
     <p align="center">Figure 3: The clusters created using k-means for different k. The X:s indicates centroids.<p>
 <p>
 
-To decide whether k=3 or k=4 should be used we use an elbow curve as it can give an indication to what k-value fits the data best, that is, how many clusters we should use. In the figure below we can clearly see an elbow at k=3, hence the elbow curves indicates that 3 clusters is the best fit.
+To decide whether k=3 or k=4 should be used we use an elbow curve as it can give an indication to what k-value fits the data best, that is, how many clusters we should use. In the figure below we can clearly see an elbow at k=3, hence the elbow curves indicate that 3 clusters is the best fit.
 
 <p align="center">
     <img src="fig/elbow_curve.png">
@@ -107,7 +107,7 @@ Since both our own experiment with different k-values and the elbow curved indic
 
 <!-- b. Validate the clusters that are found with the chosen value of K. -->
 
-We validate the clusters by checking if the clusters still are stable even if we remove a proportion of the points. We remove a random 25% of the points and examine if the labeling remains similar. We choose 25% as we believe that is enough to have an affect on the clusters, but not change the dataset dramatically.
+We validate the clusters by checking if the clusters still are stable even if we remove a proportion of the points. We remove a random 25% of the points and examine if the labeling remains similar. We choose 25% as we believe that is enough to have an effect on the clusters, but not change the dataset dramatically.
 
 <p align="center" >
     <img src="fig/kmeans-3.png" width=40%>
@@ -117,7 +117,7 @@ We validate the clusters by checking if the clusters still are stable even if we
 
 In the figures above we see the original clusters compared to 4 figures with clusters created after removing a random 25% of the points. We notice that the shapes of the clusters almost do not change at all. There are minor changes but it is still the same clusters. This indicates that the clusters are stable.
 
-We also notice that the colors of the clusters change in different runs. This does however not mean that the clusters are unstable since the initial centroids are different each time. Suppose that points nearest to “centre 1” are shown in blue, those nearest “centre 2” are shown in green and those nearest “centre 3” are shown in red. Which of the clusters we have found happens to be blue might change from one run to the next since the centres start off in different places and end up in different places, “centre 1” from one run might end up near to where “centre 2” ended up in another run.
+We also notice that the colors of the clusters change in different runs. This does however not mean that the clusters are unstable since the initial centroids are different each time. Suppose that points nearest to “centre 1” are shown in blue, those nearest “centre 2” are shown in green and those nearest “centre 3” is shown in red. Which of the clusters we have found happens to be blue might change from one run to the next since the centres start off in different places and end up in different places, “centre 1” from one run might end up near to where “centre 2” ended up in another run.
 
 So, we always find roughly the same clusters when performing k-means with k=3 on different subsets of the dataset and hence we deem these clusters to be stable.
 
@@ -130,9 +130,9 @@ c. Do the clusters found in part (a) seem reasonable?
 
 By looking at the figure below we notice that there are some aspects of the clustering that does not seem very reasonable. For example, the bottom left points, see label 1 in figure below, should probably not be in the blue set, but rather in the red. This is because psi=-180 is the same as psi=180 and hence the points in the bottom left should actually be in the red cluster as they are more connected to that cluster.
 
-Furthermore, it seems unreasonable for the green cluster to be so scattered, see label 2 in figure below. It would probably be more reasonable if it was divided into two clusters. The points at the top and bottom in one cluster, and the points in the middle as another.
+Furthermore, it seems unreasonable for the green cluster to be so scattered, see label 2 in the figure below. It would probably be more reasonable if it was divided into two clusters. The points at the top and bottom in one cluster, and the points in the middle as another.
 
-One could also argue that the points in the absolute bottom right corner, see label 3 in figure below (and possible some in the top right corner) should belong to the red set, as phi=-180 is the same as phi=180 (and again psi=-180 is the same as psi=180).
+One could also argue that the points in the absolute bottom right corner, see label 3 in the figure below (and possible some in the top right corner) should belong to the red set, as phi=-180 is the same as phi=180 (and again psi=-180 is the same as psi=180).
 
 <p align="center">
     <img src="fig/kmeans-3-resonable.png" width="70%">
@@ -314,9 +314,9 @@ When looking at the clusters found by K-means and those found using DBSCAN we fi
 
 The clusters are similar in the way that both methods found 3 clusters (This is however largely affected by our choice of parameters).
 
-But even though they have the same amount of clusters, the clusters are very different. K-means splitted the points to the right into two clusters and kept the ones at the left as a single cluster while DBSCAN did the opposite. The clusters created by DBSCAN seems more reasonable those created by K-means. This is because when looking at the clusters, it is more clear that the points to the left should be divided into two clusters than that those to the right should be.
+But even though they have the same amount of clusters, the clusters are very different. K-means split the points to the right into two clusters and kept the ones at the left as a single cluster while DBSCAN did the opposite. The clusters found by DBSCAN seem more reasonable than those created by K-means. This is because when looking at the clusters, it is more clear that the points to the left should be divided into two clusters than that those to the right should be.
 
-Furthermore we can see that the clusters created by DBSCAN are more compact clusters as it leaves outliers out of clusters. K-means at the other hand puts every node into clusters even though they sometimes clearly should not be in a cluster.
+Furthermore, we can see that the clusters created by DBSCAN are more compact clusters as it leaves outliers out of clusters. K-means on the other hand puts every node into clusters even though they sometimes clearly should not be in a cluster.
 
 An interesting note is that if we had done the clustering by hand, we would probably have chosen a mixture between K-means and DBSCAN. That is, we would have divided both the points to the rigth and the ones to left into two clusters, in total four clusters.
 
@@ -345,7 +345,7 @@ When changing one parameter at a time, we see that the clusters we have found ar
 
 When changing both parameters at the same time, we see the same thing. The top left cluster is engulfed into the large cluster when epsilon is increased.
 
-The clusters are of course also effected by changes in minPts, but in our case it was an increase in epsilon that created a large difference. In another case it might be a change in minPts that changes the clusters fundamentally.
+The clusters are of course also affected by changes in minPts, but in our case it was an increase in epsilon that created a large difference. In another case it might be a change in minPts that changes the clusters fundamentally.
 
 <p align="center">
     <img src="fig/dbscan-17-40.png" width=45%>
@@ -391,7 +391,7 @@ Comparatively little noise is noted when looking at the PRO dataset, verified by
     <p align="center">Figure 17: The clusters created when using different values of eps and minPts for DBSCAN.<p>
 <p>
 
-We notice that the only similarity between the clusters found for PRO and the general clusters is that k-means found 3 clusters in both cases. Otherwise the clusters found looks completly different, both when it comes to shape and noise and both for k-means and DBSCAN. This seems however reasonable as the distribution of the points is so different. 
+We notice that the only similarity between the clusters found for PRO and the general clusters is that k-means found 3 clusters in both cases. Otherwise, the clusters found look completely different, both when it comes to shape and noise and both for k-means and DBSCAN. This seems however reasonable as the distribution of the points is so different. 
 
 
 ### GLY
@@ -423,8 +423,8 @@ We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min
 
 In this case, we would argue that dbscan more accurately finds 3 clusters than kmeans did. 
 
-We notice that even though the distribution of GLY-points is quite similiar to the general distribution, the clusters created by both DBSCAN and k-means are quite different from the general clusters. For example, k-means found 4 clusters for GLY whilst it found 3 general clusters. In DBSCAN the red and the green cluster from the general clusters (see figure 10) looks very different from the yellow and green cluster in figure 20. 
+We notice that even though the distribution of GLY-points is quite similar to the general distribution, the clusters created by both DBSCAN and k-means are quite different from the general clusters. For example, k-means found 4 clusters for GLY whilst it found 3 general clusters. In DBSCAN the red and the green cluster from the general clusters (see figure 10) looks very different from the yellow and green cluster in figure 20. 
 
-We note however that the clusters found from GLY are much more alike the general clusters than the clusters found from PRO. For example, in DBSCAN (GLY) with 3 clusters, the bottom left cluster (red) is very similar to the bottom left cluster in the general clusters found by DBSCAN.
+We note however that the clusters found from GLY are much more alike the general clusters than the clusters found from PRO. For example, in DBSCAN (GLY) with 3 clusters, the bottom left cluster (red) is actually very similar to the bottom left cluster in the general clusters found by DBSCAN.
 
-This seems reasonable as the the distribution of GLY-points are a lot more similar to the general distribution than the distribution of the PRO-points. 
+This seems reasonable as the distribution of GLY-points is a lot more similar to the general distribution than the distribution of the PRO-points. 
