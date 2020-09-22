@@ -391,6 +391,9 @@ Comparatively little noise is noted when looking at the PRO dataset, verified by
     <p align="center">Figure 17: The clusters created when using different values of eps and minPts for DBSCAN.<p>
 <p>
 
+We notice that the only similarity between the clusters found for PRO and the general clusters is that k-means found 3 clusters in both cases. Otherwise the clusters found looks completly different, both when it comes to shape and noise and both for k-means and DBSCAN. This seems however reasonable as the distribution of the points is so different. 
+
+
 ### GLY
 
 First we look at a scatterplot highlighting the amino acids with the GLY residue name.
@@ -418,4 +421,10 @@ We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min
     <p align="center">Figure 20: The clusters created when using different values of eps and minPts for DBSCAN.<p>  
 <p>
 
-In this case, we would argue that dbscan more accurately finds 3 clusters than kmeans did. We notice that even though the distribution of GLY-points is quite similiar to the general distribution, the clusters created by both DBSCAN and k-means are very different from the general clusters. 
+In this case, we would argue that dbscan more accurately finds 3 clusters than kmeans did. 
+
+We notice that even though the distribution of GLY-points is quite similiar to the general distribution, the clusters created by both DBSCAN and k-means are quite different from the general clusters. For example, k-means found 4 clusters for GLY whilst it found 3 general clusters. In DBSCAN the red and the green cluster from the general clusters (see figure 10) looks very different from the yellow and green cluster in figure 20. 
+
+We note however that the clusters found from GLY are much more alike the general clusters than the clusters found from PRO. For example, in DBSCAN (GLY) with 3 clusters, the bottom left cluster (red) is very similar to the bottom left cluster in the general clusters found by DBSCAN.
+
+This seems reasonable as the the distribution of GLY-points are a lot more similar to the general distribution than the distribution of the PRO-points. 
