@@ -372,7 +372,7 @@ First we look at a scatterplot highlighting the amino acids with the PRO residue
     <p align="center">Figure 15: A scatterplot highlighting amino acids with residue name PRO.<p>
 <p>
 
-We notice that amino acids with residue name PRO are can be classified into one or two clusters, since they are primarily in the phi range of 250 to 350, also they range somewhat consistently across phi -100 to 200. They are not evenly distributed through the entire dataset which lead us to believe that amino acids with residue name PRO are similar in characteristic and can be labeled with _somewhat_ precision.
+We notice that amino acids with residue name PRO are can be classified into one or two clusters, since they are primarily in the phi range of 250 to 350, also they range somewhat consistently across psi -100 to 200. They are not evenly distributed through the entire dataset which lead us to believe that amino acids with residue name PRO are similar in characteristic and can be labeled with _somewhat_ precision.
 
 Now for a more analytical analysis, we find suitable k using elbow curve and find that PRO has a `k = 3`.
 
