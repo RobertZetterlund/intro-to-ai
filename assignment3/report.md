@@ -2,7 +2,7 @@
 
 ## Tobias Lindroth: 20 hrs
 
-## Robert Zetterlund: x hrs
+## Robert Zetterlund: 18 hrs
 
 ---
 
