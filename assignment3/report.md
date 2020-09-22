@@ -302,7 +302,7 @@ sns.barplot(x=df_noise["residue name"], y=df_noise["counts"])
 ```
 
 <p align="center">
-    <img src="fig/barplot.png"> 
+    <img src="fig/barplot.png" width="70%""> 
     <p align="center">Figure 11: Barplot of noise of above DBSCAN<p>
 <p>
 
