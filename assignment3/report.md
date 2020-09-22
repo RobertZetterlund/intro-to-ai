@@ -1,6 +1,6 @@
 # Assignment 3: Clustering
 
-## Tobias Lindroth: x hrs
+## Tobias Lindroth: 20 hrs
 
 ## Robert Zetterlund: x hrs
 
@@ -77,16 +77,14 @@ For example, in `k = 5` the red and green clusters in the top left corner create
     <img src="fig/kmeans-3.png" width=45%>
     <img src="fig/kmeans-4.png" width=45%>
     <img src="fig/kmeans-5.png" width=45%>   
-    <p align="center">Figure 3: The clusters created using k-means for different k. <p>
+    <p align="center">Figure 3: The clusters created using k-means for different k. The X:s indicates centroids.<p>
 <p>
 
 To decide whether k=3 or k=4 should be used we use an elbow curve as it can give an indication to what k-value fits the data best, that is, how many clusters we should use. In the figure below we can clearly see an elbow at k=3, hence the elbow curves indicates that 3 clusters is the best fit.
 
-### Elbow curve
-
 <p align="center">
     <img src="fig/elbow_curve.png">
-    <p align="center">Figure 4: The elbow curve <p>
+    <p align="center">Figure 4: The elbow curve indicating we should use 3 clusters. <p>
 <p>
 
 The calculation of the elbow curve was done by:
@@ -109,9 +107,7 @@ Since both our own experiment with different k-values and the elbow curved indic
 
 <!-- b. Validate the clusters that are found with the chosen value of K. -->
 
-We validate the clusters by checking if the clusters still are stable even if we remove a proportion of the points.
-
-We remove a random 25% of the points and examine if the labeling remains similar. We choose 25% as we believe that is enough to have an affect on the clusters, but not change the dataset dramatically.
+We validate the clusters by checking if the clusters still are stable even if we remove a proportion of the points. We remove a random 25% of the points and examine if the labeling remains similar. We choose 25% as we believe that is enough to have an affect on the clusters, but not change the dataset dramatically.
 
 <p align="center" >
     <img src="fig/kmeans-3.png" width=40%>
@@ -119,13 +115,12 @@ We remove a random 25% of the points and examine if the labeling remains similar
     <p align="center">Figure 5: The original clusters compared to the clusters created when removing a random 25% of the points. <p>
 <p>
 
-In the figures above we see that the shapes of the clusters almost do not change at all. There are minor changes but it is still the same clusters. This indicates that the clusters are stable.
+In the figures above we see the original clusters compared to 4 figures with clusters created after removing a random 25% of the points. We notice that the shapes of the clusters almost do not change at all. There are minor changes but it is still the same clusters. This indicates that the clusters are stable.
 
 We also notice that the colors of the clusters change in different runs. This does however not mean that the clusters are unstable since the initial centroids are different each time. Suppose that points nearest to “centre 1” are shown in blue, those nearest “centre 2” are shown in green and those nearest “centre 3” are shown in red. Which of the clusters we have found happens to be blue might change from one run to the next since the centres start off in different places and end up in different places, “centre 1” from one run might end up near to where “centre 2” ended up in another run.
 
-So, we always find roughly the same clusters when performing k-means on different subsets of the dataset and hence we deem these clusters to be stable.s
+So, we always find roughly the same clusters when performing k-means with k=3 on different subsets of the dataset and hence we deem these clusters to be stable.
 
-<!--  Unsure whether color change indicates anything Den verkar göra det-->
 
 ### Do the clusters found seem reasonable?
 
@@ -141,7 +136,7 @@ One could also argue that the points in the absolute bottom right corner, see la
 
 <p align="center">
     <img src="fig/kmeans-3-resonable.png" width="70%">
-    <p align="center">Figure 3: The clusters created using k-means for different k.  <p>
+    <p align="center">Figure 6: The clusters created using k-means with k=3.  <p>
 <p>
 
 ### Can you change the data to get better results?
@@ -154,7 +149,7 @@ By looking at the plots above, we notice two "divides", one at approximately `ph
 
 <p align="center">
     <img src="fig/kmeans-3-lines.png">
-    <p align="center">Figure: <p>
+    <p align="center">Figure 7: The clusters created using k-means with k=3. The X:s indicates centroids.<p>
 <p>
 
 We reason that due to the periodic attributes we can show negative values as positive values by adding `360`, essentially shifting them. This would in practice revolve in the following result
@@ -178,6 +173,7 @@ What happens to the elbow curve, should we select new value for k? Lets see by c
 <p align="center">
 <img src="fig/elbow_curve.png" width=45%>
     <img src="fig/elbow_curve_shifted.png" width=45%>
+<p align="center">Figure 8: A comparison between the elbow curve created before shifting the data (left), and the elbow curve created after (right).<p>    
 <p>
 
 We see that we improve the cumulative sum of the neighbors (the y axis) but that the optimal value for k remains, `k = 3`.
@@ -186,7 +182,7 @@ We plot the datapoints again using kmeans with shifted axises and get a visually
 
 <p align="center">
     <img src="fig/kmeans-3-shift.png">
-    <p align="center">Figure: <p>
+    <p align="center">Figure 9: The clusters created using k-means with k=3 after shifting the data. The X:s indicates centroids. <p>
 <p>
 
 ## _Question 3_
@@ -285,7 +281,7 @@ for u_label, color in zip(unique_labels, colors):
 
 <p align="center">
     <img src="fig/dbscan-19-42.png"> 
-    <p align="center">Figure: DBSCAN with epsilon=19, minPts=42<p>
+    <p align="center">Figure 10: DBSCAN with epsilon=19, minPts=42<p>
 <p>
 
 ### Barplot of noise
@@ -307,7 +303,7 @@ sns.barplot(x=df_noise["residue name"], y=df_noise["counts"])
 
 <p align="center">
     <img src="fig/barplot.png"> 
-    <p align="center">Figure: Barplot of noise of above DBSCAN<p>
+    <p align="center">Figure 11: Barplot of noise of above DBSCAN<p>
 <p>
 
 In total we have `327` noise points (outliers).
@@ -327,7 +323,7 @@ An interesting note is that if we had done the clustering by hand, we would prob
 <p align="center">
     <img src="fig/kmeans-3-shift.png" width=45%>
     <img src="fig/dbscan-19-42.png" width=45%>   
-    <p align="center">Figure: The clusters created by k-means to the left and the clusters created by dbscan to the right.<p>
+    <p align="center">Figure 12: The clusters created by k-means to the left and the clusters created by dbscan to the right.<p>
 <p>
 
 ## d - Robust to small changes?
@@ -344,7 +340,7 @@ When changing one parameter at a time, we see that the clusters we have found ar
     <img src="fig/dbscan-21-42.png" width=45%>  
     <img src="fig/dbscan-19-40.png" width=45%>  
     <img src="fig/dbscan-19-44.png" width=45%>   
-    <p align="center">Figure: Top left (eps=17, minPts=42). Top Right (eps=21, minPts=42). Bottom left (eps=19, minPts=42). Bottom right (eps=19, minPts=44)<p>
+    <p align="center">Figure 13: Top left (eps=17, minPts=42). Top Right (eps=21, minPts=42). Bottom left (eps=19, minPts=42). Bottom right (eps=19, minPts=44)<p>
 <p>
 
 When changing both parameters at the same time, we see the same thing. The top left cluster is engulfed into the large cluster when epsilon is increased.
@@ -356,7 +352,7 @@ The clusters are of course also effected by changes in minPts, but in our case i
     <img src="fig/dbscan-17-44.png" width=45%>  
     <img src="fig/dbscan-21-40.png" width=45%>  
     <img src="fig/dbscan-21-44.png" width=45%>   
-    <p align="center">Figure: Top left (eps=17, minPts=40). Top Right (eps=17, minPts=44). Bottom left (eps=21, minPts=40). Bottom right (eps=21, minPts=44) <p>
+    <p align="center">Figure 14: Top left (eps=17, minPts=40). Top Right (eps=17, minPts=44). Bottom left (eps=21, minPts=40). Bottom right (eps=21, minPts=44) <p>
 <p>
 
 The fact that DBSCAN is so sensitive to the minimum number of samples in the neighbourhood for a point to be considered as a core point, and/or the choice of the maximum distance between two samples belonging to the same neighbourhood, shows how important it is to choose these parameters carefully. A small increase or decrease can change the clusters fundamentally.
@@ -373,7 +369,7 @@ First we look at a scatterplot highlighting the amino acids with the PRO residue
 
 <p align="center">
     <img src="fig/q4/highlight-PRO.png" width="70%">
-    <p align="center">Figure: <p>
+    <p align="center">Figure 15: A scatterplot highlighting amino acids with residue name PRO.<p>
 <p>
 
 We notice that amino acids with residue name PRO are can be classified into one or two clusters, since they are primarily in the phi range of 250 to 350, also they range somewhat consistently across phi -100 to 200. They are not evenly distributed through the entire dataset which lead us to believe that amino acids with residue name PRO are similar in characteristic and can be labeled with _somewhat_ precision.
@@ -383,6 +379,7 @@ Now for a more analytical analysis, we find suitable k using elbow curve and fin
 <p align="center">
     <img src="fig/q4/elbow-PRO.png" width="45%"> 
     <img src="fig/q4/kmeans-PRO.png" width="45%"> 
+    <p align="center">Figure 16: The elbow curve indicating 3 to be the most suitable k and the clusters created by k-means using k=3.<p>
 <p>
 <!-- align="center">Elbow curve for residue type PRO, we find the largest inertia on k = 3, altough 6 is a value of interest -->
 
@@ -391,6 +388,7 @@ Comparatively little noise is noted when looking at the PRO dataset, verified by
 <p align="center">
     <img src="fig/q4/dbscan-PRO-1.png" width="45%">    
     <img src="fig/q4/dbscan-PRO.png" width="45%">
+    <p align="center">Figure 17: The clusters created when using different values of eps and minPts for DBSCAN.<p>
 <p>
 
 ### GLY
@@ -399,7 +397,7 @@ First we look at a scatterplot highlighting the amino acids with the GLY residue
 
 <p align="center">
     <img src="fig/q4/highlight-GLY.png" width="70%">
-    <p align="center">Figure: <p>
+    <p align="center">Figure 18: A scatterplot highlighting amino acids with residue name GLY.<p>
 <p>
 
 The scatterplot shows how the distribution of GLY-points is quite similar to the distribution of all points. This indicates that the clusters of GLY might be quite similar to the general clusters. The GLY-points are quite scattered,with a lot of noise, which indicates that amino acids with residue name GLY are not similar in characteristic and therefore can be difficult to label with precision.
@@ -408,14 +406,16 @@ In order to compare the clusters, we find suitable k using elbow curve and find 
 
 <p align="center">
     <img src="fig/q4/elbow-GLY.png" width="45%"> 
-    <img src="fig/q4/kmeans-GLY.png" width="45%"> 
+    <img src="fig/q4/kmeans-GLY.png" width="45%">
+    <p align="center">Figure 19: The elbow curve indicating 4 to be the most suitable k and the clusters created by k-means using k=4.<p>
 <p>
 
 We find that by using DBSCAN with reasonable chosen values of `epsilon` and `min_samples` provides three or four clusters.
 
 <p align="center">
     <img src="fig/q4/dbscan-GLY.png" width="45%">  
-    <img src="fig/q4/dbscan-GLY-4.png" width="45%">  
+    <img src="fig/q4/dbscan-GLY-4.png" width="45%">
+    <p align="center">Figure 20: The clusters created when using different values of eps and minPts for DBSCAN.<p>  
 <p>
 
-In this case, we would argue that dbscan more accurately finds 3 clusters than kmeans did.
+In this case, we would argue that dbscan more accurately finds 3 clusters than kmeans did. We notice that even though the distribution of GLY-points is quite similiar to the general distribution, the clusters created by both DBSCAN and k-means are very different from the general clusters. 
