@@ -39,11 +39,6 @@ quarter = int(size * (percentage / 100))
 test_files = all_files[:quarter]
 train_files = all_files[quarter:]
 
-print(len(all_files))
-print(len(test_files))
-print(len(train_files))
-
-
 for testfile in test_files:
     shutil.copy(testfile, test_path)
 
