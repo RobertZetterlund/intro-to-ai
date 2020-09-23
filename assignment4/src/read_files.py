@@ -1,31 +1,51 @@
 import glob
 import os
 import shutil
+import argparse
 
 
+# python3 read_files.py easy_ham ham 75
+# python3 read_files.py hard_ham ham 75
+# python3 read_files.py spam spam 75
 
-easy_ham = glob.glob('../data/raw/easy_ham/**')
+# Setup argument parser
+parser = argparse.ArgumentParser(
+    description="Copies files from raw data to train/test, expects name of raw data and percentage"
+)
+parser.add_argument("raw_name", type=str,
+                    help="name of raw data", default="easy_ham")
+parser.add_argument("foldr_name", type=str,
+                    help="name of folder to add to", default="ham")
+parser.add_argument("percentage", type=int,
+                    help="percentage of training data", default=75)
 
-#print(easy_ham)
+args = parser.parse_args()
 
-# move 1/4 of folder
+raw_name = args.raw_name
+foldr_name = args.foldr_name
+percentage = args.percentage
 
-size =  len(easy_ham)
-quarter = size//4
+path_to_foldr = "../data/"
 
-
-
-
-test_ham = easy_ham[:quarter]
-train_ham = easy_ham[quarter:]
-
-print(len(easy_ham))
-print(len(test_ham))
-print(len(train_ham))
+train_path = path_to_foldr + foldr_name + "train"
+test_path = path_to_foldr + foldr_name + "test"
 
 
-for testfile in test_ham:
-    shutil.copy(testfile, '../data/hamtest')
+all_files = glob.glob("../data/raw/" + raw_name + "/**")
 
-for trainfile in train_ham:
-    shutil.copy(trainfile, "../data/hamtrain")
+size = len(all_files)
+quarter = int(size * (percentage / 100))
+
+test_files = all_files[:quarter]
+train_files = all_files[quarter:]
+
+print(len(all_files))
+print(len(test_files))
+print(len(train_files))
+
+
+for testfile in test_files:
+    shutil.copy(testfile, test_path)
+
+for trainfile in train_files:
+    shutil.copy(trainfile, train_path)
