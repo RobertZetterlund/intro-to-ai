@@ -7,6 +7,20 @@ from sklearn.utils import shuffle
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 import os
+import argparse
+
+#all_content = [content.split(filterOn,1)[1] for content in all_content]
+
+parser = argparse.ArgumentParser(
+    description="Uses naive bayes to filter spam and ham"
+)
+
+# using "Date:" improves classification by 1 percent.
+parser.add_argument("--filterOn", type=str,
+                    help="string to filterOn", default="")
+args = parser.parse_args()
+
+filterOn = args.filterOn
 
 # Method for creating a dataframe where each email-file is represented by a row.
 # data is a list with tupels (folder_name:String, label:String) that tells this 
@@ -19,7 +33,14 @@ def files_to_df(data):
             # Open in read only mode, ignore any unicode decode errors
             with open(os.path.join('../data/' + folder_name + '/', filename), 'r', encoding='latin1') as f:
                 # Add a row in dataframe with email-text and whether the email is spam or ham  
-                df = df.append({'text':f.read(), 'label':label}, ignore_index=True)  
+                content = f.read()
+                if filterOn:
+                    ## currently selects last part of email when finding a filterOn String,
+                    ## this might be faulty if filterOn is not unique, perhaps consider 
+                    ## selecting "second", however, if keyword to filterOn is not in email that crashes.
+                    content = content.split(filterOn,1)[-1]
+
+                df = df.append({'text':content, 'label':label}, ignore_index=True)  
     return df 
 
 
