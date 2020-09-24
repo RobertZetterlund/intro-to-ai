@@ -35,11 +35,15 @@ df_test = shuffle(files_to_df(test_data))
 X_train = df_training.text
 Y_train = df_training.label
 
-
+# Count how many times each word occurs (for each email).
+# Fit creates vocabulary with all words in all the emails
+# Transform creates a vector for each document. 
+# Each vector has the length of the entire vocabulary and 
+# an integer count for the number of times each word appeared in the document.
 vectorizer = CountVectorizer()
 counts = vectorizer.fit_transform(X_train)
 
-#Create classifier and fit for multinomial model
+#Create classifier and fit for multinomial model.
 clfMulti = MultinomialNB()
 clfMulti.fit(counts, Y_train)
 
@@ -50,6 +54,8 @@ clfBernoulli.fit(counts, Y_train)
 X_test = df_test.text
 Y_test = df_test.label
 
+#Transforms each document into a vector (with length of vocabulary of train documents) with an 
+#integer count for the number of times each word appeared in the document
 example_count = vectorizer.transform(X_test)
 
 # Predict labels on the test data set 
