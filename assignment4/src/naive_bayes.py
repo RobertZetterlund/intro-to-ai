@@ -13,12 +13,17 @@ parser = argparse.ArgumentParser(
     description="Uses naive bayes to filter spam and ham"
 )
 
-# using "Date:" improves classification by 1 percent.
+# using "Date:" improves classification by 1 percent for bernoulli (if easy)
 parser.add_argument("--filterOn", type=str,
                     help="string to filterOn", default="")
+
+parser.add_argument("--difficulty", type=str,
+                    help="difficulty of ham, enum either 'easy' or 'hard'", default="easy")
+
 args = parser.parse_args()
 
 filterOn = args.filterOn
+difficulty = args.difficulty
 
 # Method for creating a dataframe where each email-file is represented by a row.
 # data is a list with tupels (folder_name:String, label:String) that tells this 
@@ -37,17 +42,15 @@ def files_to_df(data):
                     ## currently selects last part of email when finding a filterOn String,
                     ## this might be faulty if filterOn is not unique, perhaps consider 
                     ## selecting "second", however, if keyword to filterOn is not in email that crashes.
-                    content = content.split(filterOn,1)
-                    content = content[1] if len(content) > 1 else content[0]
+                    content = content.split(filterOn,1)[-1]
 
 
                 df = df.append({'text':content, 'label':label}, ignore_index=True)  
     return df 
 
-
 # Create dataframes from files
-training_data = [('hamtrain', 'ham'), ('spamtrain', 'spam')]
-test_data = [('hamtest', 'ham'), ('spamtest', 'spam')]
+training_data = [(difficulty +'_ham_train', 'ham'), ('spam_train', 'spam')]
+test_data = [(difficulty + '_ham_test', 'ham'), ('spam_test', 'spam')]
 
 
 # Create training and test dataframes. Not sure if shuffle is needed
