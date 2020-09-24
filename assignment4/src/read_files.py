@@ -7,31 +7,26 @@ import argparse
 # python3 read_files.py easy_ham ham 75
 # python3 read_files.py hard_ham ham 75
 # python3 read_files.py spam spam 75
+PATH_TO_DATA = "../data/"
 
 # Setup argument parser
 parser = argparse.ArgumentParser(
     description="Copies files from raw data to train/test, expects name of raw data and percentage"
 )
-parser.add_argument("--raw_name", type=str,
-                    help="name of raw data", default="easy_ham")
-parser.add_argument("--folder_name", type=str,
-                    help="name of folder to add to", default="ham")
+parser.add_argument("--folder", type=str,
+                    help="folder name of raw data", default="easy_ham")
 parser.add_argument("--percentage", type=int,
                     help="percentage of training data", default=75)
 
 args = parser.parse_args()
 
-raw_name = args.raw_name
-folder_name = args.folder_name
+folder = args.folder
 percentage = args.percentage
 
-path_to_folder = "../data/"
+train_path = os.path.join(PATH_TO_DATA + folder + "_train/")
+test_path = os.path.join(PATH_TO_DATA + folder + "_test/")
 
-train_path = os.path.join(path_to_folder + folder_name + "train")
-test_path = os.path.join(path_to_folder + folder_name + "test")
-
-
-all_files = glob.glob("../data/raw/" + raw_name + "/**")
+all_files = glob.glob("../data/raw/" + folder + "/**")
 
 size = len(all_files)
 splitIndex = int(size * (percentage / 100))
@@ -39,8 +34,21 @@ splitIndex = int(size * (percentage / 100))
 test_files = all_files[:splitIndex]
 train_files = all_files[splitIndex:]
 
-for testfile in test_files:
-    shutil.copy(testfile, test_path)
+# helper function for refreshing directory
+def emptyDir(path):
+    if os.path.isdir(path):
+        shutil.rmtree(path) 
+    os.mkdir(path)
 
-for trainfile in train_files:
-    shutil.copy(trainfile, train_path)
+# copy files to test folder
+def copyFilesToDir(files, path):
+    for file in files:
+        shutil.copy(file, path)
+
+
+emptyDir(test_path)
+copyFilesToDir(test_files, test_path)
+
+emptyDir(train_path)
+copyFilesToDir(train_files, train_path)
+

@@ -33,10 +33,13 @@ def files_to_df(data):
                 # Add a row in dataframe with email-text and whether the email is spam or ham  
                 content = f.read()
                 if filterOn:
+
                     ## currently selects last part of email when finding a filterOn String,
                     ## this might be faulty if filterOn is not unique, perhaps consider 
                     ## selecting "second", however, if keyword to filterOn is not in email that crashes.
-                    content = content.split(filterOn,1)[-1]
+                    content = content.split(filterOn,1)
+                    content = content[1] if len(content) > 1 else content[0]
+
 
                 df = df.append({'text':content, 'label':label}, ignore_index=True)  
     return df 
