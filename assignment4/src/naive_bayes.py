@@ -6,6 +6,7 @@ from sklearn.naive_bayes import BernoulliNB
 from sklearn.utils import shuffle
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
+import numpy as np
 import os
 import argparse
 
@@ -20,10 +21,14 @@ parser.add_argument("--filterOn", type=str,
 parser.add_argument("--difficulty", type=str,
                     help="difficulty of ham, enum either 'easy' or 'hard'", default="easy")
 
+parser.add_argument("--nrFiles", type=int,
+                    help="determines the number of files to read, speeds up debugging", default=-1)
+
 args = parser.parse_args()
 
 filterOn = args.filterOn
 difficulty = args.difficulty
+nrFiles = args.nrFiles
 
 # Method for creating a dataframe where each email-file is represented by a row.
 # data is a list with tupels (folder_name:String, label:String) that tells this 
@@ -32,7 +37,7 @@ def files_to_df(data):
     #Create empty dataframe
     df = pd.DataFrame(columns=['text', 'label'])
     for folder_name,label in data:
-        for filename in os.listdir('../data/' + folder_name + '/'):
+        for filename in os.listdir('../data/' + folder_name + '/')[:nrFiles]:
             # Open in read only mode, ignore any unicode decode errors
             with open(os.path.join('../data/' + folder_name + '/', filename), 'r', encoding='latin1') as f:
                 # Add a row in dataframe with email-text and whether the email is spam or ham  
@@ -67,6 +72,14 @@ Y_train = df_training.label
 # an integer count for the number of times each word appeared in the document.
 vectorizer = CountVectorizer()
 counts = vectorizer.fit_transform(X_train)
+
+word_count = counts.sum(axis=0).tolist()[0]
+words = vectorizer.get_feature_names()
+word_df = pd.DataFrame(zip(words, word_count), 
+                                columns=['word', 'word_count']
+                               ).sort_values(by=['word_count'], ascending=False)
+
+print("Top 10 words \n", word_df["word"][0:10].tolist())
 
 #Create classifier and fit for multinomial model.
 clfMulti = MultinomialNB()

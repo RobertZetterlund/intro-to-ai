@@ -4,9 +4,10 @@ import shutil
 import argparse
 
 
-# python3 read_files.py easy_ham ham 75
-# python3 read_files.py hard_ham ham 75
-# python3 read_files.py spam spam 75
+# python3 read_files.py --folder easy_ham
+# python3 read_files.py --folder hard_ham
+# python3 read_files.py --folder spam
+
 PATH_TO_DATA = "../data/"
 
 # Setup argument parser
