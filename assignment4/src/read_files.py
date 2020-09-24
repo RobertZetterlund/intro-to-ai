@@ -12,11 +12,11 @@ import argparse
 parser = argparse.ArgumentParser(
     description="Copies files from raw data to train/test, expects name of raw data and percentage"
 )
-parser.add_argument("raw_name", type=str,
+parser.add_argument("--raw_name", type=str,
                     help="name of raw data", default="easy_ham")
-parser.add_argument("folder_name", type=str,
+parser.add_argument("--folder_name", type=str,
                     help="name of folder to add to", default="ham")
-parser.add_argument("percentage", type=int,
+parser.add_argument("--percentage", type=int,
                     help="percentage of training data", default=75)
 
 args = parser.parse_args()
@@ -27,8 +27,8 @@ percentage = args.percentage
 
 path_to_folder = "../data/"
 
-train_path = path_to_folder + folder_name + "train"
-test_path = path_to_folder + folder_name + "test"
+train_path = os.path.join(path_to_folder + folder_name + "train")
+test_path = os.path.join(path_to_folder + folder_name + "test")
 
 
 all_files = glob.glob("../data/raw/" + raw_name + "/**")
