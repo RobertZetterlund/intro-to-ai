@@ -17,7 +17,7 @@ def files_to_df(data):
     for folder_name,label in data:
         for filename in os.listdir('../data/' + folder_name + '/'):
             # Open in read only mode, ignore any unicode decode errors
-            with open(os.path.join('../data/' + folder_name + '/', filename), 'r', encoding='utf-8', errors='ignore') as f:
+            with open(os.path.join('../data/' + folder_name + '/', filename), 'r', encoding='latin1') as f:
                 # Add a row in dataframe with email-text and whether the email is spam or ham  
                 df = df.append({'text':f.read(), 'label':label}, ignore_index=True)  
     return df 
