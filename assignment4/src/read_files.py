@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("raw_name", type=str,
                     help="name of raw data", default="easy_ham")
-parser.add_argument("foldr_name", type=str,
+parser.add_argument("folder_name", type=str,
                     help="name of folder to add to", default="ham")
 parser.add_argument("percentage", type=int,
                     help="percentage of training data", default=75)
@@ -22,22 +22,22 @@ parser.add_argument("percentage", type=int,
 args = parser.parse_args()
 
 raw_name = args.raw_name
-foldr_name = args.foldr_name
+folder_name = args.folder_name
 percentage = args.percentage
 
-path_to_foldr = "../data/"
+path_to_folder = "../data/"
 
-train_path = path_to_foldr + foldr_name + "train"
-test_path = path_to_foldr + foldr_name + "test"
+train_path = path_to_folder + folder_name + "train"
+test_path = path_to_folder + folder_name + "test"
 
 
 all_files = glob.glob("../data/raw/" + raw_name + "/**")
 
 size = len(all_files)
-quarter = int(size * (percentage / 100))
+splitIndex = int(size * (percentage / 100))
 
-test_files = all_files[:quarter]
-train_files = all_files[quarter:]
+test_files = all_files[:splitIndex]
+train_files = all_files[splitIndex:]
 
 for testfile in test_files:
     shutil.copy(testfile, test_path)
