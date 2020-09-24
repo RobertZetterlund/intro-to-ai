@@ -9,8 +9,6 @@ import pandas as pd
 import os
 import argparse
 
-#all_content = [content.split(filterOn,1)[1] for content in all_content]
-
 parser = argparse.ArgumentParser(
     description="Uses naive bayes to filter spam and ham"
 )
