@@ -8,6 +8,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 import numpy as np
 import os
+import re
+
 import argparse
 
 parser = argparse.ArgumentParser(
@@ -24,37 +26,49 @@ parser.add_argument("--difficulty", type=str,
 parser.add_argument("--nrFiles", type=int,
                     help="determines the number of files to read, speeds up debugging", default=-1)
 
+parser.add_argument("--dictionary",  type=str,
+                    help="Uses countvectorizers dictionary, default is english", default="english")
+parser.add_argument("--token_pattern",  type=bool,
+                    help="Uses a regex to help tokenization, default is pythons own. If set to true, we will use '[a-z]{3,}' which ignores special signs and digits, \
+                     and only accepts words longer than 2 ", default=False)
+
+
 args = parser.parse_args()
 
 filterOn = args.filterOn
 difficulty = args.difficulty
 nrFiles = args.nrFiles
+dictionary = args.dictionary
+token_pattern = args.token_pattern
 
 # Method for creating a dataframe where each email-file is represented by a row.
-# data is a list with tupels (folder_name:String, label:String) that tells this 
+# data is a list with tupels (folder_name:String, label:String) that tells this
 # method in which directories to look for files and how to label the files found.
+
+
 def files_to_df(data):
-    #Create empty dataframe
+    # Create empty dataframe
     df = pd.DataFrame(columns=['text', 'label'])
-    for folder_name,label in data:
+    for folder_name, label in data:
         for filename in os.listdir('../data/' + folder_name + '/')[:nrFiles]:
             # Open in read only mode, ignore any unicode decode errors
             with open(os.path.join('../data/' + folder_name + '/', filename), 'r', encoding='latin1') as f:
-                # Add a row in dataframe with email-text and whether the email is spam or ham  
+                # Add a row in dataframe with email-text and whether the email is spam or ham
                 content = f.read()
                 if filterOn:
 
-                    ## currently selects last part of email when finding a filterOn String,
-                    ## this might be faulty if filterOn is not unique, perhaps consider 
-                    ## selecting "second", however, if keyword to filterOn is not in email that crashes.
-                    content = content.split(filterOn,1)[-1]
+                    # currently selects last part of email when finding a filterOn String,
+                    # this might be faulty if filterOn is not unique, perhaps consider
+                    # selecting "second", however, if keyword to filterOn is not in email that crashes.
+                    content = content.split(filterOn, 1)[-1]
 
+                df = df.append(
+                    {'text': content, 'label': label}, ignore_index=True)
+    return df
 
-                df = df.append({'text':content, 'label':label}, ignore_index=True)  
-    return df 
 
 # Create dataframes from files
-training_data = [(difficulty +'_ham_train', 'ham'), ('spam_train', 'spam')]
+training_data = [(difficulty + '_ham_train', 'ham'), ('spam_train', 'spam')]
 test_data = [(difficulty + '_ham_test', 'ham'), ('spam_test', 'spam')]
 
 
@@ -67,48 +81,49 @@ Y_train = df_training.label
 
 # Count how many times each word occurs (for each email).
 # Fit creates vocabulary with all words in all the emails
-# Transform creates a vector for each document. 
-# Each vector has the length of the entire vocabulary and 
+# Transform creates a vector for each document.
+# Each vector has the length of the entire vocabulary and
 # an integer count for the number of times each word appeared in the document.
-vectorizer = CountVectorizer()
+
+
+vectorizer = CountVectorizer(
+    stop_words=dictionary, token_pattern=r'[a-z]{3,}') if token_pattern else CountVectorizer(stop_words=dictionary)
 counts = vectorizer.fit_transform(X_train)
 
-word_count = counts.sum(axis=0).tolist()[0]
-words = vectorizer.get_feature_names()
-word_df = pd.DataFrame(zip(words, word_count), 
-                                columns=['word', 'word_count']
-                               ).sort_values(by=['word_count'], ascending=False)
-
-print("Top 10 words \n", word_df["word"][0:10].tolist())
-
-#Create classifier and fit for multinomial model.
+# Create classifier and fit for multinomial model.
 clfMulti = MultinomialNB()
 clfMulti.fit(counts, Y_train)
 
-#Create classifier and fit for bernoulli model
+# Create classifier and fit for bernoulli model
 clfBernoulli = BernoulliNB(binarize=1)
 clfBernoulli.fit(counts, Y_train)
 
 X_test = df_test.text
 Y_test = df_test.label
 
-#Transforms each document into a vector (with length of vocabulary of train documents) with an 
-#integer count for the number of times each word appeared in the document
+# Transforms each document into a vector (with length of vocabulary of train documents) with an
+# integer count for the number of times each word appeared in the document
 example_count = vectorizer.transform(X_test)
 
-# Predict labels on the test data set 
+# Predict labels on the test data set
 predictionsMulti = clfMulti.predict(example_count)
 predictionsBernoulli = clfBernoulli.predict(example_count)
 
 # Calculate percentage of correct classified labels
 zippedMulti = zip(Y_test, predictionsMulti)
 zippedBernoulli = zip(Y_test, predictionsBernoulli)
-percentCorrectMulti = (sum(x == y for x, y in zippedMulti) / len(predictionsMulti))*100
-percentCorrectBernoulli = (sum(x == y for x, y in zippedBernoulli) / len(predictionsBernoulli))*100
+percentCorrectMulti = (
+    sum(x == y for x, y in zippedMulti) / len(predictionsMulti))*100
+percentCorrectBernoulli = (
+    sum(x == y for x, y in zippedBernoulli) / len(predictionsBernoulli))*100
 
 print(percentCorrectMulti, "% were classified correctly by Multinomial")
 print(percentCorrectBernoulli, "% were classified correctly by Bernoulli")
 
+word_count = counts.sum(axis=0).tolist()[0]
+words = vectorizer.get_feature_names()
+word_df = pd.DataFrame(zip(words, word_count),
+                       columns=['word', 'word_count']
+                       ).sort_values(by=['word_count'], ascending=False)
 
-           
-
+print("Top 100 words \n", word_df["word"][0:100].tolist())
