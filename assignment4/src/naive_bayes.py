@@ -13,9 +13,8 @@ import re
 import argparse
 
 parser = argparse.ArgumentParser(
-    description="Uses naive bayes to filter spam and ham"
+    description="Uses naive bayes to filter spam and ham, a good result can be achieved via argument: --token_pattern True "
 )
-
 # using "Date:" improves classification by 1 percent for bernoulli (if easy)
 parser.add_argument("--filterOn", type=str,
                     help="string to filterOn", default="")
