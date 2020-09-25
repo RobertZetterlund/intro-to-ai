@@ -93,8 +93,9 @@ Y_train = df_training.label
 # Transform creates a vector for each document.
 # Each vector has the length of the entire vocabulary and
 # an integer count for the number of times each word appeared in the document.
-vectorizer = CountVectorizer(
-    stop_words=dictionary, token_pattern=r'[a-z]{3,}') if token_pattern else CountVectorizer(stop_words=dictionary, max_df=max_df, min_df=min_df)
+myPattern = r'[a-z]{3,}' if token_pattern else r'(?u)\b\w\w+\b'
+
+vectorizer = CountVectorizer(stop_words=dictionary, max_df=max_df, min_df=min_df, token_pattern=myPattern)
 counts = vectorizer.fit_transform(X_train)
 
 # Create classifier and fit for multinomial model.
