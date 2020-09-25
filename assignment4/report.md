@@ -86,12 +86,6 @@ def getPercentageCorrect(predictions):
 
 percentCorrectMulti = getPercentageCorrect(predictionsMulti)
 ```
-We get:
-
-* Bernoulli: `97.50%`
-* Multinomial: `88.84%`
-
-
 
 The bernoulli naive bayes classifier classifies documents based on words being absent or present. 
 
@@ -128,7 +122,27 @@ Spam versus hard ham:
 <p>
 
 
-## _Question 4_ 
+## _Question 4_ - Filter on Common and uninformative words
+
+
+## a - Why is it useful? 
+
+
+## b - Does the result differ?
+
+There are different ways to handle the issue of uninformative words in sklearn. We will present two of which we found.
+
+### Using the stop_words argument
+
+Sklearn provides the argument `stop_words` which makes the countvectorizer filter out the uninformative words. It has some discussion regarding whether or not you should use the argument `"English"` since it might filter out informative words that happen to be common.
+
+### Using the max_df and min_df
+instead they reccomend using max df 0.7
+
+### Using the token_pattern
+
+we can also define what is allowed to be a token, we do not want digits to be tokens.
+maybe include $ aswell... ?
 
 <!--
 To avoid classification based on common and uninformative words it is common to filter

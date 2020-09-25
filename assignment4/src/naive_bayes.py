@@ -29,8 +29,8 @@ parser.add_argument("--difficulty", type=str,
 parser.add_argument("--nrFiles", type=int,
                     help="determines the number of files to read, speeds up debugging", default=-1)
 
-parser.add_argument("--dictionary",  type=str,
-                    help="Uses countvectorizers dictionary, default is english", default="english")
+parser.add_argument("--stop_words",  type=str,
+                    help="Uses countvectorizers stop_words, default is english", default="english")
 parser.add_argument("--token_pattern",  type=bool,
                     help="Uses a regex to help tokenization, default is pythons own. If set to true, we will use '[a-z]{3,}' which ignores special signs and digits, \
                      and only accepts words longer than 2 ", default=False)
@@ -45,7 +45,7 @@ args = parser.parse_args()
 filterOn = args.filterOn
 difficulty = args.difficulty
 nrFiles = args.nrFiles
-dictionary = args.dictionary
+stop_words = args.stop_words
 token_pattern = args.token_pattern
 min_df = args.min_df
 max_df = args.max_df
@@ -95,7 +95,7 @@ Y_train = df_training.label
 # an integer count for the number of times each word appeared in the document.
 myPattern = r'[a-z]{4,}' if token_pattern else r'(?u)\b\w\w+\b'
 
-vectorizer = CountVectorizer(stop_words=dictionary, max_df=max_df, min_df=min_df, token_pattern=myPattern)
+vectorizer = CountVectorizer(stop_words=stop_words, max_df=max_df, min_df=min_df, token_pattern=myPattern)
 counts = vectorizer.fit_transform(X_train)
 
 # Create classifier and fit for multinomial model.
