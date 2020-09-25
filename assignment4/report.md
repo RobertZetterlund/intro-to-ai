@@ -86,21 +86,23 @@ and include the results in your report.
  -->
 
 Spam versus easy ham:
-- Approximatly `96.2 %` of the documents were classified correctly by Multinomial. The confusion matrix below shows that it was good at classifying ham
-- Approximatly `87.5 %` of the documetns were classified correctly by Bernoulli
+- **Multinomial**: Approximatly `97.6 %` of the documents were classified correctly. 
+- **Bernoulli:** Approximatly `88.8 %` of the documents were classified correctly.
+
+The confusion matrix below shows that both classifiers were good at classifying ham correctly, but sometimes classified spam as ham.
 
 <p align="center">
     <img src="fig/q2_easy_ham_confusion.png">
-    <p align="center">Figure 1: A confusion matrix showing how the different classifiers performed for easy-ham <p>
+    <p align="center">Figure 1: Confusion matrices showing how the different classifiers performed for easy-ham <p>
 <p>
 
 Spam versus hard ham:
-- Approximately `91.1 %` of the documents were classified correctly by Multinomial. The confusion matrix below shows that the multinomial classifier was good at predicting spam as spam, but sometimes predicted ham as spam. 
-- Approxiamtely `84.8 %` of the documents were classified correctly by Bernoulli. The confusion matrix below shows that the bernoulli classifier was good at predicting spam as spam, but sometimes predicted ham as spam. 
+- **Multinomial**: Approximately `91.4 %` of the documents were classified correctly. The confusion matrix below shows that the classifier were quite accurate but classified both ham and spam wrong sometimes. 
+- **Bernoulli**: Approxiamtely `84.5 %` of the documents were classified correctly. The confusion matrix below shows that the bernoulli classifier very accurately classified spam as spam, but sometimes classified ham as spam. 
 
 <p align="center">
     <img src="fig/q2_hard_ham_confusion.png">
-    <p align="center">Figure 2: A confusion matrix showing how the different classifiers performed for easy-ham  <p>
+    <p align="center">Figure 2: Confusion matrices showing how the different classifiers performed for easy-ham  <p>
 <p>
 
 
