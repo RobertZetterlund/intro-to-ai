@@ -16,12 +16,9 @@ in a training set and a test set. -->
 
 ## _Question 2_ 
 
-The bernoulli naive bayes classifier classifies documents based on words being absent or present. 
 
-The multinomial naive bayes classifier classifies documents based on the amount of times words are present in a document. 
-
-That is, an email with the text "You have won money" would get the same classification by bernoulli as the email "You have won money money money money". The multinomial classifier would, on the other hand, would take into account that the second email contains the word "money" four times. 
 <!-- 
+Write a Python program that: 
 a. Uses four datasets (hamtrain, spamtrain, hamtest, and spamtest)
 
 b. Using a Naïve Bayes classifier (e.g. Sklearn), classifies the test sets and reports the
@@ -33,6 +30,12 @@ suited for this problem. For the case of Bernoulli Naive Bayes you should use th
 parameter binarize to make the features binary. Discuss the differences between these
 two classifiers. 
 --> 
+
+The bernoulli naive bayes classifier classifies documents based on words being absent or present. 
+
+The multinomial naive bayes classifier classifies documents based on the amount of times words are present in a document. 
+
+That is, an email with the text "You have won money" would get the same classification by bernoulli as the email "You have won money money money money". The multinomial classifier would, on the other hand, would take into account that the second email contains the word "money" four times. 
 
 ## _Question 3_ 
 <!--
