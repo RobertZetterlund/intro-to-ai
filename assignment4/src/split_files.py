@@ -4,9 +4,9 @@ import shutil
 import argparse
 
 
-# python3 read_files.py --folder easy_ham
-# python3 read_files.py --folder hard_ham
-# python3 read_files.py --folder spam
+# python3 split_files.py --folder easy_ham
+# python3 split_files.py --folder hard_ham
+# python3 split_files.py --folder spam
 
 PATH_TO_DATA = "../data/"
 
@@ -32,8 +32,8 @@ all_files = glob.glob("../data/raw/" + folder + "/**")
 size = len(all_files)
 splitIndex = int(size * (percentage / 100))
 
-test_files = all_files[:splitIndex]
-train_files = all_files[splitIndex:]
+test_files = all_files[splitIndex:]
+train_files = all_files[:splitIndex]
 
 # helper function for refreshing directory
 def emptyDir(path):

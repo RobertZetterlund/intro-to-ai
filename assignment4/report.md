@@ -6,13 +6,53 @@
 
 ## _Question 1_ - Preprocessing
 
+
+## a
+We read through some of the emails and find that some of them have date, reciever and sender in them. We regard this as extra information.
 <!-- 
 a. Note that the email files contain a lot of extra information, besides the actual message.
 Ignore that for now and run on the entire text. Further down (in the higher-grade part),
 you will be asked to filter out the headers and footers.
-
+-->
+## b
+<!--
 b. We don’t want to train and test on the same data. Split the spam and the ham datasets
 in a training set and a test set. -->
+
+In order to split the datasets we create `split_files.py` which is runnable using arguments to specify which `folder` to copy from and which `percentage` of files that should be training.
+
+```python
+# get all filenames
+all_files = glob.glob("../data/raw/" + folder + "/**")
+
+# get splitindex
+size = len(all_files)
+splitIndex = int(size * (percentage / 100))
+
+# create two list of filenames
+test_files = all_files[:splitIndex]
+train_files = all_files[splitIndex:]
+
+# empty directory of test_path, then copy files to test_path.
+emptyDir(test_path)
+copyFilesToDir(test_files, test_path)
+```
+
+Here are the helper functions:
+
+```python
+# helper function for refreshing directory
+def emptyDir(path):
+    if os.path.isdir(path):
+        shutil.rmtree(path) 
+    os.mkdir(path)
+
+# copy files to test folder
+def copyFilesToDir(files, path):
+    for file in files:
+        shutil.copy(file, path)
+```
+
 
 ## _Question 2_ 
 

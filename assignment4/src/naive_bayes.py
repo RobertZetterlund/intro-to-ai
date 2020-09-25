@@ -93,7 +93,7 @@ Y_train = df_training.label
 # Transform creates a vector for each document.
 # Each vector has the length of the entire vocabulary and
 # an integer count for the number of times each word appeared in the document.
-myPattern = r'[a-z]{3,}' if token_pattern else r'(?u)\b\w\w+\b'
+myPattern = r'[a-z]{4,}' if token_pattern else r'(?u)\b\w\w+\b'
 
 vectorizer = CountVectorizer(stop_words=dictionary, max_df=max_df, min_df=min_df, token_pattern=myPattern)
 counts = vectorizer.fit_transform(X_train)
@@ -113,19 +113,16 @@ Y_test = df_test.label
 # integer count for the number of times each word appeared in the document
 example_count = vectorizer.transform(X_test)
 
-
-
 # Predict labels on the test data set
 predictionsMulti = clfMulti.predict(example_count)
 predictionsBernoulli = clfBernoulli.predict(example_count)
 
-# Calculate percentage of correct classified labels
-zippedMulti = zip(Y_test, predictionsMulti)
-zippedBernoulli = zip(Y_test, predictionsBernoulli)
-percentCorrectMulti = (
-    sum(x == y for x, y in zippedMulti) / len(predictionsMulti))*100
-percentCorrectBernoulli = (
-    sum(x == y for x, y in zippedBernoulli) / len(predictionsBernoulli))*100
+def getPercentageCorrect(predictions):
+    zippedTargetsPredictions = zip(Y_test, predictions)
+    return sum(target == prediction for target, prediction in zippedTargetsPredictions) / len(predictions)*100
+
+percentCorrectMulti = getPercentageCorrect(predictionsMulti)
+percentCorrectBernoulli = getPercentageCorrect(predictionsBernoulli)
 
 print(percentCorrectMulti, "% were classified correctly by Multinomial")
 print(percentCorrectBernoulli, "% were classified correctly by Bernoulli")
@@ -136,7 +133,7 @@ word_df = pd.DataFrame(zip(words, word_count),
                        columns=['word', 'word_count']
                        ).sort_values(by=['word_count'], ascending=False)
 
-print("Top 100 words \n", word_df["word"][0:100].tolist())
+#print("Top 100 words \n", word_df["word"][0:100].tolist())
 
 
 
