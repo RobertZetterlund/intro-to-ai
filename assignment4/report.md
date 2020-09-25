@@ -70,6 +70,28 @@ suited for this problem. For the case of Bernoulli Naive Bayes you should use th
 parameter binarize to make the features binary. Discuss the differences between these
 two classifiers. 
 --> 
+Here are some snippets of the code, this is the multinomial model but it is the same for the Bernoulli.
+
+```python
+# Create classifier and fit for multinomial model.
+clfMulti = MultinomialNB() # if bernoulli: use BernoulliNB instead
+clfMulti.fit(counts, Y_train)
+
+example_count = vectorizer.transform(X_test)
+predictionsMulti = clfMulti.predict(example_count)
+
+def getPercentageCorrect(predictions):
+    zippedTargetsPredictions = zip(Y_test, predictions)
+    return sum(target == prediction for target, prediction in zippedTargetsPredictions) / len(predictions)*100
+
+percentCorrectMulti = getPercentageCorrect(predictionsMulti)
+```
+We get:
+
+* Bernoulli: `97.50%`
+* Multinomial: `88.84%`
+
+
 
 The bernoulli naive bayes classifier classifies documents based on words being absent or present. 
 
