@@ -82,8 +82,8 @@ test_data = [(difficulty + '_ham_test', 'ham'), ('spam_test', 'spam')]
 
 
 # Create training and test dataframes. Not sure if shuffle is needed
-df_training = shuffle(files_to_df(training_data))
-df_test = shuffle(files_to_df(test_data))
+df_training = files_to_df(training_data)
+df_test = files_to_df(test_data)
 
 X_train = df_training.text
 Y_train = df_training.label
