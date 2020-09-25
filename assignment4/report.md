@@ -45,6 +45,25 @@ ii. Spam versus hard-ham
 and include the results in your report. 
  -->
 
+Spam versus easy ham:
+- Approximatly `96.2 %` of the documents were classified correctly by Multinomial. The confusion matrix below shows that it was good at classifying ham
+- Approximatly `87.5 %` of the documetns were classified correctly by Bernoulli
+
+<p align="center">
+    <img src="fig/q2_easy_ham_confusion.png">
+    <p align="center">Figure 1: A confusion matrix showing how the different classifiers performed for easy-ham <p>
+<p>
+
+Spam versus hard ham:
+- Approximately `91.1 %` of the documents were classified correctly by Multinomial. The confusion matrix below shows that the multinomial classifier was good at predicting spam as spam, but sometimes predicted ham as spam. 
+- Approxiamtely `84.8 %` of the documents were classified correctly by Bernoulli. The confusion matrix below shows that the bernoulli classifier was good at predicting spam as spam, but sometimes predicted ham as spam. 
+
+<p align="center">
+    <img src="fig/q2_hard_ham_confusion.png">
+    <p align="center">Figure 2: A confusion matrix showing how the different classifiers performed for easy-ham  <p>
+<p>
+
+
 ## _Question 4_ 
 
 <!--
