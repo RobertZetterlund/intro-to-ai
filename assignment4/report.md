@@ -111,7 +111,7 @@ Spam versus easy ham:
 - **Multinomial**: Approximatly `97.6 %` of the documents were classified correctly. 
 - **Bernoulli:** Approximatly `88.8 %` of the documents were classified correctly.
 
-The confusion matrix below shows that both classifiers were good at classifying ham correctly, but sometimes classified spam as ham.
+The confusion matrices below shows that both classifiers were good at classifying ham correctly, but sometimes classified spam as ham.
 
 <p align="center">
     <img src="fig/q2_easy_ham_confusion.png">
@@ -143,8 +143,37 @@ Sklearn do it for you.
 -->
 
 ## _Question 5_
+## A
 
-c. If the training set were mostly spam messages, then the prior probability of spam would be very high. This would mean that when classyfing new emails, many ham-emails would be classified as spam emails.
+## B
+If the data that is inserted into the training set is very skewed, that is, a majority of the data is of one class, the results will also be skewed. This is because the model will almost only be exposed to one class. 
+
+Let's take the spam and ham emails as an example. If the training dataset almost only consists of ham emails, then the model will believe it is much more likely that the next email also is ham, just because there are som much more ham than spam emails. The prior, p(ham) will be close to 1. 
+
+Furthermore, a lot of the words that are in spam emails, but not ham, will not be entered into the vocabulary since there are so few spam-emails in the training set. This will make it more difficult for the model to classify spam as spam since words that are used in spam emails may not even be in the vocabulary.
+
+One way to fix this would be to trunkate the majority class in the training dataset. This will of course mean a loss of information but it will also lead to more equal datasets and because of that the model will probably be more accurate. 
+
+Another way to fix it could be to add more data to the minority class(es) in the training dataset. This of course means that you need to generate new data in some way or perhaps even duplicate data. 
+
+An additional idea is that you perhaps could add some weight to the data in the minority classes to make the model count minorority classes more importantly. 
+
+
+## c
+By applying the logic from question b, we belive a training set with mostly spam emails would lead to many ham messages in the test set to be classified as spam. 
+
+By removing all but 10 ham-emails from the data set, while keeping all the spam, we get the following result:
+
+**Multinomial**: Approximatly `22.3 %` were classified correctly.
+
+**Bernoulli**: Approxiamtely `16.4 %` were classified correctly.
+
+The models accuracy decreased drastically. And by looking at the confusion matrices below we note that almost all emails are classified as spam. 
+
+<p align="center">
+    <img src="fig/q5_easy_ham_only_10.png">
+    <p align="center">Figure 3: Confusion matrices showing how the different classifiers performed when there were only 10 ham-emails.   <p>
+<p>
 
 <!-- 
 Filter out the headers and the footers of the emails before you run on them. The format may
