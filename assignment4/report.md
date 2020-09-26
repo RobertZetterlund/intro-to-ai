@@ -102,10 +102,10 @@ and include the results in your report.
  -->
 
 Spam versus easy ham:
-- **Multinomial**: Approximatly `97.6 %` of the documents were classified correctly. 
-- **Bernoulli:** Approximatly `88.8 %` of the documents were classified correctly.
+- **Multinomial**: Approximatly `97.8 %` of the emails were classified correctly. 
+- **Bernoulli:** Approximatly `89.1 %` of the emails were classified correctly.
 
-The confusion matrices below shows that both classifiers were good at classifying ham correctly, but sometimes classified spam as ham.
+The confusion matrices below shows that both classifiers were good at classifying ham correctly, but sometimes classified spam as ham. Especially the bernoulli classified had problems classifying spam as it classified more spam as ham than itclassified spam as spam. 
 
 <p align="center">
     <img src="fig/q2_easy_ham_confusion.png">
@@ -113,8 +113,8 @@ The confusion matrices below shows that both classifiers were good at classifyin
 <p>
 
 Spam versus hard ham:
-- **Multinomial**: Approximately `91.4 %` of the documents were classified correctly. The confusion matrix below shows that the classifier were quite accurate but classified both ham and spam wrong sometimes. 
-- **Bernoulli**: Approxiamtely `84.5 %` of the documents were classified correctly. The confusion matrix below shows that the bernoulli classifier very accurately classified spam as spam, but sometimes classified ham as spam. 
+- **Multinomial**: Approximately `90.9 %` of the emails were classified correctly. The confusion matrix below shows that the classifier were quite accurate but classified both ham and spam wrong sometimes. 
+- **Bernoulli**: Approxiamtely `82.4 %` of the emails were classified correctly. The confusion matrix below shows that the bernoulli classifier very accurately classified spam as spam, but sometimes classified ham as spam. 
 
 <p align="center">
     <img src="fig/q2_hard_ham_confusion.png">
@@ -160,23 +160,22 @@ Sklearn do it for you.
 ## A
 
 ## B
-If the data that is inserted into the training set is very skewed, that is, a majority of the data is of one class, the results will also be skewed. This is because the model will almost only be exposed to one class. 
+If the training data set is unbalanced, that is, a majority of the data is of one class, the results will be skewed. That is because the model will almost only be exposed to one class and therefore is much more likely to place unseen data in the majority class as well. 
 
-Let's take the spam and ham emails as an example. If the training dataset almost only consists of ham emails, then the model will believe it is much more likely that the next email also is ham, just because there are som much more ham than spam emails. The prior, p(ham) will be close to 1. 
+Let's take the spam and ham emails as an example. If the training dataset almost only consists of ham emails, then the model will believe it is much more likely that the next email also is ham, just because there are som much more ham than spam emails. The prior, p(ham) will be close to 1.  The prior p(spam) will be close to 0.
 
-Furthermore, a lot of the words that are in spam emails, but not ham, will not be entered into the vocabulary since there are so few spam-emails in the training set. This will make it more difficult for the model to classify spam as spam since words that are used in spam emails may not even be in the vocabulary.
+Furthermore, a lot of the words that are common in spam emails, but not ham, will most likely not be entered into the vocabulary since there are so few spam-emails in the training set. The model will miss a lot of the features of spam emails. This will make it more difficult for the model to classify spam as spam since words that are commonly used in spam emails may not even be in the vocabulary.
 
-One way to fix this would be to trunkate the majority class in the training dataset. This will of course mean a loss of information but it will also lead to more equal datasets and because of that the model will probably be more accurate. 
+One way to fix this would be to truncate the majority class in the training dataset. That will, of course, mean a loss of information, but it will also lead to more equal datasets, and because of that, the model will probably be more accurate. 
 
-Another way to fix it could be to add more data to the minority class(es) in the training dataset. This of course means that you need to generate new data in some way or perhaps even duplicate data. 
+Another way to fix it could be to add more data to the minority class(es) in the training dataset. That, of course, means that you need to generate new data in some way or perhaps even duplicate data. 
 
-An additional idea is that you perhaps could add some weight to the data in the minority classes to make the model count minorority classes more importantly. 
-
+An additional idea is that you perhaps could add some weight to the data in the minority classes to make the model count minority classes more importantly. 
 
 ## c
 By applying the logic from question b, we belive a training set with mostly spam emails would lead to many ham messages in the test set to be classified as spam. 
 
-By removing all but 10 ham-emails from the data set, while keeping all the spam, we get the following result:
+By removing all but 10 ham-emails from the easy-ham training data set, while keeping all the spam, we get the following result:
 
 **Multinomial**: Approximatly `22.3 %` were classified correctly.
 
