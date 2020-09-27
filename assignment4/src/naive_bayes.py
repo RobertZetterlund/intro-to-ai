@@ -53,15 +53,11 @@ max_df = args.max_df
 emailFiltering = args.email_filtering
 
 # Tries to remove the header and footers from the email
-
-
 def getBodyFromEmail(mail):
     return getPayload(email.message_from_string(mail))
 
 # Recursive function that fetches the payload from a Message object
 # Returns a string
-
-
 def getPayload(mail):
     if mail.is_multipart():
         return '\n'.join(list(map(lambda x: getPayload(x), mail.get_payload())))

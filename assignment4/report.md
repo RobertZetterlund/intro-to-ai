@@ -8,7 +8,7 @@
 
 ## a
 
-We read through some of the emails and find that some of them have date, reciever and sender in them. We regard this as extra information.
+We read through some of the emails and find that some of them have date, reciever and sender in their header, and some emails have footers. We regard this as extra information.
 
 <!--
 a. Note that the email files contain a lot of extra information, besides the actual message.
@@ -39,6 +39,11 @@ train_files = all_files[splitIndex:]
 # empty directory of test_path, then copy files to test_path.
 emptyDir(test_path)
 copyFilesToDir(test_files, test_path)
+
+# empty directory of train_path, then copy files to train_path.
+emptyDir(train_path)
+copyFilesToDir(train_files, train_path)
+
 ```
 
 Here are the helper functions:
@@ -151,6 +156,7 @@ We skim through the emails and find some common words:
 - the
 - to
 - what
+- why
 
 ## b - Does the result differ?
 
@@ -164,7 +170,11 @@ There are different ways to handle the issue of uninformative words in sklearn. 
 
 ### Using the stop_words argument
 
-Sklearn provides the argument `stop_words` which makes the countvectorizer filter out the uninformative words. It has some discussion regarding whether or not you should use the argument `"English"` since it might filter out informative words that happen to be common. We compare using no stop_words with using `English` as an argument.
+Sklearn provides the argument `stop_words` which makes the countvectorizer filter out the uninformative words. It has some discussion regarding whether or not you should use the argument `"english"` since it might filter out informative words that happen to be common. We compare using no stop_words with using `english` as an argument.
+
+```shell-session
+python3 naive_bayes.py --stop_words english
+```
 
 | classifier \ stop_words | "english" |     | None    |
 | ----------------------- | --------- | --- | ------- |
@@ -187,7 +197,11 @@ for document in documents:
 df = words[word] / len(documents)
 ```
 
-In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)` and we get the following results:
+In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)`, i.e:
+```
+python3 naive_bayes.py --max_df 0.7
+```
+and we get the following results:
 
 | classifier \ (min_df,max_df) | (0,0.7) |     | None    |
 | ---------------------------- | ------- | --- | ------- |
@@ -199,7 +213,7 @@ In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)` and 
 ### Using the token_pattern
 
 We can also define what is allowed to be a token, this is done using regex and the default tokenization is
-`r'(?u)\b\w\w+\b'` which is very somewhat liberal, allowing digits to be tokens. We write a more narrow tokenization only allowing tokens which contains 3 or more letters: `r'[a-z]{4,}'`.
+`r'(?u)\b\w\w+\b'` which is somewhat lax, allowing digits to be tokens. We write a more narrow tokenization only allowing tokens which contains 3 or more letters: `r'[a-z]{4,}'`.
 
 | classifier \ (token_pattern) | r'[a-z]{4,}' |     | default |
 | ---------------------------- | ------------ | --- | ------- |
@@ -231,20 +245,18 @@ python3 naive_bayes.py --min_df 0.02 --max_df 0.98 --stop_words english --diffic
 | **Bernoulli easy**    | 97.5065 | >   | 88.9763 |
 | **Bernoulli hard**    | 88.7700 | >   | 81.8181 |
 
-We found that we improved both models using custom settings!
+We found that we improved both classification models using custom settings!
 
 ## _Question 5_
 
 ## A
 
-We add a simple parser to attempt to remove the header from emails in our dataset by removing everything before the first occurence of the string "`date:`". If the string is not available we skip any filtering. Implemented as below:
+We add a simple parser to attempt to remove the header from emails in our dataset by removing everything before the first occurence of the string "`Date:`". If the string is not available we skip any filtering. Implemented as below:
 
 ```python
 if filterOn:
     content = content.split(filterOn, 1)[-1]
 ```
-
-
 
 When adding our parser to the program from question 4, when we run 
 ```
@@ -290,11 +302,7 @@ def getPayload(mail):
         return mail.get_payload()
 ```
 
-Using this parser, we get the following result:
-
-```
-python3 naive_bayes.py --email_filtering True
-```
+Using this parser we get the following result:
 
 | classifier \ (filterOn) | email pkg |     | None    |
 | ----------------------- | --------- | --- | ------- |
