@@ -166,14 +166,12 @@ There are different ways to handle the issue of uninformative words in sklearn. 
 
 Sklearn provides the argument `stop_words` which makes the countvectorizer filter out the uninformative words. It has some discussion regarding whether or not you should use the argument `"English"` since it might filter out informative words that happen to be common. We compare using no stop_words with using `English` as an argument.
 
-| stop_words \ classifier | "English" | None    |
-| ----------------------- | --------- | ------- |
-| MultiNomial easy        | 97.5065   | 97.6377 |
-| MultiNomial hard        | 91.4438   | 90.3743 |
-| Bernoulli easy          | 88.8451   | 88.9763 |
-| Bernoulli hard          | 83.9572   | 81.8181 |
-
-
+| stop_words \ classifier | "english" |     | None    |
+| ----------------------- | --------- | --- | ------- |
+| **MultiNomial easy**    | 97.5065   | <   | 97.6377 |
+| **MultiNomial hard**    | 91.4438   | >   | 90.3743 |
+| **Bernoulli easy**      | 88.8451   | <   | 88.9763 |
+| **Bernoulli hard**      | 83.9572   | >   | 81.8181 |
 
 In for both classifiers and difficulties there are barely any differences in accuracy. It is noted in the documentation that it could prove inefficient and instead the following method is recommended.
 
@@ -191,30 +189,49 @@ df = words[word] / len(documents)
 
 In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)` and we get the following results:
 
-| (min_df,max_df) \ classifier | (0,0.7) | None    |
-| ----------------------- | --------- | ------- |
-| MultiNomial easy        | 97.5065   | 97.6377 |
-| MultiNomial hard        | 91.4438   | 90.3743 |
-| Bernoulli easy          | 88.8451   | 88.9763 |
-| Bernoulli hard          | 83.9572   | 81.8181 |
-
-
-```md
-# easy_ham
-
-98.5564 % were classified correctly by Multinomial
-88.7139 % were classified correctly by Bernoulli
-
-# hard_ham
-
-93.0481 % were classified correctly by Multinomial
-81.8181 % were classified correctly by Bernoulli
-```
+| (min_df,max_df) \ classifier | (0,0.7) |     | None    |
+| ---------------------------- | ------- | --- | ------- |
+| **MultiNomial easy**         | 98.5564 | >   | 97.6377 |
+| **MultiNomial hard**         | 93.0481 | >   | 90.3743 |
+| **Bernoulli easy**           | 88.7139 | <   | 88.9763 |
+| **Bernoulli hard**           | 81.8181 | =   | 81.8181 |
 
 ### Using the token_pattern
 
-we can also define what is allowed to be a token, we do not want digits to be tokens.
-maybe include \$ aswell... ?
+We can also define what is allowed to be a token, this is done using regex and the default tokenization is
+`r'(?u)\b\w\w+\b'` which is very somewhat liberal, allowing digits to be tokens. We write a more narrow tokenization only allowing tokens which contains 3 or more letters: `r'[a-z]{4,}'`.
+
+| (token_pattern) \ classifier | r'[a-z]{4,}' |     | default |
+| ---------------------------- | ------------ | --- | ------- |
+| **MultiNomial easy**         | 97.1128      | <   | 97.6377 |
+| **MultiNomial hard**         | 92.5133      | >   | 90.3743 |
+| **Bernoulli easy**           | 87.5328      | <   | 88.9763 |
+| **Bernoulli hard**           | 75.4010      | <   | 81.8181 |
+
+Turns out our token_pattern overall does not improve the accuracy for our classifiers.
+
+### Combining techniques
+
+We try configuring the filtering of uninformative words and run the following command for easy ham:
+
+```shell-session
+python3 naive_bayes.py --token_pattern True --min_df 0.02 --max_df 0.98 --stop_words english --difficulty easy
+```
+
+The following command were ran for hard ham:
+
+```shell-session
+python3 naive_bayes.py --min_df 0.02 --max_df 0.98 --stop_words english --difficulty hard
+```
+
+| (config) \ classifier | custom  |     | default |
+| --------------------- | ------- | --- | ------- |
+| **MultiNomial easy**  | 98.5564 | >   | 97.6377 |
+| **MultiNomial hard**  | 90.9090 | >   | 90.3743 |
+| **Bernoulli easy**    | 97.5065 | >   | 88.9763 |
+| **Bernoulli hard**    | 88.7700 | >   | 81.8181 |
+
+We found that we improved both models using custom settings!
 
 ## _Question 5_
 
