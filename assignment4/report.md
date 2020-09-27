@@ -87,11 +87,12 @@ def getPercentageCorrect(predictions):
 percentCorrectMulti = getPercentageCorrect(predictionsMulti)
 ```
 
-The bernoulli naive bayes classifier classifies documents based on words being absent or present. 
 
-The multinomial naive bayes classifier classifies documents based on the amount of times words are present in a document. 
+The **bernoulli** naive bayes classifier classifies emails based on words being absent or present. More general, it treats features as binary values. 
 
-That is, an email with the text "You have won money" would get the same classification by bernoulli as the email "You have won money money money money". The multinomial classifier would, on the other hand, would take into account that the second email contains the word "money" four times. 
+The **multinomial** naive bayes classifier classifies emails based on the amount of times words are present in a email. More general, it uses the frequency of the features to classify. 
+
+Let's take an example to show the difference. An email with the text "You have won money" would get the same classification by bernoulli as the email "You have won money money money money". That is since the feature "money" is present in both emails, it does not take into account that the feature has a higher frequency in one of the emails. The multinomial classifier, on the other hand, would take into account that the second email contains the word "money" four times. 
 
 ## _Question 3_ 
 <!--
@@ -158,6 +159,47 @@ Sklearn do it for you.
 
 ## _Question 5_
 ## A
+When adding our parser to the program from question 4, which removes all text above the first instance of `"date:"`, we get the following result:
+
+Spam versus easy ham:
+- **Multinomial**: Approximatly `97.8 %` of the emails were classified correctly. Almost the same as question 3.
+- **Bernoulli:** Approximatly `95.1 %` of the emails were classified correctly. Better than question 3.
+
+Spam versus hard ham:
+- **Multinomial**: Approximatly `87.2 %` of the emails were classified correctly. Worse than question 3.
+- **Bernoulli:** Approximatly `86.6 %` of the emails were classified correctly. Better than question 3.
+
+This shows that removing the headers actually makes the model less accurate!
+
+
+Since we are a bit unsure about how well our filtering works, and therefore if this result is to be trusted, we also implement a parser using the python `email` package. The code snippet below shows how the email packages is used to get the body from an email.
+
+```python
+# Tries to remove the header and footer from the email
+def getBodyFromEmail(mail):
+    return getPayload(email.message_from_string(mail))
+
+# Recursive function that fetches the payload from a Message object
+# Returns a string
+def getPayload(mail):
+    if mail.is_multipart():
+        return '\n'.join(list(map(lambda x: getPayload(x), mail.get_payload())))
+    else:
+        return mail.get_payload()
+```
+
+Using this parser, we get the following result:
+
+Spam versus easy ham:
+- **Multinomial**: Approximatly `91.7 %` of the emails were classified correctly. Worse than question 3. 
+- **Bernoulli:** Approximatly `91.6 %` of the emails were classified correctly. Better than question 3.
+
+Spam versus hard ham:
+- **Multinomial**: Approximatly `84.0 %` of the emails were classified correctly. Worse than question 3. 
+- **Bernoulli:** Approximatly `82.4 %` of the emails were classified correctly. The same as question 3. 
+
+
+This again shows that it is not just the body of an email that has importance when classifying it as ham or spam, the header and footer also have features that can be important.
 
 ## B
 If the training data set is unbalanced, that is, a majority of the data is of one class, the results will be skewed. That is because the model will almost only be exposed to one class and therefore is much more likely to place unseen data in the majority class as well. 
