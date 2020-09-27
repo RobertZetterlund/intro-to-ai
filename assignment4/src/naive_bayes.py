@@ -31,7 +31,7 @@ parser.add_argument("--nrFiles", type=int,
                     help="determines the number of files to read, speeds up debugging", default=-1)
 
 parser.add_argument("--stop_words",  type=str,
-                    help="Uses countvectorizers stop_words, default is english", default="english")
+                    help="Uses countvectorizers stop_words, default is english", default=None)
 parser.add_argument("--token_pattern",  type=bool,
                     help="Uses a regex to help tokenization, default is pythons own. If set to true, we will use '[a-z]{3,}' which ignores special signs and digits, \
                      and only accepts words longer than 2 ", default=False)
