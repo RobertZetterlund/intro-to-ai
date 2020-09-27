@@ -14,6 +14,7 @@ import argparse
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
+import email
 
 
 parser = argparse.ArgumentParser(
@@ -37,7 +38,9 @@ parser.add_argument("--token_pattern",  type=bool,
 parser.add_argument("--min_df",  type=float,
                     help="Float in range [0.0, 1.0] or int, default=1 When building the vocabulary ignore terms that have a document frequency strictly lower than the given threshold. This value is also called cut-off in the literature. If float, the parameter represents a proportion of documents, integer absolute counts", default=1)
 parser.add_argument("--max_df",  type=float,
-                    help="Float in range [0.0, 1.0] or int, default=1.0 When building the vocabulary ignore terms that have a document frequency strictly higher than the given threshold. If float, the parameter represents a proportion of documents, integer absolute counts.", default=1.0)                      
+                    help="Float in range [0.0, 1.0] or int, default=1.0 When building the vocabulary ignore terms that have a document frequency strictly higher than the given threshold. If float, the parameter represents a proportion of documents, integer absolute counts.", default=1.0)     
+parser.add_argument("--email_filtering", type=bool, 
+                    help="Whether to use email parse to remove header and footer", default=False)                                     
 
 
 args = parser.parse_args()
@@ -49,12 +52,24 @@ stop_words = args.stop_words
 token_pattern = args.token_pattern
 min_df = args.min_df
 max_df = args.max_df
+emailFiltering = args.email_filtering
+
+# Tries to remove the header and footers from the email
+def getBodyFromEmail(mail):
+    return getPayload(email.message_from_string(mail))
+
+# Recursive function that fetches the payload from a Message object
+# Returns a string
+def getPayload(mail):
+    if mail.is_multipart():
+        return '\n'.join(list(map(lambda x: getPayload(x), mail.get_payload())))
+    else:
+        return mail.get_payload()
+
 
 # Method for creating a dataframe where each email-file is represented by a row.
 # data is a list with tupels (folder_name:String, label:String) that tells this
 # method in which directories to look for files and how to label the files found.
-
-
 def files_to_df(data):
     # Create empty dataframe
     df = pd.DataFrame(columns=['text', 'label'])
@@ -70,6 +85,10 @@ def files_to_df(data):
                     # this might be faulty if filterOn is not unique, perhaps consider
                     # selecting "second", however, if keyword to filterOn is not in email that crashes.
                     content = content.split(filterOn, 1)[-1]
+                if emailFiltering:
+                    content=getBodyFromEmail(content)
+                    print(content)
+                    print("\n####################### NEW EMAIL ###############################\n")
 
                 df = df.append(
                     {'text': content, 'label': label}, ignore_index=True)
