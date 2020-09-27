@@ -166,7 +166,7 @@ There are different ways to handle the issue of uninformative words in sklearn. 
 
 Sklearn provides the argument `stop_words` which makes the countvectorizer filter out the uninformative words. It has some discussion regarding whether or not you should use the argument `"English"` since it might filter out informative words that happen to be common. We compare using no stop_words with using `English` as an argument.
 
-| stop_words \ classifier | "english" |     | None    |
+| classifier \ stop_words | "english" |     | None    |
 | ----------------------- | --------- | --- | ------- |
 | **MultiNomial easy**    | 97.5065   | <   | 97.6377 |
 | **MultiNomial hard**    | 91.4438   | >   | 90.3743 |
@@ -189,7 +189,7 @@ df = words[word] / len(documents)
 
 In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)` and we get the following results:
 
-| (min_df,max_df) \ classifier | (0,0.7) |     | None    |
+| classifier \ (min_df,max_df)| (0,0.7) |     | None    |
 | ---------------------------- | ------- | --- | ------- |
 | **MultiNomial easy**         | 98.5564 | >   | 97.6377 |
 | **MultiNomial hard**         | 93.0481 | >   | 90.3743 |
@@ -201,7 +201,7 @@ In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)` and 
 We can also define what is allowed to be a token, this is done using regex and the default tokenization is
 `r'(?u)\b\w\w+\b'` which is very somewhat liberal, allowing digits to be tokens. We write a more narrow tokenization only allowing tokens which contains 3 or more letters: `r'[a-z]{4,}'`.
 
-| (token_pattern) \ classifier | r'[a-z]{4,}' |     | default |
+| classifier \ (token_pattern)  | r'[a-z]{4,}' |     | default |
 | ---------------------------- | ------------ | --- | ------- |
 | **MultiNomial easy**         | 97.1128      | <   | 97.6377 |
 | **MultiNomial hard**         | 92.5133      | >   | 90.3743 |
@@ -224,7 +224,7 @@ The following command were ran for hard ham:
 python3 naive_bayes.py --min_df 0.02 --max_df 0.98 --stop_words english --difficulty hard
 ```
 
-| (config) \ classifier | custom  |     | default |
+| classifier \ (config) | custom  |     | default |
 | --------------------- | ------- | --- | ------- |
 | **MultiNomial easy**  | 98.5564 | >   | 97.6377 |
 | **MultiNomial hard**  | 90.9090 | >   | 90.3743 |
