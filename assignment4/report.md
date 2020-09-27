@@ -189,7 +189,7 @@ df = words[word] / len(documents)
 
 In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)` and we get the following results:
 
-| classifier \ (min_df,max_df)| (0,0.7) |     | None    |
+| classifier \ (min_df,max_df) | (0,0.7) |     | None    |
 | ---------------------------- | ------- | --- | ------- |
 | **MultiNomial easy**         | 98.5564 | >   | 97.6377 |
 | **MultiNomial hard**         | 93.0481 | >   | 90.3743 |
@@ -201,7 +201,7 @@ In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)` and 
 We can also define what is allowed to be a token, this is done using regex and the default tokenization is
 `r'(?u)\b\w\w+\b'` which is very somewhat liberal, allowing digits to be tokens. We write a more narrow tokenization only allowing tokens which contains 3 or more letters: `r'[a-z]{4,}'`.
 
-| classifier \ (token_pattern)  | r'[a-z]{4,}' |     | default |
+| classifier \ (token_pattern) | r'[a-z]{4,}' |     | default |
 | ---------------------------- | ------------ | --- | ------- |
 | **MultiNomial easy**         | 97.1128      | <   | 97.6377 |
 | **MultiNomial hard**         | 92.5133      | >   | 90.3743 |
@@ -237,8 +237,30 @@ We found that we improved both models using custom settings!
 
 ## A
 
-When adding our parser to the program from question 4, which removes all text above the first instance of `"date:"`, we get the following result:
+We add a simple parser to attempt to remove the header from emails in our dataset by removing everything before the first occurence of the string "`date:`". If the string is not available we skip any filtering. Implemented as below:
 
+```python
+if filterOn:
+    content = content.split(filterOn, 1)[-1]
+```
+
+
+
+When adding our parser to the program from question 4, when we run 
+```
+python3 naive_bayes.py --filterOn Date:
+```
+
+we get the following result:
+
+| classifier \ (filterOn) | Date:   |     | None    |
+| ----------------------- | ------- | --- | ------- |
+| **MultiNomial easy**    | 96.8503 | <   | 97.6377 |
+| **MultiNomial hard**    | 89.3048 | <   | 90.3743 |
+| **Bernoulli easy**      | 88.9763 | =   | 88.9763 |
+| **Bernoulli hard**      | 81.8181 | =   | 81.8181 |
+
+<!-- hur fick du denna data?
 Spam versus easy ham:
 
 - **Multinomial**: Approximatly `97.8 %` of the emails were classified correctly. Almost the same as question 3.
@@ -248,6 +270,7 @@ Spam versus hard ham:
 
 - **Multinomial**: Approximatly `87.2 %` of the emails were classified correctly. Worse than question 3.
 - **Bernoulli:** Approximatly `86.6 %` of the emails were classified correctly. Better than question 3.
+-->
 
 This shows that removing the headers actually makes the model less accurate!
 
@@ -269,6 +292,19 @@ def getPayload(mail):
 
 Using this parser, we get the following result:
 
+```
+python3 naive_bayes.py --email_filtering True
+```
+
+| classifier \ (filterOn) | email pkg |     | None    |
+| ----------------------- | --------- | --- | ------- |
+| **MultiNomial easy**    | 95.9317   | <   | 97.6377 |
+| **MultiNomial hard**    | 89.3048   | <   | 90.3743 |
+| **Bernoulli easy**      | 88.8451   | <   | 88.9763 |
+| **Bernoulli hard**      | 81.8181   | =   | 81.8181 |
+
+
+<!-- are we running same program?
 Spam versus easy ham:
 
 - **Multinomial**: Approximatly `91.7 %` of the emails were classified correctly. Worse than question 3.
@@ -278,6 +314,7 @@ Spam versus hard ham:
 
 - **Multinomial**: Approximatly `84.0 %` of the emails were classified correctly. Worse than question 3.
 - **Bernoulli:** Approximatly `82.4 %` of the emails were classified correctly. The same as question 3.
+-->
 
 This again shows that it is not just the body of an email that has importance when classifying it as ham or spam, the header and footer also have features that can be important.
 

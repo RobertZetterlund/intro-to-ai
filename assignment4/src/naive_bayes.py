@@ -1,6 +1,4 @@
-# mutli: https://scikit-learn.org/stable/modules/naive_bayes.html#multinomial-naive-bayes
-# bernoulli:  https://scikit-learn.org/stable/modules/naive_bayes.html#bernoulli-naive-bayes
-
+# Author: {Tobias Lindroth & Robert Zetterlund}
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.utils import shuffle
@@ -38,9 +36,9 @@ parser.add_argument("--token_pattern",  type=bool,
 parser.add_argument("--min_df",  type=float,
                     help="Float in range [0.0, 1.0] or int, default=1 When building the vocabulary ignore terms that have a document frequency strictly lower than the given threshold. This value is also called cut-off in the literature. If float, the parameter represents a proportion of documents, integer absolute counts", default=1)
 parser.add_argument("--max_df",  type=float,
-                    help="Float in range [0.0, 1.0] or int, default=1.0 When building the vocabulary ignore terms that have a document frequency strictly higher than the given threshold. If float, the parameter represents a proportion of documents, integer absolute counts.", default=1.0)     
-parser.add_argument("--email_filtering", type=bool, 
-                    help="Whether to use email parse to remove header and footer", default=False)                                     
+                    help="Float in range [0.0, 1.0] or int, default=1.0 When building the vocabulary ignore terms that have a document frequency strictly higher than the given threshold. If float, the parameter represents a proportion of documents, integer absolute counts.", default=1.0)
+parser.add_argument("--email_filtering", type=bool,
+                    help="Whether to use email parse to remove header and footer", default=False)
 
 
 args = parser.parse_args()
@@ -55,11 +53,15 @@ max_df = args.max_df
 emailFiltering = args.email_filtering
 
 # Tries to remove the header and footers from the email
+
+
 def getBodyFromEmail(mail):
     return getPayload(email.message_from_string(mail))
 
 # Recursive function that fetches the payload from a Message object
 # Returns a string
+
+
 def getPayload(mail):
     if mail.is_multipart():
         return '\n'.join(list(map(lambda x: getPayload(x), mail.get_payload())))
@@ -80,15 +82,9 @@ def files_to_df(data):
                 # Add a row in dataframe with email-text and whether the email is spam or ham
                 content = f.read()
                 if filterOn:
-
-                    # currently selects last part of email when finding a filterOn String,
-                    # this might be faulty if filterOn is not unique, perhaps consider
-                    # selecting "second", however, if keyword to filterOn is not in email that crashes.
                     content = content.split(filterOn, 1)[-1]
                 if emailFiltering:
-                    content=getBodyFromEmail(content)
-                    print(content)
-                    print("\n####################### NEW EMAIL ###############################\n")
+                    content = getBodyFromEmail(content)
 
                 df = df.append(
                     {'text': content, 'label': label}, ignore_index=True)
@@ -114,7 +110,8 @@ Y_train = df_training.label
 # an integer count for the number of times each word appeared in the document.
 myPattern = r'[a-z]{4,}' if token_pattern else r'(?u)\b\w\w+\b'
 
-vectorizer = CountVectorizer(stop_words=stop_words, max_df=max_df, min_df=min_df, token_pattern=myPattern)
+vectorizer = CountVectorizer(
+    stop_words=stop_words, max_df=max_df, min_df=min_df, token_pattern=myPattern)
 counts = vectorizer.fit_transform(X_train)
 
 # Create classifier and fit for multinomial model.
@@ -136,9 +133,11 @@ example_count = vectorizer.transform(X_test)
 predictionsMulti = clfMulti.predict(example_count)
 predictionsBernoulli = clfBernoulli.predict(example_count)
 
+
 def getPercentageCorrect(predictions):
     zippedTargetsPredictions = zip(Y_test, predictions)
     return sum(target == prediction for target, prediction in zippedTargetsPredictions) / len(predictions)*100
+
 
 percentCorrectMulti = getPercentageCorrect(predictionsMulti)
 percentCorrectBernoulli = getPercentageCorrect(predictionsBernoulli)
@@ -155,20 +154,21 @@ word_df = pd.DataFrame(zip(words, word_count),
 #print("Top 100 words \n", word_df["word"][0:100].tolist())
 
 
-
 # Create confusion matrixes
 bConfusion = confusion_matrix(Y_test, predictionsBernoulli)
 mConfusion = confusion_matrix(Y_test, predictionsMulti)
 
-bernoulliConfusion = ConfusionMatrixDisplay(confusion_matrix=bConfusion, display_labels=['ham', 'spam'])
-multiConfusion = ConfusionMatrixDisplay(confusion_matrix=mConfusion, display_labels=['ham', 'spam'])
+bernoulliConfusion = ConfusionMatrixDisplay(
+    confusion_matrix=bConfusion, display_labels=['ham', 'spam'])
+multiConfusion = ConfusionMatrixDisplay(
+    confusion_matrix=mConfusion, display_labels=['ham', 'spam'])
 
-#Plot confusion matrixes                                                        
+# Plot confusion matrixes
 fig, ax = plt.subplots(nrows=1, ncols=2)
 bernoulliConfusion.plot(ax=ax[0], cmap=plt.get_cmap("Blues"))
 multiConfusion.plot(ax=ax[1], cmap=plt.get_cmap("Greens"))
 
-#Set titles
+# Set titles
 bernoulliConfusion.ax_.set_title("Bernoulli classifier")
 multiConfusion.ax_.set_title("Multinomial classifier")
 plt.show()

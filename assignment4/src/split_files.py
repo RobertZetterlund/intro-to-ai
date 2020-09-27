@@ -1,12 +1,8 @@
+# Author: {Tobias Lindroth & Robert Zetterlund}
 import glob
 import os
 import shutil
 import argparse
-
-
-# python3 split_files.py --folder easy_ham
-# python3 split_files.py --folder hard_ham
-# python3 split_files.py --folder spam
 
 PATH_TO_DATA = "../data/"
 
