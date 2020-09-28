@@ -222,11 +222,13 @@ and we get the following results:
 | **MultiNomial hard**         | 93.0481 | >   | 90.3743 |
 | **Bernoulli easy**           | 88.7139 | <   | 88.9763 |
 | **Bernoulli hard**           | 81.8181 | =   | 81.8181 |
+
+It looks as if it can be useful picking `min_df` and `max_df` and we keep this in mind when we present an optimized model in the last section of this question.
  
 ### Using the token_pattern
  
 We can also define what is allowed to be a token, this is done using regex and the default tokenization is
-`r'(?u)\b\w\w+\b'` which is somewhat lax, allowing digits to be tokens. We write a more narrow tokenization only allowing tokens which contain 3 or more letters: `r'[a-z]{4,}'`.
+`r'(?u)\b\w\w+\b'` which is somewhat lax, allowing digits to be tokens. We write a more narrow tokenization only allowing tokens which contain 4 or more letters: `r'[a-z]{4,}'`.
  
 | classifier \ (token_pattern) | r'[a-z]{4,}' |     | default |
 | ---------------------------- | ------------ | --- | ------- |
