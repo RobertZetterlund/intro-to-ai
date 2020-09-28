@@ -151,10 +151,6 @@ in the dataset.
  
 Common and uninformative words slow down the computational process and excluding them does not affect the results any noticable amount. Assume that the word "the", "of" and "and" show up in almost all emails, both spam and ham. Then it does not make sense to classify based on those. It is desirable to classify based on informative words. For example, in spam mails there might regularly be mention of money in the form of "cash" or using the \$-sign, when in ham we usually do not discuss money and when we do we rarely use the wording "cash".
  
-We argue that it is useful in part due to optimization, but also due to the possible variations of writing styles. .... ?
- 
-In summary, the distinction of a "uninformative" word is context-and dataset dependent
- 
 We skim through the emails and find some common words:
  
 - and
