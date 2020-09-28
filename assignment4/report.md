@@ -2,7 +2,7 @@
  
 ## Tobias Lindroth: 15 hrs
  
-## Robert Zetterlund: y hrs
+## Robert Zetterlund: 15 hrs
  
 ## _Question 1_ - Preprocessing
  
