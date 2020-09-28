@@ -114,7 +114,7 @@ ii. Spam versus hard-ham
 and include the results in your report.
 -->
  
-Spam versus easy ham:
+### Spam versus easy ham:
  
 - **Multinomial**: Approximately `97.6 %` of the emails were classified correctly.
 - **Bernoulli:** Approximately `89 %` of the emails were classified correctly.
@@ -126,7 +126,7 @@ The confusion matrices below shows that both classifiers were good at classifyin
    <p align="center">Figure 1: Confusion matrices showing how the different classifiers performed for easy-ham <p>
 <p>
  
-Spam versus hard ham:
+### Spam versus hard ham:
  
 - **Multinomial**: Approximately `90.4 %` of the emails were classified correctly. The confusion matrix below shows that the classifier was quite accurate but classified both ham and spam wrong sometimes.
 - **Bernoulli**: Approximately `81.8 %` of the emails were classified correctly. The confusion matrix below shows that the bernoulli classifier very accurately classified spam as spam, but sometimes classified ham as spam.
@@ -135,6 +135,11 @@ Spam versus hard ham:
    <img src="fig/q2_hard_ham_confusion.png">
    <p align="center">Figure 2: Confusion matrices showing how the different classifiers performed for easy-ham  <p>
 <p>
+
+
+### Implications
+Earlier in the course we were discussing the idea of false positive and negatives. To recap, this means doing a faulty classification. What consequences does classifying a ham email have? When we discuss these topics we are not sure if it is desirable to be lenient and allow a large set of spam mail in your inbox in order to not incorrectly filter any ham mails. We come to the conclusion that although modern mail services (such as Outlook) employ spam-filtering, they also allow the user to see a folder named "spam", in which you can label mail as not spam or spam to help nudge the filtering. Therefore we think that it is okay to have results similar to the multinomial classifer for both easy and hard mails. This becomes more ambiguous when we look at the bernoulli classifier for hard mail, where the inbox only gets half of the ham mails.
+
  
 ## _Question 4_ - Filter on Common and uninformative words
  
