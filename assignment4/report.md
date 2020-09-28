@@ -84,9 +84,14 @@ Here are some snippets of the code, this is the multinomial model but it is the 
 clfMulti = MultinomialNB() # if bernoulli: use BernoulliNB instead
 clfMulti.fit(counts, Y_train)
  
+# Transforms each document into a vector (with length of vocabulary of train documents) with an
+# integer count for the number of times each word appeared in the document
 example_count = vectorizer.transform(X_test)
+
+# Predict labels on the test data set
 predictionsMulti = clfMulti.predict(example_count)
  
+# helper function for getting percentage of correct predictions
 def getPercentageCorrect(predictions):
    zippedTargetsPredictions = zip(Y_test, predictions)
    return sum(target == prediction for target, prediction in zippedTargetsPredictions) / len(predictions)*100
