@@ -210,7 +210,7 @@ for document in documents:
 df = words[word] / len(documents)
 ```
  
-In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)`, i.e:
+In the documentation they motivate not to use `stop_words="english"` and instead recommended to use `(min_df,max_df) = (0,0.7)`. We run
 ```
 python3 naive_bayes.py --max_df 0.7
 ```
