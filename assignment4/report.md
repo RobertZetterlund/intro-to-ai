@@ -1,6 +1,6 @@
 # Assignment 3: Spam classification using Naïve Bayes
  
-## Tobias Lindroth: x hrs
+## Tobias Lindroth: 15 hrs
  
 ## Robert Zetterlund: y hrs
  
