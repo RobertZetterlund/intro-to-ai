@@ -116,8 +116,8 @@ and include the results in your report.
  
 Spam versus easy ham:
  
-- **Multinomial**: Approximately `97.8 %` of the emails were classified correctly.
-- **Bernoulli:** Approximately `89.1 %` of the emails were classified correctly.
+- **Multinomial**: Approximately `97.6 %` of the emails were classified correctly.
+- **Bernoulli:** Approximately `89 %` of the emails were classified correctly.
  
 The confusion matrices below shows that both classifiers were good at classifying ham correctly, but sometimes classified spam as ham. The bernoulli classifier had problems classifying spam as it classified more spam as ham than it classified spam as spam.
  
@@ -128,8 +128,8 @@ The confusion matrices below shows that both classifiers were good at classifyin
  
 Spam versus hard ham:
  
-- **Multinomial**: Approximately `90.9 %` of the emails were classified correctly. The confusion matrix below shows that the classifier was quite accurate but classified both ham and spam wrong sometimes.
-- **Bernoulli**: Approximately `82.4 %` of the emails were classified correctly. The confusion matrix below shows that the bernoulli classifier very accurately classified spam as spam, but sometimes classified ham as spam.
+- **Multinomial**: Approximately `90.4 %` of the emails were classified correctly. The confusion matrix below shows that the classifier was quite accurate but classified both ham and spam wrong sometimes.
+- **Bernoulli**: Approximately `81.8 %` of the emails were classified correctly. The confusion matrix below shows that the bernoulli classifier very accurately classified spam as spam, but sometimes classified ham as spam.
  
 <p align="center">
    <img src="fig/q2_hard_ham_confusion.png">
