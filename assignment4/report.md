@@ -78,6 +78,7 @@ two classifiers.
 -->
 
 Here are some snippets of the code, this is the multinomial model but it is the same for the Bernoulli.
+We chose `binarize=1` for bernoulli since we wanted words that occured atleast one time to be counted as present. 
 
 ```python
 # Create classifier and fit for multinomial model.
@@ -94,11 +95,16 @@ def getPercentageCorrect(predictions):
 percentCorrectMulti = getPercentageCorrect(predictionsMulti)
 ```
 
-The **bernoulli** naive bayes classifier classifies emails based on words being absent or present. More general, it treats features as binary values.
+### Differences between the classifiers
+The **bernoulli** naive bayes classifier classifies emails based on words being absent or present. More generally, the bernoulli naive bayes classifier treats features as binary values.
 
-The **multinomial** naive bayes classifier classifies emails based on the amount of times words are present in a email. More general, it uses the frequency of the features to classify.
+The **multinomial** naive bayes classifier classifies emails based on the amount of times words are present in a email. More general, it uses the frequency of the features, not only if they are present or absent.
 
 Let's take an example to show the difference. An email with the text "You have won money" would get the same classification by bernoulli as the email "You have won money money money money". That is since the feature "money" is present in both emails, it does not take into account that the feature has a higher frequency in one of the emails. The multinomial classifier, on the other hand, would take into account that the second email contains the word "money" four times.
+
+This difference in how the classifiers work have effects on how well they perform. From the example above, it is quite reasonable to assume that the multinomial classifier works better then bernoulli when classifying longer texts since it takes repetitiveness into account. This might be what makes the multinomial more accurate when predicting the emails. 
+
+
 
 ## _Question 3_
 
