@@ -6,7 +6,7 @@
  
 ## _Question 1_ - Preprocessing
  
-## a
+### a
  
 We read through some of the emails and find that some of them have date, receiver and sender in their header, and some emails have footers. We regard this as extra information.
  
@@ -16,7 +16,7 @@ Ignore that for now and run on the entire text. Further down (in the higher-grad
 you will be asked to filter out the headers and footers.
 -->
  
-## b
+### b
  
 <!--
 b. We don’t want to train and test on the same data. Split the spam and the ham datasets
