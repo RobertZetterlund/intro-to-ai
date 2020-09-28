@@ -361,7 +361,7 @@ An additional idea is that you perhaps could add some weight to the data in the 
 ## C
 By applying the logic from question b, we believe a training set with mostly spam emails and a test set with mostly ham would lead to most messages in the test set to be classified as spam.
  
-By removing all but 20 ham-emails from the easy-ham training data set while keeping all the spam and removing all but 20 spam-emails from the test set, we get the following result:
+By removing all but 20 ham-emails from the easy-ham training data set while keeping all the spam and removing all but 20 spam-emails from the test set while keeping the ham, we get the following result:
  
 **Multinomial**: Approximately `12.3288 %` were classified correctly.
  
