@@ -353,19 +353,19 @@ Another way to fix it could be to add more data to the minority class(es) in the
 An additional idea is that you perhaps could add some weight to the data in the minority classes to make the model count minority classes more importantly.
  
 ## C
-By applying the logic from question b, we believe a training set with mostly spam emails would lead to many ham messages in the test set to be classified as spam.
+By applying the logic from question b, we believe a training set with mostly spam emails and a test set with mostly ham would lead to most messages in the test set to be classified as spam.
  
-By removing all but 10 ham-emails from the easy-ham training data set, while keeping all the spam, we get the following result:
+By removing all but 20 ham-emails from the easy-ham training data set while keeping all the spam and removing all but 20 spam-emails from the test set, we get the following result:
  
-**Multinomial**: Approximately `22.3 %` were classified correctly.
+**Multinomial**: Approximately `12.3288 %` were classified correctly.
  
-**Bernoulli**: Approximately `16.4 %` were classified correctly.
+**Bernoulli**: Approximately `3.0441 %` were classified correctly.
  
 The model's accuracy decreased drastically. And by looking at the confusion matrices below we note that almost all emails are classified as spam.
  
 <p align="center">
-   <img src="fig/q5_easy_ham_only_10.png">
-   <p align="center">Figure 3: Confusion matrices showing how the different classifiers performed when there were only 10 ham-emails.   <p>
+   <img src="fig/q5_easy_ham_only_20.png">
+   <p align="center">Figure 3: Confusion matrices showing how the different classifiers performed with mostly spam in the training dataset and mostly ham in the test dataset.   <p>
 <p>
  
 <!--

@@ -72,7 +72,7 @@ def files_to_df(data):
     # Create empty dataframe
     df = pd.DataFrame(columns=['text', 'label'])
     for folder_name, label in data:
-        for filename in os.listdir('../data/' + folder_name + '/')[:nrFiles]:
+        for filename in os.listdir('../data/' + folder_name + '/')[: 20 if folder_name == 'easy_ham_train' or folder_name == 'spam_test' else nrFiles]:
             # Open in read only mode, ignore any unicode decode errors
             with open(os.path.join('../data/' + folder_name + '/', filename), 'r', encoding='latin1') as f:
                 # Add a row in dataframe with email-text and whether the email is spam or ham
