@@ -85,9 +85,14 @@ We chose `binarize=1` for bernoulli since we wanted words that occured atleast o
 clfMulti = MultinomialNB() # if bernoulli: use BernoulliNB instead
 clfMulti.fit(counts, Y_train)
  
+# Transforms each document into a vector (with length of vocabulary of train documents) with an
+# integer count for the number of times each word appeared in the document
 example_count = vectorizer.transform(X_test)
+
+# Predict labels on the test data set
 predictionsMulti = clfMulti.predict(example_count)
  
+# helper function for getting percentage of correct predictions
 def getPercentageCorrect(predictions):
    zippedTargetsPredictions = zip(Y_test, predictions)
    return sum(target == prediction for target, prediction in zippedTargetsPredictions) / len(predictions)*100
@@ -115,10 +120,10 @@ ii. Spam versus hard-ham
 and include the results in your report.
 -->
  
-Spam versus easy ham:
+### Spam versus easy ham:
  
-- **Multinomial**: Approximately `97.8 %` of the emails were classified correctly.
-- **Bernoulli:** Approximately `89.1 %` of the emails were classified correctly.
+- **Multinomial**: Approximately `97.6 %` of the emails were classified correctly.
+- **Bernoulli:** Approximately `89 %` of the emails were classified correctly.
  
 The confusion matrices below shows that both classifiers were good at classifying ham correctly, but sometimes classified spam as ham. The bernoulli classifier had problems classifying spam as it classified more spam as ham than it classified spam as spam.
  
@@ -127,15 +132,20 @@ The confusion matrices below shows that both classifiers were good at classifyin
    <p align="center">Figure 1: Confusion matrices showing how the different classifiers performed for easy-ham <p>
 <p>
  
-Spam versus hard ham:
+### Spam versus hard ham:
  
-- **Multinomial**: Approximately `90.9 %` of the emails were classified correctly. The confusion matrix below shows that the classifier was quite accurate but classified both ham and spam wrong sometimes.
-- **Bernoulli**: Approximately `82.4 %` of the emails were classified correctly. The confusion matrix below shows that the bernoulli classifier very accurately classified spam as spam, but sometimes classified ham as spam.
+- **Multinomial**: Approximately `90.4 %` of the emails were classified correctly. The confusion matrix below shows that the classifier was quite accurate but classified both ham and spam wrong sometimes.
+- **Bernoulli**: Approximately `81.8 %` of the emails were classified correctly. The confusion matrix below shows that the bernoulli classifier very accurately classified spam as spam, but sometimes classified ham as spam.
  
 <p align="center">
    <img src="fig/q2_hard_ham_confusion.png">
    <p align="center">Figure 2: Confusion matrices showing how the different classifiers performed for easy-ham  <p>
 <p>
+
+
+### Implications
+Earlier in the course we were discussing the idea of false positive and negatives. To recap, this means doing a faulty classification. What consequences does classifying a ham email have? When we discuss these topics we are not sure if it is desirable to be lenient and allow a large set of spam mail in your inbox in order to not incorrectly filter any ham mails. We come to the conclusion that although modern mail services (such as Outlook) employ spam-filtering, they also allow the user to see a folder named "spam", in which you can label mail as not spam or spam to help nudge the filtering. Therefore we think that it is okay to have results similar to the multinomial classifer for both easy and hard mails. This becomes more ambiguous when we look at the bernoulli classifier for hard mail, where the inbox only gets half of the ham mails.
+
  
 ## _Question 4_ - Filter on Common and uninformative words
  
@@ -151,10 +161,6 @@ in the dataset.
 -->
  
 Common and uninformative words slow down the computational process and excluding them does not affect the results any noticable amount. Assume that the word "the", "of" and "and" show up in almost all emails, both spam and ham. Then it does not make sense to classify based on those. It is desirable to classify based on informative words. For example, in spam mails there might regularly be mention of money in the form of "cash" or using the \$-sign, when in ham we usually do not discuss money and when we do we rarely use the wording "cash".
- 
-We argue that it is useful in part due to optimization, but also due to the possible variations of writing styles. .... ?
- 
-In summary, the distinction of a "uninformative" word is context-and dataset dependent
  
 We skim through the emails and find some common words:
  
