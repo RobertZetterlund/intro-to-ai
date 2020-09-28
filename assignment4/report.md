@@ -258,33 +258,36 @@ if filterOn:
     content = content.split(filterOn, 1)[-1]
 ```
 
-When adding our parser to the program from question 4, when we run 
+When running the program with the following command
 ```
 python3 naive_bayes.py --filterOn Date:
 ```
 
 we get the following result:
 
-| classifier \ (filterOn) | Date:   |     | None    |
+| classifier \ (filterOn) | Date:   |     | q3    |
 | ----------------------- | ------- | --- | ------- |
 | **MultiNomial easy**    | 96.8503 | <   | 97.6377 |
 | **MultiNomial hard**    | 89.3048 | <   | 90.3743 |
 | **Bernoulli easy**      | 88.9763 | =   | 88.9763 |
 | **Bernoulli hard**      | 81.8181 | =   | 81.8181 |
 
-<!-- hur fick du denna data?
-Spam versus easy ham:
 
-- **Multinomial**: Approximatly `97.8 %` of the emails were classified correctly. Almost the same as question 3.
-- **Bernoulli:** Approximatly `95.1 %` of the emails were classified correctly. Better than question 3.
+When we add our filtering together with the parameters chosen in question 4, we get this command:
+```
+python3 naive_bayes.py --filterOn=Date: --min_df=0.02 --max_df=0.98
+```
 
-Spam versus hard ham:
+which yields the following result:
 
-- **Multinomial**: Approximatly `87.2 %` of the emails were classified correctly. Worse than question 3.
-- **Bernoulli:** Approximatly `86.6 %` of the emails were classified correctly. Better than question 3.
--->
+| classifier \ (filterOn) | Date:   |     | q4   |
+| ----------------------- | ------- | --- | ------- |
+| **MultiNomial easy**    | 95.8005 | <   | 98.5564 |
+| **MultiNomial hard**    | 86.6310 | <   | 90.9090 |
+| **Bernoulli easy**      | 91.2073 | <   | 97.5065 |
+| **Bernoulli hard**      | 85.0267 | <   | 88.7700 |
 
-This shows that removing the headers actually makes the model less accurate!
+This shows that removing the headers actually makes the model less accurate in most cases!
 
 Since we are a bit unsure about how well our filtering works, and therefore if this result is to be trusted, we also implement a parser using the python `email` package. The code snippet below shows how the email packages is used to get the body from an email.
 
@@ -304,7 +307,7 @@ def getPayload(mail):
 
 Using this parser we get the following result:
 
-| classifier \ (filterOn) | email pkg |     | None    |
+| classifier \ (filterOn) | email pkg |     | q3    |
 | ----------------------- | --------- | --- | ------- |
 | **MultiNomial easy**    | 95.9317   | <   | 97.6377 |
 | **MultiNomial hard**    | 89.3048   | <   | 90.3743 |
@@ -312,17 +315,20 @@ Using this parser we get the following result:
 | **Bernoulli hard**      | 81.8181   | =   | 81.8181 |
 
 
-<!-- are we running same program?
-Spam versus easy ham:
+When we add this filtering together with the parameters chosen in question 4, we get this command:
+```
+python3 naive_bayes.py --email_filtering=True --min_df=0.02 --max_df=0.98
+```
 
-- **Multinomial**: Approximatly `91.7 %` of the emails were classified correctly. Worse than question 3.
-- **Bernoulli:** Approximatly `91.6 %` of the emails were classified correctly. Better than question 3.
+which yields the following result:
 
-Spam versus hard ham:
+| classifier \ (filterOn) | email pkg |     | q4   |
+| ----------------------- | ------- | --- | ------- |
+| **MultiNomial easy**    | 93.3071 | <   | 98.5564 |
+| **MultiNomial hard**    | 85.0267 | <   | 90.9090 |
+| **Bernoulli easy**      | 91.3386 | <   | 97.5065 |
+| **Bernoulli hard**      | 83.9572 | <   | 88.7700 |
 
-- **Multinomial**: Approximatly `84.0 %` of the emails were classified correctly. Worse than question 3.
-- **Bernoulli:** Approximatly `82.4 %` of the emails were classified correctly. The same as question 3.
--->
 
 This again shows that it is not just the body of an email that has importance when classifying it as ham or spam, the header and footer also have features that can be important.
 
@@ -340,7 +346,7 @@ Another way to fix it could be to add more data to the minority class(es) in the
 
 An additional idea is that you perhaps could add some weight to the data in the minority classes to make the model count minority classes more importantly.
 
-## c
+## C
 
 By applying the logic from question b, we belive a training set with mostly spam emails would lead to many ham messages in the test set to be classified as spam.
 
