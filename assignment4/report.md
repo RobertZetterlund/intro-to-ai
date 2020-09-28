@@ -146,6 +146,7 @@ The confusion matrices below shows that both classifiers were good at classifyin
 ### Implications
 Earlier in the course we were discussing the idea of false positive and negatives. To recap, this means doing a faulty classification. What consequences does classifying a ham email have? When we discuss these topics we are not sure if it is desirable to be lenient and allow a large set of spam mail in your inbox in order to not incorrectly filter any ham mails. We come to the conclusion that although modern mail services (such as Outlook) employ spam-filtering, they also allow the user to see a folder named "spam", in which you can label mail as not spam or spam to help nudge the filtering. Therefore we think that it is okay to have results similar to the multinomial classifer for both easy and hard mails. This becomes more ambiguous when we look at the bernoulli classifier for hard mail, where the inbox only gets half of the ham mails.
 
+Having said that, we could choose to judge the accuracy of our models using only how succesfully they classify ham to be ham. Or the opposite, accuracy of classifying spam to be spam. However, we think that the overall accuracy can be used to gauge the model's accuracy if and only if the distribution of ham and spam in the dataset is similar to how it is in the real world (we assume more spam are sent than ham in general). Then again, this depends on what types of lists your email address has leaked to.
  
 ## _Question 4_ - Filter on Common and uninformative words
  
