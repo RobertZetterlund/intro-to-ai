@@ -2,11 +2,11 @@
  
 ## Tobias Lindroth: 15 hrs
  
-## Robert Zetterlund: y hrs
+## Robert Zetterlund: 15 hrs
  
 ## _Question 1_ - Preprocessing
  
-## a
+### a
  
 We read through some of the emails and find that some of them have date, receiver and sender in their header, and some emails have footers. We regard this as extra information.
  
@@ -16,7 +16,7 @@ Ignore that for now and run on the entire text. Further down (in the higher-grad
 you will be asked to filter out the headers and footers.
 -->
  
-## b
+### b
  
 <!--
 b. We don’t want to train and test on the same data. Split the spam and the ham datasets
@@ -210,7 +210,7 @@ for document in documents:
 df = words[word] / len(documents)
 ```
  
-In the documentation, we are recommended to use `(min_df,max_df) = (0,0.7)`, i.e:
+In the documentation they motivate not to use `stop_words="english"` and instead recommended to use `(min_df,max_df) = (0,0.7)`. We run
 ```
 python3 naive_bayes.py --max_df 0.7
 ```
@@ -222,11 +222,13 @@ and we get the following results:
 | **MultiNomial hard**         | 93.0481 | >   | 90.3743 |
 | **Bernoulli easy**           | 88.7139 | <   | 88.9763 |
 | **Bernoulli hard**           | 81.8181 | =   | 81.8181 |
+
+It looks as if it can be useful picking `min_df` and `max_df` and we keep this in mind when we present an optimized model in the last section of this question.
  
 ### Using the token_pattern
  
 We can also define what is allowed to be a token, this is done using regex and the default tokenization is
-`r'(?u)\b\w\w+\b'` which is somewhat lax, allowing digits to be tokens. We write a more narrow tokenization only allowing tokens which contain 3 or more letters: `r'[a-z]{4,}'`.
+`r'(?u)\b\w\w+\b'` which is somewhat lax, allowing digits to be tokens. We write a more narrow tokenization only allowing tokens which contain 4 or more letters: `r'[a-z]{4,}'`.
  
 | classifier \ (token_pattern) | r'[a-z]{4,}' |     | default |
 | ---------------------------- | ------------ | --- | ------- |
