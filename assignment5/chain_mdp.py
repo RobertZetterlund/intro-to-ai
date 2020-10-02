@@ -19,7 +19,8 @@ rewards = np.array([
 action_space_size = env.action_space.n
 state_space_size = env.observation_space.n
 
-alfa = 1
+# slip chance is 0.2
+alfa = 0.8
 epsilon = 0.9
 
 V_new = np.copy(V_curr)
@@ -36,6 +37,8 @@ while not np.allclose(V_prev, V_curr, atol=0.001):
 
     v_curr = np.copy(V_new)
     
-
-
+print("\n******** Candidate solution ********\n")
 print(v_curr)
+
+print("\n******** Policy ********************\n")
+print(np.argmax(v_curr, axis=1), "\n")
