@@ -11,13 +11,17 @@ state_space_size = env.observation_space.n
 
 q_table = np.zeros((state_space_size, action_space_size))
 
-num_episodes = 1000
+num_episodes = 10000
 max_steps_per_episode = 10
 
+## alfa
 learning_rate = 0.1
-discount_rate = 0.99
+## gamma
+discount_rate = 0.95
 
+## epsilon
 exploration_rate = 1
+
 max_exploration_rate = 1
 min_exploration_rate = 0.01
 exploration_decay_rate = 0.001
@@ -55,7 +59,6 @@ for episode in range(num_episodes):
     # Exploration rate decay
     exploration_rate = min_exploration_rate + \
     (max_exploration_rate - min_exploration_rate) * np.exp(-exploration_decay_rate*episode)
-    
     
     rewards_all_episodes.append(rewards_current_episode)
 
