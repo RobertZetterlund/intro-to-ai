@@ -11,7 +11,6 @@ state_space_size = env.observation_space.n
 
 q_table = np.zeros((state_space_size, action_space_size))
 
-
 num_episodes = 1000
 max_steps_per_episode = 10
 
@@ -60,11 +59,19 @@ for episode in range(num_episodes):
     
     rewards_all_episodes.append(rewards_current_episode)
 
+
+## print the q table
+print("\n******** Q table ********\n")
+print(q_table)
+
+print("\n******** Policy ********\n")
+print(np.argmax(q_table, axis=1))
+
 # Calculate and print the average reward per 100 episodes
 rewards_per_thousand_episodes = np.split(np.array(rewards_all_episodes),num_episodes/100)
 count = 100
 
-print("********Average reward per thousand episodes********\n")
+print("\n********Average reward per thousand episodes********\n")
 for r in rewards_per_thousand_episodes:
     print(count, ": ", str(sum(r/100)))
     count += 100
