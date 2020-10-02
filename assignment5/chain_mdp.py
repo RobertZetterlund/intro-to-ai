@@ -30,10 +30,11 @@ while not np.allclose(v_prev, v_curr, atol=0.001):
             not_action = abs(action-1)
 
             v_curr[state][action] = alfa * (rewards[state][action] + epsilon*v_prev[state][action]) + (
-                1-alfa) * (rewards[state][not_action] + epsilon * v_prev[state][action])
+                1-alfa) * (rewards[state][not_action] + epsilon * v_prev[state][not_action])
     
 print("\n******** Candidate solution ********\n")
 print(v_curr)
 
-print("\n******** Policy ********************\n")
+print("\n******** Policy ********************")
+print("(forward,backward) = (0,1)\n")
 print(np.argmax(v_curr, axis=1), "\n")
