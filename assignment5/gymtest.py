@@ -5,10 +5,12 @@ env = gym.make('NChain-v0')
 
 Q = np.zeros((env.observation_space.n, env.action_space.n))
 
-print(Q)
 
-epsilon = 0.9
+#
+#epsilon = 0.9
+# learning rate
 alfa = 0.1
+# discount factor
 gamma = 0.95
 
 actionDict = {
@@ -16,21 +18,20 @@ actionDict = {
     1: "Backward"
 }
 
-for i_episode in range(5):
+for i_episode in range(100):
     prev_state = env.reset()
 
     for t in range(5):
-        #print(state)
         action = env.action_space.sample()
-        move = actionDict[action]
-        notmove = actionDict[abs(action-1)]
+        not_action = abs(action-1)
 
         state, reward, done, info = env.step(action)
 
         # given performing action from state observation, we get reward... so
-        print("state: ", state, " move: ", move, " reward: ", reward)
+        #move = actionDict[action]
+        #print("prevstate: ", prev_state, " move: ", move, "state: ", state, " reward: ", reward)
 
-        Q[prev_state][action] = Q[prev_state][action] + alfa*(reward + gamma * max(Q[state][abs(action-1)], Q[state][action]) - Q[prev_state][action])
+        Q[prev_state][action] = Q[prev_state][action] + alfa*(reward + gamma * max(Q[state][not_action], Q[state][action]) - Q[prev_state][action])
 
         prev_state = state
 
