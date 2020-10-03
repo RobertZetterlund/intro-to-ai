@@ -1,19 +1,20 @@
 import gym
 import pandas as pd
 import numpy as np
+# init environment with slip = 0
 env = gym.make('NChain-v0', slip=0)
 
 Q = np.zeros((env.observation_space.n, env.action_space.n))
-#
-#epsilon = 0.9
+
 # learning rate / also slip chance
-allowed_steps = 10
+allowed_steps = 100
+nr_episodes = 1000
 
 alfa = 0.2
 # discount factor
 gamma = 0.95
 
-for i_episode in range(10000):
+for i_episode in range(nr_episodes):
     old_state = env.reset()
 
     # how many steps are the agent allowed to go?
@@ -36,4 +37,3 @@ print("\n******** Policy ********************")
 print("(forward,backward) = (0,1)\n")
 
 print(np.argmax(Q, axis=1), "\n")
-# env.close()
