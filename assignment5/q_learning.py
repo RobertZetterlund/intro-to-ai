@@ -1,14 +1,13 @@
 import gym
 import pandas as pd
 import numpy as np
-import random
-env = gym.make('NChain-v0')
+env = gym.make('NChain-v0', slip=0)
 
 Q = np.zeros((env.observation_space.n, env.action_space.n))
 #
-epsilon = 0.1
-# learning rate
-alfa = 0.1
+#epsilon = 0.9
+# learning rate / also slip chance
+alfa = 0.2
 # discount factor
 gamma = 0.95
 
@@ -28,12 +27,8 @@ for i_episode in range(1000):
 
         action = env.action_space.sample()
         new_state, reward, done, info = env.step(action)
-
-    
-        # given performing action from state observation, we get reward... so
-        #move = actionDict[action]
-        #print("prevstate: ", prev_state, " move: ", move, "state: ", state, " reward: ", reward)
-        Q[old_state][action] = Q[old_state][action] + alfa * \
+        # update Q value for old state following policy
+        Q[old_state][action] = (1-alfa) * Q[old_state][action] + alfa * \
             (reward + gamma * max(Q[new_state, :]) - Q[old_state][action])
         
         old_state = new_state
