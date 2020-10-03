@@ -7,6 +7,7 @@ env = gym.make('NChain-v0')
 
 v_prev = np.zeros(env.observation_space.n)
 v_curr = np.ones_like(v_prev)
+v_actions = np.zeros_like(v_prev)
 
 #v_prev = np.zeros((env.observation_space.n, env.action_space.n))
 #v_curr = np.ones_like(v_prev)
@@ -49,11 +50,11 @@ while not np.allclose(v_prev, v_curr, atol=0.001):
         actionValues = [calculateActionValue(state,action) for action in range(action_space_size)]
         best_action = np.argmax(actionValues)
         v_curr[state] = actionValues[best_action]
-    
+        v_actions[state] = best_action
 
 print("\n******** Candidate solution ********\n")
 print(v_curr)
 #
-#print("\n******** Policy ********************")
-#print("(forward,backward) = (0,1)\n")
-#print(np.argmax(v_curr, axis=1), "\n")
+print("\n******** Policy ********************")
+print("(forward,backward) = (0,1)\n")
+print(v_actions, "\n")
