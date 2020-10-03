@@ -1,13 +1,13 @@
 import gym
 import pandas as pd
 import numpy as np
-env = gym.make('NChain-v0')
+env = gym.make('NChain-v0', slip=0)
 
 Q = np.zeros((env.observation_space.n, env.action_space.n))
 #
 #epsilon = 0.9
-# learning rate
-alfa = 0.1
+# learning rate / also slip chance
+alfa = 0.2
 # discount factor
 gamma = 0.95
 
@@ -20,7 +20,7 @@ for i_episode in range(10000):
         # Step with that action
         new_state, reward, done, info = env.step(action)
         # update Q value for old state following policy
-        Q[old_state][action] = Q[old_state][action] + alfa * \
+        Q[old_state][action] = (1-alfa) * Q[old_state][action] + alfa * \
             (reward + gamma * max(Q[new_state, :]) - Q[old_state][action])
         
         old_state = new_state
