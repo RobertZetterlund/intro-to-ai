@@ -18,22 +18,21 @@ actionDict = {
     1: "Backward"
 }
 
-for i_episode in range(100):
-    prev_state = env.reset()
+for i_episode in range(100000):
+    old_state = env.reset()
 
     for t in range(5):
         action = env.action_space.sample()
-        not_action = abs(action-1)
-
-        state, reward, done, info = env.step(action)
+        new_state, reward, done, info = env.step(action)
 
         # given performing action from state observation, we get reward... so
         #move = actionDict[action]
         #print("prevstate: ", prev_state, " move: ", move, "state: ", state, " reward: ", reward)
 
-        Q[prev_state][action] = Q[prev_state][action] + alfa*(reward + gamma * max(Q[state][not_action], Q[state][action]) - Q[prev_state][action])
+        Q[old_state][action] = Q[old_state][action] + alfa * \
+            (reward + gamma * max(Q[new_state, :]) - Q[old_state][action])
 
-        prev_state = state
+        old_state = new_state
 
         if done:
             print("Episode finished after {} timesteps".format(t+1))
