@@ -18,7 +18,7 @@ def valueIteration(states, calculateActionValue):
     while not np.allclose([value for _,(_,value) in vCandidate.items()], [value for _,(_,value) in lastCandidate.items()]):
         lastCandidate = vCandidate.copy()
         for state in states.keys():
-            actions = [(action, calculateActionValue(state, action, {s:value for  s, (_, value) in vCandidate.items()})) for action in states[state]]
+            actions = [(action, calculateActionValue(state, action, {s:value for  s, (_, value) in lastCandidate.items()})) for action in states[state]]
             maxActionValue = max([value for _,value in actions])
             bestActions = [(action, value) for action,value in actions if value == maxActionValue]
             #Update the new candidate with the max action value and the actions giving that value
