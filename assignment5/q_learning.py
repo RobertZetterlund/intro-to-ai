@@ -7,6 +7,8 @@ Q = np.zeros((env.observation_space.n, env.action_space.n))
 #
 #epsilon = 0.9
 # learning rate / also slip chance
+allowed_steps = 10
+
 alfa = 0.2
 # discount factor
 gamma = 0.95
@@ -14,7 +16,8 @@ gamma = 0.95
 for i_episode in range(10000):
     old_state = env.reset()
 
-    for t in range(10):
+    # how many steps are the agent allowed to go?
+    for t in range(allowed_steps):
         # Get best action based on Q matrix
         action = np.argmax(Q[old_state, :])
         # Step with that action
