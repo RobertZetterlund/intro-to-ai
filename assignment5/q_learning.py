@@ -1,8 +1,7 @@
 import gym
 import pandas as pd
 import numpy as np
-# init environment with slip = 0
-env = gym.make('NChain-v0', slip=0.2)
+env = gym.make('NChain-v0')
 
 Q = np.zeros((env.observation_space.n, env.action_space.n))
 
