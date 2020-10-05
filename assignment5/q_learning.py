@@ -2,7 +2,7 @@ import gym
 import pandas as pd
 import numpy as np
 import random
-env = gym.make('NChain-v0', slip=0.2)
+env = gym.make('NChain-v0', slip=0.8)
 
 Q = np.zeros((env.observation_space.n, env.action_space.n))
 Qcopy = np.ones((env.observation_space.n, env.action_space.n))
@@ -45,4 +45,9 @@ print("Q = \n", Q)
 print("\n******** Policy ********************")
 print("(forward,backward) = (0,1)\n")
 print(np.argmax(Q, axis=1), "\n")
+
+
+
+
+
 # env.close()
