@@ -29,7 +29,7 @@ while not np.allclose(Q,Qcopy, atol=0.01):
         # update Q value for old state following policy
 
         Q[old_state][action] += alfa * \
-            (reward + gamma * max(Q[new_state, :]) - Q[old_state][action])
+            (reward + gamma * np.max(Q[new_state, :]) - Q[old_state][action])
         
         old_state = new_state
 
@@ -44,6 +44,5 @@ print("Q = \n", Q)
 
 print("\n******** Policy ********************")
 print("(forward,backward) = (0,1)\n")
-
 print(np.argmax(Q, axis=1), "\n")
 # env.close()
