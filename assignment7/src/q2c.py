@@ -47,7 +47,7 @@ for neurons in neuronsToTry :
         Dense(neurons, activation='relu'),
         Dense(10, activation='softmax')],
         epochs=10,
-        lr=0.6
+        lr=lr
         )
         #Evalute accuracy
         accuracy = model.evaluate(x_test, y_test, verbose=0)[1]

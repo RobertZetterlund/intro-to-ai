@@ -39,7 +39,9 @@ for learningRate in np.linspace(lrStart, lrEnd, lrEnd/lrStep):
         y_train, 
         x_test, 
         y_test,
-        [Flatten(),  Dense(100, activation='relu'), Dense(10, activation='softmax')],
+        [Flatten(),  
+        Dense(100, activation='relu'), 
+        Dense(10, activation='softmax')],
         epochs=10,
         lr=learningRate
         )
