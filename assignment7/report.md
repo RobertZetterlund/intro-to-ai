@@ -62,8 +62,30 @@ Which results in
 
 ### B)
 
-To find the optimal learning rate, that is, the learning rate that yields the best accuarcy, we tried learning rates in the interval between 0.001 and 1.0 with a step length of 0.05. 
+To find the optimal learning rate, that is, the learning rate that yields the best accuarcy, we try learning rates in the interval between 0.001 and 1.0.
 
 The results show that the optimal learning rate is approxiamtely 0.6, which yields an accuracy of around 97.89 %.  
 
 ### C)
+
+
+## _Question 3_
+
+### A)
+
+We add the gaussian noise layer as the first hidden layer, see code snippet below. 
+
+
+The reason we put it as the first hidden layer is because...
+
+We calculate the different predicitions score using the different standard deviations.
+
+- `0.1` yields a test accuracy of 0.9785000085830688
+- `1` yields a test accuracy of 0.9577000141143799
+- `10` yields a test accuracy of 0.09740000218153
+
+
+Can you come up with an argument for why adding noise like this could be a good idea in certain situations?
+
+
+
