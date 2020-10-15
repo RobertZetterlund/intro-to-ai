@@ -105,7 +105,7 @@ model, fit_info = train_model(
     epochs=30,
     lr=bestModel.at['learning rate']
 )
-Plot a line chart
+#Plot a line chart
 #fig, (ax1, ax2) = plt.subplots(1, 2)
 plt.plot(list(range(1, 30+1)), [a*100 for a in fit_info.history['accuracy']],
          marker='o', markerfacecolor='blue', markersize=8, color='skyblue', linewidth=2)

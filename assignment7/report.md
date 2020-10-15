@@ -87,5 +87,9 @@ We calculate the different predicitions score using the different standard devia
 
 Can you come up with an argument for why adding noise like this could be a good idea in certain situations?
 
-
-
+### B)
+Reg param: 0.001 Test loss: 0.12269703298807144, Test accuracy 0.9768000245094299
+Reg param: 0.005 Test loss: 0.1834477186203003, Test accuracy 0.9671000242233276
+Reg param: 0.01 Test loss: 0.2412899136543274, Test accuracy 0.955299973487854
+Reg param: 0.05 Test loss: 0.4854423701763153, Test accuracy 0.8988000154495239
+Reg param: 0.1 Test loss: 0.9878652095794678, Test accuracy 0.7328000068664551
