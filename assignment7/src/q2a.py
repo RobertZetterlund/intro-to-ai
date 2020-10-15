@@ -25,6 +25,9 @@ model, fit_info = train_model(
      Dense(10, activation='softmax')]
     )
 
+score = model.evaluate(x_test, y_test, verbose=0)
+print("Test loss: {}, Test accuracy {}".format(score[0], score[1]))    
+
 #Plot a line chart
 plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['accuracy']], marker='o', markerfacecolor='blue', markersize=8, color='skyblue', linewidth=2)
 plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['val_accuracy']], marker='o', color='olive',markersize=8, linewidth=2)
