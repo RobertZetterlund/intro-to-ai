@@ -6,6 +6,8 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras import backend as K
 import matplotlib.pyplot as plt
+import numpy as np
+import random
 
 
 
@@ -24,7 +26,7 @@ def train_model(x_train, y_train, x_val, y_val, layers, batch_size=128, num_clas
     fit_info = model.fit(x_train, y_train,
             batch_size=batch_size,
             epochs=epochs,
-            verbose=0,
+            verbose=1,
             validation_data=(x_val, y_val))
 
 
@@ -32,12 +34,19 @@ def train_model(x_train, y_train, x_val, y_val, layers, batch_size=128, num_clas
 
 
 
-def generateData(num_classes):
+def generateData(num_classes, rollDirection=0, steps=0):
     # input image dimensions
     img_rows, img_cols = 28, 28
 
     # the data, split between train and test sets
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+    #Roll image
+    if rollDirection in [1,2,3,4]:
+        imageToDisplay = random.randint(0, len(x_test)-1)
+        displayImage(x_test[imageToDisplay])
+        x_test = np.array([roll(matrix,rollDirection,steps) for matrix in x_test])
+        displayImage(x_test[imageToDisplay])
 
     if K.image_data_format() == 'channels_first':
         x_train = x_train.reshape(x_train.shape[0], 1, img_rows, img_cols)
@@ -58,6 +67,29 @@ def generateData(num_classes):
     y_test = keras.utils.to_categorical(y_test, num_classes)    
 
 
-    return (x_train, y_train), (x_test, y_test)   
+    return (x_train, y_train, x_test, y_test, input_shape)   
+
+
+ 
  
 
+def roll(data, direction, steps):
+    #rigth
+    if direction == 1:
+        return np.roll(data,steps,axis=1)  
+    #left    
+    elif direction == 2:
+        return np.roll(data,-1*steps,axis=1)
+    # UP
+    elif direction == 3:
+        return np.roll(data, -1*steps,axis = 0)
+    # Down    
+    elif direction == 4:
+        return np.roll(data,steps,axis = 0)
+        
+
+def displayImage(image):
+    np.array(image, dtype='float')
+    pixels = image.reshape((28, 28))
+    plt.imshow(pixels, cmap='gray')
+    plt.show()
