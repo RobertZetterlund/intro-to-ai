@@ -217,8 +217,9 @@ What is a benefit of using convolutional layers over fully connected ones?
 One benefit of convolutional networks compared to fully connected ones is that they still can recgnize an image even though the image have been slightly shifted. In the context of recognizing digits, the convolutional should be able to recognize a digit even though the digits is placed a bit different in the image (i.e. slightly to the left or to the rigth, see figures below) compared to the images in the training dataset. 
 
 <p align="center">
-    <img src="fig/zero.png" width="40%">  
-    <img src="fig/zero_shifted.png" width="40%">
+    <img src="fig/zero.png" width="30%">  
+    <br>
+    <img src="fig/zero_shifted.png" width="30%">
     <p align="center">Shifting the digit slightly to the right.<p>  
 <p>
 
