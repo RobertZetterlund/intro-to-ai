@@ -24,12 +24,10 @@ epochs = 10
 accuracies = []
 
 #what learning rates to iterate through
-lrStart = 0.1
-lrEnd = 1.0
-lrStep = 0.05
+learningrates = [0.001, 0.005, 0.025, 0.05, 0.1, 0.25, 0.5, 1]
 
 
-for learningRate in np.linspace(lrStart, lrEnd, lrEnd/lrStep):
+for learningRate in learningrates:
     accuracy = 0
     #3 times for each learning rate
     for j in range(3):
