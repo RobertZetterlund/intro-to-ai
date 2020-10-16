@@ -212,17 +212,19 @@ Use at least one convolutional layer and try and create a network that can reach
 
 <!--
 What is a benefit of using convolutional layers over fully connected ones?
-
-
-
 --->
 
-One benefit of convolutional networks over fully connected is that they still can classify an image even though the image have been slightly shifted.
+One benefit of convolutional networks compared to fully connected ones is that they still can recgnize an image even though the image have been slightly shifted. In the context of recognizing digits, the convolutional should be able to recognize a digit even though the digits is placed a bit different in the image (i.e. slightly to the left or to the rigth, see figures below) compared to the images in the training dataset. 
 
-When shifting all the images in the validation dataset 3 pixels to the rigth, we get that the convolutional network performs a lot better than the fully connected network. 
+<p align="center">
+    <img src="fig/zero.png" width="40%">  
+    <img src="fig/zero_shifted.png" width="40%">
+    <p align="center">Shifting the digit slightly to the right.<p>  
+<p>
+
+When trying this, by shifting all the images in the validation dataset 3 pixels to the rigth, we indeed get that the convolutional network performs a lot better than the fully connected network. 
 
 - Convolutional network: 90.1 % accuracy
 - Fully connected network 57.1 % accuracy
 
-
-Another benfit of using convolutional networks is that there will be less parameters. This makes it more efficient when it comes memory and complexity. 
+Another benfit of using convolutional networks is that it will need less parameters than a fully connected on. This makes it more efficient when it comes memory and complexity. The reason why in needs less parameters is because it uses shared weights and biases. Each of the hidden neurons in a convolutional network has a bias and several weights connected to the neurons in its local receptive field. But all the hidden neurons has the same array of weights, and hence a convolutional network will need less parameters. 
