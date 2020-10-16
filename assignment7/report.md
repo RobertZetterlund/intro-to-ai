@@ -107,7 +107,7 @@ Similar as before, the learning rate is set to 0.1, and the layers of the model 
 ]
 ```
 
-![img](fig/Q2a.png)
+![img](fig/q2a.png)
 
 ### B)
 
