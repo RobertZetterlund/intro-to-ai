@@ -137,6 +137,34 @@ The results show that the optimal learning rate is approxiamtely 0.5, which yiel
 
 ### C)
 
+Similar as to above, we introduce an additional for-loop over neurons.
+
+```python
+neuronsToTry = [10, 25, 50, 100, 150, 250, 500, 750, 1000]
+learningRatesToTry = [0.001, 0.005, 0.01, 0.05, 0.1]
+
+for neurons in neuronsToTry:
+    for lr in learningRatesToTry:
+        # train and evaluate        
+
+
+# line plot each learning rate:
+for idx,lr in enumerate(learningRatesToTry):
+    lr_df = df[df["learning rate"]==lr]
+    lr_df.plot.line(x="neurons", y="accuracy", color=colors[idx], legend=True, marker='o', linewidth=2, ax=ax)
+```
+
+![img](fig/q2c.png)
+
+It appears that having more than 250 neurons seems redudant and that a learning rate of 0.1 is the best for all amounts of neurons. 
+
+Overall, the model that performs the best is the one with `1000` neurons and a learning rate of `0.1`, with an accuracy of `97.34%`. 
+
+We use the same code used in q2 but with changed neurons and learning rate, plotted below.
+
+![img](fig/q2c2.png)
+
+
 ## _Question 3_
 
 ### A)
