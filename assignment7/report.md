@@ -93,3 +93,20 @@ Reg param: 0.005 Test loss: 0.1834477186203003, Test accuracy 0.9671000242233276
 Reg param: 0.01 Test loss: 0.2412899136543274, Test accuracy 0.955299973487854
 Reg param: 0.05 Test loss: 0.4854423701763153, Test accuracy 0.8988000154495239
 Reg param: 0.1 Test loss: 0.9878652095794678, Test accuracy 0.7328000068664551
+
+
+## _Question 4_
+
+## A)
+
+## B) 
+
+One benefit of convolutional networks over fully connected is that they still can classify an image even though the image have been slightly shifted.
+
+When shifting all the images in the validation dataset 3 pixels to the rigth, we get that the convolutional network performs a lot better than the fully connected network. 
+
+- Convolutional network: 90.1 % accuracy
+- Fully connected network 57.1 % accuracy
+
+
+Another benfit of using convolutional networks is that there will be less parameters. This makes it more efficient when it comes memory and complexity. 
