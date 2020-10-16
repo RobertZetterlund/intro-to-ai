@@ -21,7 +21,7 @@ model, fit_info = train_model(
     x_test, 
     y_test,
     [Flatten(), 
-     Dense(1000, activation='relu'), 
+     Dense(100, activation='relu'), 
      Dense(10, activation='softmax')]
     )
 
