@@ -145,7 +145,7 @@ learningRatesToTry = [0.001, 0.005, 0.01, 0.05, 0.1]
 
 for neurons in neuronsToTry:
     for lr in learningRatesToTry:
-        # train and evaluate        
+        # train and evaluate
 
 
 # line plot each learning rate:
@@ -156,14 +156,13 @@ for idx,lr in enumerate(learningRatesToTry):
 
 ![img](fig/q2c.png)
 
-It appears that having more than 250 neurons seems redudant and that a learning rate of 0.1 is the best for all amounts of neurons. 
+It appears that having more than 250 neurons seems redudant and that a learning rate of 0.1 is the best for all amounts of neurons.
 
-Overall, the model that performs the best is the one with `1000` neurons and a learning rate of `0.1`, with an accuracy of `97.34%`. 
+Overall, the model that performs the best is the one with `1000` neurons and a learning rate of `0.1`, with an accuracy of `97.34%`.
 
 We use the same code used in q2 but with changed neurons and learning rate, plotted below.
 
 ![img](fig/q2c2.png)
-
 
 ## _Question 3_
 
@@ -207,7 +206,7 @@ According to [Jason Brownlee PhD](https://machinelearningmastery.com/train-neura
 | 0.005     | 0.18344   | 0.9671        |
 | 0.01      | 0.24128   | 0.9552        |
 | 0.05      | 0.48544   | 0.8988        |
-| 0.001     | 0.98786   | 0.7328        |
+| 0.1       | 0.98786   | 0.7328        |
 
 <!--Reg param: 0.001 Test loss: 0.12269703298807144, Test accuracy 0.9768000245094299
 Reg param: 0.005 Test loss: 0.1834477186203003, Test accuracy 0.9671000242233276
@@ -256,4 +255,4 @@ When trying this, by shifting all the images in the validation dataset 3 pixels 
 - Convolutional network: 90.1 % accuracy
 - Fully connected network 57.1 % accuracy
 
-Another benfit of using convolutional networks is that it will need less parameters than a fully connected on. This makes it more efficient when it comes memory and complexity. The reason why in needs less parameters is because it uses shared weights and biases. Each of the hidden neurons in a convolutional network has a bias and several weights connected to the neurons in its local receptive field. But all the hidden neurons has the same array of weights, and hence a convolutional network will need less parameters. 
+Another benefit of using convolutional networks is that it will need less parameters than a fully connected on. This makes it more efficient when it comes memory and complexity. The reason why in needs less parameters is because it uses shared weights and biases. Each of the hidden neurons in a convolutional network has a bias and several weights connected to the neurons in its local receptive field. But all the hidden neurons has the same array of weights, and hence a convolutional network will need less parameters. 
