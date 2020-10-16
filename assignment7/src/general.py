@@ -24,7 +24,7 @@ def train_model(x_train, y_train, x_val, y_val, layers, batch_size=128, num_clas
     fit_info = model.fit(x_train, y_train,
             batch_size=batch_size,
             epochs=epochs,
-            verbose=0,
+            verbose=1,
             validation_data=(x_val, y_val))
 
 
@@ -56,7 +56,6 @@ def generateData(num_classes):
     # convert class vectors to binary class matrices
     y_train = keras.utils.to_categorical(y_train, num_classes)
     y_test = keras.utils.to_categorical(y_test, num_classes)    
-
 
     return (x_train, y_train), (x_test, y_test)   
  

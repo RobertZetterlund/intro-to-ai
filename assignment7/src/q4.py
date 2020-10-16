@@ -15,7 +15,7 @@ from keras.regularizers import l2
 
 from general import generateData, train_model
 
-input_shape = (1,28,28)
+input_shape = (28,28,1)
 
 num_classes = 10
 
@@ -31,10 +31,16 @@ model, fit_info = train_model(
     x_test, 
     y_test,
     [
-    Conv2D(784, (3,3), activation="relu", input_shape=input_shape),
+    GaussianNoise(0.1),    
+    Conv2D(5, (5,5), activation="relu", input_shape=input_shape, kernel_regularizer=l2(0.001)),
     MaxPooling2D(2,2),
+    Conv2D(5,(5,5), activation="relu", input_shape=input_shape),
+    MaxPooling2D(2,2),
+    Flatten(),
     Dense(num_classes, activation='softmax')
     ],
 )
-score = model.evaluate(x_test, y_test, verbose=0)
-print("Test loss: {}, Test accuracy {}".format(score[0], score[1]))
+print(model.summary())
+
+#score = model.evaluate(x_test, y_test, verbose=0)
+#print("Test loss: {}, Test accuracy {}".format(score[0], score[1]))
