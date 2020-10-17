@@ -91,11 +91,12 @@ plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['val_accurac
 
 ![img](fig/Q1b.png)
 
-<!--- Perhaps use bar chart instead? --->
+We get that the accuracy on the test dataset is approximately `97.46 %` for this network when using 10 epochs and a learning rate of 0.1.
+
 
 ## _Question 2_
 
-### A)
+###  A)
 
 Similar as before, the learning rate is set to 0.1, and the layers of the model is:
 
@@ -109,9 +110,11 @@ Similar as before, the learning rate is set to 0.1, and the layers of the model 
 
 ![img](fig/q2a.png)
 
+Using this network, we get that the accuracy on the test dataset after training with 30 epochs is approximately `97.73 %`.
+
 ### B)
 
-To find the optimal learning rate, that is, the learning rate that yields the best accuarcy, we try learning rates in the interval between 0.001 and 1.0.
+To find the optimal learning rate, that is, the learning rate that yields the best accuarcy, we try some learning rates in the interval between 0.001 and 1.0.
 
 ```python
 learningrates = [0.001, 0.005, 0.025, 0.05, 0.1, 0.25, 0.5, 1]
@@ -183,22 +186,46 @@ We use simple for loop and iterate over suggested standardDeviations.
 
 ```python
 for standardDeviation in [0.1,1,10]:
-    # train and evaluate model
+    # train and evaluate model...
 ```
 
-We calculate the different predicitions score using the different standard deviations.
+We calculate the different predictions score using the different standard deviations.
 
-- `0.1` yields a test accuracy of 0.9785000085830688
-- `1` yields a test accuracy of 0.9577000141143799
-- `10` yields a test accuracy of 0.09740000218153
+- `0.1` yields a test accuracy of 97.85 %
+- `1` yields a test accuracy of 95.77 %
+- `10` yields a test accuracy of 9.74 % 
 
 **Can you come up with an argument for why adding noise like this could be a good idea in certain situations?**
 
-The reason we put Gaussian noise as the first hidden layer is because of the consensus within the community.
+When reading [Keras' documentation](https://keras.io/api/layers/regularization_layers/gaussian_noise/), we realize that what the noise layer essentially does is that it adds random noise to each input before handing the inputs to the next layer. 
 
-According to [Jason Brownlee PhD](https://machinelearningmastery.com/train-neural-networks-with-noise-to-reduce-overfitting/), Gaussian noise can be useful to reduce overfitting. [to be continued]
+By adding the noise layer as the first hidden layer we can make each input look a little bit different every time it is given to the network. Logically, it follows that this will decrease the risk of the network fitting individual points exactly. Hence, by adding random noise, we reduce overfitting. 
+
+Reducing overfitting is important as it helps the model to be more generalized and work better on new, unseen data. If you for example have a small dataset, the model might not be very generalized as it likely will have been able to fit the data points in the training data set precisely. In such a case, adding noise could be a good idea as it will reduce overfitting.  
+
+<!--- The reason we put Gaussian noise as the first hidden layer is because of the consensus within the community. 
+
+According to [Jason Brownlee PhD](https://machinelearningmastery.com/train-neural-networks-with-noise-to-reduce-overfitting/), Gaussian noise can be useful to reduce overfitting. [to be continued] -->
 
 ### B)
+
+We add l_2 regularization to the hidden layer, see code snippet below.
+
+```python
+[
+    Flatten(),
+    Dense(100, activation='relu', kernel_regularizer=l2(regParam)),
+    Dense(num_classes, activation='softmax')
+]
+```
+
+We use a simple for loop and iterate over some regularization parameters in the intervall [0.001, 01].
+
+```python
+for regParam in [0.001, 0.005, 0.01, 0.05, 0.1]:
+    #train and evaluate model...
+```
+We get the following result: 
 
 | reg param | Test loss | Test accuracy |
 | --------- | --------- | ------------- |
@@ -207,6 +234,14 @@ According to [Jason Brownlee PhD](https://machinelearningmastery.com/train-neura
 | 0.01      | 0.24128   | 0.9552        |
 | 0.05      | 0.48544   | 0.8988        |
 | 0.1       | 0.98786   | 0.7328        |
+
+In [question 2a](#question-2) we got a test accuracy of **`0.9773`** when using the same network, the same learning rate, and the same number of epochs, but without l_2 norm regularization. 
+
+Hence it seems like adding l_2 regularization to our layer does **`not`** improve the final prediction score.
+We are not sure on why this is the case, but we have a speculation. 
+
+Regularization is often used to reduce overfitting so that the model will work better on new, unseen data, and not only on the training data. The fact that regularization does not improve our network indicates that our network is not overfitting. 
+
 
 <!--Reg param: 0.001 Test loss: 0.12269703298807144, Test accuracy 0.9768000245094299
 Reg param: 0.005 Test loss: 0.1834477186203003, Test accuracy 0.9671000242233276
@@ -241,7 +276,7 @@ Use at least one convolutional layer and try and create a network that can reach
 What is a benefit of using convolutional layers over fully connected ones?
 --->
 
-One benefit of convolutional networks compared to fully connected ones is that they still can recgnize an image even though the image have been slightly shifted. In the context of recognizing digits, the convolutional should be able to recognize a digit even though the digits is placed a bit different in the image (i.e. slightly to the left or to the rigth, see figures below) compared to the images in the training dataset. 
+One benefit of convolutional networks compared to fully connected ones is that they still can recognize an image even though the image has been slightly shifted. In the context of recognizing digits, the convolutional should be able to recognize a digit even though the digits are placed a bit different in the image (e.g. slightly to the left or to the right, see figures below) compared to the images in the training dataset.
 
 <p align="center">
     <img src="fig/zero.png" width="30%">  
@@ -250,9 +285,9 @@ One benefit of convolutional networks compared to fully connected ones is that t
     <p align="center">Shifting the digit slightly to the right.<p>  
 <p>
 
-When trying this, by shifting all the images in the validation dataset 3 pixels to the rigth, we indeed get that the convolutional network performs a lot better than the fully connected network. 
+When trying this, by shifting all the images in the validation dataset 3 pixels to the right, we indeed get that the convolutional network from question 4a performs much better than the fully connected network from question 2a. 
 
 - Convolutional network: 90.1 % accuracy
 - Fully connected network 57.1 % accuracy
 
-Another benefit of using convolutional networks is that it will need less parameters than a fully connected on. This makes it more efficient when it comes memory and complexity. The reason why in needs less parameters is because it uses shared weights and biases. Each of the hidden neurons in a convolutional network has a bias and several weights connected to the neurons in its local receptive field. But all the hidden neurons has the same array of weights, and hence a convolutional network will need less parameters. 
+Another benefit of using convolutional networks is that it will need fewer parameters than a fully connected one. This makes it more efficient when it comes to memory and complexity. The reason why it needs fewer parameters is that it uses shared weights and biases. Each of the hidden neurons in a convolutional network has a bias and several weights connected to the neurons in its local receptive field. But all the hidden neurons have the same array of weights, hence a convolutional network will need fewer parameters. 
