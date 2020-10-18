@@ -115,7 +115,7 @@ train_model(
 
 ![img](fig/q2a.png)
 
-Using this network, we get that the accuracy on the test dataset after training with 30 epochs is approximately `97.73 %`.
+Using this network, we get that the accuracy on the test dataset after training with 30 epochs is approximately `97.54 %`.
 
 ### B)
 
@@ -158,8 +158,12 @@ for neurons in neuronsToTry:
 
 # line plot each learning rate:
 for idx,lr in enumerate(learningRatesToTry):
+    ## filter out learning rates for plot
     lr_df = df[df["learning rate"]==lr]
-    lr_df.plot.line(x="neurons", y="accuracy", color=colors[idx], legend=True, marker='o', linewidth=2, ax=ax)
+    ## used for equal spacing of x axis
+    lr_df["x"] = x
+    ## plot line
+    lr_df.plot.line(x="x", y="accuracy", color=colors[idx], legend=True, marker='o', linewidth=2, ax=ax)
 ```
 
 ![img](fig/q2c.png)
@@ -246,10 +250,9 @@ We get the following result:
 | 0.05      | 0.48544   | 0.8988        |
 | 0.1       | 0.98786   | 0.7328        |
 
-In [question 2a](#question-2) we got a test accuracy of **`0.9773`** when using the same network, the same learning rate, and the same number of epochs, but without l_2 norm regularization. 
+In [question 2a](#question-2) we got a test accuracy of **`0.9754`** when using the same network, the same learning rate, and the same number of epochs, but without l_2 norm regularization. 
 
-Hence it seems like adding l_2 regularization to our layer does **`not`** improve the final prediction score.
-We are not sure on why this is the case, but we have a speculation. 
+Hence it seems like adding l_2 regularization to our layer does **`not`** significantly improve the final prediction score, as we receive very similar results for all different simulations of the same model. We are not sure on why l_2 does not improve, but we can speculate.
 
 Regularization is often used to reduce overfitting so that the model will work better on new, unseen data, and not only on the training data. The fact that regularization does not improve our network indicates that our network is not overfitting. 
 
