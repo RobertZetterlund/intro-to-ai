@@ -42,5 +42,5 @@ model, fit_info = train_model(
 )
 print(model.summary())
 
-#score = model.evaluate(x_test, y_test, verbose=0)
-#print("Test loss: {}, Test accuracy {}".format(score[0], score[1]))
+score = model.evaluate(x_test, y_test, verbose=0)
+print("Test loss: {}, Test accuracy {}".format(score[0], score[1]))

@@ -11,7 +11,7 @@
 The layers are created in this sequence of code
 
 ```python
-
+model.add(Flatten())
 model.add(Dense(125, activation = 'relu'))
 model.add(Dense(100, activation = 'relu'))
 model.add(Dense(50, activation = 'relu'))
@@ -56,7 +56,6 @@ We can verify this by using the `summary()`-method that is available for keras-m
 ```python
 print(model.summary())
 
-
 Model: "sequential"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #
@@ -74,7 +73,6 @@ dense_3 (Dense)              (None, 10)                510
 Total params: 116,285
 Trainable params: 116,285
 Non-trainable params: 0
-
 ```
 
 ### B)
@@ -102,8 +100,7 @@ We get that the accuracy on the test dataset is approximately `97.46 %` for this
 
 Similar as before, the learning rate is set to 0.1, and the layers of the model is:
 
-```python
-  
+```python  
 train_model(
     #...
     [
@@ -140,7 +137,6 @@ for learningRate in learningrates:
     # Add learning rate and the average accuracy to the list
     accuracies.append((learningRate,accuracy))
 
-
 # get highest avg
 bestAccuracy = max(accuracies, key=lambda item:item[1])
 ```
@@ -158,7 +154,6 @@ learningRatesToTry = [0.001, 0.005, 0.01, 0.05, 0.1]
 for neurons in neuronsToTry:
     for lr in learningRatesToTry:
         # train and evaluate
-
 
 # line plot each learning rate:
 for idx,lr in enumerate(learningRatesToTry):
@@ -226,9 +221,11 @@ By adding the noise layer as the first hidden layer we can make each input look 
 
 Reducing overfitting is important as it helps the model to be more generalized and work better on new, unseen data. If you for example have a small dataset, the model might not be very generalized as it likely will have been able to fit the data points in the training data set precisely. In such a case, adding noise could be a good idea as it will reduce overfitting.  
 
+
 <!--- The reason we put Gaussian noise as the first hidden layer is because of the consensus within the community. 
 
-According to [Jason Brownlee PhD](https://machinelearningmastery.com/train-neural-networks-with-noise-to-reduce-overfitting/), Gaussian noise can be useful to reduce overfitting. [to be continued] -->
+According to [Jason Brownlee PhD](https://machinelearningmastery.com/train-neural-networks-with-noise-to-reduce-overfitting/), Gaussian noise can be useful to reduce overfitting. [to be continued] 
+-->
 
 ### B)
 
@@ -280,17 +277,24 @@ Reg param: 0.1 Test loss: 0.9878652095794678, Test accuracy 0.7328000068664551
 Use at least one convolutional layer and try and create a network that can reach 99% accuracy on the validation data. If you choose to use any layers except convolutional layers and layers that you used in previous exercises, you must describe what they do. If you do not reach 99% accuracy, report your best performance and explain your attempts and thought process.
  -->
 
+We create the following architecture for this assignment:
+
 ```python
  [
     GaussianNoise(0.1),
-    Conv2D(30, (5,5), activation="relu", input_shape=input_shape, kernel_regularizer=l2(0.001)),
+    Conv2D(45, (5,5), activation="relu", input_shape=input_shape, kernel_regularizer=l2(0.001)),
     MaxPooling2D(2,2),
-    Conv2D(60,(5,5), activation="relu", input_shape=input_shape, kernel_regularizer=l2(0.001)),
+    Conv2D(60,(5,5), activation="relu", input_shape=input_shape),
     MaxPooling2D(2,2),
     Flatten(),
     Dense(num_classes, activation='softmax')
 ]
 ```
+We achieve a validation accuracy of `99.1%`. The new type of layers that we introduce are convulutional layers (`Conv2D`) and max pooling layers (`MaxPooling2D`). 
+
+`Conv2D` works by introducing the concept of features within the image. It aims to solve the issue that fully connected layers have trouble with, *the spatial structure of images*. Essentially, by examining (in our case) multiple 5x5 sections of the image, it is possible to determine the presence of certain features *appearing* or not.  If we were to search for edges, it could be beneficial to search for vertical lines. Then we would examine multiple 5x5 sections of the image with a *feature map* primed to detect said edges. Conceptually this is how we would want it to work, but the model changes feature maps to optimize itself and the conceptual approach might not suit the model.
+
+`MaxPooling2D` is a layer that paired with convolutional layers highlight the features detected in a summarized way. By applying pooling over the previous layer, the previous layer can be condensed. Max pooling (with stride=1) condenses every 2x2 matrix in the previous layer to a single node by selecting the maximum value, reducing the size by a factor of 2. Pooling are useful for detecting small changes of feature activation in the convolutional layer.  
 
 ### B)
 
@@ -306,6 +310,8 @@ One benefit of convolutional networks compared to fully connected ones is that t
     <img src="fig/zero_shifted.png" width="30%">
     <p align="center">Shifting the digit slightly to the right.<p>  
 <p>
+
+We implement this type of shifting using `np.roll` in the code section below. 
 
 ```python
 def roll(data, direction, steps):
@@ -323,7 +329,7 @@ def roll(data, direction, steps):
         return np.roll(data,steps,axis = 0)
 ```
 
-When trying this, by shifting all the images in the validation dataset 3 pixels to the right, we indeed get that the convolutional network from question 4a performs much better than the fully connected network from question 2a. 
+When shifting all the images in the validation dataset 3 pixels to the right, we indeed get that the convolutional network from question 4a performs much better than the fully connected network from question 2a. 
 
 - Convolutional network: 90.1 % accuracy
 - Fully connected network 57.1 % accuracy
