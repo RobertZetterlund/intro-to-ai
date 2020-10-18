@@ -86,7 +86,7 @@ fit_info = model.fit(...)
 # Plot test-accuracy
 plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['accuracy']], marker='o', markerfacecolor='blue', markersize=8, color='skyblue', linewidth=2)
 # Plot validation-accuracy.
-plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['val_accuracy']], marker='o', color='olive',markersize=8, linewidth=2)
+plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['val_accuracy']], marker='o', color='lime', markerfacecolor='green', markersize=8, linewidth=2)
 ```
 
 ![img](fig/Q1b.png)
@@ -101,11 +101,16 @@ We get that the accuracy on the test dataset is approximately `97.46 %` for this
 Similar as before, the learning rate is set to 0.1, and the layers of the model is:
 
 ```python
-[
-    Flatten(),
-    Dense(100, activation='relu'),
-    Dense(10, activation='softmax')
-]
+  
+train_model(
+    #...
+    [
+     Flatten(),
+     Dense(100, activation='relu'),
+     Dense(10, activation='softmax')
+    ],
+    lr=0.1
+)
 ```
 
 ![img](fig/q2a.png)
@@ -161,9 +166,15 @@ for idx,lr in enumerate(learningRatesToTry):
 
 It appears that having more than 250 neurons seems redudant and that a learning rate of 0.1 is the best for all amounts of neurons.
 
-Overall, the model that performs the best is the one with `1000` neurons and a learning rate of `0.1`, with an accuracy of `97.34%`.
+Overall, the model that performs the best is the one with `1000` neurons and a learning rate of `0.1`, with an accuracy of `97.5%` on the validation set.
 
-We use the same code used in q2 but with changed neurons and learning rate, plotted below.
+To show the optimal model we use the same code used in question 2 but with changed neurons and learning rate, shown below. 
+
+```python
+neurons_in_layer = 1000
+learning_rate = 0.1
+epochs = 30
+```
 
 ![img](fig/q2c2.png)
 
@@ -178,7 +189,7 @@ We add the gaussian noise layer as the first hidden layer, see code snippet belo
     Flatten(),
     GaussianNoise(<standardDeviation>),
     Dense(100, activation='relu'),
-    Dense(num_classes, activation='softmax')
+    Dense(num_classes, activation='softmax'),
 ]
 ```
 

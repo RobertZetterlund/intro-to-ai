@@ -16,12 +16,12 @@ import pandas as pd
 from matplotlib import cm
 
 num_classes = 10
-epochs = 10
-(x_train, y_train), (x_test, y_test) = generateData(num_classes)
+epochs = 5
+(x_train, y_train, x_test, y_test, input_shape) = generateData(num_classes)
 
-neuronsToTry = [10, 150, 500]  # [10, 25, 50, 100, 150, 250, 500, 750, 1000]
+neuronsToTry = [10, 25, 50, 100, 750]  # [10, 25, 50, 100, 150, 250, 500, 750, 1000]
 #
-learningRatesToTry = [0.001, 0.01, 0.1]  # [0.001, 0.005, 0.01, 0.05, 0.1]
+learningRatesToTry = [0.001]  # [0.001, 0.005, 0.01, 0.05, 0.1]
 colors = ["blue","red","green","orange","purple","cyan","pink","brown"]
 
 modelPerformances = []
@@ -62,15 +62,21 @@ df["accuracy"] = df["accuracy"]*100
 
 ax = plt.gca()
 
+x = [neuron for neuron in range(len(neuronsToTry))]
+
 for idx,lr in enumerate(learningRatesToTry):
+    ## filter out learning rates for plot
     lr_df = df[df["learning rate"]==lr]
-    lr_df.plot.line(x="neurons", y="accuracy", color=colors[idx], legend=True, marker='o', linewidth=2, ax=ax)
+    ## used for equal spacing of x axis
+    lr_df["x"] = x
+    ## plot line
+    lr_df.plot.line(x="x", y="accuracy", color=colors[idx], legend=True, marker='o', linewidth=2, ax=ax)
 
 ax.legend(learningRatesToTry)
 
 plt.title("Accuracies for different learning rates \n when the amount of neurons change ")
 plt.ylabel("Accuracy (%)")
 plt.xlabel("Number of neurons in layer")
-plt.xticks(neuronsToTry)
+plt.xticks(x, neuronsToTry)
 
 plt.show()
