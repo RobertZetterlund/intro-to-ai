@@ -14,110 +14,69 @@ import math as m
 from seaborn.matrix import heatmap
 import pandas as pd
 from matplotlib import cm
-#
-#
+
 num_classes = 10
-epochs = 10
-USE_OLD_DATA = False
+epochs = 5
+(x_train, y_train, x_test, y_test, input_shape) = generateData(num_classes)
 
-# generate data
-(x_train, y_train), (x_test, y_test) = generateData(num_classes)
-
-neuronsToTry = [10, 150, 500]  # [10, 25, 50, 100, 150, 250, 500, 750, 1000]
+neuronsToTry = [10, 25, 50, 100, 750]  # [10, 25, 50, 100, 150, 250, 500, 750, 1000]
 #
-learningRatesToTry = [0.001, 0.01, 0.1]  # [0.001, 0.005, 0.01, 0.05, 0.1]
-# A list to collect the performance of the model depending
-# on the number of neurons
+learningRatesToTry = [0.001]  # [0.001, 0.005, 0.01, 0.05, 0.1]
+colors = ["blue","red","green","orange","purple","cyan","pink","brown"]
+
 modelPerformances = []
 
-if(not USE_OLD_DATA):
 
-    for neurons in neuronsToTry:
 
-        for lr in learningRatesToTry:
-            # Train model
-            model, fit_info = train_model(
-                x_train,
-                y_train,
-                x_test,
-                y_test,
-                [Flatten(),
-                 Dense(neurons, activation='relu'),
-                 Dense(10, activation='softmax')],
-                epochs=10,
-                lr=lr
-            )
-            # Evalute accuracy
-            accuracy = model.evaluate(x_test, y_test, verbose=0)[1]
+for neurons in neuronsToTry:
 
-            model_dict = {
+    for lr in learningRatesToTry:
+        # Train model
+        model, fit_info = train_model(
+            x_train,
+            y_train,
+            x_test,
+            y_test,
+            [
+                Flatten(),
+                Dense(neurons, activation='relu'),
+                Dense(10, activation='softmax')],
+            epochs=10,
+            lr=lr
+        )
+        # Evalute accuracy
+        accuracy = model.evaluate(x_test, y_test, verbose=0)[1]
+
+        model_dict = {
                 "neurons": neurons,
                 "learning rate": lr,
                 "accuracy": accuracy
-            }
-            # Add performance to list
-            modelPerformances.append(model_dict)
+        }
+        # Add performance to list
+        modelPerformances.append(model_dict)
 
-            print(accuracy, "Neurons:", neurons, "Learning rate:", lr)
+        print(accuracy, "Neurons:", neurons, "Learning rate:", lr)
 
-    df = pd.DataFrame(modelPerformances)
+df = pd.DataFrame(modelPerformances)
+df["accuracy"] = df["accuracy"]*100
 
-# Create two subplots
+ax = plt.gca()
 
-# https://matplotlib.org/3.1.1/gallery/mplot3d/3d_bars.html
+x = [neuron for neuron in range(len(neuronsToTry))]
 
-else:
+for idx,lr in enumerate(learningRatesToTry):
+    ## filter out learning rates for plot
+    lr_df = df[df["learning rate"]==lr]
+    ## used for equal spacing of x axis
+    lr_df["x"] = x
+    ## plot line
+    lr_df.plot.line(x="x", y="accuracy", color=colors[idx], legend=True, marker='o', linewidth=2, ax=ax)
 
-    data = [
-        [10, 0.001, 0.7530],
-        [10, 0.010, 0.9030],
-        [10, 0.100, 0.9359],
-        [150, 0.001, 0.8630],
-        [150, 0.010, 0.9253],
-        [150, 0.100, 0.9714],
-        [500, 0.001, 0.8684],
-        [500, 0.010, 0.9295],
-        [500, 0.100, 0.9721]
-    ]
+ax.legend(learningRatesToTry)
 
-    df = pd.DataFrame(data, columns=["neurons", "learning rate", "accuracy"])
-
-
-ax1 = df.plot.scatter(x="neurons", y="learning rate",
-                      c="accuracy", colormap="winter")
-ax1.set_xticks(neuronsToTry)
-ax1.set_yticks(learningRatesToTry)
-plt.show()
-
-# Plot in some way
-
-
-# Get best model
-bestModel = df.iloc[df['accuracy'].argmax()]
-model, fit_info = train_model(
-    x_train,
-    y_train,
-    x_test,
-    y_test,
-    [Flatten(),
-     Dense(bestModel.at["neurons"], activation='relu'),
-     Dense(10, activation='softmax')],
-    epochs=30,
-    lr=bestModel.at['learning rate']
-)
-#Plot a line chart
-#fig, (ax1, ax2) = plt.subplots(1, 2)
-plt.plot(list(range(1, 30+1)), [a*100 for a in fit_info.history['accuracy']],
-         marker='o', markerfacecolor='blue', markersize=8, color='skyblue', linewidth=2)
-plt.plot(list(range(1, 30+1)), [a*100 for a in fit_info["fit_info"].history['val_accuracy']],
-         marker='o', color='olive', markersize=8, linewidth=2)
-
-
-#ax1.title(str(bestModel[0]) + " neurons in hidden layer")
-plt.legend(['Training dataset', 'Validation dataset'])
-plt.xlabel("Epoch")
+plt.title("Accuracies for different learning rates \n when the amount of neurons change ")
 plt.ylabel("Accuracy (%)")
-title = "Performance per epoch for " + \
-    str(bestModel["neurons"]) + " number of neurons"
-plt.title(title)
+plt.xlabel("Number of neurons in layer")
+plt.xticks(x, neuronsToTry)
+
 plt.show()
