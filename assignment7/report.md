@@ -89,7 +89,9 @@ plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['accuracy']]
 plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['val_accuracy']], marker='o', color='lime', markerfacecolor='green', markersize=8, linewidth=2)
 ```
 
-![img](fig/Q1b.png)
+<p align=center>
+<img src="fig/Q1b.png" width="75%">
+<p>
 
 We get that the accuracy on the test dataset is approximately `97.46 %` for this network when using 10 epochs and a learning rate of 0.1.
 
@@ -113,7 +115,9 @@ train_model(
 )
 ```
 
-![img](fig/q2a.png)
+<p align=center>
+<img src="fig/q2a.png" width="75%">
+<p>
 
 Using this network, we get that the accuracy on the test dataset after training with 30 epochs is approximately `97.54 %`.
 
@@ -166,7 +170,9 @@ for idx,lr in enumerate(learningRatesToTry):
     lr_df.plot.line(x="x", y="accuracy", color=colors[idx], legend=True, marker='o', linewidth=2, ax=ax)
 ```
 
-![img](fig/q2c.png)
+<p align=center>
+<img src="fig/q2c.png" width="75%">
+<p>
 
 It appears that having more than 250 neurons seems redudant and that a learning rate of 0.1 is the best for all amounts of neurons.
 
@@ -180,7 +186,9 @@ learning_rate = 0.1
 epochs = 30
 ```
 
-![img](fig/q2c2.png)
+<p align=center>
+<img src="fig/q2c2.png" width="75%">
+<p>
 
 ## _Question 3_
 
@@ -299,9 +307,27 @@ One benefit of convolutional networks compared to fully connected ones is that t
     <p align="center">Shifting the digit slightly to the right.<p>  
 <p>
 
+```python
+def roll(data, direction, steps):
+    #rigth
+    if direction == 1:
+        return np.roll(data,steps,axis=1)  
+    #left    
+    elif direction == 2:
+        return np.roll(data,-1*steps,axis=1)
+    # UP
+    elif direction == 3:
+        return np.roll(data, -1*steps,axis = 0)
+    # Down    
+    elif direction == 4:
+        return np.roll(data,steps,axis = 0)
+```
+
 When trying this, by shifting all the images in the validation dataset 3 pixels to the right, we indeed get that the convolutional network from question 4a performs much better than the fully connected network from question 2a. 
 
 - Convolutional network: 90.1 % accuracy
 - Fully connected network 57.1 % accuracy
 
 Another benefit of using convolutional networks is that it will need fewer parameters than a fully connected one. This makes it more efficient when it comes to memory and complexity. The reason why it needs fewer parameters is that it uses shared weights and biases. Each of the hidden neurons in a convolutional network has a bias and several weights connected to the neurons in its local receptive field. But all the hidden neurons have the same array of weights, hence a convolutional network will need fewer parameters. 
+
+
