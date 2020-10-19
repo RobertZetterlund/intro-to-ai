@@ -108,6 +108,7 @@ train_model(
      Dense(100, activation='relu'),
      Dense(10, activation='softmax')
     ],
+    epochs=30,
     lr=0.1
 )
 ```
@@ -127,7 +128,7 @@ learningrates = [0.001, 0.005, 0.025, 0.05, 0.1, 0.25, 0.5, 1]
 
 for learningRate in learningrates:
     for j in range(3):
-        # train model, store accuracy, learning rate
+        # train model with 10 epochs, store accuracy, learning rate
         train_model(...,lr=learningRate)
 
         accuracy += model.evaluate(x_test, y_test, verbose=0)[1]
@@ -153,7 +154,7 @@ learningRatesToTry = [0.001, 0.005, 0.01, 0.05, 0.1]
 
 for neurons in neuronsToTry:
     for lr in learningRatesToTry:
-        # train and evaluate
+        # train with 10 epochs and evaluate
 
 # line plot each learning rate:
 for idx,lr in enumerate(learningRatesToTry):
