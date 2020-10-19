@@ -117,7 +117,7 @@ train_model(
 <img src="fig/q2a.png" width="75%">
 <p>
 
-Using this network, we get that the accuracy on the test dataset after training with 30 epochs is approximately `97.54 %`.
+Using this network, we get that the accuracy on the validation dataset after training with 30 epochs is approximately `97.54 %`.
 
 ### B)
 
