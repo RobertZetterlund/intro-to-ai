@@ -16,7 +16,7 @@ num_classes = 10
 epochs = 10
 
 #generate data
-(x_train, y_train), (x_test, y_test) = generateData(num_classes)
+(x_train, y_train,x_test, y_test, input_shape) = generateData(num_classes)
 
 
 

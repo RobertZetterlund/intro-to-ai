@@ -31,13 +31,12 @@ convModel, _ = train_model(
     x_test, 
     y_test,
     [
-    GaussianNoise(0.1),    
-    Conv2D(20, (5,5), activation="relu", input_shape=input_shape),
+    GaussianNoise(0.1),
+    Conv2D(45, (5,5), activation="relu", input_shape=input_shape, kernel_regularizer=l2(0.001)),
     MaxPooling2D(2,2),
-    Conv2D(40, (5,5), activation="relu", input_shape=input_shape),
+    Conv2D(60,(5,5), activation="relu", input_shape=input_shape),
     MaxPooling2D(2,2),
     Flatten(),
-    Dense(100, activation='relu'),
     Dense(num_classes, activation='softmax')
     ],
 )
@@ -55,6 +54,10 @@ convScore = convModel.evaluate(x_test, y_test, verbose=0)
 print("Convolutional network: Test loss: {}, Test accuracy {}".format(convScore[0], convScore[1]))   
 score = model.evaluate(x_test, y_test, verbose=0)
 print("Fully connected network: Test loss: {}, Test accuracy {}".format(score[0], score[1]))
+
+
+print(convModel.summary())
+print(model.summary())
 
 
 

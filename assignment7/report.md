@@ -334,6 +334,7 @@ When shifting all the images in the validation dataset 3 pixels to the right, we
 - Convolutional network: 90.1 % accuracy
 - Fully connected network 57.1 % accuracy
 
-Another benefit of using convolutional networks is that it will need fewer parameters than a fully connected one. This makes it more efficient when it comes to memory and complexity. The reason why it needs fewer parameters is that it uses shared weights and biases. Each of the hidden neurons in a convolutional network has a bias and several weights connected to the neurons in its local receptive field. But all the hidden neurons have the same array of weights, hence a convolutional network will need fewer parameters. 
+Another benefit of using convolutional networks is that it will need fewer parameters than a fully connected one. This makes it more efficient when it comes to memory and complexity. The reason why it needs fewer parameters is that it uses shared weights and biases. Each of the hidden neurons in a feature map will have the same array of weights and the same bias. This means that a convolutional layer with 3 feature maps and windows of 5\*5 neurons will have only 3\*5\*5 + 3=78 parameters. 
+
 
 

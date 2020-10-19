@@ -14,7 +14,7 @@ from general import generateData, train_model
 num_classes = 10
 
 #generate data
-(x_train, y_train), (x_test, y_test) = generateData(num_classes)
+(x_train, y_train,x_test, y_test, input_shape) = generateData(num_classes)
 
 #Train model
 for standardDeviation in [0.1,1,10]:

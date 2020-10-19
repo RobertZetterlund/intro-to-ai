@@ -15,13 +15,10 @@ from keras.regularizers import l2
 
 from general import generateData, train_model
 
-input_shape = (28,28,1)
-
 num_classes = 10
 
 #generate data
-(x_train, y_train), (x_test, y_test) = generateData(num_classes)
-print(len(x_train))
+(x_train, y_train,x_test, y_test, input_shape) = generateData(num_classes)
 
 #Train model
 
