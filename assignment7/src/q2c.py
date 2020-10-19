@@ -16,7 +16,7 @@ import pandas as pd
 from matplotlib import cm
 
 num_classes = 10
-epochs = 5
+epochs = 10
 
 # Generate the datasets
 (x_train, y_train, x_test, y_test, _) = generateData(num_classes)
@@ -86,4 +86,46 @@ plt.ylabel("Accuracy (%)")
 plt.xlabel("Number of neurons in layer")
 plt.xticks(x, neuronsToTry)
 
+plt.show()
+
+## find best model and train it over 30 epochs
+
+epochs = 30
+
+bestModel = df.iloc[df['accuracy'].argmax()]
+model, fit_info = train_model(
+    x_train,
+    y_train,
+    x_test,
+    y_test,
+    [Flatten(),
+     Dense(bestModel.at["neurons"], activation='relu'),
+     Dense(10, activation='softmax')],
+    epochs=epochs,
+    lr=bestModel.at['learning rate']
+)
+
+# Plot a line chart
+plt.plot(list(range(1, epochs+1)), [a*100 for a in fit_info.history['accuracy']],
+         marker='o', markerfacecolor='blue', markersize=8, color='skyblue', linewidth=2)
+plt.plot(list(range(1, epochs+1)), [a*100 for a in fit_info.history['val_accuracy']],
+         marker='o', color='lime', markerfacecolor='green', markersize=8, linewidth=2)
+
+# Fix y-ticks
+last_val = fit_info.history['val_accuracy'][-1] * 100
+min_val = min(fit_info.history["accuracy"]) * 100
+range_start = 10 * (min_val//10) 
+yticks = np.arange(range_start, 101, 10)
+yticks = np.sort(np.append(yticks, last_val))
+plt.yticks(yticks)
+
+#Print dashed line for optimal value
+plt.axhline(last_val, ls="--", c="k")
+
+plt.legend(['Training dataset', 'Validation dataset'])
+plt.xlabel("Epoch")
+plt.ylabel("Accuracy (%)")
+title = "Performance per epoch for " + \
+    str(int(bestModel["neurons"])) + " number of neurons"
+plt.title(title)
 plt.show()
