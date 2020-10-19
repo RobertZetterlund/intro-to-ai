@@ -81,7 +81,7 @@ Non-trainable params: 0
 # get fit_info when training model
 fit_info = model.fit(...)
 
-# Plot test-accuracy
+# Plot training-accuracy
 plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['accuracy']], marker='o', markerfacecolor='blue', markersize=8, color='skyblue', linewidth=2)
 # Plot validation-accuracy.
 plt.plot( list(range(1,epochs+1)), [a*100 for a in fit_info.history['val_accuracy']], marker='o', color='lime', markerfacecolor='green', markersize=8, linewidth=2)
