@@ -272,7 +272,7 @@ In [question 2a](#question-2) we got a test accuracy of **`0.9754`** when using 
 
 Hence it seems like adding l_2 regularization to our layer does **`not`** significantly improve the final prediction score, as we receive very similar results for all different simulations of the same model. We are not sure on why l_2 does not improve, but we can speculate.
 
-Regularization is often used to reduce overfitting so that the model will work better on new, unseen data, and not only on the training data. The fact that regularization does not improve our network indicates that our network is not overfitting. 
+Regularization is often used to reduce overfitting so that the model will work better on new, unseen data, and not only on the training data. The fact that regularization does only improve our network very slightly indicates that our network is not overfitting. 
 
 
 <!--Reg param: 0.001 Test loss: 0.12269703298807144, Test accuracy 0.9768000245094299
