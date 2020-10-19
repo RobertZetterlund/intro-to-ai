@@ -129,7 +129,7 @@ learningrates = [0.001, 0.005, 0.025, 0.05, 0.1, 0.25, 0.5, 1]
 for learningRate in learningrates:
     for j in range(3):
         # train model with 10 epochs, store accuracy, learning rate
-        train_model(...,lr=learningRate)
+        train_model(...,lr=learningRate, epochs=10)
 
         accuracy += model.evaluate(x_test, y_test, verbose=0)[1]
 
@@ -154,14 +154,26 @@ learningRatesToTry = [0.001, 0.005, 0.01, 0.05, 0.1]
 
 for neurons in neuronsToTry:
     for lr in learningRatesToTry:
-        # train with 10 epochs and evaluate
+        # train model with values of neurons and learning rate
+        model, fit_info = train_model(
+            #...
+            ,[
+                Flatten(),
+                Dense(neurons, activation='relu'),
+                Dense(10, activation='softmax')
+            ],
+            epochs=10,
+            lr=lr
+         )
+         # Evaluate model and store information in dataframe
+         # ...
 
 # line plot each learning rate:
 for idx,lr in enumerate(learningRatesToTry):
     ## filter out learning rates for plot
     lr_df = df[df["learning rate"]==lr]
     ## used for equal spacing of x axis
-    lr_df["x"] = x
+    lr_df["x"] = [neuron for neuron in range(len(neuronsToTry))]
     ## plot line
     lr_df.plot.line(x="x", y="accuracy", color=colors[idx], legend=True, marker='o', linewidth=2, ax=ax)
 ```
