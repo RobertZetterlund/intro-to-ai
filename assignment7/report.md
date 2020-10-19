@@ -141,7 +141,7 @@ for learningRate in learningrates:
 bestAccuracy = max(accuracies, key=lambda item:item[1])
 ```
 
-The results show that the optimal learning rate is approxiamtely 0.5, which yields an accuracy of 0.978 %.
+The results show that the optimal learning rate is approximately 0.5, which yields an accuracy of 97.8 %.
 
 ### C)
 
