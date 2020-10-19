@@ -1,6 +1,6 @@
 # Assignment 7
 
-### Tobias Lindroth: x hrs
+### Tobias Lindroth: 17 hrs
 
 ### Robert Zetterlund: y hrs
 
