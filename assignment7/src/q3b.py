@@ -16,8 +16,7 @@ num_classes = 10
 #generate data
 (x_train, y_train,x_test, y_test, input_shape) = generateData(num_classes)
 
-#Train model
-
+#Train model for different l_2 regularization parameters
 for regParam in [0.001, 0.005, 0.01, 0.05, 0.1]:
     model, fit_info = train_model(
         x_train, 
@@ -28,5 +27,6 @@ for regParam in [0.001, 0.005, 0.01, 0.05, 0.1]:
         Dense(100, activation='relu', kernel_regularizer=l2(regParam)),
         Dense(num_classes, activation='softmax')],
     )
+    #Print score
     score = model.evaluate(x_test, y_test, verbose=0)
     print("Reg param:",regParam,"Test loss: {}, Test accuracy {}".format(score[0], score[1]))

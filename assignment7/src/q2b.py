@@ -18,8 +18,6 @@ epochs = 10
 #generate data
 (x_train, y_train,x_test, y_test, input_shape) = generateData(num_classes)
 
-
-
 #list to collect the accuracies for different learning rates
 accuracies = []
 

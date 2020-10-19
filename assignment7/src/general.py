@@ -15,14 +15,16 @@ import random
 # Returns the model and fit info
 def train_model(x_train, y_train, x_val, y_val, layers, batch_size=128, num_classes=10, epochs=30, lr=0.1):
 
-    ## Define model ##
+    ## Define model using the given layers##
     model = Sequential(layers)
     
+    # Configure the model for training using the given learning rate
+    # Use the accuracy metric
     model.compile(loss=keras.losses.categorical_crossentropy,
                 optimizer=keras.optimizers.SGD(lr = lr),
                 metrics=['accuracy'])
 
-
+    #Fit the model using the given training data and validation data
     fit_info = model.fit(x_train, y_train,
             batch_size=batch_size,
             epochs=epochs,
@@ -33,7 +35,7 @@ def train_model(x_train, y_train, x_val, y_val, layers, batch_size=128, num_clas
     return (model, fit_info)  
 
 
-
+### Generates the data needed
 def generateData(num_classes, rollDirection=0, steps=0):
     # input image dimensions
     img_rows, img_cols = 28, 28
@@ -43,9 +45,12 @@ def generateData(num_classes, rollDirection=0, steps=0):
 
     #Roll image
     if rollDirection in [1,2,3,4]:
+        #Choose random image to display
         imageToDisplay = random.randint(0, len(x_test)-1)
         displayImage(x_test[imageToDisplay])
+        #Roll all images
         x_test = np.array([roll(matrix,rollDirection,steps) for matrix in x_test])
+        #Displayed rolled image
         displayImage(x_test[imageToDisplay])
 
     if K.image_data_format() == 'channels_first':

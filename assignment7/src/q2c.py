@@ -17,16 +17,18 @@ from matplotlib import cm
 
 num_classes = 10
 epochs = 5
-(x_train, y_train, x_test, y_test, input_shape) = generateData(num_classes)
 
-neuronsToTry = [10, 25, 50, 100, 750]  # [10, 25, 50, 100, 150, 250, 500, 750, 1000]
-#
-learningRatesToTry = [0.001]  # [0.001, 0.005, 0.01, 0.05, 0.1]
+# Generate the datasets
+(x_train, y_train, x_test, y_test, _) = generateData(num_classes)
+
+neuronsToTry = [10, 25, 50, 100, 150, 250, 500, 750, 1000]
+learningRatesToTry = [0.001, 0.005, 0.01, 0.05, 0.1]
+
+#Colors for plotting
 colors = ["blue","red","green","orange","purple","cyan","pink","brown"]
 
+#List to collect the performances of the different models
 modelPerformances = []
-
-
 
 for neurons in neuronsToTry:
 
@@ -46,7 +48,7 @@ for neurons in neuronsToTry:
         )
         # Evalute accuracy
         accuracy = model.evaluate(x_test, y_test, verbose=0)[1]
-
+        # Create model performance dict
         model_dict = {
                 "neurons": neurons,
                 "learning rate": lr,
@@ -57,11 +59,16 @@ for neurons in neuronsToTry:
 
         print(accuracy, "Neurons:", neurons, "Learning rate:", lr)
 
+#Create a dataframe from model performances to make it easier to plot
 df = pd.DataFrame(modelPerformances)
+
+#Transform accuracy to percentage
 df["accuracy"] = df["accuracy"]*100
 
+#Get ax of figure
 ax = plt.gca()
 
+#Get list [0,1,2..... len(neuronsToTry)]
 x = [neuron for neuron in range(len(neuronsToTry))]
 
 for idx,lr in enumerate(learningRatesToTry):

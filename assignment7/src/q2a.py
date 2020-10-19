@@ -46,18 +46,20 @@ plt.plot(list(range(1, epochs+1)), [a*100 for a in fit_info.history['val_accurac
 
 plt.title(title)
 
+# Fix y-ticks
 last_val = fit_info.history['val_accuracy'][-1] * 100
 min_val = min(fit_info.history["accuracy"]) * 100
-
-range_start = 10 * (min_val//10)  # makes 77 be 70
-
+range_start = 10 * (min_val//10) 
 yticks = np.arange(range_start, 101, 10)
 yticks = np.sort(np.append(yticks, last_val))
-
-plt.axhline(last_val, ls="--", c="k")
 plt.yticks(yticks)
 
+#Print dashed line for optimal value
+plt.axhline(last_val, ls="--", c="k")
+
+#Legend and labels
 plt.legend(['Training dataset', 'Validation dataset'], loc="lower right")
 plt.xlabel("Epoch")
 plt.ylabel("Accuracy (%)")
+#Show the plot
 plt.show()

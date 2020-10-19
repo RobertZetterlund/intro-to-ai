@@ -21,7 +21,6 @@ num_classes = 10
 (x_train, y_train,x_test, y_test, input_shape) = generateData(num_classes)
 
 #Train model
-
 model, fit_info = train_model(
     x_train, 
     y_train, 
@@ -37,7 +36,9 @@ model, fit_info = train_model(
     Dense(num_classes, activation='softmax')
     ],
 )
+#Print model summary
 print(model.summary())
 
+#Print model score
 score = model.evaluate(x_test, y_test, verbose=0)
 print("Test loss: {}, Test accuracy {}".format(score[0], score[1]))

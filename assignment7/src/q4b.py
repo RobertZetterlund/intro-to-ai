@@ -23,8 +23,7 @@ num_classes = 10
 (x_train, y_train,x_test, y_test, input_shape) = generateData(num_classes, 1,3)
 
 
-#Train model
-
+#Train convolutional model
 convModel, _ = train_model(
     x_train, 
     y_train, 
@@ -41,6 +40,7 @@ convModel, _ = train_model(
     ],
 )
 
+#Train fully connected model
 model, _ = train_model(
     x_train, 
     y_train, 
@@ -50,12 +50,14 @@ model, _ = train_model(
      Dense(100, activation='relu'), 
      Dense(10, activation='softmax')]
     )
+
+#Compare accuarcy of the two models
 convScore = convModel.evaluate(x_test, y_test, verbose=0)
 print("Convolutional network: Test loss: {}, Test accuracy {}".format(convScore[0], convScore[1]))   
 score = model.evaluate(x_test, y_test, verbose=0)
 print("Fully connected network: Test loss: {}, Test accuracy {}".format(score[0], score[1]))
 
-
+#Compare nr of parameters of the two models
 print(convModel.summary())
 print(model.summary())
 

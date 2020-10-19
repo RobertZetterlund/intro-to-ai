@@ -9,14 +9,12 @@ from keras import backend as K
 
 from general import generateData, train_model
 
-
-
 num_classes = 10
 
 #generate data
 (x_train, y_train,x_test, y_test, input_shape) = generateData(num_classes)
 
-#Train model
+#Train model for each standard deviation
 for standardDeviation in [0.1,1,10]:
     model, fit_info = train_model(
         x_train, 
@@ -28,5 +26,6 @@ for standardDeviation in [0.1,1,10]:
         Dense(100, activation='relu'),
         Dense(num_classes, activation='softmax')],
     )
+    #Print the score
     score = model.evaluate(x_test, y_test, verbose=0)
     print("Standard deviation", standardDeviation, "Test loss: {}, Test accuracy {}".format(score[0], score[1]))
