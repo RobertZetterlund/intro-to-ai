@@ -1,3 +1,5 @@
+# Author: {Tobias Lindroth & Robert Zetterlund}
+
 # Use at least one convolutional layer and try and create a network that can reach 99% accuracy 
 # on the validation data. If you choose to use any layers except convolutional layers and layers 
 # that you used in previous exercises, you must describe what they do. 
