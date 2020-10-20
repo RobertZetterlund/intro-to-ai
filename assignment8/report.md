@@ -35,3 +35,20 @@ The total amount of stored paths depend on the current layer (how long a path is
 For every iteration, `d` new paths arise. At first split 1 path becomes 3, at second split 3 paths become 5, then 7, then 9. This is equal to the nodes of the layer. All these nodes have equal length to initial node. We can then simply multiply depth times width to calculate the memory cost.
 
 Number of nodes at layer is calculated by `d^l` where l is the layer. Say `d=3` and `l=3`, then the total amount of nodes will be 9. Since the height is 3, two steps are required. The total memory required is then 9 * 2 = 18. 
+
+
+
+# Question 2 
+
+
+## Find all labeling of these three nodes, where DFS will never reach to the goal! Discuss how DFS should be modified to avoid this situation?
+
+<p align="center">
+    <img src="q2.png">
+<p>
+
+What is important here is to always make the rightmost point in the triangle choose "incorrectly", meaning it should choose to remain in the loop. This means that the "1" must always be placed at the top of the triangle. 3 and 4 can be placed however deemed fit as the arrows indicate which directions that are allowed.
+
+
+To solve this issue you use: "Iterative Deepening DFS". But more on that later...
+
