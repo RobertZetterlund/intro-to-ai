@@ -86,7 +86,6 @@ Depth level 0. Only the first node is visited.
 <b style="color: red">0</b> - 3 - 4 - 2
 </pre>
 </td>
-<td>
 </table>
 </pre> 
 
