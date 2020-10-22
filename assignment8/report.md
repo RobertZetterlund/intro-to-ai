@@ -66,7 +66,9 @@ $$d^r * (r+1)$$
 What is important here is to always make the rightmost point in the triangle choose "incorrectly", meaning it should choose to remain in the loop. This means that the "1" must always be placed at the top of the triangle. 3 and 4 can be placed however deemed fit as the arrows indicate which directions that are allowed.
 
 
-To solve this issue you use: "Iterative Deepening DFS". That is, we limit the depth of any one path. When the depth limit is 3, this makes it impossible for the algorithm to continue in the loop, but instead it has to visit the end node. The figures below is an example of how the iterative DFS will work if the labels is chosen to
+To solve this issue you use: "Iterative Deepening DFS". That is, we limit the depth of any one path to make sure we do not end up in a loop in the graph. 
+
+In our example, we can by using this change, prevent the algorithm to continue in the loop, and instead make sure it visits the end node. The figures below is an example of how the iterative DFS will work if the labels is chosen to
 
 <pre>
   1
@@ -76,9 +78,16 @@ To solve this issue you use: "Iterative Deepening DFS". That is, we limit the de
 
 Depth level 0. Only the first node is visited. 
 <pre>
+<table align="left" rules="none" >
+<td>
+<pre>
       1
      / \
 <b style="color: red">0</b> - 3 - 4 - 2
+</pre>
+</td>
+<td>
+</table>
 </pre> 
 
 Depth level 1. We reach to second element before reaching the limit. 
