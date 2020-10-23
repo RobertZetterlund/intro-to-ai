@@ -207,8 +207,7 @@ Depth Level 3. After reaching the node with value of `1` we can not continue dee
 # Question 3: 
 [(a) *Suppose that the goal is to cover the topics [welcome,skiing,robots] and the algorithm always selects the leftmost topic to find the neighbors for each node. Draw (by hand) the search space as a tree expanded for a lowest-cost-first search until the first solution is found. This should show all nodes expanded, which node is a goal node, and the frontier when the goal was found.*]
 
-<img src="fig/tobias-sketch.png>
-
+<img src="fig/tobias-sketch.png">
 
 [(b) *Give a non-trivial heuristic function h that is admissible. [h(n)=0 for all n is the trivial heuristic function.]*]
 
@@ -220,8 +219,77 @@ Depth Level 3. After reaching the node with value of `1` we can not continue dee
 
 [(a) *Write the paths stored and selected in the first five iterations of the A* algorithm, assuming that in the case of tie the algorithm prefers the path stored first.*]
 
+<p align="center">
+<img src="a-star.jpg" width="80%">
+<p>
+
+```
+iter    step         possible steps             cost
+
+0.                   (*44*,53,42)               (4,6,6)
+1.    43 -> 44       (53,42,54,*34*)            (6,6,6,4)
+2.    44 -> 34       (*53*,42,54)               (6,6,6)
+3.    43 -> 53       (*42*,54,63,52)            (6,6,8,8)
+4.    43 -> 42       (*54*,63,52,41,32)         (6,8,8,8,6)
+5.    44 -> 54       (63,52,41,*32*,64)         (8,8,8,6,8)
+```
+
+
+[*(b) Solve with software, Use Manhattan distance, no diagonal step and compare A\*, BFS and Best-First- Search. Write a short description about your observation. How does each of these methods reach the solution? Why? Which one is faster?*]
+
+### A*
+
+A-star knows where the goal is, and tries to find a path to it. It uses manhattan distance to "rate" every state based on how it got there as well as how long it is via "manhattan"-distance to the goal. 
+
+When searching, it looks for the "best" state and searches from there.
+
+
+<p align="center">
+<img src="a-star-software.png" width="75%">
+<p>
+
+
+
+### Breadth First-Search
+
+Breadth first-search is naively searching for a goal by amassing more states recursively. It works by for every state s, visit all available neighbouring nodes not visited yet. This means that the number of operations in general is larger. But breadth first search is deemed to be a good algorithm to use when the search space is large but the goal is assumed to be relatively nearby.
+
+
+<p align="center">
+<img src="breadth-first.png" width="75%">
+<p>
+
+### Best First-Search
+
+According to wikipedia:
+
+*"Best-first search is a search algorithm which explores a graph by expanding the most promising node chosen according to a specified rule."*
+
+Our rule is the lowest manhattan distance. We have a frontier similar to A*.
+
+<p align="center">
+<img src="best-first.png" width="75%">
+<p>
+
+
+
+## **Why is A\* not the same as Best-First?**
+Compare these and discuss why they are not identical.
+
+<p align="center">
+      <img src="best-first.png" width="45%">
+      <img src="a-star-software.png" width="45%">
+<p>
 
 
 
 
+# Question 5 - Markov decision processes
+[*(a) Discuss when and how the generic search problem can be described as a markov decision process (MDP).*]
 
+I think we need to have directional graph?
+
+
+[*(b) When the search problem can be written as an MDP, what are the advantages and disadvantages of the value iteration algorithm over the A\* algorithm?*]
+
+It is said that A\* always gurantees optimal solution. Maybe value iteration is too heavy with computation? 
