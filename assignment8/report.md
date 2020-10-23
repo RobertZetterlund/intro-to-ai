@@ -202,3 +202,26 @@ Depth Level 3. After reaching the node with value of `1` we can not continue dee
 
 </table>
 </pre>
+
+
+# Question 3: 
+[(a) *Suppose that the goal is to cover the topics [welcome,skiing,robots] and the algorithm always selects the leftmost topic to find the neighbors for each node. Draw (by hand) the search space as a tree expanded for a lowest-cost-first search until the first solution is found. This should show all nodes expanded, which node is a goal node, and the frontier when the goal was found.*]
+
+<img src="fig/tobias-sketch.png>
+
+
+[(b) *Give a non-trivial heuristic function h that is admissible. [h(n)=0 for all n is the trivial heuristic function.]*]
+
+
+
+# Question 4
+[*Consider the problem of finding a path in the grid shown below from the position s to the position g. A piece can move on the grid horizontally or vertically, one square at a time. No step may be made into a forbidden shaded area. Each square is denoted by the xy coordinate. For example, s is 43 and g is 36. Consider the Manhattan distance as the heuristic.*]
+
+
+[(a) *Write the paths stored and selected in the first five iterations of the A* algorithm, assuming that in the case of tie the algorithm prefers the path stored first.*]
+
+
+
+
+
+
