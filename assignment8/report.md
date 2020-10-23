@@ -66,7 +66,7 @@ $$d^r * (r+1)$$
 What is important here is to always make the rightmost point in the triangle choose "incorrectly", meaning it should choose to remain in the loop. This means that the "1" must always be placed at the top of the triangle. 3 and 4 can be placed however deemed fit as the arrows indicate which directions that are allowed.
 
 
-To solve this issue you use: "Iterative Deepening DFS". That is, we limit the depth of any one path to make sure we do not end up in a loop in the graph. 
+To solve this issue you can use: "Iterative Deepening DFS". That is, we limit the depth of any one path to make sure we do not end up in a loop in the graph. 
 
 In our example, we can by using this change, prevent the algorithm to continue in the loop, and instead make sure it visits the end node. The figures below is an example of how the iterative DFS will work if the labels is chosen to
 
@@ -89,7 +89,7 @@ Depth level 0. Only the first node is visited.
 </table>
 </pre> 
 
-Depth level 1. We reach to second element before reaching the limit. 
+Depth level 1. We reach the second element before reaching the limit. 
 
 <!--- NExt iteration --->
 <pre>
@@ -207,9 +207,29 @@ Depth Level 3. After reaching the node with value of `1` we can not continue dee
 # Question 3: 
 [(a) *Suppose that the goal is to cover the topics [welcome,skiing,robots] and the algorithm always selects the leftmost topic to find the neighbors for each node. Draw (by hand) the search space as a tree expanded for a lowest-cost-first search until the first solution is found. This should show all nodes expanded, which node is a goal node, and the frontier when the goal was found.*]
 
-<img src="fig/tobias-sketch.png">
+Below is the search space until the first solution for a lowest-cost-first search. The nodes are written as {To_Cover, Segs} and the node marked with `Solution!` is the found goal node.
+
+<img src="low-cost.jpg">
 
 [(b) *Give a non-trivial heuristic function h that is admissible. [h(n)=0 for all n is the trivial heuristic function.]*]
+
+
+Our idea is to create a heuristic function that given a node returns an estimate of how many seconds it will take to complete the topics in `To_Cover`. That is, given e.g. {[Skiing, robots], []} our heuristic function should estimate the length it will take to cover the topics skiing and robots. 
+
+However, we know from the lecture that an admissible heuristic function never should overestimate the actual cost.
+
+<img src="lecture.png">
+
+Hence, our heuristic function should calculate the lowest possible time it will take to cover the topics in `To_Cover`. This will make sure that we never overestimate the actual cost. Note the similarity between this and using the straight-line distance in the shortest-path problem. 
+
+The lowest possible time to cover a topic? Well, that is simply the minimum value of `length / number of topics covered` for all the rows in the database. In our problem, the lowest possible time it will take to cover a topic is **`10 seconds`**.
+
+Hence our heuristic function will simply be
+```
+Number of topics in To_cover * 10
+```
+
+
 
 
 
@@ -289,7 +309,37 @@ Compare these and discuss why they are not identical.
 
 I think we need to have directional graph?
 
+Finite number of states? 
+
+A generic search problem can be described as a MDP in the following way: 
+
+```
+The states in the MDP should be the same as the nodes in the search problem.
+```
+``` 
+The actions possible in a state are the out-arcs one can take from a node. A node without any out-arcs will be an absorbing state.
+```
+```
+The reward of an action in a MDP is the negative cost of the corresponding arc. That is, if an arc has a cost of one - the corresponding action in a MDP will have the reward -1. 
+```
+```
+If a node S1 has an arc to another node S2, the transition probability of ending up in state S2 taking action A (corresponding to the arc) in S1 should be 1. All the other transition probabilities for taking action A in S1 should be 0.
+```
+
+To show an example of how a generic search problem can be described as a MDP we will use the problem from Q4. 
+
+- The states of the MDP is all the cells, same as in generic search problem. 
+- The possible actions at each state (except goal state) is to go up, down, left or right. Each of these actions has a reward of -1.
+- The transition probabilities in each cell are uniform.
+
+
 
 [*(b) When the search problem can be written as an MDP, what are the advantages and disadvantages of the value iteration algorithm over the A\* algorithm?*]
 
-It is said that A\* always gurantees optimal solution. Maybe value iteration is too heavy with computation? 
+It is said that A\* always gurantees optimal solution. Maybe value iteration is too heavy with computation?
+
+Advantages
+- Value iteration will not only find optimal path, but also what the optimal action is in each state 
+
+Disadvantages
+- Needs to perform calculations on all the states in every iteration. This will be heavy if the state space is large.  
