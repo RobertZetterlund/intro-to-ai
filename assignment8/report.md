@@ -27,7 +27,9 @@ So for every layer we traverse we earn `d^l` more nodes (where `l` denotes curre
 
 We always assume we pick left first and that r is rightmost. In this case then when `d=2` and `r=3` we can express the maximum number of bfs iterations as `sum of d^l, where l = 0,1,..,r-1.   = 7`. For `d=3, r=3` this becomes 13.  
 
-In terms of `d` and `r` the maximum number of iterations can be written as:
+So, in general, the maximum number of BFS iterations to reach a solution can be calculated simply as the total number of nodes.
+
+In terms of `d` and `r` this can be written as:
 
 $$\sum_{i=0}^r d^r$$
 
@@ -311,7 +313,7 @@ I think we need to have directional graph?
 
 Finite number of states? 
 
-A generic search problem can be described as a MDP in the following way: 
+We believe a generic search problem can be described as a MDP in the following way: 
 
 ```
 The states in the MDP should be the same as the nodes in the search problem.
@@ -320,7 +322,7 @@ The states in the MDP should be the same as the nodes in the search problem.
 The actions possible in a state are the out-arcs one can take from a node. A node without any out-arcs will be an absorbing state.
 ```
 ```
-The reward of an action in a MDP is the negative cost of the corresponding arc. That is, if an arc has a cost of one - the corresponding action in a MDP will have the reward -1. 
+The reward of an action in a MDP is the negative cost of the corresponding arc. That is, if an arc has a cost of 1 - the corresponding action in a MDP will have the reward -1. 
 ```
 ```
 If a node S1 has an arc to another node S2, the transition probability of ending up in state S2 taking action A (corresponding to the arc) in S1 should be 1. All the other transition probabilities for taking action A in S1 should be 0.
@@ -339,7 +341,8 @@ To show an example of how a generic search problem can be described as a MDP we 
 It is said that A\* always gurantees optimal solution. Maybe value iteration is too heavy with computation?
 
 Advantages
-- Value iteration will not only find optimal path, but also what the optimal action is in each state 
+- Value iteration will not only find optimal path, but also what the optimal action is in each state. A* only finds the optimal path.  
+- We do not need to find an admissable heuristic function
 
 Disadvantages
 - Needs to perform calculations on all the states in every iteration. This will be heavy if the state space is large.  
