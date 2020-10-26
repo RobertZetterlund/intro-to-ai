@@ -40,7 +40,7 @@ _[Suppose that storing each node requires one unit of memory and the search algo
 
 The total amount of stored paths depend on the current layer (how long a path is) and how many nodes are at the current level (how many unique paths we have).
 
-For every iteration, `d` new paths arise. If `d=3`, the first split 1 path becomes 3, at second split 3 paths become 5, then 7, then 9. This is equal to the nodes of the layer. All these nodes have equal length to initial node. We can then simply multiply depth times width to calculate the memory cost.
+For every iteration, `d` new paths arise. If `d=3`, the first split 1 path becomes 3, at second split 3 paths become 5, then 7, then 9. This is equal to the nodes of the layer. All these nodes have equal length to the initial node. We can then simply multiply depth times width to calculate the memory cost.
 
 To calculate the width of the tree we find the amount of nodes at the layer that the goal is on. Say `d=3` and `r=3`, then the total amount of nodes will be 40, and the width will be `3^3=27`. Since the height is 3, 4 nodes are required to build each path. The total memory required is then 27 \* 4 = 108.
 
@@ -144,7 +144,7 @@ Number of topics in To_cover * 10
 <img src="fig/a-star.jpg" width="80%">
 <p>
 
-Here are table representations of the first five iterations of the A\* algorithm. Within in the `possible steps`-column, the \*\*xx\*\* indicate the selected next node based on lowest `h(x)` or order of stored (starting north going clockwise).
+Here are table representations of the first five iterations of the A\* algorithm. Within the `possible steps`-column, the \*\*xx\*\* indicates the selected next node based on the lowest `h(x)` or order of stored (starting north going clockwise).
 
 ```
 iter    step         possible steps             cost
@@ -183,16 +183,16 @@ Below is a table with numbers exctracted when running the problem.
 
 ### A\*
 
-A-star knows where the goal is, and tries to find a path to it. It uses manhattan distance to "rate" every state based on how it got there as well as how long it is via "manhattan"-distance to the goal.
+A-star knows where the goal is and tries to find a path to it. It uses manhattan distance to "rate" every state based on how it got there as well as how long it is via "manhattan"-distance to the goal.
 
 A\* reaches the solution by adding all discovered new nodes to a priority queue. The priority queue is sorted based on the sum `f(x)` of:
 
 1. The shortest path to that node, `g(x)`
 2. The heuristic for that node, `h(x)`, in our case the manhattan distance.
 
-When we have equal values in our priority queue the decision can be made either to prioritize the node found first, or prioritize the lowerst `h(x)` by convention.
+When we have equal values in our priority queue the decision can be made either to prioritize the node found first, or prioritize the lowest `h(x)` by convention.
 
-A\* is effective in the sense that if we have found the beginning of an optimal path it is likely to continue along that path, as the value of `h(x)` get smaller. As `h(x)` get smaller `g(x)` gets bigger, but if the direction is directly towards the goal, `f(x)` remains the same. Thus the path continues to be explored as `f(x)` is still first in the queue.
+A\* is effective in the sense that if we have found the beginning of an optimal path it is likely to continue along that path, as the value of `h(x)` get smaller. As `h(x)` gets smaller `g(x)` gets bigger, but if the direction is directly towards the goal, `f(x)` remains the same. Thus the path continues to be explored as `f(x)` is still first in the queue.
 
 Regarding the problem in the software, the goal is reached after `71` operations. This is because it "incorrectly" explores the corner to the top left of the start. We went more in depth into how in the iteration example above, but in short: since A\* is unaware of walls it will attempt straight-line approaches. When those fail, only then it will explore values with higher `f(x)`.
 
@@ -214,13 +214,13 @@ Operations needed to find goal: **`364`**
 
 ### Best First-Search
 
-According to wikipedia:
+According to Wikipedia:
 
 _"Best-first search is a search algorithm which explores a graph by expanding the most promising node chosen according to a specified rule."_
 
 Our rule is the lowest manhattan distance. We have a frontier similar to A\*.
 
-The main difference between Best First-search and A* is that the aforementioned priority queue relies solely on the heurestic value. That is why it uses fewer operations than A* for this particular problem. It also terminates when it finds a goal (since `h(x)=0`), which A\* does not immediately do, (it explores `f(x)`:s equal to the goal node).
+The main difference between Best First-search and A* is that the aforementioned priority queue relies solely on the heuristic value. That is why it uses fewer operations than A* for this particular problem. It also terminates when it finds a goal (since `h(x)=0`), which A\* does not immediately do, (it explores `f(x)`:s equal to the goal node).
 
 <p align="center">
       <img src="fig/best-first.png" width="30%">
@@ -239,15 +239,15 @@ Compare the two solutions of the same problem below:
 
 A\* keeps the promise of finding the optimal path of 10, whilst BFS finds a path of length 14, although with fewer operations.
 
-In the implementation of the algorithm, the priority queue of the BFS appears to prioritize order of discovery starting from north and following clockwise. That is why the first iteration goes north and then continues on that path as `h(x)` continues to get lower or equal to the heurestic value of the south-most green nodes neighbor, which is 8 steps (the value of `h(x)` for the diagonal path is 7).
+In the implementation of the algorithm, the priority queue of the BFS appears to prioritize the order of discovery starting from the north and following clockwise. That is why the first iteration goes north and then continues on that path as `h(x)` continues to get lower or equal to the heuristic value of the south-most green nodes neighbor, which is 8 steps (the value of `h(x)` for the diagonal path is 7).
 
 ## Which one is fastest?
 
-We find that there are two ways to define fastest in the context of this problem. Either we prioritize the length of the path or the number of operations. We compare A\* and Best First-search as Breadth First-search is not competative in neither definitions.
+We find that there are two ways to define fastest in the context of this problem. Either we prioritize the length of the path or the number of operations. We compare A\* and Best First-search as Breadth First-search is not competitive in neither definitions.
 
-For the length of the path, we can always say that A\* is the fastest as it is guranteed to find the optimal path, something that cannot be said about the BFS.
+For the length of the path, we can always say that A\* is the fastest as it is guaranteed to find the optimal path, something that cannot be said about the BFS.
 
-For the number of operations it is more problem-dependent. For the problem above the number of operations is fewer in the BFS (compared to A\*). For the problem introduced below the number of operations is greater in the BFS. View the example in the figure below and the data in the following table.
+For the number of operations, it is more problem-dependent. For the problem above the number of operations is fewer in the BFS (compared to A\*). For the problem introduced below the number of operations is greater in the BFS. View the example in the figure below and the data in the following table.
 
 <p align="center">
       <img src="fig/example-operation.png" width="30%">
@@ -258,7 +258,7 @@ For the number of operations it is more problem-dependent. For the problem above
 | **# of operations** | 36      |  40     |
 | **length**          | 7       | 7       |
 
-The software is friendly enough to show the time it took for the program to execute and find the goal. This is shown in the unit of milliseconds and varies for identical rounds when we re-run the solver. We believe that this is not a good metric to estimate time with as it is too unstable. Instead, run time should be approximated using the number of operations. Worth mentioning is that it _might_ not be enough, as different problems may introduce multiple lookup in different parts of the memory when the amount of paths become large enough. We deem this aspect to be relevant in large problems but perhaps not in our small problem solved using javascript.
+The software is friendly enough to show the time it took for the program to execute and find the goal. This is shown in the unit of milliseconds and varies for identical rounds when we re-run the solver. We believe that this is not a good metric to estimate time with as it is too unstable. Instead, run time should be approximated using the number of operations. Worth mentioning is that it _might_ not be enough, as different problems may introduce multiple lookups in different parts of the memory when the number of paths become large enough. We deem this aspect to be relevant in large problems but perhaps not in our small problem solved using javascript.
 
 As for an actual direct answer, the solution with the least operations should in theory be the fastest.
 
@@ -281,10 +281,10 @@ _But when is it possible to do this this?_
 
 We find it difficult to come up with almost any requirement that is needed for transforming a general search problem into a MDP. For example it does not matter if:
 
-- **The graph is undirected or directed** - Arcs are described as actions. Making a graph directed only means removing the actions which corresponds to arcs previously possible to use.
+- **The graph is undirected or directed** - Arcs are described as actions. Making a graph directed only means removing the actions which correspond to arcs previously possible to use.
 - **There is a single or several different goal nodes** - The goal node(s) is described as absorbing states. Adding more goal nodes corresponds to adding more absorbing states. E.g value iteration will still find an optimal policy to get to the closest goal node.
 
-However, one requirement we believe is needed is that the **`number of states should be finite`**. The reason behind this requirement is that we do not think it is possibly to calculate an optimal policy for a MDP with inifinite state space. E.g value iteration perform calculations on all states every iteration, and this will not be possible on a MDP with infinite state space.
+However, one requirement we believe is needed is that the **`number of states should be finite`**. The reason behind this requirement is that we do not think it is possible to calculate an optimal policy for an MDP with infinite state space. E.g value iteration performs calculations on all states every iteration, and this will not be possible on an MDP with infinite state space.
 
 <!--- To show an example of how a generic search problem can be described as a MDP we will use the problem from Q4.
 
@@ -301,7 +301,7 @@ Advantages
 
 - Value iteration will find the optimal action in each state (optimal policy). This means that by following the optimal policy we can easily get the optimal path from any state to the goal node. A\* will only find the optimal path from a single start node (and the nodes included in the optimal path).
 
-- We do not need to find a admissable heuristic function to use value iteration.
+- We do not need to find an admissable heuristic function to use value iteration.
 
 Disadvantages
 
