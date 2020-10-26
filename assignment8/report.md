@@ -40,14 +40,14 @@ _[Suppose that storing each node requires one unit of memory and the search algo
 
 The total amount of stored paths depend on the current layer (how long a path is) and how many nodes are at the current level (how many unique paths we have).
 
-For every iteration, `d` new paths arise. At first split 1 path becomes 3, at second split 3 paths become 5, then 7, then 9. This is equal to the nodes of the layer. All these nodes have equal length to initial node. We can then simply multiply depth times width to calculate the memory cost.
+For every iteration, `d` new paths arise. If `d=3`, the first split 1 path becomes 3, at second split 3 paths become 5, then 7, then 9. This is equal to the nodes of the layer. All these nodes have equal length to initial node. We can then simply multiply depth times width to calculate the memory cost.
 
-Number of nodes at layer is calculated by `d^l` where l is the layer. Say `d=3` and `l=3`, then the total amount of nodes will be 9. Since the height is 3, 3 nodes are required to build each path. The total memory required is then 9 \* 3 = 27.
+To calculate the width of the tree we find the amount of nodes at the layer that the goal is on. Say `d=3` and `r=3`, then the total amount of nodes will be 40, and the width will be `3^3=27`. Since the height is 3, 4 nodes are required to build each path. The total memory required is then 27 \* 4 = 108.
 
 So, in general, the maximum amount of memory can be calculated as:
 
 ```
-Number of nodes in last layer*number of nodes in path
+(width of tree) * (height of tree + 1)
 ```
 
 In terms of `d` and `r` this can be written as:
