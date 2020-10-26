@@ -381,7 +381,7 @@ However, one requirement we believe is needed is that the **`number of states sh
 [*(b) When the search problem can be written as an MDP, what are the advantages and disadvantages of the value iteration algorithm over the A\* algorithm?*]
 
 Advantages
-- Value iteration will find the optimal action in each state (optimal policy). This means that by following the optimal policy we can easily get the optimal path from any state to the goal node. A* will only find the optimal path from a single start node.  
+- Value iteration will find the optimal action in each state (optimal policy). This means that by following the optimal policy we can easily get the optimal path from any state to the goal node. A* will only find the optimal path from a single start node (and the nodes included in the optimal path).  
 
 - We do not need to find a admissable heuristic function to use value iteration. 
 
