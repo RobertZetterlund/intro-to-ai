@@ -313,43 +313,43 @@ Compare these and discuss why they are not identical.
 # Question 5 - Markov decision processes
 [*(a) Discuss when and how the generic search problem can be described as a markov decision process (MDP).*]
 
-I think we need to have directional graph?
-
 Finite number of states? 
 
 We believe a generic search problem can be described as a MDP in the following way: 
 
 ```
-The states in the MDP should be the same as the nodes in the search problem.
+The nodes in a general search problem should be described as states in a MDP.
 ```
 
 ``` 
-The actions possible in a state are the out-arcs one can take from a node. A node without any out-arcs will be an absorbing state.
+The out-arcs from a node in a general search problem should in a MDP be described as the possible actions from a state. 
+A node without any out-arcs should be an absorbing state.
 ```
 
 ```
-The reward of an action in a MDP is the negative cost of the corresponding arc. That is, if an arc has a cost of 1 - the corresponding action in a MDP will have the reward -1. 
+The cost of an arc in a general search problem should be described as a reward of the corresponding action in the MDP. But since it actually is a cost, not a reward, the reward of an action in a MDP should be the negative cost of the corresponding arc. That is, if an arc has a cost of 1 - the corresponding action in a MDP will have the reward -1. 
 ```
 
 ```
-If a node S1 has an arc to another node S2, the transition probability of ending up in state S2 taking action A (corresponding to the arc) in S1 should be 1. All the other transition probabilities for taking action A in S1 should be 0.
+Finally, the MDP should be deterministic. That is, taking action A1 from state S1 should always take you to S2. Hence, the transition probabilities should always be either 0 or 1. An action will either take you to a certain state, or it will not. 
 ```
 
-To show an example of how a generic search problem can be described as a MDP we will use the problem from Q4. 
+<!--- To show an example of how a generic search problem can be described as a MDP we will use the problem from Q4.
+ 
 
 - The states of the MDP is all the cells, same as in generic search problem. 
 - The possible actions at each state (except goal state) is to go up, down, left or right. Each of these actions has a reward of -1.
 - The transition probabilities in each cell are uniform.
 
-
+-->
 
 [*(b) When the search problem can be written as an MDP, what are the advantages and disadvantages of the value iteration algorithm over the A\* algorithm?*]
 
-It is said that A\* always gurantees optimal solution. Maybe value iteration is too heavy with computation?
-
 Advantages
-- Value iteration will not only find optimal path, but also what the optimal action is in each state. A* only finds the optimal path.  
-- We do not need to find an admissable heuristic function
+- Value iteration will find the optimal action in each state (optimal policy). This means that by following the optimal policy we can easily get the optimal path from any state to the goal node. A* will only find the optimal path from a single start node.  
+
+- We do not need to find a admissable heuristic function to use value iteration. 
 
 Disadvantages
-- Needs to perform calculations on all the states in every iteration. This will be heavy if the state space is large.  
+- Value iteration needs to perform calculations on all the states in every iteration. This will be heavy if the state space is large and hence A* star will be much quicker.
+- Since value iteration need to perform calculations on all states  
