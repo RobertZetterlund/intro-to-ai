@@ -1,3 +1,9 @@
+# Assignment 8
+
+### Tobias Lindroth: 11 hrs
+
+### Robert Zetterlund: 11 hrs
+
 # Question 1:
 
 _[The branching factor ‘d’ of a directed graph is the maximum number of children (outer degree) of a node in the graph. Suppose that the shortest path between the initial state and a goal is of length ‘r’. ]_
