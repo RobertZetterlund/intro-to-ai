@@ -12,22 +12,20 @@ _[The branching factor ‘d’ of a directed graph is the maximum number of chil
 
 _[What is the maximum number of BFS iterations required to reach the solution in terms of ‘d’ and ‘r’?]_
 
-BFS, breadth first search will always explore with the frontier and follows a FIFO queue.
+We assume that the length 'r' is the amount of edges in a path. The amount of edges in a path is one less than the amount of nodes in a path.
 
-If the shortest path between initial state and goal is 'r', then we have found our solution at depth r. This means that we have traveled through `'r'`-layers. For every layer every node splits to `'d'` children. For simplicity let us assume `d=2``
+For simplicity let us assume `d=2` and that goal is the lower right corner node.
 
 ```
                 o           ^
             o       o       | in total 3 splits (r)
-          o   o   o   o     |
+          o   o   o   o     | path is 4 nodes (r+1) 
          o o o o o o o o    v
 ```
 
-So for every layer we traverse we earn `d^l` more nodes (where `l` denotes current layer)
+In this case then when `d=2` and `r=3` we can express the maximum number of bfs iterations as `sum of d^i, where i = 1,...,r-1. = 7`.
 
-We always assume we pick left first and that r is rightmost. In this case then when `d=2` and `r=3` we can express the maximum number of bfs iterations as `sum of d^l, where l = 0,1,..,r-1. = 7`. For `d=3, r=3` this becomes 13.
-
-So, in general, the maximum number of BFS iterations to reach a solution can be calculated simply as the total number of nodes.
+So, in general, the maximum number of BFS iterations to reach a solution can be calculated simply as `"the total number of nodes" - 1`.
 
 In terms of `d` and `r` this can be written as:
 
