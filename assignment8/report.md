@@ -62,7 +62,7 @@ $$d^r * (r+1)$$
 ## Find all labeling of these three nodes, where DFS will never reach to the goal! Discuss how DFS should be modified to avoid this situation?
 
 <p align="center">
-    <img src="q2.png">
+    <img src="fig/q2.png">
 <p>
 
 What is important here is to always make the rightmost point in the triangle choose "incorrectly", meaning it should choose to remain in the loop. This means that the "1" must always be placed at the top of the triangle. 3 and 4 can be placed however deemed fit as the arrows indicate which directions that are allowed.
@@ -211,7 +211,7 @@ Depth Level 3. After reaching the node with value of `1` we can not continue dee
 
 Below is the search space until the first solution for a lowest-cost-first search. The nodes are written as {To_Cover, Segs} and the node marked with `Solution!` is the found goal node.
 
-<img src="low-cost.jpg">
+<img src="fig/low-cost.jpg">
 
 [(b) *Give a non-trivial heuristic function h that is admissible. [h(n)=0 for all n is the trivial heuristic function.]*]
 
@@ -220,7 +220,7 @@ Our idea is to create a heuristic function that given a node returns an estimate
 
 However, we know from the lecture that an admissible heuristic function never should overestimate the actual cost.
 
-<img src="lecture.png">
+<img src="fig/lecture.png">
 
 Hence, our heuristic function should calculate the lowest possible time it will take to cover the topics in `To_Cover`. This will make sure that we never overestimate the actual cost. Note the similarity between this and using the straight-line distance in the shortest-path problem. 
 
@@ -242,7 +242,7 @@ Number of topics in To_cover * 10
 [(a) *Write the paths stored and selected in the first five iterations of the A* algorithm, assuming that in the case of tie the algorithm prefers the path stored first.*]
 
 <p align="center">
-<img src="a-star.jpg" width="80%">
+<img src="fig/a-star.jpg" width="80%">
 <p>
 
 ```
@@ -267,7 +267,7 @@ When searching, it looks for the "best" state and searches from there.
 
 
 <p align="center">
-<img src="a-star-software.png" width="75%">
+<img src="fig/a-star-software.png" width="75%">
 <p>
 
 Operations needed to find goal: **`71`**
@@ -278,7 +278,7 @@ Breadth first-search is naively searching for a goal by amassing more states rec
 
 
 <p align="center">
-<img src="breadth-first.png" width="75%">
+<img src="fig/breadth-first.png" width="75%">
 <p>
 
 Operations needed to find goal: **`364`**
@@ -292,7 +292,7 @@ According to wikipedia:
 Our rule is the lowest manhattan distance. We have a frontier similar to A*.
 
 <p align="center">
-<img src="best-first.png" width="75%">
+<img src="fig/best-first.png" width="75%">
 <p>
 
 Operations needed to find goal: **`48`**
@@ -303,8 +303,8 @@ Operations needed to find goal: **`48`**
 Compare these and discuss why they are not identical.
 
 <p align="center">
-      <img src="best-first.png" width="45%">
-      <img src="a-star-software.png" width="45%">
+      <img src="fig/best-first.png" width="45%"> 
+      <img src="fig/a-star-software.png" width="45%">
 <p>
 
 
@@ -322,12 +322,15 @@ We believe a generic search problem can be described as a MDP in the following w
 ```
 The states in the MDP should be the same as the nodes in the search problem.
 ```
+
 ``` 
 The actions possible in a state are the out-arcs one can take from a node. A node without any out-arcs will be an absorbing state.
 ```
+
 ```
 The reward of an action in a MDP is the negative cost of the corresponding arc. That is, if an arc has a cost of 1 - the corresponding action in a MDP will have the reward -1. 
 ```
+
 ```
 If a node S1 has an arc to another node S2, the transition probability of ending up in state S2 taking action A (corresponding to the arc) in S1 should be 1. All the other transition probabilities for taking action A in S1 should be 0.
 ```
