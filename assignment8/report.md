@@ -102,7 +102,7 @@ Depth level 2
     <img src="fig/IterativeDFS2.png">
 <p>
 
-Depth Level 3. After reaching the node with value of `1` we can not continue deeper because of the limit. Instead we visit the node that is left at depth 3, the end node.
+Depth Level 3. After reaching the node with value `1` we can not continue deeper because of the limit. Instead we visit the node that is left at depth 3, the end node.
 
 <!--- NExt iteration --->
 
