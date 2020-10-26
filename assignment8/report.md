@@ -294,26 +294,27 @@ Compare these and discuss why they are not identical.
 
 [*(a) Discuss when and how the generic search problem can be described as a markov decision process (MDP).*]
 
-Finite number of states? 
+We believe a generic search problem can be described as an MDP in the following way:
 
-We believe a generic search problem can be described as a MDP in the following way:
 
-```
-The nodes in a general search problem should be described as states in a MDP.
-```
+- The nodes in a general search problem should be described as states in an MDP.
 
-``` 
-The out-arcs from a node in a general search problem should in a MDP be described as the possible actions from a state. 
-A node without any out-arcs should be an absorbing state.
-```
+- The out-arcs from a node in a general search problem should in an MDP be described as the possible actions from the corresponding state. 
+A node without any out-arcs should have an absorbing state.
 
-```
-The cost of an arc in a general search problem should be described as a reward of the corresponding action in the MDP. But since it actually is a cost, not a reward, the reward of an action in a MDP should be the negative cost of the corresponding arc. That is, if an arc has a cost of 1 - the corresponding action in a MDP will have the reward -1. 
-```
+- The cost of an arc in a general search problem should be described as a reward of the corresponding action in an MDP. But since it actually is a cost, not a reward, the reward of an action in an MDP should be the negative cost of the corresponding arc. That is, if an arc has a cost of 1, the corresponding action in an MDP should have the reward -1. 
 
-```
-Finally, the MDP should be deterministic. That is, taking action A1 from state S1 should always take you to S2. Hence, the transition probabilities should always be either 0 or 1. An action will either take you to a certain state, or it will not. 
-```
+- Finally, the MDP should be deterministic. That is, taking action A1 from state S1 should always take you to S2. Hence, the transition probabilities should always be either 0 or 1. An action will either take you to a certain state, or it will not.  
+
+
+_But when is it possible to do this this?_
+
+We find it difficult to come up with almost any requirement that is needed for transforming a general search problem into a MDP.  For example it does not matter if:
+
+- **The graph is undirected or directed** - Arcs are described as actions. Making a graph directed only means removing the actions which corresponds to arcs previously possible to use. 
+- **There is a single or several different goal nodes** - The goal node(s) is described as absorbing states. Adding more goal nodes corresponds to adding more absorbing states. E.g value iteration will still find an optimal policy to get to the closest goal node. 
+
+However, one requirement we believe is needed is that the **`number of states should be finite`**. The reason behind this requirement is that we do not think it is possibly to calculate an optimal policy for a MDP with inifinite state space. E.g value iteration perform calculations on all states every iteration, and this will not be possible on a MDP with infinite state space. 
 
 <!--- To show an example of how a generic search problem can be described as a MDP we will use the problem from Q4.
  
@@ -333,4 +334,4 @@ Advantages
 
 Disadvantages
 - Value iteration needs to perform calculations on all the states in every iteration. This will be heavy if the state space is large and hence A* star will be much quicker.
-- Since value iteration need to perform calculations on all states  
+- Since value iteration in each iteration needs to perform calculations on all states, it will not work if the state space is infinite.
