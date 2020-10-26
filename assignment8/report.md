@@ -31,7 +31,10 @@ So, in general, the maximum number of BFS iterations to reach a solution can be 
 
 In terms of `d` and `r` this can be written as:
 
-$$\sum_{i=0}^r d^r$$
+<p align="center">
+    <img src="fig/q1a_math.png">
+<p>
+
 
 ### b)
 
@@ -51,7 +54,10 @@ Number of nodes in last layer*number of nodes in path
 
 In terms of `d` and `r` this can be written as:
 
-$$d^r * (r+1)$$
+
+<p align="center">
+    <img src="fig/q1b_math.png">
+<p>
 
 # Question 2
 
@@ -75,130 +81,34 @@ In our example, we can by using this change, prevent the algorithm to continue i
 
 Depth level 0. Only the first node is visited.
 
-<pre>
-<table align="left" rules="none" >
-<td>
-<pre>
-      1
-     / \
-<b style="color: red">0</b> - 3 - 4 - 2
-</pre>
-</td>
-</table>
-</pre>
+<p>
+    <img src="fig/IterativeDFS0.png">
+<p>
+
+
 
 Depth level 1. We reach the second element before reaching the limit.
 
 <!--- NExt iteration --->
-<pre>
-<table align="left" rules="none" >
-<td>
-<pre>
-      1
-     / \
-<b style="color: red">0</b> - 3 - 4 - 2
-</pre>
-</td>
-<td>
-<pre>
-      1
-     / \
-<b style="color: red">0</b> - <b style="color: red">3</b> - 4 - 2
-</pre>
+<p>
+    <img src="fig/IterativeDFS1.png">
+<p>
 
-</td>
-
-</table>
-</pre>
 
 Depth level 2
 
 <!--- NExt iteration --->
-<pre>
-<table align="left" rules="none" >
-<td>
-<pre>
-      1
-     / \
-<b style="color: red">0</b> - 3 - 4 - 2
-</pre>
-</td>
-<td>
-<pre>
-      1
-     / \
-<b style="color: red">0</b> - <b style="color: red">3</b> - 4 - 2
-</pre>
-
-</td>
-
-<td>
-<pre>
-      1
-     / \
-<b style="color: red">0</b> - <b style="color: red">3</b> - <b style="color: red">4</b> - 2
-</pre>
-
-</td>
-</table>
-</pre>
+<p>
+    <img src="fig/IterativeDFS2.png">
+<p>
 
 Depth Level 3. After reaching the node with value of `1` we can not continue deeper because of the limit. Instead we visit the node that is left at depth 3, the end node.
 
 <!--- NExt iteration --->
-<pre>
-<table align="left" rules="none" >
-<td>
-<pre>
-      1
-     / \
-<b style="color: red">0</b> - 3 - 4 - 2
-</pre>
-</td>
-<td>
-<pre>
-      1
-     / \
-<b style="color: red">0</b> - <b style="color: red">3</b> - 4 - 2
-</pre>
 
-</td>
-
-<td>
-<pre>
-      1
-     / \
-<b style="color: red">0</b> - <b style="color: red">3</b> - <b style="color: red">4</b> - 2
-</pre>
-
-</td>
-
-</td>
-
-<td>
-<pre>
-      <b style="color: red">1</b>
-     / \
-<b style="color: red">0</b> - <b style="color: red">3</b> - <b style="color: red">4</b> - 2
-</pre>
-
-</td>
-
-</td>
-
-</td>
-
-<td>
-<pre>
-      <b style="color: red">1</b>
-     / \
-<b style="color: red">0</b> - <b style="color: red">3</b> - <b style="color: red">4</b> - <b style="color: red">2</b>
-</pre>
-
-</td>
-
-</table>
-</pre>
+<p>
+    <img src="fig/IterativeDFS3.png">
+<p>
 
 # Question 3:
 
