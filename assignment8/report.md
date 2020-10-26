@@ -208,7 +208,7 @@ Our idea is to create a heuristic function that given a node returns an estimate
 
 However, we know from the lecture that an admissible heuristic function never should overestimate the actual cost.
 
-<img src="fig/lecture.png">
+<img src="fig/lecture.PNG">
 
 Hence, our heuristic function should calculate the lowest possible time it will take to cover the topics in `To_Cover`. This will make sure that we never overestimate the actual cost. Note the similarity between this and using the straight-line distance in the shortest-path problem.
 
