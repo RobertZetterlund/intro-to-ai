@@ -278,7 +278,7 @@ A\* is effective in the sense that if we have found the beginning of an optimal 
 Regarding the problem in the software, the goal is reached after `71` operations. This is because it "incorrectly" explores the corner to the top left of the start. We went more in depth into how in the iteration example above, but in short: since A\* is unaware of walls it will attempt straight-line approaches. When those fail, only then it will explore values with higher `f(x)`.
 
 <p align="center">
-      <img src="fig/a-star-software.png" width="75%">
+      <img src="fig/a-star-software.png" width="30%">
 <p>
 
 Operations needed to find goal: **`71`**
@@ -288,7 +288,7 @@ Operations needed to find goal: **`71`**
 Breadth first-search is **naively** searching for a goal by amassing more states recursively. It works by for every state s, visit all available neighbouring nodes not visited yet. This means that the number of operations in general is larger. <!--But breadth first search is deemed to be a good algorithm to use when the search space is large but the goal is assumed to be relatively nearby.-->
 
 <p align="center">
-      <img src="fig/breadth-first.png" width="75%">
+      <img src="fig/breadth-first.png" width="30%">
 <p>
 
 Operations needed to find goal: **`364`**
@@ -304,7 +304,7 @@ Our rule is the lowest manhattan distance. We have a frontier similar to A\*.
 The main difference between Best First-search and A* is that the aforementioned priority queue relies solely on the heurestic value. That is why it uses fewer operations than A* for this particular problem. It also terminates when it finds a goal (since `h(x)=0`), which A\* does not immediately do, (it explores `f(x)`:s equal to the goal node).
 
 <p align="center">
-      <img src="fig/best-first.png" width="75%">
+      <img src="fig/best-first.png" width="30%">
 <p>
 
 Operations needed to find goal: **`48`**
@@ -315,7 +315,7 @@ Compare the two solutions of the same problem below:
 
 |              A\*               |                BFS                 |
 | :----------------------------: | :--------------------------------: |
-| ![](fig/a-star-difference.png) | ![](fig/best-first-difference.png) |
+| ![](fig/a-star-difference.PNG) | ![](fig/best-first-difference.PNG) |
 |       length: 10, op: 75       |         length: 14, op: 52         |
 
 A\* keeps the promise of finding the optimal path of 10, whilst BFS finds a path of length 14, although with fewer operations.
@@ -331,7 +331,7 @@ For the length of the path, we can always say that A\* is the fastest as it is g
 For the number of operations it is more problem-dependent. For the problem above the number of operations is fewer in the BFS (compared to A\*). For the problem introduced below the number of operations is greater in the BFS. View the example in the figure below and the data in the following table.
 
 <p align="center">
-      <img src="fig/example-operation.png" width="75%">
+      <img src="fig/example-operation.png" width="30%">
 <p>
 
 |                 | **A\*** | **BFS** |
