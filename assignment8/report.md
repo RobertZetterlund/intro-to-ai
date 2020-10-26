@@ -1,31 +1,25 @@
-
-
-
-
-
-
-
 # Question 1:
 
-*[The branching factor ‘d’ of a directed graph is the maximum number of children (outer degree) of a node in the graph. Suppose that the shortest path between the initial state and a goal is of length ‘r’. ]*
+_[The branching factor ‘d’ of a directed graph is the maximum number of children (outer degree) of a node in the graph. Suppose that the shortest path between the initial state and a goal is of length ‘r’. ]_
 
-### a) 
-*[What is the maximum number of BFS iterations required to reach the solution in terms of ‘d’ and ‘r’?]*
+### a)
 
-BFS, breadth first search will always explore with the frontier and follows a FIFO queue. 
+_[What is the maximum number of BFS iterations required to reach the solution in terms of ‘d’ and ‘r’?]_
+
+BFS, breadth first search will always explore with the frontier and follows a FIFO queue.
 
 If the shortest path between initial state and goal is 'r', then we have found our solution at depth r. This means that we have traveled through `'r'`-layers. For every layer every node splits to `'d'` children. For simplicity let us assume `d=2``
 
 ```
                 o           ^
             o       o       | in total 3 splits (r)
-          o   o   o   o     | 
+          o   o   o   o     |
          o o o o o o o o    v
 ```
 
 So for every layer we traverse we earn `d^l` more nodes (where `l` denotes current layer)
 
-We always assume we pick left first and that r is rightmost. In this case then when `d=2` and `r=3` we can express the maximum number of bfs iterations as `sum of d^l, where l = 0,1,..,r-1.   = 7`. For `d=3, r=3` this becomes 13.  
+We always assume we pick left first and that r is rightmost. In this case then when `d=2` and `r=3` we can express the maximum number of bfs iterations as `sum of d^l, where l = 0,1,..,r-1. = 7`. For `d=3, r=3` this becomes 13.
 
 So, in general, the maximum number of BFS iterations to reach a solution can be calculated simply as the total number of nodes.
 
@@ -33,16 +27,15 @@ In terms of `d` and `r` this can be written as:
 
 $$\sum_{i=0}^r d^r$$
 
+### b)
 
+_[Suppose that storing each node requires one unit of memory and the search algorithm stores each entire path as a string of nodes. Hence, storing a path with k nodes requires k units of memory. What is the maximum amount of memory required for BFS in terms of ‘d’ and ‘r’ ?]_
 
-### b) 
-*[Suppose that storing each node requires one unit of memory and the search algorithm stores each entire path as a string of nodes. Hence, storing a path with k nodes requires k units of memory. What is the maximum amount of memory required for BFS in terms of ‘d’ and ‘r’ ?]*
-
-The total amount of stored paths depend on the current layer (how long a path is) and how many nodes are at the current level (how many unique paths we have). 
+The total amount of stored paths depend on the current layer (how long a path is) and how many nodes are at the current level (how many unique paths we have).
 
 For every iteration, `d` new paths arise. At first split 1 path becomes 3, at second split 3 paths become 5, then 7, then 9. This is equal to the nodes of the layer. All these nodes have equal length to initial node. We can then simply multiply depth times width to calculate the memory cost.
 
-Number of nodes at layer is calculated by `d^l` where l is the layer. Say `d=3` and `l=3`, then the total amount of nodes will be 9. Since the height is 3, 3 nodes are required to build each path. The total memory required is then 9 * 3 = 27. 
+Number of nodes at layer is calculated by `d^l` where l is the layer. Say `d=3` and `l=3`, then the total amount of nodes will be 9. Since the height is 3, 3 nodes are required to build each path. The total memory required is then 9 \* 3 = 27.
 
 So, in general, the maximum amount of memory can be calculated as:
 
@@ -50,14 +43,11 @@ So, in general, the maximum amount of memory can be calculated as:
 Number of nodes in last layer*number of nodes in path
 ```
 
-In terms of `d` and `r` this can be written as: 
+In terms of `d` and `r` this can be written as:
 
 $$d^r * (r+1)$$
 
-
-
-# Question 2 
-
+# Question 2
 
 ## Find all labeling of these three nodes, where DFS will never reach to the goal! Discuss how DFS should be modified to avoid this situation?
 
@@ -67,8 +57,7 @@ $$d^r * (r+1)$$
 
 What is important here is to always make the rightmost point in the triangle choose "incorrectly", meaning it should choose to remain in the loop. This means that the "1" must always be placed at the top of the triangle. 3 and 4 can be placed however deemed fit as the arrows indicate which directions that are allowed.
 
-
-To solve this issue you can use: "Iterative Deepening DFS". That is, we limit the depth of any one path to make sure we do not end up in a loop in the graph. 
+To solve this issue you can use: "Iterative Deepening DFS". That is, we limit the depth of any one path to make sure we do not end up in a loop in the graph.
 
 In our example, we can by using this change, prevent the algorithm to continue in the loop, and instead make sure it visits the end node. The figures below is an example of how the iterative DFS will work if the labels is chosen to
 
@@ -76,9 +65,10 @@ In our example, we can by using this change, prevent the algorithm to continue i
   1
  / \
 3 - 4
-</pre> 
+</pre>
 
-Depth level 0. Only the first node is visited. 
+Depth level 0. Only the first node is visited.
+
 <pre>
 <table align="left" rules="none" >
 <td>
@@ -89,9 +79,9 @@ Depth level 0. Only the first node is visited.
 </pre>
 </td>
 </table>
-</pre> 
+</pre>
 
-Depth level 1. We reach the second element before reaching the limit. 
+Depth level 1. We reach the second element before reaching the limit.
 
 <!--- NExt iteration --->
 <pre>
@@ -114,7 +104,6 @@ Depth level 1. We reach the second element before reaching the limit.
 
 </table>
 </pre>
-
 
 Depth level 2
 
@@ -148,7 +137,8 @@ Depth level 2
 </table>
 </pre>
 
-Depth Level 3. After reaching the node with value of `1` we can not continue deeper because of the limit. Instead we visit the node that is left at depth 3, the end node. 
+Depth Level 3. After reaching the node with value of `1` we can not continue deeper because of the limit. Instead we visit the node that is left at depth 3, the end node.
+
 <!--- NExt iteration --->
 <pre>
 <table align="left" rules="none" >
@@ -188,7 +178,6 @@ Depth Level 3. After reaching the node with value of `1` we can not continue dee
 
 </td>
 
-
 </td>
 
 </td>
@@ -205,39 +194,35 @@ Depth Level 3. After reaching the node with value of `1` we can not continue dee
 </table>
 </pre>
 
+# Question 3:
 
-# Question 3: 
-[(a) *Suppose that the goal is to cover the topics [welcome,skiing,robots] and the algorithm always selects the leftmost topic to find the neighbors for each node. Draw (by hand) the search space as a tree expanded for a lowest-cost-first search until the first solution is found. This should show all nodes expanded, which node is a goal node, and the frontier when the goal was found.*]
+[(a) _Suppose that the goal is to cover the topics [welcome,skiing,robots] and the algorithm always selects the leftmost topic to find the neighbors for each node. Draw (by hand) the search space as a tree expanded for a lowest-cost-first search until the first solution is found. This should show all nodes expanded, which node is a goal node, and the frontier when the goal was found._]
 
 Below is the search space until the first solution for a lowest-cost-first search. The nodes are written as {To_Cover, Segs} and the node marked with `Solution!` is the found goal node.
 
 <img src="fig/low-cost.jpg">
 
-[(b) *Give a non-trivial heuristic function h that is admissible. [h(n)=0 for all n is the trivial heuristic function.]*]
+[(b) _Give a non-trivial heuristic function h that is admissible. [h(n)=0 for all n is the trivial heuristic function.]_]
 
-
-Our idea is to create a heuristic function that given a node returns an estimate of how many seconds it will take to complete the topics in `To_Cover`. That is, given e.g. {[Skiing, robots], []} our heuristic function should estimate the length it will take to cover the topics skiing and robots. 
+Our idea is to create a heuristic function that given a node returns an estimate of how many seconds it will take to complete the topics in `To_Cover`. That is, given e.g. {[Skiing, robots], []} our heuristic function should estimate the length it will take to cover the topics skiing and robots.
 
 However, we know from the lecture that an admissible heuristic function never should overestimate the actual cost.
 
 <img src="fig/lecture.png">
 
-Hence, our heuristic function should calculate the lowest possible time it will take to cover the topics in `To_Cover`. This will make sure that we never overestimate the actual cost. Note the similarity between this and using the straight-line distance in the shortest-path problem. 
+Hence, our heuristic function should calculate the lowest possible time it will take to cover the topics in `To_Cover`. This will make sure that we never overestimate the actual cost. Note the similarity between this and using the straight-line distance in the shortest-path problem.
 
 The lowest possible time to cover a topic? Well, that is simply the minimum value of `length / number of topics covered` for all the rows in the database. In our problem, the lowest possible time it will take to cover a topic is **`10 seconds`**.
 
 Hence our heuristic function will simply be
+
 ```
 Number of topics in To_cover * 10
 ```
 
-
-
-
-
 # Question 4
-[*Consider the problem of finding a path in the grid shown below from the position s to the position g. A piece can move on the grid horizontally or vertically, one square at a time. No step may be made into a forbidden shaded area. Each square is denoted by the xy coordinate. For example, s is 43 and g is 36. Consider the Manhattan distance as the heuristic.*]
 
+[*Consider the problem of finding a path in the grid shown below from the position s to the position g. A piece can move on the grid horizontally or vertically, one square at a time. No step may be made into a forbidden shaded area. Each square is denoted by the xy coordinate. For example, s is 43 and g is 36. Consider the Manhattan distance as the heuristic.*]
 
 [(a) *Write the paths stored and selected in the first five iterations of the A* algorithm, assuming that in the case of tie the algorithm prefers the path stored first.*]
 
@@ -256,15 +241,13 @@ iter    step         possible steps             cost
 5.    44 -> 54       (63,52,41,*32*,64)         (8,8,8,6,8)
 ```
 
-
 [*(b) Solve with software, Use Manhattan distance, no diagonal step and compare A\*, BFS and Best-First- Search. Write a short description about your observation. How does each of these methods reach the solution? Why? Which one is faster?*]
 
-### A*
+### A\*
 
-A-star knows where the goal is, and tries to find a path to it. It uses manhattan distance to "rate" every state based on how it got there as well as how long it is via "manhattan"-distance to the goal. 
+A-star knows where the goal is, and tries to find a path to it. It uses manhattan distance to "rate" every state based on how it got there as well as how long it is via "manhattan"-distance to the goal.
 
 When searching, it looks for the "best" state and searches from there.
-
 
 <p align="center">
 <img src="fig/a-star-software.png" width="75%">
@@ -276,7 +259,6 @@ Operations needed to find goal: **`71`**
 
 Breadth first-search is naively searching for a goal by amassing more states recursively. It works by for every state s, visit all available neighbouring nodes not visited yet. This means that the number of operations in general is larger. But breadth first search is deemed to be a good algorithm to use when the search space is large but the goal is assumed to be relatively nearby.
 
-
 <p align="center">
 <img src="fig/breadth-first.png" width="75%">
 <p>
@@ -287,9 +269,9 @@ Operations needed to find goal: **`364`**
 
 According to wikipedia:
 
-*"Best-first search is a search algorithm which explores a graph by expanding the most promising node chosen according to a specified rule."*
+_"Best-first search is a search algorithm which explores a graph by expanding the most promising node chosen according to a specified rule."_
 
-Our rule is the lowest manhattan distance. We have a frontier similar to A*.
+Our rule is the lowest manhattan distance. We have a frontier similar to A\*.
 
 <p align="center">
 <img src="fig/best-first.png" width="75%">
@@ -300,22 +282,21 @@ Operations needed to find goal: **`48`**
 
 
 ## **Why is A\* not the same as Best-First?**
+
 Compare these and discuss why they are not identical.
 
-<p align="center">
-      <img src="fig/best-first.png" width="45%"> 
-      <img src="fig/a-star-software.png" width="45%">
-<p>
-
-
-
+|              A\*               |       BFS                             |
+| :----------------------------: | :--------------------------------: | --- |
+| ![](fig/a-star-difference.png) | ![](fig/best-first-difference.png) |
+|       length: 10, op: 75       |         length: 14, op: 52         |
 
 # Question 5 - Markov decision processes
+
 [*(a) Discuss when and how the generic search problem can be described as a markov decision process (MDP).*]
 
 Finite number of states? 
 
-We believe a generic search problem can be described as a MDP in the following way: 
+We believe a generic search problem can be described as a MDP in the following way:
 
 ```
 The nodes in a general search problem should be described as states in a MDP.
@@ -337,7 +318,7 @@ Finally, the MDP should be deterministic. That is, taking action A1 from state S
 <!--- To show an example of how a generic search problem can be described as a MDP we will use the problem from Q4.
  
 
-- The states of the MDP is all the cells, same as in generic search problem. 
+- The states of the MDP is all the cells, same as in generic search problem.
 - The possible actions at each state (except goal state) is to go up, down, left or right. Each of these actions has a reward of -1.
 - The transition probabilities in each cell are uniform.
 
