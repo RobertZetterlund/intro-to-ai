@@ -270,7 +270,7 @@ When searching, it looks for the "best" state and searches from there.
 <img src="a-star-software.png" width="75%">
 <p>
 
-
+Operations needed to find goal: **`71`**
 
 ### Breadth First-Search
 
@@ -280,6 +280,8 @@ Breadth first-search is naively searching for a goal by amassing more states rec
 <p align="center">
 <img src="breadth-first.png" width="75%">
 <p>
+
+Operations needed to find goal: **`364`**
 
 ### Best First-Search
 
@@ -292,6 +294,8 @@ Our rule is the lowest manhattan distance. We have a frontier similar to A*.
 <p align="center">
 <img src="best-first.png" width="75%">
 <p>
+
+Operations needed to find goal: **`48`**
 
 
 
