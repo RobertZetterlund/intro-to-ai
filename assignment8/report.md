@@ -69,7 +69,7 @@ What is important here is to always make the rightmost point in the triangle cho
 
 To solve this issue you can use: "Iterative Deepening DFS". That is, we limit the depth of any one path to make sure we do not end up in a loop in the graph.
 
-In our example, we can by using this change, prevent the algorithm to continue in the loop, and instead make sure it visits the end node. The figures below is an example of how the iterative DFS will work if the labels is chosen to
+In our example, we can by using this change, prevent the algorithm to continue in the loop, and instead make sure it visits the end node. The figures below are an example of how the iterative DFS will work if the labels are chosen to
 
 <pre>
   1
