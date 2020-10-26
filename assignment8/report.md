@@ -247,20 +247,29 @@ iter    step         possible steps             cost
 
 A-star knows where the goal is, and tries to find a path to it. It uses manhattan distance to "rate" every state based on how it got there as well as how long it is via "manhattan"-distance to the goal.
 
-When searching, it looks for the "best" state and searches from there.
+A\* reaches the solution by adding all discovered new nodes to a priority queue. The priority queue is sorted based on the sum `f(x)` of:
+
+1. The shortest path to that node, `g(x)`
+2. The heuristic for that node, `h(x)`, in our case the manhattan distance.
+
+When we have equal values in our priority queue the decision can be made either to prioritize the node found first, or prioritize the lowerst `h(x)` by convention.
+
+A\* is effective in the sense that if we have found the beginning of an optimal path it is likely to continue along that path, as the value of `h(x)` get smaller. As `h(x)` get smaller `g(x)` gets bigger, but if the direction is directly towards the goal, `f(x)` remains the same. Thus the path continues to be explored as `f(x)` is still first in the queue.
+
+Regarding the problem in the software, the goal is reached after `71` operations. This is because it "incorrectly" explores the corner to the top left of the start. We went more in depth into how in the iteration example above, but in short: since A\* is unaware of walls it will attempt straight-line approaches. When those fail, only then it will explore values with higher `f(x)`.
 
 <p align="center">
-<img src="fig/a-star-software.png" width="75%">
+      <img src="fig/a-star-software.png" width="75%">
 <p>
 
 Operations needed to find goal: **`71`**
 
 ### Breadth First-Search
 
-Breadth first-search is naively searching for a goal by amassing more states recursively. It works by for every state s, visit all available neighbouring nodes not visited yet. This means that the number of operations in general is larger. But breadth first search is deemed to be a good algorithm to use when the search space is large but the goal is assumed to be relatively nearby.
+Breadth first-search is **naively** searching for a goal by amassing more states recursively. It works by for every state s, visit all available neighbouring nodes not visited yet. This means that the number of operations in general is larger. <!--But breadth first search is deemed to be a good algorithm to use when the search space is large but the goal is assumed to be relatively nearby.-->
 
 <p align="center">
-<img src="fig/breadth-first.png" width="75%">
+      <img src="fig/breadth-first.png" width="75%">
 <p>
 
 Operations needed to find goal: **`364`**
@@ -273,22 +282,47 @@ _"Best-first search is a search algorithm which explores a graph by expanding th
 
 Our rule is the lowest manhattan distance. We have a frontier similar to A\*.
 
+The main difference between Best First-search and A* is that the aforementioned priority queue relies solely on the heurestic value. That is why it uses fewer operations than A* for this particular problem. It also terminates when it finds a goal (since `h(x)=0`), which A\* does not immediately do, (it explores `f(x)`:s equal to the goal node).
+
 <p align="center">
-<img src="fig/best-first.png" width="75%">
+      <img src="fig/best-first.png" width="75%">
 <p>
 
 Operations needed to find goal: **`48`**
 
+## **Comparisions between A\* and Best First-search?**
 
+Compare the two solutions of the same problem below:
 
-## **Why is A\* not the same as Best-First?**
-
-Compare these and discuss why they are not identical.
-
-|              A\*               |       BFS                             |
-| :----------------------------: | :--------------------------------: | --- |
+|              A\*               |                BFS                 |
+| :----------------------------: | :--------------------------------: |
 | ![](fig/a-star-difference.png) | ![](fig/best-first-difference.png) |
 |       length: 10, op: 75       |         length: 14, op: 52         |
+
+A\* keeps the promise of finding the optimal path of 10, whilst BFS finds a path of length 14, although with fewer operations.
+
+In the implementation of the algorithm, the priority queue of the BFS appears to prioritize order of discovery starting from north and following clockwise. That is why the first iteration goes north and then continues on that path as `h(x)` continues to get lower or equal to the heurestic value of the south-most green nodes neighbor, which is 8 steps (the value of `h(x)` for the diagonal path is 7).
+
+## Which one is fastest?
+
+We find that there are two ways to define fastest in the context of this problem. Either we prioritize the length of the path or the number of operations. We compare A\* and Best First-search as Breadth First-search is not competative in neither definitions.
+
+For the length of the path, we can always say that A\* is the fastest as it is guranteed to find the optimal path, something that cannot be said about the BFS.
+
+For the number of operations it is more problem-dependent. For the problem above the number of operations is fewer in the BFS (compared to A\*). For the problem introduced below the number of operations is greater in the BFS. View the example in the figure below and the data in the following table.
+
+<p align="center">
+      <img src="fig/example-operation.png" width="75%">
+<p>
+
+|                 | **A\*** | **BFS** |
+| --------------- | --- | --- |
+| **# of operations** | 36  |  40 |
+| **length**          | 7   | 7   |
+
+
+
+
 
 # Question 5 - Markov decision processes
 
