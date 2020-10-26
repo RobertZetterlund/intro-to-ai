@@ -230,7 +230,6 @@ Number of topics in To_cover * 10
 <img src="fig/a-star.jpg" width="80%">
 <p>
 
-
 Here are table representations of the first five iterations of the A\* algorithm. Within in the `possible steps`-column, the \*\*xx\*\* indicate the selected next node based on lowest `h(x)` or order of stored (starting north going clockwise).
 
 ```
@@ -245,22 +244,28 @@ iter    step         possible steps             cost
 ```
 
 The stored paths are as follows:
+
 ```
 iter                         stored paths                       step
 
-0.    {(43)}                                                    select 43 
-1.    {(43),(43,44)}                                            43 -> 44             
-2.    {(43),(43,44),(43,44,34)}                                 44 -> 34            
-3.    {(43),(43,44),(43,44,34),(43,53)}                         43 -> 53             
-4.    {(43),(43,44),(43,44,34),(43,53),(43,42)}                 43 -> 42                  
-5.    {(43),(43,44),(43,44,34),(43,53),(43,42),(43,44,54)}      44 -> 54                     
+0.    {(43)}                                                    select 43
+1.    {(43),(43,44)}                                            43 -> 44
+2.    {(43),(43,44),(43,44,34)}                                 44 -> 34
+3.    {(43),(43,44),(43,44,34),(43,53)}                         43 -> 53
+4.    {(43),(43,44),(43,44,34),(43,53),(43,42)}                 43 -> 42
+5.    {(43),(43,44),(43,44,34),(43,53),(43,42),(43,44,54)}      44 -> 54
 
 
 ```
 
-
-
 [*(b) Solve with software, Use Manhattan distance, no diagonal step and compare A\*, BFS and Best-First- Search. Write a short description about your observation. How does each of these methods reach the solution? Why? Which one is faster?*]
+
+Below is a table with numbers exctracted when running the problem.
+
+| q4-b                | **A\*** | **Best First-search** | Breadth First-search |
+| ------------------- | :-----: | :-------------------: | :------------------: |
+| **# of operations** |   57    |          39           |        284           |
+| **length**          |    9    |          9            |         9            |
 
 ### A\*
 
@@ -334,14 +339,14 @@ For the number of operations it is more problem-dependent. For the problem above
       <img src="fig/example-operation.png" width="30%">
 <p>
 
-|                 | **A\*** | **BFS** |
-| --------------- | --- | --- |
-| **# of operations** | 36  |  40 |
-| **length**          | 7   | 7   |
+| example-problem     | **A\*** | **Best First-search** |
+| ------------------- | :-------: | :-------: |
+| **# of operations** | 36      |  40     |
+| **length**          | 7       | 7       |
 
+The software is friendly enough to show the time it took for the program to execute and find the goal. This is shown in the unit of milliseconds and varies for identical rounds when we re-run the solver. We believe that this is not a good metric to estimate time with as it is too unstable. Instead, run time should be approximated using the number of operations. Worth mentioning is that it _might_ not be enough, as different problems may introduce multiple lookup in different parts of the memory when the amount of paths become large enough. We deem this aspect to be relevant in large problems but perhaps not in our small problem solved using javascript.
 
-
-
+As for an actual direct answer, the solution with the least operations should in theory be the fastest.
 
 # Question 5 - Markov decision processes
 
@@ -349,28 +354,26 @@ For the number of operations it is more problem-dependent. For the problem above
 
 We believe a generic search problem can be described as an MDP in the following way:
 
-
 - The nodes in a general search problem should be described as states in an MDP.
 
-- The out-arcs from a node in a general search problem should in an MDP be described as the possible actions from the corresponding state. 
-A node without any out-arcs should have an absorbing state.
+- The out-arcs from a node in a general search problem should in an MDP be described as the possible actions from the corresponding state.
+  A node without any out-arcs should have an absorbing state.
 
-- The cost of an arc in a general search problem should be described as a reward of the corresponding action in an MDP. But since it actually is a cost, not a reward, the reward of an action in an MDP should be the negative cost of the corresponding arc. That is, if an arc has a cost of 1, the corresponding action in an MDP should have the reward -1. 
+- The cost of an arc in a general search problem should be described as a reward of the corresponding action in an MDP. But since it actually is a cost, not a reward, the reward of an action in an MDP should be the negative cost of the corresponding arc. That is, if an arc has a cost of 1, the corresponding action in an MDP should have the reward -1.
 
-- Finally, the MDP should be deterministic. That is, taking action A1 from state S1 should always take you to S2. Hence, the transition probabilities should always be either 0 or 1. An action will either take you to a certain state, or it will not.  
-
+- Finally, the MDP should be deterministic. That is, taking action A1 from state S1 should always take you to S2. Hence, the transition probabilities should always be either 0 or 1. An action will either take you to a certain state, or it will not.
 
 _But when is it possible to do this this?_
 
-We find it difficult to come up with almost any requirement that is needed for transforming a general search problem into a MDP.  For example it does not matter if:
+We find it difficult to come up with almost any requirement that is needed for transforming a general search problem into a MDP. For example it does not matter if:
 
-- **The graph is undirected or directed** - Arcs are described as actions. Making a graph directed only means removing the actions which corresponds to arcs previously possible to use. 
-- **There is a single or several different goal nodes** - The goal node(s) is described as absorbing states. Adding more goal nodes corresponds to adding more absorbing states. E.g value iteration will still find an optimal policy to get to the closest goal node. 
+- **The graph is undirected or directed** - Arcs are described as actions. Making a graph directed only means removing the actions which corresponds to arcs previously possible to use.
+- **There is a single or several different goal nodes** - The goal node(s) is described as absorbing states. Adding more goal nodes corresponds to adding more absorbing states. E.g value iteration will still find an optimal policy to get to the closest goal node.
 
-However, one requirement we believe is needed is that the **`number of states should be finite`**. The reason behind this requirement is that we do not think it is possibly to calculate an optimal policy for a MDP with inifinite state space. E.g value iteration perform calculations on all states every iteration, and this will not be possible on a MDP with infinite state space. 
+However, one requirement we believe is needed is that the **`number of states should be finite`**. The reason behind this requirement is that we do not think it is possibly to calculate an optimal policy for a MDP with inifinite state space. E.g value iteration perform calculations on all states every iteration, and this will not be possible on a MDP with infinite state space.
 
 <!--- To show an example of how a generic search problem can be described as a MDP we will use the problem from Q4.
- 
+
 
 - The states of the MDP is all the cells, same as in generic search problem.
 - The possible actions at each state (except goal state) is to go up, down, left or right. Each of these actions has a reward of -1.
@@ -381,10 +384,12 @@ However, one requirement we believe is needed is that the **`number of states sh
 [*(b) When the search problem can be written as an MDP, what are the advantages and disadvantages of the value iteration algorithm over the A\* algorithm?*]
 
 Advantages
-- Value iteration will find the optimal action in each state (optimal policy). This means that by following the optimal policy we can easily get the optimal path from any state to the goal node. A* will only find the optimal path from a single start node (and the nodes included in the optimal path).  
 
-- We do not need to find a admissable heuristic function to use value iteration. 
+- Value iteration will find the optimal action in each state (optimal policy). This means that by following the optimal policy we can easily get the optimal path from any state to the goal node. A\* will only find the optimal path from a single start node (and the nodes included in the optimal path).
+
+- We do not need to find a admissable heuristic function to use value iteration.
 
 Disadvantages
-- Value iteration needs to perform calculations on all the states in every iteration. This will be heavy if the state space is large and hence A* star will be much quicker.
+
+- Value iteration needs to perform calculations on all the states in every iteration. This will be heavy if the state space is large and hence A\* star will be much quicker.
 - Since value iteration in each iteration needs to perform calculations on all states, it will not work if the state space is infinite.
