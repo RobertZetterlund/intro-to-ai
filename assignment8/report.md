@@ -230,16 +230,35 @@ Number of topics in To_cover * 10
 <img src="fig/a-star.jpg" width="80%">
 <p>
 
+
+Here are table representations of the first five iterations of the A\* algorithm. Within in the `possible steps`-column, the \*\*xx\*\* indicate the selected next node based on lowest `h(x)` or order of stored (starting north going clockwise).
+
 ```
 iter    step         possible steps             cost
 
-0.                   (*44*,53,42)               (4,6,6)
+0.       43          (*44*,53,42)               (4,6,6)
 1.    43 -> 44       (53,42,54,*34*)            (6,6,6,4)
 2.    44 -> 34       (*53*,42,54)               (6,6,6)
 3.    43 -> 53       (*42*,54,63,52)            (6,6,8,8)
 4.    43 -> 42       (*54*,63,52,41,32)         (6,8,8,8,6)
 5.    44 -> 54       (63,52,41,*32*,64)         (8,8,8,6,8)
 ```
+
+The stored paths are as follows:
+```
+iter                         stored paths                       step
+
+0.    {(43)}                                                    select 43 
+1.    {(43),(43,44)}                                            43 -> 44             
+2.    {(43),(43,44),(43,44,34)}                                 44 -> 34            
+3.    {(43),(43,44),(43,44,34),(43,53)}                         43 -> 53             
+4.    {(43),(43,44),(43,44,34),(43,53),(43,42)}                 43 -> 42                  
+5.    {(43),(43,44),(43,44,34),(43,53),(43,42),(43,44,54)}      44 -> 54                     
+
+
+```
+
+
 
 [*(b) Solve with software, Use Manhattan distance, no diagonal step and compare A\*, BFS and Best-First- Search. Write a short description about your observation. How does each of these methods reach the solution? Why? Which one is faster?*]
 
