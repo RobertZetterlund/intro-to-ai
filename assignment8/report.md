@@ -253,11 +253,8 @@ When searching, it looks for the "best" state and searches from there.
 <img src="fig/a-star-software.png" width="75%">
 <p>
 
-<<<<<<< HEAD
 Operations needed to find goal: **`71`**
 
-=======
->>>>>>> 17fa660... comparision
 ### Breadth First-Search
 
 Breadth first-search is naively searching for a goal by amassing more states recursively. It works by for every state s, visit all available neighbouring nodes not visited yet. This means that the number of operations in general is larger. But breadth first search is deemed to be a good algorithm to use when the search space is large but the goal is assumed to be relatively nearby.
